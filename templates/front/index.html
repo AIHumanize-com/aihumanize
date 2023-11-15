@@ -1,1439 +1,1333 @@
-{% extends 'front/main.html' %}
-
-{% load static %}
-{% block content %}
+{% extends 'front/main.html' %} {% load static %} {% block content %}
 <!-- Your HTML code here -->
 <main class="flex-grow-1">
-    <!-- Hero -->
-    <!-- Hero -->
-    <section class="hero-section style-2 position-relative py-10 py-lg-15">
-        <div class="striped-shape">
-            <img src="assets/images/shapes/stripe-lite.svg" alt="" />
+  <!-- Hero -->
+  <!-- Hero -->
+  <section class="hero-section style-2 position-relative py-10 py-lg-15">
+    <div class="striped-shape">
+      <img src="assets/images/shapes/stripe-lite.svg" alt="" />
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="text-center">
+          <div class="position-relative z-1">
+            <p class="text-primary" data-aos="fade-up-sm">
+              Best AI Copywriting Tool
+            </p>
+            <h1 class="text-dark mb-8" data-aos="fade-up-sm" data-aos-delay="150">
+              A 10X Faster Way To Write Your <br />
+
+              <span class="fw-bold text-gradient-1 typed-animation"
+                data-strings='["Technical Writing", "News Article", "SEO Content", "Product Description"]'>Product
+                Description</span>
+            </h1>
+            <!-- <a href="login.html" class="btn btn-lg btn-gradient-1" data-aos="fade-up-sm" data-aos-delay="200">Start Writing - It's Free</a> -->
+          </div>
         </div>
-        <div class="container">
-            <div class="row  ">
-                <div class="text-center">
-                    <div class="position-relative z-1">
-                        <p class="text-primary" data-aos="fade-up-sm">
-                            Best AI Copywriting Tool
-                        </p>
-                        <h1 class="text-dark mb-8" data-aos="fade-up-sm" data-aos-delay="150">
-                            A 10X Faster Way To Write Your <br />
-
-                            <span
-                    class="fw-bold text-gradient-1 typed-animation"
-                    data-strings='["Technical Writing", "News Article", "SEO Content", "Product Description"]'
-                    >Product Description</span>
-                        </h1>
-                        <!-- <a href="login.html" class="btn btn-lg btn-gradient-1" data-aos="fade-up-sm" data-aos-delay="200">Start Writing - It's Free</a> -->
+        <div class="box-outer d-flex justify-center">
+          <div class="box">
+            <div class="inner-box">
+              <div class="sub-boxes">
+                <div class="box-1">
+                  <div class="ninja-box">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="color-change-svg"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_1026_1491)">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M22.6432 5.72121C22.6488 5.65925 22.6164 5.59397 22.5459 5.56885L18.6682 4.19738C18.6261 4.18257 18.5936 4.14957 18.5788 4.10794L17.9875 2.43652L17.9874 2.43679L17.2068 0.230406C17.1608 0.100281 16.9767 0.100281 16.9303 0.230406L15.5583 4.10852C15.544 4.15014 15.511 4.18314 15.4694 4.19795L11.5912 5.56942C11.4611 5.61583 11.4611 5.8 11.5912 5.84594L15.4694 7.21787C15.511 7.23269 15.544 7.26573 15.5583 7.30731L16.9303 11.185C16.9767 11.3155 17.1608 11.3155 17.2068 11.185L17.9865 8.98112L18.5787 7.30731C18.5935 7.26569 18.6261 7.23269 18.6682 7.21787L22.5458 5.84594C22.606 5.82476 22.6385 5.77415 22.6432 5.72121ZM17.9917 5.8517C17.9257 6.27667 17.5734 6.60663 17.1384 6.63849L17.1385 6.6391L17.1383 6.63911C17.1154 6.64103 17.0919 6.64197 17.0685 6.64197C16.5528 6.64197 16.1347 6.22389 16.1347 5.7077C16.1347 5.19203 16.5528 4.77391 17.0685 4.77391C17.0924 4.77391 17.1158 4.77484 17.1388 4.77677C17.6219 4.81262 18.0028 5.21589 18.0028 5.70766C18.0028 5.75665 17.999 5.80475 17.9917 5.8517ZM14.7675 12.7119C14.7658 12.6559 14.7333 12.6007 14.67 12.5781L10.7919 11.2067C10.7503 11.1919 10.7178 11.1589 10.7029 11.1172L10.1289 9.49414C10.1288 9.49425 10.1288 9.49437 10.1287 9.49448L9.33105 7.24017C9.28511 7.11005 9.10047 7.11005 9.05453 7.24017L7.68259 11.1183C7.66778 11.1599 7.63525 11.1929 7.59362 11.2077L3.71551 12.5792C3.58539 12.6256 3.58539 12.8098 3.71551 12.8557L7.59362 14.2276C7.63525 14.2425 7.66778 14.2755 7.68259 14.3171L9.05453 18.1947C9.10047 18.3253 9.28511 18.3253 9.33105 18.1947L10.0543 16.1497L10.703 14.3171C10.7178 14.2755 10.7503 14.2425 10.792 14.2276L14.6701 12.8557C14.7373 12.832 14.7697 12.7714 14.7675 12.7119ZM10.126 12.6847C10.1264 12.6953 10.1265 12.7058 10.1265 12.7164C10.1265 13.2326 9.7084 13.6507 9.19273 13.6507H9.18701C9.18705 13.651 9.18709 13.6514 9.18713 13.6517H9.18705C8.67376 13.6484 8.25901 13.2317 8.25901 12.7174C8.25901 12.2017 8.67709 11.7836 9.19281 11.7836C9.20715 11.7836 9.2215 11.7841 9.23537 11.7851C9.72063 11.8066 10.1093 12.1984 10.126 12.6847ZM23.9025 18.1538C23.961 18.1746 23.9932 18.2233 23.999 18.2749C24.0065 18.338 23.9743 18.4056 23.9025 18.4313L20.0244 19.8027C19.9827 19.8175 19.9502 19.8505 19.9354 19.8922L19.3169 21.6411L18.5635 23.7703C18.5175 23.9004 18.3329 23.9004 18.287 23.7703L16.915 19.8922C16.9002 19.8506 16.8677 19.8175 16.8256 19.8027L12.9479 18.4313C12.8178 18.3848 12.8178 18.2007 12.9479 18.1547L16.8256 16.7828C16.8677 16.768 16.9002 16.735 16.915 16.6934L18.287 12.8157C18.3329 12.6851 18.5175 12.6851 18.5635 12.8157L19.3698 15.094L19.3699 15.0938L19.9354 16.6925C19.9502 16.7341 19.9827 16.7671 20.0244 16.7819L23.9025 18.1538ZM19.3589 18.2921C19.3589 18.2685 19.358 18.2451 19.3563 18.2219C19.3222 17.7676 18.964 17.4044 18.5123 17.363C18.4836 17.3602 18.4544 17.3587 18.4252 17.3587C17.9095 17.3587 17.4914 17.7768 17.4914 18.293C17.4914 18.8087 17.9096 19.2268 18.4252 19.2268C18.4429 19.2268 18.4602 19.2263 18.4774 19.2248L18.4774 19.2248L18.4773 19.224C18.9691 19.1972 19.3589 18.7901 19.3589 18.2921ZM2.12873 12.3584C2.32687 12.3584 2.48752 12.519 2.48752 12.7172C2.48752 12.9153 2.32687 13.076 2.12873 13.076H0.358781C0.160641 13.076 0 12.9153 0 12.7172C0 12.519 0.160641 12.3584 0.358781 12.3584H2.12873ZM3.61781 17.7451C3.41967 17.7451 3.25903 17.9058 3.25903 18.1039C3.25903 18.302 3.41967 18.4627 3.61781 18.4627H5.5313C5.72944 18.4627 5.89008 18.302 5.89008 18.1039C5.89008 17.9058 5.72944 17.7451 5.5313 17.7451H3.61781ZM6.60742 18.1039C6.60742 17.9058 6.76806 17.7451 6.9662 17.7451H7.37486C7.573 17.7451 7.73364 17.9058 7.73364 18.1039C7.73364 18.302 7.573 18.4627 7.37486 18.4627H6.9662C6.76806 18.4627 6.60742 18.302 6.60742 18.1039ZM6.47196 9.71913C6.47196 9.52099 6.31132 9.36035 6.11318 9.36035H1.12221C0.924068 9.36035 0.763428 9.52099 0.763428 9.71913C0.763428 9.91727 0.924068 10.0779 1.12221 10.0779H6.11318C6.31132 10.0779 6.47196 9.91727 6.47196 9.71913ZM11.5346 3.50858H4.50258C4.30439 3.50858 4.1438 3.34794 4.1438 3.1498C4.1438 2.95166 4.30444 2.79102 4.50258 2.79102H11.5346C11.7327 2.79102 11.8934 2.95166 11.8934 3.1498C11.8934 3.34794 11.7327 3.50858 11.5346 3.50858ZM12.9699 3.50858H14.2475C14.4457 3.50858 14.6063 3.34794 14.6063 3.1498C14.6063 2.95166 14.4457 2.79102 14.2475 2.79102H12.9699C12.7717 2.79102 12.6111 2.95166 12.6111 3.1498C12.6111 3.34794 12.7717 3.50858 12.9699 3.50858ZM10.1036 5.90116H0.358781C0.160641 5.90116 0 5.74052 0 5.54238C0 5.34423 0.160641 5.18359 0.358781 5.18359H10.1036C10.3017 5.18359 10.4624 5.34423 10.4624 5.54238C10.4624 5.74052 10.3017 5.90116 10.1036 5.90116ZM16.177 22.1816H9.14491C8.94677 22.1816 8.78613 22.3423 8.78613 22.5404C8.78613 22.7386 8.94677 22.8992 9.14491 22.8992H16.1769C16.3751 22.8992 16.5357 22.7386 16.5357 22.5404C16.5357 22.3423 16.3751 22.1816 16.177 22.1816ZM6.43202 22.1816H7.70974C7.90788 22.1816 8.06852 22.3423 8.06852 22.5404C8.06852 22.7386 7.90788 22.8992 7.70974 22.8992H6.43202C6.23388 22.8992 6.07324 22.7386 6.07324 22.5404C6.07324 22.3423 6.23388 22.1816 6.43202 22.1816ZM13.4341 20.3393C13.4341 20.1411 13.2735 19.9805 13.0753 19.9805H0.956682C0.758541 19.9805 0.5979 20.1411 0.5979 20.3393C0.5979 20.5374 0.758541 20.698 0.956682 20.698H13.0753C13.2735 20.698 13.4341 20.5374 13.4341 20.3393Z"
+                          fill="currentColor"></path>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_1026_1491">
+                          <rect width="24" height="24" fill="white"></rect>
+                        </clipPath>
+                        <linearGradient id="paint0_linear_191_6020" x1="-4.60094" y1="6.10729" x2="25.7971" y2="5.92317"
+                          gradientUnits="userSpaceOnUse">
+                          <stop offset="0.270833" stop-color="#C926F1"></stop>
+                          <stop offset="1" stop-color="#FB42FF"></stop>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    <div>
+                      <p>Ninja</p>
                     </div>
-                    
+                  </div>
+                  <div class="ghost-box">
+                    <span class="relative max-[370px]:hidden"><svg width="16" height="16" class="color-change-svg"
+                        viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M10.2395 0.15766C8.91694 0.447897 7.53651 1.28737 6.67959 2.32275C5.5057 3.74082 4.64244 6.04636 4.36893 8.49341C4.15938 10.3688 4.04717 10.9433 3.73976 11.7171C3.33938 12.7251 2.62951 13.8218 1.84362 14.6467C1.49742 15.0101 1.23484 15.3282 1.26 15.3537C1.28527 15.379 1.61327 15.4494 1.9889 15.5098C3.63577 15.775 5.24467 14.9734 6.20142 13.4111C6.41139 13.0682 6.60555 12.8103 6.63279 12.8377C6.66014 12.8653 6.51434 13.2447 6.30875 13.6811C5.73168 14.9057 4.59449 15.921 3.50296 16.1862C3.29331 16.237 3.16519 16.3679 3.05194 16.6467C2.28924 18.5239 1.35058 20.0945 0.472761 20.9622C0.212774 21.2192 0 21.4723 0 21.5245C0 21.6471 1.02425 21.5276 1.76791 21.3185C2.71687 21.0516 3.49464 20.5635 4.35926 19.692C5.0007 19.0455 5.23864 18.8703 5.47502 18.8703C5.88632 18.8703 6.44716 19.2807 6.75967 19.8106C7.52143 21.1019 8.02737 21.5256 8.80754 21.5256C9.3793 21.5256 9.69669 21.2348 10.2653 20.1899C10.4821 19.7916 10.7881 19.3697 10.9455 19.2523L11.2314 19.0389L11.5137 19.2514C11.669 19.3682 11.9849 19.8373 12.2157 20.2938C12.5592 20.973 12.7081 21.1595 13.0356 21.3208C13.3854 21.493 13.4896 21.5015 13.8651 21.3881C14.5295 21.1874 15.1313 20.7107 15.6564 19.9689C15.9204 19.5962 16.2558 19.1964 16.4018 19.0807C17.0238 18.5876 17.684 18.9521 18.4258 20.1983C19.0256 21.206 19.5814 21.7488 20.1796 21.9112C20.4174 21.9758 20.6266 22.0136 20.6443 21.9955C20.6727 21.9663 20.634 20.741 20.4488 15.8044L20.4027 14.5728H20.7013H21L20.8002 14.2315C20.4493 13.6321 20.2807 12.5937 20.1768 10.3923C20.1213 9.21717 20.0299 7.99081 19.9737 7.66703C19.9174 7.34326 19.8164 6.74821 19.7494 6.34467C19.3328 3.83861 17.9455 2.03713 15.5427 0.881838C13.8401 0.063325 11.886 -0.203538 10.2395 0.15766ZM12.4687 6.0711C12.8395 6.47118 13.0008 7.00281 13.0605 8.02173C13.1011 8.71331 13.0681 8.97829 12.8725 9.53371C12.4175 10.8258 11.7399 10.934 11.1801 9.80404C10.897 9.23278 10.8694 9.08489 10.8769 8.17938C10.8835 7.38183 10.933 7.07262 11.125 6.62851C11.5125 5.73223 11.9763 5.53978 12.4687 6.0711ZM16.8454 6.37915C17.2082 6.74496 17.366 7.29011 17.366 8.17896C17.366 9.05711 17.2185 9.57616 16.8512 9.9904C16.5908 10.2842 16.5226 10.3112 16.2696 10.2207C15.8144 10.0578 15.5542 9.43319 15.5101 8.39771C15.4674 7.39472 15.5916 6.8612 15.9753 6.40179C16.3057 6.00601 16.4709 6.00171 16.8454 6.37915Z"
+                          fill="currentColor"></path>
+                        <defs>
+                          <clipPath id="clip0_1026_1491">
+                            <rect width="24" height="24" fill="white"></rect>
+                          </clipPath>
+                          <linearGradient id="paint0_linear_191_6020" x1="-4.60094" y1="6.10729" x2="25.7971"
+                            y2="5.92317" gradientUnits="userSpaceOnUse">
+                            <stop offset="0.270833" stop-color="#C926F1"></stop>
+                            <stop offset="1" stop-color="#FB42FF"></stop>
+                          </linearGradient>
+                        </defs>
+                      </svg></span>
+                    <p>Ghost</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                      stroke-width="2"
+                      class="larger-svg h-4 w-4 transition-colors sm:ml-0 group-hover/options:text-gray-500 !text-gray-500 group-hover/button:text-brand-purple">
+                      <path fill-rule="evenodd"
+                        d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
                 </div>
-                <div class="box-outer d-flex justify-center ">
-
-
-                    <div class="box ">
-                        <div class="inner-box">
-                            <div class="sub-boxes">
-                                <div class="box-1">
-                                    <div class="ninja-box">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="color-change-svg"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip0_1026_1491)">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M22.6432 5.72121C22.6488 5.65925 22.6164 5.59397 22.5459 5.56885L18.6682 4.19738C18.6261 4.18257 18.5936 4.14957 18.5788 4.10794L17.9875 2.43652L17.9874 2.43679L17.2068 0.230406C17.1608 0.100281 16.9767 0.100281 16.9303 0.230406L15.5583 4.10852C15.544 4.15014 15.511 4.18314 15.4694 4.19795L11.5912 5.56942C11.4611 5.61583 11.4611 5.8 11.5912 5.84594L15.4694 7.21787C15.511 7.23269 15.544 7.26573 15.5583 7.30731L16.9303 11.185C16.9767 11.3155 17.1608 11.3155 17.2068 11.185L17.9865 8.98112L18.5787 7.30731C18.5935 7.26569 18.6261 7.23269 18.6682 7.21787L22.5458 5.84594C22.606 5.82476 22.6385 5.77415 22.6432 5.72121ZM17.9917 5.8517C17.9257 6.27667 17.5734 6.60663 17.1384 6.63849L17.1385 6.6391L17.1383 6.63911C17.1154 6.64103 17.0919 6.64197 17.0685 6.64197C16.5528 6.64197 16.1347 6.22389 16.1347 5.7077C16.1347 5.19203 16.5528 4.77391 17.0685 4.77391C17.0924 4.77391 17.1158 4.77484 17.1388 4.77677C17.6219 4.81262 18.0028 5.21589 18.0028 5.70766C18.0028 5.75665 17.999 5.80475 17.9917 5.8517ZM14.7675 12.7119C14.7658 12.6559 14.7333 12.6007 14.67 12.5781L10.7919 11.2067C10.7503 11.1919 10.7178 11.1589 10.7029 11.1172L10.1289 9.49414C10.1288 9.49425 10.1288 9.49437 10.1287 9.49448L9.33105 7.24017C9.28511 7.11005 9.10047 7.11005 9.05453 7.24017L7.68259 11.1183C7.66778 11.1599 7.63525 11.1929 7.59362 11.2077L3.71551 12.5792C3.58539 12.6256 3.58539 12.8098 3.71551 12.8557L7.59362 14.2276C7.63525 14.2425 7.66778 14.2755 7.68259 14.3171L9.05453 18.1947C9.10047 18.3253 9.28511 18.3253 9.33105 18.1947L10.0543 16.1497L10.703 14.3171C10.7178 14.2755 10.7503 14.2425 10.792 14.2276L14.6701 12.8557C14.7373 12.832 14.7697 12.7714 14.7675 12.7119ZM10.126 12.6847C10.1264 12.6953 10.1265 12.7058 10.1265 12.7164C10.1265 13.2326 9.7084 13.6507 9.19273 13.6507H9.18701C9.18705 13.651 9.18709 13.6514 9.18713 13.6517H9.18705C8.67376 13.6484 8.25901 13.2317 8.25901 12.7174C8.25901 12.2017 8.67709 11.7836 9.19281 11.7836C9.20715 11.7836 9.2215 11.7841 9.23537 11.7851C9.72063 11.8066 10.1093 12.1984 10.126 12.6847ZM23.9025 18.1538C23.961 18.1746 23.9932 18.2233 23.999 18.2749C24.0065 18.338 23.9743 18.4056 23.9025 18.4313L20.0244 19.8027C19.9827 19.8175 19.9502 19.8505 19.9354 19.8922L19.3169 21.6411L18.5635 23.7703C18.5175 23.9004 18.3329 23.9004 18.287 23.7703L16.915 19.8922C16.9002 19.8506 16.8677 19.8175 16.8256 19.8027L12.9479 18.4313C12.8178 18.3848 12.8178 18.2007 12.9479 18.1547L16.8256 16.7828C16.8677 16.768 16.9002 16.735 16.915 16.6934L18.287 12.8157C18.3329 12.6851 18.5175 12.6851 18.5635 12.8157L19.3698 15.094L19.3699 15.0938L19.9354 16.6925C19.9502 16.7341 19.9827 16.7671 20.0244 16.7819L23.9025 18.1538ZM19.3589 18.2921C19.3589 18.2685 19.358 18.2451 19.3563 18.2219C19.3222 17.7676 18.964 17.4044 18.5123 17.363C18.4836 17.3602 18.4544 17.3587 18.4252 17.3587C17.9095 17.3587 17.4914 17.7768 17.4914 18.293C17.4914 18.8087 17.9096 19.2268 18.4252 19.2268C18.4429 19.2268 18.4602 19.2263 18.4774 19.2248L18.4774 19.2248L18.4773 19.224C18.9691 19.1972 19.3589 18.7901 19.3589 18.2921ZM2.12873 12.3584C2.32687 12.3584 2.48752 12.519 2.48752 12.7172C2.48752 12.9153 2.32687 13.076 2.12873 13.076H0.358781C0.160641 13.076 0 12.9153 0 12.7172C0 12.519 0.160641 12.3584 0.358781 12.3584H2.12873ZM3.61781 17.7451C3.41967 17.7451 3.25903 17.9058 3.25903 18.1039C3.25903 18.302 3.41967 18.4627 3.61781 18.4627H5.5313C5.72944 18.4627 5.89008 18.302 5.89008 18.1039C5.89008 17.9058 5.72944 17.7451 5.5313 17.7451H3.61781ZM6.60742 18.1039C6.60742 17.9058 6.76806 17.7451 6.9662 17.7451H7.37486C7.573 17.7451 7.73364 17.9058 7.73364 18.1039C7.73364 18.302 7.573 18.4627 7.37486 18.4627H6.9662C6.76806 18.4627 6.60742 18.302 6.60742 18.1039ZM6.47196 9.71913C6.47196 9.52099 6.31132 9.36035 6.11318 9.36035H1.12221C0.924068 9.36035 0.763428 9.52099 0.763428 9.71913C0.763428 9.91727 0.924068 10.0779 1.12221 10.0779H6.11318C6.31132 10.0779 6.47196 9.91727 6.47196 9.71913ZM11.5346 3.50858H4.50258C4.30439 3.50858 4.1438 3.34794 4.1438 3.1498C4.1438 2.95166 4.30444 2.79102 4.50258 2.79102H11.5346C11.7327 2.79102 11.8934 2.95166 11.8934 3.1498C11.8934 3.34794 11.7327 3.50858 11.5346 3.50858ZM12.9699 3.50858H14.2475C14.4457 3.50858 14.6063 3.34794 14.6063 3.1498C14.6063 2.95166 14.4457 2.79102 14.2475 2.79102H12.9699C12.7717 2.79102 12.6111 2.95166 12.6111 3.1498C12.6111 3.34794 12.7717 3.50858 12.9699 3.50858ZM10.1036 5.90116H0.358781C0.160641 5.90116 0 5.74052 0 5.54238C0 5.34423 0.160641 5.18359 0.358781 5.18359H10.1036C10.3017 5.18359 10.4624 5.34423 10.4624 5.54238C10.4624 5.74052 10.3017 5.90116 10.1036 5.90116ZM16.177 22.1816H9.14491C8.94677 22.1816 8.78613 22.3423 8.78613 22.5404C8.78613 22.7386 8.94677 22.8992 9.14491 22.8992H16.1769C16.3751 22.8992 16.5357 22.7386 16.5357 22.5404C16.5357 22.3423 16.3751 22.1816 16.177 22.1816ZM6.43202 22.1816H7.70974C7.90788 22.1816 8.06852 22.3423 8.06852 22.5404C8.06852 22.7386 7.90788 22.8992 7.70974 22.8992H6.43202C6.23388 22.8992 6.07324 22.7386 6.07324 22.5404C6.07324 22.3423 6.23388 22.1816 6.43202 22.1816ZM13.4341 20.3393C13.4341 20.1411 13.2735 19.9805 13.0753 19.9805H0.956682C0.758541 19.9805 0.5979 20.1411 0.5979 20.3393C0.5979 20.5374 0.758541 20.698 0.956682 20.698H13.0753C13.2735 20.698 13.4341 20.5374 13.4341 20.3393Z"
-                                                    fill="currentColor"></path>
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_1026_1491">
-                                                    <rect width="24" height="24" fill="white"></rect>
-                                                </clipPath>
-                                                <linearGradient id="paint0_linear_191_6020" x1="-4.60094"
-                                                    y1="6.10729" x2="25.7971" y2="5.92317"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop offset="0.270833" stop-color="#C926F1"></stop>
-                                                    <stop offset="1" stop-color="#FB42FF"></stop>
-                                                </linearGradient>
-                                            </defs>
-                                        </svg>
-                                        <div>
-                                            <p>Ninja</p>
-                                        </div>
-                                    </div>
-                                    <div class="ghost-box">
-                                        <span class="relative max-[370px]:hidden"><svg width="16" height="16" class="color-change-svg"
-                                                viewBox="0 0 21 22" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M10.2395 0.15766C8.91694 0.447897 7.53651 1.28737 6.67959 2.32275C5.5057 3.74082 4.64244 6.04636 4.36893 8.49341C4.15938 10.3688 4.04717 10.9433 3.73976 11.7171C3.33938 12.7251 2.62951 13.8218 1.84362 14.6467C1.49742 15.0101 1.23484 15.3282 1.26 15.3537C1.28527 15.379 1.61327 15.4494 1.9889 15.5098C3.63577 15.775 5.24467 14.9734 6.20142 13.4111C6.41139 13.0682 6.60555 12.8103 6.63279 12.8377C6.66014 12.8653 6.51434 13.2447 6.30875 13.6811C5.73168 14.9057 4.59449 15.921 3.50296 16.1862C3.29331 16.237 3.16519 16.3679 3.05194 16.6467C2.28924 18.5239 1.35058 20.0945 0.472761 20.9622C0.212774 21.2192 0 21.4723 0 21.5245C0 21.6471 1.02425 21.5276 1.76791 21.3185C2.71687 21.0516 3.49464 20.5635 4.35926 19.692C5.0007 19.0455 5.23864 18.8703 5.47502 18.8703C5.88632 18.8703 6.44716 19.2807 6.75967 19.8106C7.52143 21.1019 8.02737 21.5256 8.80754 21.5256C9.3793 21.5256 9.69669 21.2348 10.2653 20.1899C10.4821 19.7916 10.7881 19.3697 10.9455 19.2523L11.2314 19.0389L11.5137 19.2514C11.669 19.3682 11.9849 19.8373 12.2157 20.2938C12.5592 20.973 12.7081 21.1595 13.0356 21.3208C13.3854 21.493 13.4896 21.5015 13.8651 21.3881C14.5295 21.1874 15.1313 20.7107 15.6564 19.9689C15.9204 19.5962 16.2558 19.1964 16.4018 19.0807C17.0238 18.5876 17.684 18.9521 18.4258 20.1983C19.0256 21.206 19.5814 21.7488 20.1796 21.9112C20.4174 21.9758 20.6266 22.0136 20.6443 21.9955C20.6727 21.9663 20.634 20.741 20.4488 15.8044L20.4027 14.5728H20.7013H21L20.8002 14.2315C20.4493 13.6321 20.2807 12.5937 20.1768 10.3923C20.1213 9.21717 20.0299 7.99081 19.9737 7.66703C19.9174 7.34326 19.8164 6.74821 19.7494 6.34467C19.3328 3.83861 17.9455 2.03713 15.5427 0.881838C13.8401 0.063325 11.886 -0.203538 10.2395 0.15766ZM12.4687 6.0711C12.8395 6.47118 13.0008 7.00281 13.0605 8.02173C13.1011 8.71331 13.0681 8.97829 12.8725 9.53371C12.4175 10.8258 11.7399 10.934 11.1801 9.80404C10.897 9.23278 10.8694 9.08489 10.8769 8.17938C10.8835 7.38183 10.933 7.07262 11.125 6.62851C11.5125 5.73223 11.9763 5.53978 12.4687 6.0711ZM16.8454 6.37915C17.2082 6.74496 17.366 7.29011 17.366 8.17896C17.366 9.05711 17.2185 9.57616 16.8512 9.9904C16.5908 10.2842 16.5226 10.3112 16.2696 10.2207C15.8144 10.0578 15.5542 9.43319 15.5101 8.39771C15.4674 7.39472 15.5916 6.8612 15.9753 6.40179C16.3057 6.00601 16.4709 6.00171 16.8454 6.37915Z"
-                                                    fill="currentColor"></path>
-                                                <defs>
-                                                    <clipPath id="clip0_1026_1491">
-                                                        <rect width="24" height="24" fill="white"></rect>
-                                                    </clipPath>
-                                                    <linearGradient id="paint0_linear_191_6020" x1="-4.60094"
-                                                        y1="6.10729" x2="25.7971" y2="5.92317"
-                                                        gradientUnits="userSpaceOnUse">
-                                                        <stop offset="0.270833" stop-color="#C926F1"></stop>
-                                                        <stop offset="1" stop-color="#FB42FF"></stop>
-                                                    </linearGradient>
-                                                </defs>
-                                            </svg></span>
-                                        <p>Ghost</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
-                                            fill="currentColor" aria-hidden="true" stroke-width="2"
-                                            class="larger-svg 
-                                              
-                                             h-4 w-4 transition-colors sm:ml-0 group-hover/options:text-gray-500 !text-gray-500 group-hover/button:text-brand-purple">
-                                            <path fill-rule="evenodd"
-                                                d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <h2>FREE PLAN</h2>
-
-                        </div>
-                        <p class="p-simple">Select your prefered model</p>
-                        <div class="text-area-inner-buttons" style="position: relative;">
-                            <textarea rows="10" style="height: 230px; width: 100%;" aria-invalid="false"
-                                id="input-text" name="input_text"
-                                placeholder="Enter the text that you want to make it unique and human"
-                                class=""></textarea>
-                            <div id="error-message" class="error-message"></div>
-                            <div class="textarea-buttons" id="textarea-buttons">
-
-                                <!-- <div class="text-area-btn-1">
+              </div>
+              <h2>FREE PLAN</h2>
+            </div>
+            <p class="p-simple">Select your prefered model</p>
+            <div class="text-area-inner-buttons" style="position: relative">
+              <textarea rows="10" style="height: 230px; width: 100%" aria-invalid="false" id="input-text"
+                name="input_text" placeholder="Enter the text that you want to make it unique and human"
+                class=""></textarea>
+              <div id="error-message" class="error-message"></div>
+              <div class="textarea-buttons" id="textarea-buttons">
+                <!-- <div class="text-area-btn-1">
                                     <img src="{% static 'assets/images/icons/icons8-hand-32.png' %}" alt="">
                                     <p>Try Sample Text</p>
                                 </div> -->
-                                <div class="text-area-btn-2">
-                                    <img src="{% static 'assets/images/icons/icons8-paste-50.png' %}" alt="" height="24px"
-                                        width="22px">
-                                    <p>Paste Text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div style=""class="words-count">
-                        <div class="buttons">
-                            <div class="button-1">
-                                <button id="btn btn-lg btn-gradient-1 aos-init aos-animate"> 
-                                    <span><img width="24" height="24" src="{% static 'assets/images/icons/icons8-brain-50.png' %}"/></span>
-                                    Humanize</button>
-                            </div>
-                            <div class="button-2">
-                                <select class="select-box" aria-invalid="false" id=":R2b1l6m:" name="level">
-                                    <option value="easy">Easy</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="aggressive" selected="">Aggressive</option>
-                                </select>
-                                <p>Level</p>
-                            </div>
-                        </div>
-                        <div><h3>Words Count: <span id="word-count" style="color: red;"> 0</span>/300</h3></div>
-                    </div>
-                        <div class="mt-2 ai-button">
-                            <button class="ai-btn" id="ai-btn">Check for Ai</button>
-                        </div>
-                        <div>
-                            <p class="box-last-text text-center">100% Free, No Credit Card Required</p>
-                        </div>
-                    </div>
+                <div class="text-area-btn-2">
+                  <img src="{% static 'assets/images/icons/icons8-paste-50.png' %}" alt="" height="24px" width="22px" />
+                  <p>Paste Text</p>
                 </div>
+              </div>
             </div>
-            <div class="row " id="result-row" style="display: none;">
-                <div class="box-outer d-flex justify-center">
-                    <div class="result-box">
-                        <div>
-                            <h2>Your New Content:</h2>
-                        </div>
-                    
-                        <div>
-                            <div class="super-box">
-                                <div class="result-main-box">
-                                    <div class="result-main-left-text">
-                                        <button class="btn btn-outline-primary">Check for AI</button>
-                                    </div>
-                                    <div class="result-main-right-icons">
-                                        <img width="32" height="32"
-                                            src="https://img.icons8.com/windows/32/000000/copy.png"
-                                            alt="copy" />
-                                        <img width="32" height="32"
-                                            src="https://img.icons8.com/ios/50/000000/facebook-like--v1.png"
-                                            alt="facebook-like--v1" />
-                                        <img width="32" height="32"
-                                            src="https://img.icons8.com/external-outline-andi-nur-abdillah/64/000000/external-Dislike-survey-(outline)-outline-andi-nur-abdillah.png"
-                                            alt="external-Dislike-survey-(outline)-outline-andi-nur-abdillah" />
-                                    </div>
-
-                                </div>
-                                <div class="border-b"></div>
-                                <p style="margin: 0;" class="reult-p"></p>
-                            </div>
-
-                        </div>
-
-                    </div>
+            <p style="color: red; display: none" id="min_word_error">
+              Error: Please enter at least 30 words.
+            </p>
+            <div style="" class="words-count">
+              <div class="buttons">
+                <div class="button-1">
+                  <button id="hummani-main-btn" class="btn btn-lg btn-gradient-1 aos-init aos-animate">
+                    <span><img width="24" height="24"
+                        src="{% static 'assets/images/icons/icons8-brain-50.png' %}" /></span>
+                    Humanize
+                  </button>
                 </div>
-            </div>
-            <div class="row justify-center mt-18">
-                <div class="col-lg-10">
-                    <div class="text-center">
-                        <h4 class="mb-10" data-aos="fade-up-sm" data-aos-delay="50">
-                            <span class="text-gradient-1">20,000+</span>
-                            Professionals & Teams Choose
-                            <span class="text-primary">GenAI.</span>
-                        </h4>
-
-                        <div
-                            class="row align-center justify-center row-cols-3 row-cols-md-5 g-6 g-lg-10 g-xl-20">
-                            <div class="col" data-aos="fade-up-sm" data-aos-delay="100" data-aos-offset="10">
-                                <img src="assets/images/brands/1.png" alt="" class="img-fluid brand-img" />
-                            </div>
-                            <div class="col" data-aos="fade-up-sm" data-aos-delay="150" data-aos-offset="10">
-                                <img src="assets/images/brands/2.png" alt="" class="img-fluid brand-img" />
-                            </div>
-                            <div class="col" data-aos="fade-up-sm" data-aos-delay="200" data-aos-offset="10">
-                                <img src="assets/images/brands/3.png" alt="" class="img-fluid brand-img" />
-                            </div>
-                            <div class="col" data-aos="fade-up-sm" data-aos-delay="250" data-aos-offset="10">
-                                <img src="assets/images/brands/4.png" alt="" class="img-fluid brand-img" />
-                            </div>
-                            <div class="col" data-aos="fade-up-sm" data-aos-delay="300" data-aos-offset="10">
-                                <img src="assets/images/brands/5.png" alt="" class="img-fluid brand-img" />
-                            </div>
-                        </div>
-                    </div>
+                <div class="button-2">
+                  <select class="select-box" aria-invalid="false" id=":R2b1l6m:" name="level">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="aggressive" selected="">Aggressive</option>
+                  </select>
+                  <p>Level</p>
                 </div>
+              </div>
+
+              <div>
+                <h3>
+                  Words Count:
+                  <span id="word-count" style="color: red"> 0</span>/300
+                </h3>
+              </div>
             </div>
+            <div class="mt-2 ai-button">
+              <button class="ai-btn" id="ai-btn">Check for Ai</button>
+
+            </div>
+
+
+            <div>
+              <div class="box-last-text text-center" style="display: none;" id="detector-answer">
+
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+      <div class="row" id="result-row" style="display: none">
+        <div class="box-outer d-flex justify-center">
+          <div class="result-box">
+            <div>
+              <h2>Your New Content:</h2>
+            </div>
 
-
-    <!-- Features -->
-    <section class="features-section has-blurry-shape position-relative overflow-hidden py-10 py-lg-15 ">
-        <div class="blurry-shape">
-            <img src="assets/images/shapes/blurry-shape-3.svg" alt="" class="img-fluid" />
+            <div>
+              <div class="super-box">
+                <div class="result-main-box">
+                  <div class="result-main-left-text">
+                    <button class="btn btn-outline-primary">
+                      Check for AI
+                    </button>
+                  </div>
+                  <div class="result-main-right-icons">
+                    <img width="32" height="32" src="https://img.icons8.com/windows/32/000000/copy.png" alt="copy" />
+                    <img width="32" height="32" src="https://img.icons8.com/ios/50/000000/facebook-like--v1.png"
+                      alt="facebook-like--v1" />
+                    <img width="32" height="32"
+                      src="https://img.icons8.com/external-outline-andi-nur-abdillah/64/000000/external-Dislike-survey-(outline)-outline-andi-nur-abdillah.png"
+                      alt="external-Dislike-survey-(outline)-outline-andi-nur-abdillah" />
+                  </div>
+                </div>
+                <div class="border-b"></div>
+                <p style="margin: 0" class="reult-p"></p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="container">
-            <div class="text-center mb-18">
-                <h1 class=" mb-0" data-aos="fade-up-sm" data-aos-delay="50">
-                    Generate Creative AI Copy On-The-Spot, <br class="d-none d-lg-block" />
-                    Across Your Favorite Tools
-                </h1>
-            </div>
+      </div>
+      <div class="row justify-center mt-18">
+        <div class="col-lg-10">
+          <div class="text-center">
+            <h4 class="mb-10" data-aos="fade-up-sm" data-aos-delay="50">
+              <span class="text-gradient-1">20,000+</span>
+              Professionals & Teams Choose
+              <span class="text-primary">GenAI.</span>
+            </h4>
 
-            <div class="row row-cols-1 row-cols-lg-3 g-6 g-xl-14">
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
-                    <div class="d-flex flex-column flex-lg-row gap-6">
-                        <div
-                            class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
-                            <h4 class="mb-0">01</h4>
-                        </div>
-                        <div class="content">
-                            <h4 class=" mb-4">Generates quality contents</h4>
-                            <p>
-                                This tool helps you find the right keywords to target for your content. By using
-                                the Google
-                                Keyword Planner, you can see how often people
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
-                    <div class="d-flex flex-column flex-lg-row gap-6">
-                        <div
-                            class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
-                            <h4 class="mb-0">02</h4>
-                        </div>
-                        <div class="content">
-                            <h4 class=" mb-4">Provides Useful Suggestions</h4>
-                            <p>
-                                GenAI writing tools can analyze data and generate insights to help writers
-                                create more
-                                compelling and informative content.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="200">
-                    <div class="d-flex flex-column flex-lg-row gap-6">
-                        <div
-                            class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
-                            <h4 class="mb-0">03</h4>
-                        </div>
-                        <div class="content">
-                            <h4 class=" mb-4">Improves Products Productivity</h4>
-                            <p>
-                                Emotions are a powerful tool in advertising. Use emotions that resonate with
-                                your audience
-                                to create a connection.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="row align-center justify-center row-cols-3 row-cols-md-5 g-6 g-lg-10 g-xl-20">
+              <div class="col" data-aos="fade-up-sm" data-aos-delay="100" data-aos-offset="10">
+                <img src="assets/images/brands/1.png" alt="" class="img-fluid brand-img" />
+              </div>
+              <div class="col" data-aos="fade-up-sm" data-aos-delay="150" data-aos-offset="10">
+                <img src="assets/images/brands/2.png" alt="" class="img-fluid brand-img" />
+              </div>
+              <div class="col" data-aos="fade-up-sm" data-aos-delay="200" data-aos-offset="10">
+                <img src="assets/images/brands/3.png" alt="" class="img-fluid brand-img" />
+              </div>
+              <div class="col" data-aos="fade-up-sm" data-aos-delay="250" data-aos-offset="10">
+                <img src="assets/images/brands/4.png" alt="" class="img-fluid brand-img" />
+              </div>
+              <div class="col" data-aos="fade-up-sm" data-aos-delay="300" data-aos-offset="10">
+                <img src="assets/images/brands/5.png" alt="" class="img-fluid brand-img" />
+              </div>
             </div>
-
-            <div class="text-center mt-12">
-                <a href="login.html" class="btn btn-primary">Try a demo</a>
-            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
+  <!-- Features -->
+  <section class="features-section has-blurry-shape position-relative overflow-hidden py-10 py-lg-15">
+    <div class="blurry-shape">
+      <img src="assets/images/shapes/blurry-shape-3.svg" alt="" class="img-fluid" />
+    </div>
+    <div class="container">
+      <div class="text-center mb-18">
+        <h1 class="mb-0" data-aos="fade-up-sm" data-aos-delay="50">
+          Generate Creative AI Copy On-The-Spot,
+          <br class="d-none d-lg-block" />
+          Across Your Favorite Tools
+        </h1>
+      </div>
 
-    <!-- Features -->
-    <section class="py-10 py-lg-15 ">
-        <div class="container">
-            <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border mb-18">
-                <div class="row g-6 g-lg-14 g-xl-20 align-center">
-                    <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
-                        <div class="content">
-                            <p class="text-primary">Features 1</p>
-                            <h1 class=" mb-8">
-                                Let's Create AI-Powered Content With A Single Click.
-                            </h1>
-                            <p class="mb-6">
-                                To create powerful content, you need to know who you're targeting. Identify your
-                                target
-                                audience and understand their needs, interests, and pain points.
-                            </p>
-                            <ul class="list-unstyled list-check mb-8">
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18"
-                                        class="icon">
-                                        <g>
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="1.5"
-                                                d="m3.75 9 3.75 3.75 7.5-7.5" />
-                                        </g>
-                                    </svg>
-                                    <span>Start creating powerful content, for your next ads</span>
-                                </li>
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18"
-                                        class="icon">
-                                        <g>
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="1.5"
-                                                d="m3.75 9 3.75 3.75 7.5-7.5" />
-                                        </g>
-                                    </svg>
-                                    <span>Let's Communicate with your customers with emotions</span>
-                                </li>
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18"
-                                        class="icon">
-                                        <g>
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="1.5"
-                                                d="m3.75 9 3.75 3.75 7.5-7.5" />
-                                        </g>
-                                    </svg>
-                                    <span>Use visuals like images, videos, or infographics to make your content
-                                        more
-                                        engaging</span>
-                                </li>
-                            </ul>
-                            <a href="login.html" class="arrow-link arrow-link-primary text-primary gap-3">
-                                <span>Get Started Free</span>
-                                <svg class="icon" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
-                                        stroke="currentColor" stroke-width="1.21" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
-                        <div class="feature-img">
-                            <img src="assets/images/illustrations/feature-illustration-1-blue.svg" alt=""
-                                class="img-fluid" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border mb-18">
-                <div class="row g-6 g-lg-14 g-xl-20 align-center flex-row-reverse">
-                    <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
-                        <div class="content">
-                            <p class="text-primary">Features 2</p>
-                            <h1 class=" mb-8">
-                                A Magical Tool To Optimize Your Content For First Page Rankings
-                            </h1>
-                            <p class="mb-6">
-                                A Magical Tool to Optimize you content for the first know who you're targeting.
-                                Identify
-                                your target audience and understand their needs, interests, and pain points.
-                            </p>
-                            <a href="login.html" class="arrow-link arrow-link-primary text-primary gap-3">
-                                <span>Request A Demo</span>
-                                <svg class="icon" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
-                                        stroke="currentColor" stroke-width="1.21" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
-                        <div class="feature-img">
-                            <img src="assets/images/illustrations/feature-illustration-2-blue.svg" alt=""
-                                class="img-fluid" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border">
-                <div class="row g-6 g-lg-14 g-xl-20 align-center">
-                    <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
-                        <div class="content">
-                            <p class="text-primary">Features 3</p>
-                            <h1 class=" mb-8">
-                                Write Blog Posts, Stories, & Even Books With
-                                <span class="text-primary">GenAI</span>.
-                            </h1>
-                            <p class="mb-6">
-                                To create powerful content, you need to know who you're targeting. Identify your
-                                target
-                                audience and understand their needs, interests, and pain points.
-                            </p>
-                            <ul class="list-unstyled list-check mb-8">
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18"
-                                        class="icon">
-                                        <g>
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="1.5"
-                                                d="m3.75 9 3.75 3.75 7.5-7.5" />
-                                        </g>
-                                    </svg>
-                                    <span>Start creating powerful content, for your next ads</span>
-                                </li>
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18"
-                                        class="icon">
-                                        <g>
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="1.5"
-                                                d="m3.75 9 3.75 3.75 7.5-7.5" />
-                                        </g>
-                                    </svg>
-                                    <span>Let's Communicate with your customers with emotions</span>
-                                </li>
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18"
-                                        class="icon">
-                                        <g>
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="1.5"
-                                                d="m3.75 9 3.75 3.75 7.5-7.5" />
-                                        </g>
-                                    </svg>
-                                    <span>Use visuals like images, videos, or infographics to make your content
-                                        more
-                                        engaging</span>
-                                </li>
-                            </ul>
-                            <a href="login.html" class="arrow-link arrow-link-primary text-primary gap-3">
-                                <span>Get Started Free</span>
-                                <svg class="icon" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
-                                        stroke="currentColor" stroke-width="1.21" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
-                        <div class="feature-img">
-                            <img src="assets/images/illustrations/feature-illustration-3-blue.svg" alt=""
-                                class="img-fluid" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Use cases -->
-    <section class="pt-10 pt-lg-15 pb-20 pb-lg-30">
-        <div class="container">
-            <div class="row justify-center mb-18">
-                <div class="col-lg-9">
-                    <div class="text-center">
-                        <p class="text-primary" data-aos="fade-up-sm" data-aos-delay="50">
-                            GenAI Use Cases
-                        </p>
-                        <h1 class=" mb-0" data-aos="fade-up-sm" data-aos-delay="100">
-                            Write Better Content Faster, The Future Of AI Writing Tools is Here
-                        </h1>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row justify-center row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gx-8 gy-14">
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="50">
-                    <div class="d-flex flex-column justify-between gap-6 h-full text-center">
-                        <div
-                            class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40">
-                                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2">
-                                    <path
-                                        d="M13.333 35h13.334A8.333 8.333 0 0 0 35 26.667v-5a5 5 0 0 0-5-5h-1.667v-3.334A8.333 8.333 0 0 0 20 5h-6.667A8.333 8.333 0 0 0 5 13.333v13.334A8.333 8.333 0 0 0 13.333 35Z" />
-                                    <path
-                                        d="M11.667 14.167a2.5 2.5 0 0 1 2.5-2.5h5a2.5 2.5 0 1 1 0 5h-5a2.5 2.5 0 0 1-2.5-2.5Zm0 11.666a2.5 2.5 0 0 1 2.5-2.5h11.666a2.5 2.5 0 1 1 0 5H14.167a2.5 2.5 0 0 1-2.5-2.5Z" />
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="content flex-grow-1">
-                            <h5 class=" mb-4">Writing Blog Content</h5>
-                            <p class="mb-0">
-                                Writing blog content with GenAI, make sure you have a clear understanding of who
-                                your
-                                audience is.
-                            </p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
-                                <span>Try Blog Content</span>
-                                <svg class="icon" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
-                                        stroke="currentColor" stroke-width="1.21" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
-                    <div class="d-flex flex-column justify-between gap-6 text-center h-full">
-                        <div
-                            class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
-                                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2">
-                                    <path
-                                        d="M8 18.667a5.333 5.333 0 0 1 5.333-5.334h37.334A5.334 5.334 0 0 1 56 18.667v26.666a5.333 5.333 0 0 1-5.333 5.334H13.333A5.333 5.333 0 0 1 8 45.333V18.667Z" />
-                                    <path
-                                        d="M18.667 40V29.333a5.334 5.334 0 0 1 10.666 0V40m-10.666-5.333h10.666m16-10.667v16h-4a4 4 0 1 1 4-4" />
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="content flex-grow-1">
-                            <h5 class=" mb-4">Digital Ad Copy</h5>
-                            <p class="mb-0">
-                                A Magical Tool to Optimize you content for the first know who you're targeting.
-                                Identify
-                                your target.
-                            </p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
-                                <span>Try Digital Ad</span>
-                                <svg class="icon" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
-                                        stroke="currentColor" stroke-width="1.21" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
-                    <div class="d-flex flex-column justify-between gap-6 text-center h-full">
-                        <div
-                            class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
-                                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2">
-                                    <path
-                                        d="M10.667 13.333a2.667 2.667 0 0 1 2.666-2.666h37.334a2.667 2.667 0 0 1 2.666 2.666v37.334a2.667 2.667 0 0 1-2.666 2.666H13.333a2.667 2.667 0 0 1-2.666-2.666V13.333Zm0 8h42.666m-32-10.666v10.666" />
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="content flex-grow-1">
-                            <h5 class=" mb-4">Website Copy</h5>
-                            <p class="mb-0">
-                                Optimize you content for the first know who you're targeting. Identify your
-                                target audience.
-                            </p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
-                                <span>Try Website Copy</span>
-                                <svg class="icon" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
-                                        stroke="currentColor" stroke-width="1.21" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="200">
-                    <div class="d-flex flex-column justify-between gap-6 text-center h-full">
-                        <div
-                            class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
-                                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2">
-                                    <path d="M24 32a8 8 0 1 0 16.001 0A8 8 0 0 0 24 32Z" />
-                                    <path
-                                        d="M10.667 32a21.334 21.334 0 1 0 42.667 0 21.334 21.334 0 0 0-42.667 0ZM32 5.333v5.334m0 42.666v5.334M53.333 32h5.334M5.333 32h5.334" />
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="content flex-grow-1">
-                            <h5 class=" mb-4">Social Media Content</h5>
-                            <p class="mb-0">
-                                First know who you're targeting. Identify your target audience and understand
-                                their needs.
-                            </p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
-                                <span>Try Social Media Content</span>
-                                <svg class="icon" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
-                                        stroke="currentColor" stroke-width="1.21" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="50">
-                    <div class="d-flex flex-column justify-between gap-6 text-center h-full">
-                        <div
-                            class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
-                                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2">
-                                    <path
-                                        d="M34.667 13.333H56M34.667 24H48M34.667 40H56M34.667 50.667H48M8 13.333a2.667 2.667 0 0 1 2.667-2.666h10.666A2.667 2.667 0 0 1 24 13.333V24a2.667 2.667 0 0 1-2.667 2.667H10.667A2.667 2.667 0 0 1 8 24V13.333ZM8 40a2.667 2.667 0 0 1 2.667-2.667h10.666A2.667 2.667 0 0 1 24 40v10.667a2.667 2.667 0 0 1-2.667 2.666H10.667A2.667 2.667 0 0 1 8 50.667V40Z" />
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="content flex-grow-1">
-                            <h5 class=" mb-4">Landing Page Copy</h5>
-                            <p class="mb-0">
-                                First know who you're targeting. Identify your target audience and understand
-                                their needs.
-                            </p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
-                                <span>Try Landing Page Copy</span>
-                                <svg class="icon" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
-                                        stroke="currentColor" stroke-width="1.21" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
-                    <div class="d-flex flex-column justify-between gap-6 text-center h-full">
-                        <div
-                            class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
-                                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2">
-                                    <path
-                                        d="M8 13.333a2.667 2.667 0 0 1 2.667-2.666h42.666A2.667 2.667 0 0 1 56 13.333V40a2.667 2.667 0 0 1-2.667 2.667H10.667A2.667 2.667 0 0 1 8 40V13.333Zm10.667 40h26.666M24 42.667v10.666m16-10.666v10.666M24 32v-3.2m8 3.2v-5.6m8 5.6V21.6" />
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="content flex-grow-1">
-                            <h5 class=" mb-4">Marketing Copy</h5>
-                            <p class="mb-0">
-                                A Magical Tool to Optimize you content for the first know who you're targeting.
-                                Identify
-                                your target.
-                            </p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
-                                <span>Try Marketing Copy</span>
-                                <svg class="icon" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
-                                        stroke="currentColor" stroke-width="1.21" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
-                    <div class="d-flex flex-column justify-between gap-6 text-center h-full">
-                        <div
-                            class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
-                                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2">
-                                    <path
-                                        d="M10.667 21.333a10.667 10.667 0 0 1 10.666-10.666h21.334a10.667 10.667 0 0 1 10.666 10.666v21.334a10.667 10.667 0 0 1-10.666 10.666H21.333a10.667 10.667 0 0 1-10.666-10.666V21.333Z" />
-                                    <path d="M24 21.333a8 8 0 0 0 16 0" />
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="content flex-grow-1">
-                            <h5 class=" mb-4">eCommerce Copy</h5>
-                            <p class="mb-0">
-                                Writing blog content with GenAI, make sure you have a clear understanding of who
-                                your
-                                audience is.
-                            </p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
-                                <span>Try eCommerce Copy</span>
-                                <svg class="icon" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
-                                        stroke="currentColor" stroke-width="1.21" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="200">
-                    <div class="d-flex flex-column justify-between gap-6 text-center h-full">
-                        <div
-                            class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
-                                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2">
-                                    <path
-                                        d="M32 10.667 10.667 21.333 32 32l21.333-10.667L32 10.667ZM10.667 32 32 42.667 53.333 32M10.667 42.667 32 53.333l21.333-10.666" />
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="content flex-grow-1">
-                            <h5 class=" mb-4">Product Description</h5>
-                            <p class="mb-0">
-                                Optimize you content for the first know who you're targeting. Identify your
-                                target audience.
-                            </p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
-                                <span>Try Product Description</span>
-                                <svg class="icon" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
-                                        stroke="currentColor" stroke-width="1.21" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- App users -->
-    <section class="bg-primary py-20 py-lg-30">
-        <div class="container">
-            <div class="row justify-center mb-18">
-                <div class="col-lg-9">
-                    <div class="text-center">
-                        <h1 class="text-white mb-0" data-aos="fade-up-sm" data-aos-delay="50">
-                            Who are the user of GenAI. writing tools
-                        </h1>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-10 g-xl-24 divider-x">
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="50">
-                    <div class="h-full">
-                        <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="#9884FF" stroke-width="1.5"
-                                    d="M8 13.333A5.333 5.333 0 0 1 13.333 8h37.334A5.333 5.333 0 0 1 56 13.333v37.334A5.333 5.333 0 0 1 50.667 56H13.333A5.333 5.333 0 0 1 8 50.667V13.333Z" />
-                                <path stroke="#fff" stroke-width="2"
-                                    d="M24 40h-5.333m16-8h-16m10.666-8H18.667" />
-                            </svg>
-                        </div>
-                        <div class="content text-white">
-                            <h4 class="mb-4">Content Marketers</h4>
-                            <p class="mb-0">
-                                Content marketers and writers who need to create large amounts of content
-                                quickly and
-                                efficiently.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
-                    <div class="h-full">
-                        <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="#fff" stroke-width="2"
-                                    d="M24 37.334c0 4.418 7.163 8 16 8s16-3.582 16-8c0-4.42-7.163-8-16-8s-16 3.58-16 8Z" />
-                                <path stroke="#fff" stroke-width="2"
-                                    d="M24 37.334V48c0 4.416 7.163 8 16 8s16-3.584 16-8V37.334" />
-                                <path stroke="#9884FF" stroke-width="1.5"
-                                    d="M8 16c0 2.859 3.05 5.499 8 6.928 4.95 1.43 11.05 1.43 16 0 4.95-1.43 8-4.07 8-6.928 0-2.859-3.05-5.499-8-6.928-4.95-1.43-11.05-1.43-16 0-4.95 1.43-8 4.07-8 6.928Z" />
-                                <path stroke="#9884FF" stroke-width="1.5"
-                                    d="M8 16v26.667c0 2.368 2.059 3.866 5.333 5.333" />
-                                <path stroke="#9884FF" stroke-width="1.5"
-                                    d="M8 29.334c0 2.367 2.059 3.866 5.333 5.333" />
-                            </svg>
-                        </div>
-                        <div class="content text-white">
-                            <h4 class="mb-4">Small Business Owners</h4>
-                            <p class="mb-0">
-                                Small business owners who may not have the resources to hire a full-time writer
-                                but need to
-                                produce high-quality content
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
-                    <div class="h-full">
-                        <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="#9884FF" stroke-width="1.5"
-                                    d="M32 8c19.2 0 24 4.8 24 24s-4.8 24-24 24S8 51.2 8 32 12.8 8 32 8Z" />
-                                <path stroke="#fff" stroke-width="2"
-                                    d="M21.333 36a6.666 6.666 0 1 0 13.333 0 6.666 6.666 0 0 0-13.333 0Z" />
-                                <path stroke="#fff" stroke-width="2" d="M21.333 21.334h21.334v21.333" />
-                            </svg>
-                        </div>
-                        <div class="content text-white">
-                            <h4 class="mb-4">Digital Marketing Agencies</h4>
-                            <p class="mb-0">
-                                Digital marketing agencies that need to produce content for their clients'
-                                websites, social
-                                media, and advertising campaigns
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Reviews -->
-    <section class="pt-20 pt-lg-30 pb-10 pb-lg-15">
-        <div class="container">
-            <div class="row justify-center mb-18">
-                <div class="col-lg-9">
-                    <div class="text-center">
-                        <h1 class="" data-aos="fade-up-sm" data-aos-delay="50">
-                            <span class="text-primary">GenAI.</span>
-                            Received <img src="assets/images/icons/star.png" alt="" /> 4.8/5 Stars in Over
-                            10,000+ Reviews.
-                        </h1>
-                    </div>
-                </div>
-            </div>
-            <div class="review-carousel-container position-relative">
-                <div class="swiper review-carousel">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide h-auto">
-                            <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
-                                <div class="d-flex items-center gap-4 mb-6">
-                                    <div class="w-12 h-12 rounded-circle overflow-hidden">
-                                        <img src="assets/images/review/1.png" alt=""
-                                            class="w-full h-full object-cover" />
-                                    </div>
-                                    <div class="">
-                                        <h6 class=" mb-1">Wade Warrent</h6>
-                                        <p class="mb-0 fs-sm">Marketing Coordinator</p>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <div class="stars d-flex items-center gap-1 mb-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                    </div>
-                                    <p class="review-text mb-0">
-                                        This is the best thing that has happened to my team in a while! Makes
-                                        post text
-                                        something we barely need to think about!
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide h-auto">
-                            <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
-                                <div class="d-flex items-center gap-4 mb-6">
-                                    <div class="w-12 h-12 rounded-circle overflow-hidden">
-                                        <img src="assets/images/review/2.png" alt=""
-                                            class="w-full h-full object-cover" />
-                                    </div>
-                                    <div class="">
-                                        <h6 class=" mb-1">Dianne Russell</h6>
-                                        <p class="mb-0 fs-sm">Content Creator</p>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <div class="stars d-flex items-center gap-1 mb-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                    </div>
-                                    <p class="review-text mb-0">
-                                        Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui
-                                        esse pariatur
-                                        duis deserunt mollit dolore cillum minim tempor enim.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide h-auto">
-                            <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
-                                <div class="d-flex items-center gap-4 mb-6">
-                                    <div class="w-12 h-12 rounded-circle overflow-hidden">
-                                        <img src="assets/images/review/3.png" alt=""
-                                            class="w-full h-full object-cover" />
-                                    </div>
-                                    <div class="">
-                                        <h6 class=" mb-1">Jenny Wilson</h6>
-                                        <p class="mb-0 fs-sm">Product Designer</p>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <div class="stars d-flex items-center gap-1 mb-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                    </div>
-                                    <p class="review-text mb-0">
-                                        Comfortable to wear for long periods of time. The battery life is
-                                        impressive,
-                                        providing up to 8 hours of listening time on a single charge. The
-                                        earbuds are also
-                                        sweat.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide h-auto">
-                            <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
-                                <div class="d-flex items-center gap-4 mb-6">
-                                    <div class="w-12 h-12 rounded-circle overflow-hidden">
-                                        <img src="assets/images/review/4.png" alt=""
-                                            class="w-full h-full object-cover" />
-                                    </div>
-                                    <div class="">
-                                        <h6 class=" mb-1">Guy Hawkins</h6>
-                                        <p class="mb-0 fs-sm">Digital Marketer</p>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <div class="stars d-flex items-center gap-1 mb-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                    </div>
-                                    <p class="review-text mb-0">
-                                        Through my interactions with users, I have seen how technology has made
-                                        life easier
-                                        and more convenient for people.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide h-auto">
-                            <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
-                                <div class="d-flex items-center gap-4 mb-6">
-                                    <div class="w-12 h-12 rounded-circle overflow-hidden">
-                                        <img src="assets/images/review/1.png" alt=""
-                                            class="w-full h-full object-cover" />
-                                    </div>
-                                    <div class="">
-                                        <h6 class=" mb-1">Bessie Cooper</h6>
-                                        <p class="mb-0 fs-sm">SEO Expert</p>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <div class="stars d-flex items-center gap-1 mb-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                    </div>
-                                    <p class="review-text mb-0">
-                                        I feel proud to be part of this technological advancement and to be able
-                                        to help
-                                        people in their day-to-day activities. It is truly amazing how
-                                        technology has the
-                                        power to connect
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide h-auto">
-                            <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
-                                <div class="d-flex items-center gap-4 mb-6">
-                                    <div class="w-12 h-12 rounded-circle overflow-hidden">
-                                        <img src="assets/images/review/1.png" alt=""
-                                            class="w-full h-full object-cover" />
-                                    </div>
-                                    <div class="">
-                                        <h6 class=" mb-1">Wade Warrent</h6>
-                                        <p class="mb-0 fs-sm">Marketing Coordinator</p>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <div class="stars d-flex items-center gap-1 mb-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 15 14" class="w-4 h-4 text-primary">
-                                            <path
-                                                d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
-                                        </svg>
-                                    </div>
-                                    <p class="review-text mb-0">
-                                        This is the best thing that has happened to my team in a while! Makes
-                                        post text
-                                        something we barely need to think about!
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-pagination justify-center mt-8"></div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Pricing -->
-    <section class="py-10 py-lg-15">
-        <div class="container">
-            <div class="row justify-center mb-14">
-                <div class="col-lg-10">
-                    <div class="text-center">
-                        <p class="text-primary" data-aos="fade-up-sm" data-aos-delay="50">
-                            Pricing Plan
-                        </p>
-                        <h1 class=" mb-5" data-aos="fade-up-sm" data-aos-delay="100">
-                            Ready to Get Started? <br />
-                            Don't Worry, We'll Keep You Under Budget
-                        </h1>
-                        <p class="mb-0" data-aos="fade-up-sm" data-aos-delay="150">
-                            Get started with a 5-day trial, <span class="text-primary">25% off</span> for Yearly
-                            Plan,
-                            Cancel anytime.
-                        </p>
-                    </div>
-                    <div class="text-center mt-12" data-aos="fade-up-sm" data-aos-delay="200">
-                        <div class="switch-wrapper border d-inline-flex rounded p-2 ">
-                            <input id="monthly" type="radio" name="switch" checked />
-                            <input id="yearly" type="radio" name="switch" />
-                            <label for="monthly">Monthly</label>
-                            <label for="yearly">Yearly</label>
-                            <span class="highlighter"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-6 pricing-table">
-                <div class="col-md-6 col-lg-4" data-aos="fade-up-sm" data-aos-delay="50">
-                    <div class="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-whitedark">
-                        <h3 class="text-primary fw-medium mb-0">Free</h3>
-                        <h1 class="display-2 fw-semibold  mb-0 mt-4 price monthly">$00</h1>
-                        <h1 class="display-2 fw-semibold  mb-0 mt-4 price yearly d-none">$00</h1>
-                        <p class=" lead fw-normal mt-4 mb-0">
-                            A 10X faster way to writing your professional copy
-                        </p>
-                        <a href="pricing-plan.html"
-                            class="pricing-btn btn btn-lg w-full fs-4 lh-sm mt-9 btn-lite-blue-2">Start for
-                            Free</a>
-                        <ul class="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">
-                            <li>Single seats</li>
-                            <li>10,000 words per month</li>
-                            <li>30+ AI writing tools</li>
-                            <li>60+ Copywriting tools</li>
-                            <li>10+ languages</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4" data-aos="fade-up-sm" data-aos-delay="100">
-                    <div class="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-whitedark">
-                        <h3 class="text-primary fw-medium mb-0">Starter</h3>
-                        <h1 class="display-2 fw-semibold  mb-0 mt-4 price monthly">$29</h1>
-                        <h1 class="display-2 fw-semibold  mb-0 mt-4 price yearly d-none">$299</h1>
-                        <p class=" lead fw-normal mt-4 mb-0">
-                            A 10X faster way to writing your professional copy
-                        </p>
-                        <a href="pricing-plan.html"
-                            class="pricing-btn btn btn-lg w-full fs-4 lh-sm mt-9 btn-lite-blue-2">Choose
-                            Plan</a>
-                        <ul class="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">
-                            <li>5 User seats</li>
-                            <li><strong class=" fw-medium">50,000</strong> words per month</li>
-                            <li><strong class=" fw-medium">70+</strong> AI writing tools</li>
-                            <li><strong class=" fw-medium">100+</strong> Copywriting tools</li>
-                            <li>Blog post wizard tool</li>
-                            <li>25+ languages</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4" data-aos="fade-up-sm" data-aos-delay="150">
-                    <div class="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-whitedark">
-                        <span class="badge text-bg-primary px-4 py-2 rounded-end-0">Most Popular</span>
-                        <h3 class="text-primary fw-medium mb-0">Enterprise</h3>
-                        <h1 class="display-2 fw-semibold  mb-0 mt-4 price monthly">$119</h1>
-                        <h1 class="display-2 fw-semibold  mb-0 mt-4 price yearly d-none">$1299</h1>
-                        <p class=" lead fw-normal mt-4 mb-0">
-                            A 10X faster way to writing your professional copy
-                        </p>
-                        <a href="pricing-plan.html"
-                            class="pricing-btn btn btn-lg w-full fs-4 lh-sm mt-9 btn-lite-blue-2">Choose
-                            Plan</a>
-                        <ul class="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">
-                            <li>Unlimited seats</li>
-                            <li><strong class=" fw-medium">100,000</strong> words per month</li>
-                            <li><strong class=" fw-medium">100+</strong> AI writing tools</li>
-                            <li><strong class=" fw-medium">200+</strong> Copywriting tools</li>
-                            <li>Blog post wizard tool</li>
-                            <li>25+ languages</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- FAQ -->
-    <section class="py-10 py-lg-15">
-        <div class="container">
-            <div class="row justify-center mb-18">
-                <div class="col-lg-10">
-                    <div class="text-center">
-                        <h1 class="mb-0 " data-aos="fade-up-sm" data-aos-delay="50">
-                            Questions About our GenAI? <br class="d-none d-md-block" />
-                            We have Answers!
-                        </h1>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row justify-center">
-                <div class="col-lg-8" data-aos="fade-up-sm" data-aos-delay="100">
-                    <div class="accordion accordion-flush d-flex flex-column gap-6" id="faqAccordion">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#faq-collapseOne" aria-expanded="false"
-                                    aria-controls="faq-collapseOne">
-                                    <span class="icon"></span>
-                                    What Is GenAI Content Writing Tool?
-                                </button>
-                            </h2>
-                            <div id="faq-collapseOne" class="accordion-collapse collapse show"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Once you know your audience, choose a topic that will resonate with them.
-                                    Look for
-                                    trending topics in your industry or address common questions or challenges
-                                    your audience
-                                    may be facing. Keep in mind that your topic should be both interesting and
-                                    relevant to
-                                    your audience
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#faq-collapseTwo"
-                                    aria-expanded="false" aria-controls="faq-collapseTwo">
-                                    <span class="icon"></span>
-                                    Is it helpful for Digital Marketer or Content Writer?
-                                </button>
-                            </h2>
-                            <div id="faq-collapseTwo" class="accordion-collapse collapse"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Once you know your audience, choose a topic that will resonate with them.
-                                    Look for
-                                    trending topics in your industry or address common questions or challenges
-                                    your audience
-                                    may be facing. Keep in mind that your topic should be both interesting and
-                                    relevant to
-                                    your audience
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#faq-collapseThree"
-                                    aria-expanded="false" aria-controls="faq-collapseThree">
-                                    <span class="icon"></span>
-                                    Is there a limit on how much content I can generate?
-                                </button>
-                            </h2>
-                            <div id="faq-collapseThree" class="accordion-collapse collapse"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Once you know your audience, choose a topic that will resonate with them.
-                                    Look for
-                                    trending topics in your industry or address common questions or challenges
-                                    your audience
-                                    may be facing. Keep in mind that your topic should be both interesting and
-                                    relevant to
-                                    your audience
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#faq-collapseFour"
-                                    aria-expanded="false" aria-controls="faq-collapseFour">
-                                    <span class="icon"></span>
-                                    What Languages does it supports?
-                                </button>
-                            </h2>
-                            <div id="faq-collapseFour" class="accordion-collapse collapse"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Once you know your audience, choose a topic that will resonate with them.
-                                    Look for
-                                    trending topics in your industry or address common questions or challenges
-                                    your audience
-                                    may be facing. Keep in mind that your topic should be both interesting and
-                                    relevant to
-                                    your audience
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#faq-collapseFive"
-                                    aria-expanded="false" aria-controls="faq-collapseFive">
-                                    <span class="icon"></span>
-                                    What is SEO Writing AI and how do I use it?
-                                </button>
-                            </h2>
-                            <div id="faq-collapseFive" class="accordion-collapse collapse"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Once you know your audience, choose a topic that will resonate with them.
-                                    Look for
-                                    trending topics in your industry or address common questions or challenges
-                                    your audience
-                                    may be facing. Keep in mind that your topic should be both interesting and
-                                    relevant to
-                                    your audience
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- CTA -->
-    <section class="cta-section style-2 py-10 py-lg-15" data-aos="fade-up-sm" data-aos-delay="150">
-        <div class="container">
+      <div class="row row-cols-1 row-cols-lg-3 g-6 g-xl-14">
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="d-flex flex-column flex-lg-row gap-6">
             <div
-                class="rounded-5 border position-relative pt-6 px-6 overflow-hidden bg-striped bg-striped-bottom gradient-bg border-primary">
-                <div class="row align-center justify-center g-0">
-                    <div class="col-lg-5">
-                        <div class="p-0 pt-md-6 text-center text-lg-start p-lg-6 p-xl-10">
-                            <h2 class=" mb-6">
-                                Using
-                                <span class="text-primary">GenAI</span>
-                                you can save hours each week creating long-form content.
-                            </h2>
-                            <a href="login.html" class="btn btn-primary">Get Started Free</a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-7">
-                        <div class="cta-image-container mt-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 86 42"
-                                class="text-primary arrow-shape">
-                                <path fill="currentColor"
-                                    d="M83.007 5.063c-8.303-4.146-19.138-3.888-27.778-.97C46.956 6.888 37.093 13.477 37.1 23.3c0 3.58 2.13 7.126 6.128 6.453 3.714-.623 5.706-4.227 4.922-7.795-2.116-9.638-15.81-9.008-22.92-6.476a30.564 30.564 0 0 0-11.9 7.744c-3.05 3.222-6.07 7.587-6.6 12.094-.075.65.97.914 1.24.332 1.429-3.109 2.544-6.172 4.632-8.935 2.168-2.869 4.92-5.3 7.982-7.161 6.077-3.694 15.03-5.894 21.7-2.497 3.533 1.802 6.914 7.774 2.361 10.55-1.845 1.124-4.263.905-5.36-1.113-1-1.843-.788-4.302-.285-6.253 2.048-7.951 10.417-12.945 17.706-15.252a39.207 39.207 0 0 1 12.77-1.803c4.621.113 8.847 1.265 13.224 2.615.426.133.72-.536.308-.74Z" />
-                                <path fill="currentColor"
-                                    d="M85.318 6.107C77.431-.542 66.216-1.539 56.765 2.153 52.217 3.93 48.075 6.62 44.43 9.867c-3.718 3.315-7.686 7.46-9.29 12.29-1.122 3.37-.827 9.393 3.792 9.836 4.065.392 8.748-3.306 9.751-7.167 1.123-4.321-2.065-8.325-5.861-9.91-4.533-1.89-10.034-1.255-14.67-.028C18.004 17.574 9.163 24.89 4.811 34.499c-.414.917.925 1.725 1.358.797 3.22-6.944 8.669-12.606 15.433-16.148 3.447-1.805 7.224-3.029 11.08-3.527 4.417-.568 9.8-.516 12.977 3.1 3.508 3.99 1.106 8.906-3.196 10.993-2.51 1.218-5.217 1.2-6.206-1.88-.804-2.498.079-5.313 1.285-7.533C41.411 13.192 48.878 7.087 56.22 3.912 65.421-.067 76.632.335 84.582 6.835c.51.424 1.248-.296.736-.728Z" />
-                                <path fill="currentColor"
-                                    d="M14.65 30.337c-1.917.849-3.728 1.993-5.56 3.01-.866.48-1.735.96-2.602 1.445-.4.223-2.362 1.634-2.766 1.416-.21-.111-.02-2.62-.02-2.95l-.022-2.95c-.015-1.918.346-4.259-.32-6.075-.237-.65-1.107-.667-1.334.005-.423 1.245-.241 2.569-.222 3.873.02 1.474.044 2.95.065 4.423.022 1.364-.587 4.544.89 5.408 1.41.826 3.676-1.342 4.81-2.007 2.547-1.49 5.266-2.848 7.666-4.563a.595.595 0 0 0-.585-1.035Z" />
-                                <path fill="currentColor"
-                                    d="M14.241 29.944c-1.847 1.293-3.383 3.118-5.07 4.618-1.96 1.739-3.985 3.433-6.174 4.873l1.349.775a76.48 76.48 0 0 1 .125-7.34c.158-2.375.909-4.93.706-7.287-.06-.686-1.104-1.162-1.452-.39-.928 2.06-.94 4.768-1.106 6.995a64.81 64.81 0 0 0-.072 8.036c.042.81.939 1.134 1.53.635 1.972-1.665 3.983-3.264 5.88-5.02 1.705-1.578 3.703-3.259 4.913-5.258.224-.38-.243-.907-.629-.637Z" />
-                                <path fill="currentColor"
-                                    d="M14.98 28.142C10.7 32.102 6.441 36.087 2.12 40l1.531.634c-.332-2.723-.642-5.443-.777-8.184-.123-2.526.22-5.24-.273-7.715-.155-.782-1.317-.715-1.506.006-.67 2.525-.275 5.5-.115 8.079.166 2.698.443 5.394.902 8.056.118.686 1.054.85 1.499.402 4.119-4.124 8.302-8.18 12.467-12.258.576-.558-.285-1.422-.87-.878Z" />
-                            </svg>
-                            <div class="cta-img rounded-top-4">
-                                <img src="assets/images/screens/screen-7.jpg" alt=""
-                                    class="img-fluid w-full h-full object-cover" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+              <h4 class="mb-0">01</h4>
             </div>
+            <div class="content">
+              <h4 class="mb-4">Generates quality contents</h4>
+              <p>
+                This tool helps you find the right keywords to target for your
+                content. By using the Google Keyword Planner, you can see how
+                often people
+              </p>
+            </div>
+          </div>
         </div>
-    </section>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
+          <div class="d-flex flex-column flex-lg-row gap-6">
+            <div
+              class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+              <h4 class="mb-0">02</h4>
+            </div>
+            <div class="content">
+              <h4 class="mb-4">Provides Useful Suggestions</h4>
+              <p>
+                GenAI writing tools can analyze data and generate insights to
+                help writers create more compelling and informative content.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="200">
+          <div class="d-flex flex-column flex-lg-row gap-6">
+            <div
+              class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+              <h4 class="mb-0">03</h4>
+            </div>
+            <div class="content">
+              <h4 class="mb-4">Improves Products Productivity</h4>
+              <p>
+                Emotions are a powerful tool in advertising. Use emotions that
+                resonate with your audience to create a connection.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="text-center mt-12">
+        <a href="login.html" class="btn btn-primary">Try a demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-10 py-lg-15">
+    <div class="container">
+      <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border mb-18">
+        <div class="row g-6 g-lg-14 g-xl-20 align-center">
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
+            <div class="content">
+              <p class="text-primary">Features 1</p>
+              <h1 class="mb-8">
+                Let's Create AI-Powered Content With A Single Click.
+              </h1>
+              <p class="mb-6">
+                To create powerful content, you need to know who you're
+                targeting. Identify your target audience and understand their
+                needs, interests, and pain points.
+              </p>
+              <ul class="list-unstyled list-check mb-8">
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>Start creating powerful content, for your next ads</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>Let's Communicate with your customers with emotions</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>Use visuals like images, videos, or infographics to make
+                    your content more engaging</span>
+                </li>
+              </ul>
+              <a href="login.html" class="arrow-link arrow-link-primary text-primary gap-3">
+                <span>Get Started Free</span>
+                <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor"
+                    stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+            <div class="feature-img">
+              <img src="assets/images/illustrations/feature-illustration-1-blue.svg" alt="" class="img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border mb-18">
+        <div class="row g-6 g-lg-14 g-xl-20 align-center flex-row-reverse">
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
+            <div class="content">
+              <p class="text-primary">Features 2</p>
+              <h1 class="mb-8">
+                A Magical Tool To Optimize Your Content For First Page Rankings
+              </h1>
+              <p class="mb-6">
+                A Magical Tool to Optimize you content for the first know who
+                you're targeting. Identify your target audience and understand
+                their needs, interests, and pain points.
+              </p>
+              <a href="login.html" class="arrow-link arrow-link-primary text-primary gap-3">
+                <span>Request A Demo</span>
+                <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor"
+                    stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+            <div class="feature-img">
+              <img src="assets/images/illustrations/feature-illustration-2-blue.svg" alt="" class="img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border">
+        <div class="row g-6 g-lg-14 g-xl-20 align-center">
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
+            <div class="content">
+              <p class="text-primary">Features 3</p>
+              <h1 class="mb-8">
+                Write Blog Posts, Stories, & Even Books With
+                <span class="text-primary">GenAI</span>.
+              </h1>
+              <p class="mb-6">
+                To create powerful content, you need to know who you're
+                targeting. Identify your target audience and understand their
+                needs, interests, and pain points.
+              </p>
+              <ul class="list-unstyled list-check mb-8">
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>Start creating powerful content, for your next ads</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>Let's Communicate with your customers with emotions</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>Use visuals like images, videos, or infographics to make
+                    your content more engaging</span>
+                </li>
+              </ul>
+              <a href="login.html" class="arrow-link arrow-link-primary text-primary gap-3">
+                <span>Get Started Free</span>
+                <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor"
+                    stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+            <div class="feature-img">
+              <img src="assets/images/illustrations/feature-illustration-3-blue.svg" alt="" class="img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="pt-10 pt-lg-15 pb-20 pb-lg-30">
+    <div class="container">
+      <div class="row justify-center mb-18">
+        <div class="col-lg-9">
+          <div class="text-center">
+            <p class="text-primary" data-aos="fade-up-sm" data-aos-delay="50">
+              GenAI Use Cases
+            </p>
+            <h1 class="mb-0" data-aos="fade-up-sm" data-aos-delay="100">
+              Write Better Content Faster, The Future Of AI Writing Tools is
+              Here
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-center row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gx-8 gy-14">
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="50">
+          <div class="d-flex flex-column justify-between gap-6 h-full text-center">
+            <div class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40">
+                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path
+                    d="M13.333 35h13.334A8.333 8.333 0 0 0 35 26.667v-5a5 5 0 0 0-5-5h-1.667v-3.334A8.333 8.333 0 0 0 20 5h-6.667A8.333 8.333 0 0 0 5 13.333v13.334A8.333 8.333 0 0 0 13.333 35Z" />
+                  <path
+                    d="M11.667 14.167a2.5 2.5 0 0 1 2.5-2.5h5a2.5 2.5 0 1 1 0 5h-5a2.5 2.5 0 0 1-2.5-2.5Zm0 11.666a2.5 2.5 0 0 1 2.5-2.5h11.666a2.5 2.5 0 1 1 0 5H14.167a2.5 2.5 0 0 1-2.5-2.5Z" />
+                </g>
+              </svg>
+            </div>
+            <div class="content flex-grow-1">
+              <h5 class="mb-4">Writing Blog Content</h5>
+              <p class="mb-0">
+                Writing blog content with GenAI, make sure you have a clear
+                understanding of who your audience is.
+              </p>
+            </div>
+            <div class="flex-shrink-0">
+              <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
+                <span>Try Blog Content</span>
+                <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor"
+                    stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="d-flex flex-column justify-between gap-6 text-center h-full">
+            <div class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
+                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path
+                    d="M8 18.667a5.333 5.333 0 0 1 5.333-5.334h37.334A5.334 5.334 0 0 1 56 18.667v26.666a5.333 5.333 0 0 1-5.333 5.334H13.333A5.333 5.333 0 0 1 8 45.333V18.667Z" />
+                  <path
+                    d="M18.667 40V29.333a5.334 5.334 0 0 1 10.666 0V40m-10.666-5.333h10.666m16-10.667v16h-4a4 4 0 1 1 4-4" />
+                </g>
+              </svg>
+            </div>
+            <div class="content flex-grow-1">
+              <h5 class="mb-4">Digital Ad Copy</h5>
+              <p class="mb-0">
+                A Magical Tool to Optimize you content for the first know who
+                you're targeting. Identify your target.
+              </p>
+            </div>
+            <div class="flex-shrink-0">
+              <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
+                <span>Try Digital Ad</span>
+                <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor"
+                    stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
+          <div class="d-flex flex-column justify-between gap-6 text-center h-full">
+            <div class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
+                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path
+                    d="M10.667 13.333a2.667 2.667 0 0 1 2.666-2.666h37.334a2.667 2.667 0 0 1 2.666 2.666v37.334a2.667 2.667 0 0 1-2.666 2.666H13.333a2.667 2.667 0 0 1-2.666-2.666V13.333Zm0 8h42.666m-32-10.666v10.666" />
+                </g>
+              </svg>
+            </div>
+            <div class="content flex-grow-1">
+              <h5 class="mb-4">Website Copy</h5>
+              <p class="mb-0">
+                Optimize you content for the first know who you're targeting.
+                Identify your target audience.
+              </p>
+            </div>
+            <div class="flex-shrink-0">
+              <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
+                <span>Try Website Copy</span>
+                <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor"
+                    stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="200">
+          <div class="d-flex flex-column justify-between gap-6 text-center h-full">
+            <div class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
+                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path d="M24 32a8 8 0 1 0 16.001 0A8 8 0 0 0 24 32Z" />
+                  <path
+                    d="M10.667 32a21.334 21.334 0 1 0 42.667 0 21.334 21.334 0 0 0-42.667 0ZM32 5.333v5.334m0 42.666v5.334M53.333 32h5.334M5.333 32h5.334" />
+                </g>
+              </svg>
+            </div>
+            <div class="content flex-grow-1">
+              <h5 class="mb-4">Social Media Content</h5>
+              <p class="mb-0">
+                First know who you're targeting. Identify your target audience
+                and understand their needs.
+              </p>
+            </div>
+            <div class="flex-shrink-0">
+              <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
+                <span>Try Social Media Content</span>
+                <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor"
+                    stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="50">
+          <div class="d-flex flex-column justify-between gap-6 text-center h-full">
+            <div class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
+                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path
+                    d="M34.667 13.333H56M34.667 24H48M34.667 40H56M34.667 50.667H48M8 13.333a2.667 2.667 0 0 1 2.667-2.666h10.666A2.667 2.667 0 0 1 24 13.333V24a2.667 2.667 0 0 1-2.667 2.667H10.667A2.667 2.667 0 0 1 8 24V13.333ZM8 40a2.667 2.667 0 0 1 2.667-2.667h10.666A2.667 2.667 0 0 1 24 40v10.667a2.667 2.667 0 0 1-2.667 2.666H10.667A2.667 2.667 0 0 1 8 50.667V40Z" />
+                </g>
+              </svg>
+            </div>
+            <div class="content flex-grow-1">
+              <h5 class="mb-4">Landing Page Copy</h5>
+              <p class="mb-0">
+                First know who you're targeting. Identify your target audience
+                and understand their needs.
+              </p>
+            </div>
+            <div class="flex-shrink-0">
+              <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
+                <span>Try Landing Page Copy</span>
+                <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor"
+                    stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="d-flex flex-column justify-between gap-6 text-center h-full">
+            <div class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
+                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path
+                    d="M8 13.333a2.667 2.667 0 0 1 2.667-2.666h42.666A2.667 2.667 0 0 1 56 13.333V40a2.667 2.667 0 0 1-2.667 2.667H10.667A2.667 2.667 0 0 1 8 40V13.333Zm10.667 40h26.666M24 42.667v10.666m16-10.666v10.666M24 32v-3.2m8 3.2v-5.6m8 5.6V21.6" />
+                </g>
+              </svg>
+            </div>
+            <div class="content flex-grow-1">
+              <h5 class="mb-4">Marketing Copy</h5>
+              <p class="mb-0">
+                A Magical Tool to Optimize you content for the first know who
+                you're targeting. Identify your target.
+              </p>
+            </div>
+            <div class="flex-shrink-0">
+              <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
+                <span>Try Marketing Copy</span>
+                <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor"
+                    stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
+          <div class="d-flex flex-column justify-between gap-6 text-center h-full">
+            <div class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
+                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path
+                    d="M10.667 21.333a10.667 10.667 0 0 1 10.666-10.666h21.334a10.667 10.667 0 0 1 10.666 10.666v21.334a10.667 10.667 0 0 1-10.666 10.666H21.333a10.667 10.667 0 0 1-10.666-10.666V21.333Z" />
+                  <path d="M24 21.333a8 8 0 0 0 16 0" />
+                </g>
+              </svg>
+            </div>
+            <div class="content flex-grow-1">
+              <h5 class="mb-4">eCommerce Copy</h5>
+              <p class="mb-0">
+                Writing blog content with GenAI, make sure you have a clear
+                understanding of who your audience is.
+              </p>
+            </div>
+            <div class="flex-shrink-0">
+              <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
+                <span>Try eCommerce Copy</span>
+                <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor"
+                    stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="200">
+          <div class="d-flex flex-column justify-between gap-6 text-center h-full">
+            <div class="icon text-primary w-14 h-14 rounded-3 flex-shrink-0 d-flex align-center justify-center mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64">
+                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path
+                    d="M32 10.667 10.667 21.333 32 32l21.333-10.667L32 10.667ZM10.667 32 32 42.667 53.333 32M10.667 42.667 32 53.333l21.333-10.666" />
+                </g>
+              </svg>
+            </div>
+            <div class="content flex-grow-1">
+              <h5 class="mb-4">Product Description</h5>
+              <p class="mb-0">
+                Optimize you content for the first know who you're targeting.
+                Identify your target audience.
+              </p>
+            </div>
+            <div class="flex-shrink-0">
+              <a href="use-cases-details.html" class="arrow-link arrow-link-primary gap-3 fs-sm">
+                <span>Try Product Description</span>
+                <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor"
+                    stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App users -->
+  <section class="bg-primary py-20 py-lg-30">
+    <div class="container">
+      <div class="row justify-center mb-18">
+        <div class="col-lg-9">
+          <div class="text-center">
+            <h1 class="text-white mb-0" data-aos="fade-up-sm" data-aos-delay="50">
+              Who are the user of GenAI. writing tools
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-10 g-xl-24 divider-x">
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="50">
+          <div class="h-full">
+            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="#9884FF" stroke-width="1.5"
+                  d="M8 13.333A5.333 5.333 0 0 1 13.333 8h37.334A5.333 5.333 0 0 1 56 13.333v37.334A5.333 5.333 0 0 1 50.667 56H13.333A5.333 5.333 0 0 1 8 50.667V13.333Z" />
+                <path stroke="#fff" stroke-width="2" d="M24 40h-5.333m16-8h-16m10.666-8H18.667" />
+              </svg>
+            </div>
+            <div class="content text-white">
+              <h4 class="mb-4">Content Marketers</h4>
+              <p class="mb-0">
+                Content marketers and writers who need to create large amounts
+                of content quickly and efficiently.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="h-full">
+            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="#fff" stroke-width="2"
+                  d="M24 37.334c0 4.418 7.163 8 16 8s16-3.582 16-8c0-4.42-7.163-8-16-8s-16 3.58-16 8Z" />
+                <path stroke="#fff" stroke-width="2" d="M24 37.334V48c0 4.416 7.163 8 16 8s16-3.584 16-8V37.334" />
+                <path stroke="#9884FF" stroke-width="1.5"
+                  d="M8 16c0 2.859 3.05 5.499 8 6.928 4.95 1.43 11.05 1.43 16 0 4.95-1.43 8-4.07 8-6.928 0-2.859-3.05-5.499-8-6.928-4.95-1.43-11.05-1.43-16 0-4.95 1.43-8 4.07-8 6.928Z" />
+                <path stroke="#9884FF" stroke-width="1.5" d="M8 16v26.667c0 2.368 2.059 3.866 5.333 5.333" />
+                <path stroke="#9884FF" stroke-width="1.5" d="M8 29.334c0 2.367 2.059 3.866 5.333 5.333" />
+              </svg>
+            </div>
+            <div class="content text-white">
+              <h4 class="mb-4">Small Business Owners</h4>
+              <p class="mb-0">
+                Small business owners who may not have the resources to hire a
+                full-time writer but need to produce high-quality content
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
+          <div class="h-full">
+            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="#9884FF" stroke-width="1.5"
+                  d="M32 8c19.2 0 24 4.8 24 24s-4.8 24-24 24S8 51.2 8 32 12.8 8 32 8Z" />
+                <path stroke="#fff" stroke-width="2"
+                  d="M21.333 36a6.666 6.666 0 1 0 13.333 0 6.666 6.666 0 0 0-13.333 0Z" />
+                <path stroke="#fff" stroke-width="2" d="M21.333 21.334h21.334v21.333" />
+              </svg>
+            </div>
+            <div class="content text-white">
+              <h4 class="mb-4">Digital Marketing Agencies</h4>
+              <p class="mb-0">
+                Digital marketing agencies that need to produce content for
+                their clients' websites, social media, and advertising campaigns
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="pt-20 pt-lg-30 pb-10 pb-lg-15">
+    <div class="container">
+      <div class="row justify-center mb-18">
+        <div class="col-lg-9">
+          <div class="text-center">
+            <h1 class="" data-aos="fade-up-sm" data-aos-delay="50">
+              <span class="text-primary">GenAI.</span>
+              Received <img src="assets/images/icons/star.png" alt="" /> 4.8/5
+              Stars in Over 10,000+ Reviews.
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="review-carousel-container position-relative">
+        <div class="swiper review-carousel">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide h-auto">
+              <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
+                <div class="d-flex items-center gap-4 mb-6">
+                  <div class="w-12 h-12 rounded-circle overflow-hidden">
+                    <img src="assets/images/review/1.png" alt="" class="w-full h-full object-cover" />
+                  </div>
+                  <div class="">
+                    <h6 class="mb-1">Wade Warrent</h6>
+                    <p class="mb-0 fs-sm">Marketing Coordinator</p>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="stars d-flex items-center gap-1 mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                  </div>
+                  <p class="review-text mb-0">
+                    This is the best thing that has happened to my team in a
+                    while! Makes post text something we barely need to think
+                    about!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide h-auto">
+              <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
+                <div class="d-flex items-center gap-4 mb-6">
+                  <div class="w-12 h-12 rounded-circle overflow-hidden">
+                    <img src="assets/images/review/2.png" alt="" class="w-full h-full object-cover" />
+                  </div>
+                  <div class="">
+                    <h6 class="mb-1">Dianne Russell</h6>
+                    <p class="mb-0 fs-sm">Content Creator</p>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="stars d-flex items-center gap-1 mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                  </div>
+                  <p class="review-text mb-0">
+                    Aliqua id fugiat nostrud irure ex duis ea quis id quis ad
+                    et. Sunt qui esse pariatur duis deserunt mollit dolore
+                    cillum minim tempor enim.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide h-auto">
+              <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
+                <div class="d-flex items-center gap-4 mb-6">
+                  <div class="w-12 h-12 rounded-circle overflow-hidden">
+                    <img src="assets/images/review/3.png" alt="" class="w-full h-full object-cover" />
+                  </div>
+                  <div class="">
+                    <h6 class="mb-1">Jenny Wilson</h6>
+                    <p class="mb-0 fs-sm">Product Designer</p>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="stars d-flex items-center gap-1 mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                  </div>
+                  <p class="review-text mb-0">
+                    Comfortable to wear for long periods of time. The battery
+                    life is impressive, providing up to 8 hours of listening
+                    time on a single charge. The earbuds are also sweat.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide h-auto">
+              <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
+                <div class="d-flex items-center gap-4 mb-6">
+                  <div class="w-12 h-12 rounded-circle overflow-hidden">
+                    <img src="assets/images/review/4.png" alt="" class="w-full h-full object-cover" />
+                  </div>
+                  <div class="">
+                    <h6 class="mb-1">Guy Hawkins</h6>
+                    <p class="mb-0 fs-sm">Digital Marketer</p>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="stars d-flex items-center gap-1 mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                  </div>
+                  <p class="review-text mb-0">
+                    Through my interactions with users, I have seen how
+                    technology has made life easier and more convenient for
+                    people.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide h-auto">
+              <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
+                <div class="d-flex items-center gap-4 mb-6">
+                  <div class="w-12 h-12 rounded-circle overflow-hidden">
+                    <img src="assets/images/review/1.png" alt="" class="w-full h-full object-cover" />
+                  </div>
+                  <div class="">
+                    <h6 class="mb-1">Bessie Cooper</h6>
+                    <p class="mb-0 fs-sm">SEO Expert</p>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="stars d-flex items-center gap-1 mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                  </div>
+                  <p class="review-text mb-0">
+                    I feel proud to be part of this technological advancement
+                    and to be able to help people in their day-to-day
+                    activities. It is truly amazing how technology has the power
+                    to connect
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide h-auto">
+              <div class="review-card rounded h-full p-6 border bg-lite-blue border-lite-blue-4">
+                <div class="d-flex items-center gap-4 mb-6">
+                  <div class="w-12 h-12 rounded-circle overflow-hidden">
+                    <img src="assets/images/review/1.png" alt="" class="w-full h-full object-cover" />
+                  </div>
+                  <div class="">
+                    <h6 class="mb-1">Wade Warrent</h6>
+                    <p class="mb-0 fs-sm">Marketing Coordinator</p>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="stars d-flex items-center gap-1 mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"
+                      class="w-4 h-4 text-primary">
+                      <path
+                        d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
+                    </svg>
+                  </div>
+                  <p class="review-text mb-0">
+                    This is the best thing that has happened to my team in a
+                    while! Makes post text something we barely need to think
+                    about!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination justify-center mt-8"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="py-10 py-lg-15">
+    <div class="container">
+      <div class="row justify-center mb-14">
+        <div class="col-lg-10">
+          <div class="text-center">
+            <p class="text-primary" data-aos="fade-up-sm" data-aos-delay="50">
+              Pricing Plan
+            </p>
+            <h1 class="mb-5" data-aos="fade-up-sm" data-aos-delay="100">
+              Ready to Get Started? <br />
+              Don't Worry, We'll Keep You Under Budget
+            </h1>
+            <p class="mb-0" data-aos="fade-up-sm" data-aos-delay="150">
+              Get started with a 5-day trial,
+              <span class="text-primary">25% off</span> for Yearly Plan, Cancel
+              anytime.
+            </p>
+          </div>
+          <div class="text-center mt-12" data-aos="fade-up-sm" data-aos-delay="200">
+            <div class="switch-wrapper border d-inline-flex rounded p-2">
+              <input id="monthly" type="radio" name="switch" checked />
+              <input id="yearly" type="radio" name="switch" />
+              <label for="monthly">Monthly</label>
+              <label for="yearly">Yearly</label>
+              <span class="highlighter"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row g-6 pricing-table">
+        <div class="col-md-6 col-lg-4" data-aos="fade-up-sm" data-aos-delay="50">
+          <div class="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-whitedark">
+            <h3 class="text-primary fw-medium mb-0">Free</h3>
+            <h1 class="display-2 fw-semibold mb-0 mt-4 price monthly">$00</h1>
+            <h1 class="display-2 fw-semibold mb-0 mt-4 price yearly d-none">
+              $00
+            </h1>
+            <p class="lead fw-normal mt-4 mb-0">
+              A 10X faster way to writing your professional copy
+            </p>
+            <a href="pricing-plan.html" class="pricing-btn btn btn-lg w-full fs-4 lh-sm mt-9 btn-lite-blue-2">Start for
+              Free</a>
+            <ul class="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">
+              <li>Single seats</li>
+              <li>10,000 words per month</li>
+              <li>30+ AI writing tools</li>
+              <li>60+ Copywriting tools</li>
+              <li>10+ languages</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4" data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-whitedark">
+            <h3 class="text-primary fw-medium mb-0">Starter</h3>
+            <h1 class="display-2 fw-semibold mb-0 mt-4 price monthly">$29</h1>
+            <h1 class="display-2 fw-semibold mb-0 mt-4 price yearly d-none">
+              $299
+            </h1>
+            <p class="lead fw-normal mt-4 mb-0">
+              A 10X faster way to writing your professional copy
+            </p>
+            <a href="pricing-plan.html" class="pricing-btn btn btn-lg w-full fs-4 lh-sm mt-9 btn-lite-blue-2">Choose
+              Plan</a>
+            <ul class="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">
+              <li>5 User seats</li>
+              <li><strong class="fw-medium">50,000</strong> words per month</li>
+              <li><strong class="fw-medium">70+</strong> AI writing tools</li>
+              <li><strong class="fw-medium">100+</strong> Copywriting tools</li>
+              <li>Blog post wizard tool</li>
+              <li>25+ languages</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4" data-aos="fade-up-sm" data-aos-delay="150">
+          <div class="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-whitedark">
+            <span class="badge text-bg-primary px-4 py-2 rounded-end-0">Most Popular</span>
+            <h3 class="text-primary fw-medium mb-0">Enterprise</h3>
+            <h1 class="display-2 fw-semibold mb-0 mt-4 price monthly">$119</h1>
+            <h1 class="display-2 fw-semibold mb-0 mt-4 price yearly d-none">
+              $1299
+            </h1>
+            <p class="lead fw-normal mt-4 mb-0">
+              A 10X faster way to writing your professional copy
+            </p>
+            <a href="pricing-plan.html" class="pricing-btn btn btn-lg w-full fs-4 lh-sm mt-9 btn-lite-blue-2">Choose
+              Plan</a>
+            <ul class="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">
+              <li>Unlimited seats</li>
+              <li>
+                <strong class="fw-medium">100,000</strong> words per month
+              </li>
+              <li><strong class="fw-medium">100+</strong> AI writing tools</li>
+              <li><strong class="fw-medium">200+</strong> Copywriting tools</li>
+              <li>Blog post wizard tool</li>
+              <li>25+ languages</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-10 py-lg-15">
+    <div class="container">
+      <div class="row justify-center mb-18">
+        <div class="col-lg-10">
+          <div class="text-center">
+            <h1 class="mb-0" data-aos="fade-up-sm" data-aos-delay="50">
+              Questions About our GenAI? <br class="d-none d-md-block" />
+              We have Answers!
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-center">
+        <div class="col-lg-8" data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="accordion accordion-flush d-flex flex-column gap-6" id="faqAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseOne" aria-expanded="false" aria-controls="faq-collapseOne">
+                  <span class="icon"></span>
+                  What Is GenAI Content Writing Tool?
+                </button>
+              </h2>
+              <div id="faq-collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Once you know your audience, choose a topic that will resonate
+                  with them. Look for trending topics in your industry or
+                  address common questions or challenges your audience may be
+                  facing. Keep in mind that your topic should be both
+                  interesting and relevant to your audience
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseTwo" aria-expanded="false" aria-controls="faq-collapseTwo">
+                  <span class="icon"></span>
+                  Is it helpful for Digital Marketer or Content Writer?
+                </button>
+              </h2>
+              <div id="faq-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Once you know your audience, choose a topic that will resonate
+                  with them. Look for trending topics in your industry or
+                  address common questions or challenges your audience may be
+                  facing. Keep in mind that your topic should be both
+                  interesting and relevant to your audience
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseThree" aria-expanded="false" aria-controls="faq-collapseThree">
+                  <span class="icon"></span>
+                  Is there a limit on how much content I can generate?
+                </button>
+              </h2>
+              <div id="faq-collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Once you know your audience, choose a topic that will resonate
+                  with them. Look for trending topics in your industry or
+                  address common questions or challenges your audience may be
+                  facing. Keep in mind that your topic should be both
+                  interesting and relevant to your audience
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseFour" aria-expanded="false" aria-controls="faq-collapseFour">
+                  <span class="icon"></span>
+                  What Languages does it supports?
+                </button>
+              </h2>
+              <div id="faq-collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Once you know your audience, choose a topic that will resonate
+                  with them. Look for trending topics in your industry or
+                  address common questions or challenges your audience may be
+                  facing. Keep in mind that your topic should be both
+                  interesting and relevant to your audience
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseFive" aria-expanded="false" aria-controls="faq-collapseFive">
+                  <span class="icon"></span>
+                  What is SEO Writing AI and how do I use it?
+                </button>
+              </h2>
+              <div id="faq-collapseFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Once you know your audience, choose a topic that will resonate
+                  with them. Look for trending topics in your industry or
+                  address common questions or challenges your audience may be
+                  facing. Keep in mind that your topic should be both
+                  interesting and relevant to your audience
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section style-2 py-10 py-lg-15" data-aos="fade-up-sm" data-aos-delay="150">
+    <div class="container">
+      <div
+        class="rounded-5 border position-relative pt-6 px-6 overflow-hidden bg-striped bg-striped-bottom gradient-bg border-primary">
+        <div class="row align-center justify-center g-0">
+          <div class="col-lg-5">
+            <div class="p-0 pt-md-6 text-center text-lg-start p-lg-6 p-xl-10">
+              <h2 class="mb-6">
+                Using
+                <span class="text-primary">GenAI</span>
+                you can save hours each week creating long-form content.
+              </h2>
+              <a href="login.html" class="btn btn-primary">Get Started Free</a>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="cta-image-container mt-10">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 86 42" class="text-primary arrow-shape">
+                <path fill="currentColor"
+                  d="M83.007 5.063c-8.303-4.146-19.138-3.888-27.778-.97C46.956 6.888 37.093 13.477 37.1 23.3c0 3.58 2.13 7.126 6.128 6.453 3.714-.623 5.706-4.227 4.922-7.795-2.116-9.638-15.81-9.008-22.92-6.476a30.564 30.564 0 0 0-11.9 7.744c-3.05 3.222-6.07 7.587-6.6 12.094-.075.65.97.914 1.24.332 1.429-3.109 2.544-6.172 4.632-8.935 2.168-2.869 4.92-5.3 7.982-7.161 6.077-3.694 15.03-5.894 21.7-2.497 3.533 1.802 6.914 7.774 2.361 10.55-1.845 1.124-4.263.905-5.36-1.113-1-1.843-.788-4.302-.285-6.253 2.048-7.951 10.417-12.945 17.706-15.252a39.207 39.207 0 0 1 12.77-1.803c4.621.113 8.847 1.265 13.224 2.615.426.133.72-.536.308-.74Z" />
+                <path fill="currentColor"
+                  d="M85.318 6.107C77.431-.542 66.216-1.539 56.765 2.153 52.217 3.93 48.075 6.62 44.43 9.867c-3.718 3.315-7.686 7.46-9.29 12.29-1.122 3.37-.827 9.393 3.792 9.836 4.065.392 8.748-3.306 9.751-7.167 1.123-4.321-2.065-8.325-5.861-9.91-4.533-1.89-10.034-1.255-14.67-.028C18.004 17.574 9.163 24.89 4.811 34.499c-.414.917.925 1.725 1.358.797 3.22-6.944 8.669-12.606 15.433-16.148 3.447-1.805 7.224-3.029 11.08-3.527 4.417-.568 9.8-.516 12.977 3.1 3.508 3.99 1.106 8.906-3.196 10.993-2.51 1.218-5.217 1.2-6.206-1.88-.804-2.498.079-5.313 1.285-7.533C41.411 13.192 48.878 7.087 56.22 3.912 65.421-.067 76.632.335 84.582 6.835c.51.424 1.248-.296.736-.728Z" />
+                <path fill="currentColor"
+                  d="M14.65 30.337c-1.917.849-3.728 1.993-5.56 3.01-.866.48-1.735.96-2.602 1.445-.4.223-2.362 1.634-2.766 1.416-.21-.111-.02-2.62-.02-2.95l-.022-2.95c-.015-1.918.346-4.259-.32-6.075-.237-.65-1.107-.667-1.334.005-.423 1.245-.241 2.569-.222 3.873.02 1.474.044 2.95.065 4.423.022 1.364-.587 4.544.89 5.408 1.41.826 3.676-1.342 4.81-2.007 2.547-1.49 5.266-2.848 7.666-4.563a.595.595 0 0 0-.585-1.035Z" />
+                <path fill="currentColor"
+                  d="M14.241 29.944c-1.847 1.293-3.383 3.118-5.07 4.618-1.96 1.739-3.985 3.433-6.174 4.873l1.349.775a76.48 76.48 0 0 1 .125-7.34c.158-2.375.909-4.93.706-7.287-.06-.686-1.104-1.162-1.452-.39-.928 2.06-.94 4.768-1.106 6.995a64.81 64.81 0 0 0-.072 8.036c.042.81.939 1.134 1.53.635 1.972-1.665 3.983-3.264 5.88-5.02 1.705-1.578 3.703-3.259 4.913-5.258.224-.38-.243-.907-.629-.637Z" />
+                <path fill="currentColor"
+                  d="M14.98 28.142C10.7 32.102 6.441 36.087 2.12 40l1.531.634c-.332-2.723-.642-5.443-.777-8.184-.123-2.526.22-5.24-.273-7.715-.155-.782-1.317-.715-1.506.006-.67 2.525-.275 5.5-.115 8.079.166 2.698.443 5.394.902 8.056.118.686 1.054.85 1.499.402 4.119-4.124 8.302-8.18 12.467-12.258.576-.558-.285-1.422-.87-.878Z" />
+              </svg>
+              <div class="cta-img rounded-top-4">
+                <img src="assets/images/screens/screen-7.jpg" alt="" class="img-fluid w-full h-full object-cover" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 {% endblock %}

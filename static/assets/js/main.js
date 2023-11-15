@@ -314,75 +314,80 @@ Last Update: 9 May 2023
 // 	  // Perform humanize action here if needed
 // 	}
 //   });
-  //hidebuttons
-  var textarea = document.getElementById('input-text');
-  var textareaButtons = document.getElementById('textarea-buttons');
+//hidebuttons
+var textarea = document.getElementById('input-text');
+var textareaButtons = document.getElementById('textarea-buttons');
 
-  textarea.addEventListener('input', function () {
-	  // Check if the textarea has any input
-	  if (textarea.value.trim() !== '') {
-		  // If there is input, hide the textarea buttons
-		  textareaButtons.style.display = 'none';
-	  } else {
-		  // If there is no input, show the textarea buttons and set flex direction to row
-		  textareaButtons.style.display = 'flex';
-		  textareaButtons.style.flexDirection = 'row';
-	  }
-  });
-  //ai-btn
-  document.addEventListener('DOMContentLoaded', function () {
-    var textarea = document.getElementById('input-text');
-    var aiButton = document.getElementById('ai-btn');
+textarea.addEventListener('input', function () {
+	// Check if the textarea has any input
+	if (textarea.value.trim() !== '') {
+		// If there is input, hide the textarea buttons
+		textareaButtons.style.display = 'none';
+	} else {
+		// If there is no input, show the textarea buttons and set flex direction to row
+		textareaButtons.style.display = 'flex';
+		textareaButtons.style.flexDirection = 'row';
+	}
+});
+//ai-btn
+document.addEventListener('DOMContentLoaded', function () {
+	var textarea = document.getElementById('input-text');
+	var aiButton = document.getElementById('ai-btn');
 
-    textarea.addEventListener('input', function () {
-        if (textarea.value.trim() !== '') {
+	textarea.addEventListener('input', function () {
+		if (textarea.value.trim() !== '') {
 			aiButton.disabled = false;
-            aiButton.style.cursor = 'pointer'; // Set the cursor to pointer when enabled
-            aiButton.style.opacity = '1';
-			aiButton.style.backgroundColor ='white';
-			aiButton.style.border="2px solid #6a4dff";
+			aiButton.style.cursor = 'pointer'; // Set the cursor to pointer when enabled
+			aiButton.style.opacity = '1';
+			aiButton.style.backgroundColor = 'white';
+			aiButton.style.border = "2px solid #6a4dff";
 			aiButton.style.color = '#6a4dff';
-			aiButton.style.fontWeight="400";
-			 // Reset opacity when enabled
-        } else {
+			aiButton.style.fontWeight = "400";
+			// Reset opacity when enabled
+		} else {
 			aiButton.disabled = true;
-            aiButton.style.cursor = 'not-allowed';
-            aiButton.style.opacity = '0.77';
-			aiButton.style.backgroundColor ='#6a4dff';
+			aiButton.style.cursor = 'not-allowed';
+			aiButton.style.opacity = '0.77';
+			aiButton.style.backgroundColor = '#6a4dff';
 			aiButton.style.color = 'white';
-        }
-    });
+		}
+	});
 });
 var updateWordCount; // Declare the function globally
 
 document.addEventListener('DOMContentLoaded', function () {
-    var textarea = document.getElementById('input-text');
-    var wordCountSpan = document.getElementById('word-count');
+	var textarea = document.getElementById('input-text');
+	var wordCountSpan = document.getElementById('word-count');
 
-    updateWordCount = function() {
-        var text = textarea.value.trim();
-        var wordCount = text.split(/\s+/).filter(function (word) {
-            return word.length > 0;
-        }).length;
-        wordCountSpan.textContent = wordCount;
-    };
+	updateWordCount = function () {
+		var text = textarea.value.trim();
+		var wordCount = text.split(/\s+/).filter(function (word) {
+			return word.length > 0;
+		}).length;
+		if (wordCount >= 30){
+			document.getElementById("min_word_error").style.display = "none"
+			
+		}
+		wordCountSpan.textContent = wordCount;
+	};
 
-    textarea.addEventListener('input', updateWordCount);
-    textarea.addEventListener('keydown', updateWordCount);
+	textarea.addEventListener('input', updateWordCount);
+	textarea.addEventListener('keydown', updateWordCount);
 
-    // Initialize word count on page load
-    updateWordCount();
+	// Initialize word count on page load
+	updateWordCount();
 });
 
-document.querySelector('.text-area-btn-2').addEventListener('click', function(event) {
+document.querySelector('.text-area-btn-2').addEventListener('click', function (event) {
 	var pasteDiv = event.currentTarget;
 
 	navigator.clipboard.readText()
 		.then(text => {
 			if (typeof text === 'string') { // Check if the copied content is a string (text)
 				document.getElementById('input-text').value = text;
-				updateWordCount(); 
+				updateWordCount();
 				pasteDiv.style.display = 'none'; // Hide or remove the paste button div
+				document.getElementById('ai-btn').style = "cursor: pointer; opacity: 1; background-color: white; border: 2px solid rgb(106, 77, 255); color: rgb(106, 77, 255); font-weight: 400;"
 			} else {
 				console.log('Copied content is not text.');
 			}
@@ -392,70 +397,141 @@ document.querySelector('.text-area-btn-2').addEventListener('click', function(ev
 		});
 });
 
-var humanizeButton = document.getElementById('btn btn-lg btn-gradient-1 aos-init aos-animate');
+var humanizeButton = document.getElementById('hummani-main-btn');
 
-    humanizeButton.addEventListener('click', function() {
-        var textareaContent = document.getElementById('input-text').value;
-        var wordCount = textareaContent.split(/\s+/).filter(function(n) { return n != '' }).length;
+humanizeButton.addEventListener('click', function () {
+	var textareaContent = document.getElementById('input-text').value;
+	var wordCount = textareaContent.split(/\s+/).filter(function (n) { return n != '' }).length;
 
-        if (wordCount < 30) {
-            console.error('Error: Please enter at least 30 words.');
-            return;
-        }
+	if (wordCount < 30) {
+		let error_p = document.getElementById("min_word_error")
+		error_p.style.display = ''
+		return;
+	}
 
-        // Disable the button and add spinner
-        humanizeButton.disabled = true;
-        humanizeButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+	// Disable the button and add spinner
+	humanizeButton.disabled = true;
+	humanizeButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
 
-        fetch('humanizer/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ text: textareaContent }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            let result_text_area = document.querySelector('.reult-p');
+	fetch('humanizer/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ text: textareaContent }),
+	})
+		.then(response => response.json())
+		.then(data => {
+			let result_text_area = document.querySelector('.reult-p');
 			result_text_area.innerHTML = data.text
-            document.getElementById('result-row').style.display = 'block';
+			document.getElementById('result-row').style.display = 'block';
 
 
 			result_text_area.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            // Re-enable the button and remove spinner
-            humanizeButton.disabled = false;
-            humanizeButton.innerHTML = 'Humanize';
-        })
-        .catch(error => {
-            console.error('Error:', error);
+			// Re-enable the button and remove spinner
+			humanizeButton.disabled = false;
+			humanizeButton.innerHTML = 'Humanize';
+		})
+		.catch(error => {
+			console.error('Error:', error);
 
-            // Re-enable the button and remove spinner in case of error
-            humanizeButton.disabled = false;
-            humanizeButton.innerHTML = 'Humanize';
-        });
-    });
-
-
-	document.querySelector('img[alt="copy"]').addEventListener('click', function() {
-		let resultTextArea = document.querySelector('.reult-p');
-		let textToCopy = resultTextArea.textContent || resultTextArea.innerText;
-	
-		// Copying text to clipboard
-		navigator.clipboard.writeText(textToCopy).then(() => {
-			// Change the image or its content temporarily
-			let copyImage = this;
-			let originalSrc = copyImage.src;
-			copyImage.style.disable = 'none'; // Remove the src or hide the image
-			copyImage.insertAdjacentHTML('afterend', '<span id="temp-copied">Copied!</span>');
-	
-			// Revert back to the original image after a short delay
-			setTimeout(() => {
-				document.getElementById('temp-copied').remove();
-				copyImage.style.disable = '';
-			}, 2000); // Adjust time as needed
-		}).catch(err => {
-			console.error('Error copying text: ', err);
+			// Re-enable the button and remove spinner in case of error
+			humanizeButton.disabled = false;
+			humanizeButton.innerHTML = 'Humanize';
 		});
+});
+
+
+document.querySelector('img[alt="copy"]').addEventListener('click', function () {
+	let resultTextArea = document.querySelector('.reult-p');
+	let textToCopy = resultTextArea.textContent || resultTextArea.innerText;
+
+	// Copying text to clipboard
+	navigator.clipboard.writeText(textToCopy).then(() => {
+		// Change the image or its content temporarily
+		let copyImage = this;
+		let originalSrc = copyImage.src;
+		copyImage.style.disable = 'none'; // Remove the src or hide the image
+		copyImage.insertAdjacentHTML('afterend', '<span id="temp-copied">Copied!</span>');
+
+		// Revert back to the original image after a short delay
+		setTimeout(() => {
+			document.getElementById('temp-copied').remove();
+			copyImage.style.disable = '';
+		}, 2000); // Adjust time as needed
+	}).catch(err => {
+		console.error('Error copying text: ', err);
 	});
-	
+});
+document.getElementById("ai-btn").addEventListener("click", function () {
+    var button = this;
+    
+    // Disable the button
+    button.disabled = true;
+
+    // Create and append the spinner element
+    var spinner = document.createElement("span");
+    spinner.classList.add("spinner-border", "spinner-border-sm");
+    spinner.setAttribute("role", "status");
+    spinner.setAttribute("aria-hidden", "true");
+    
+    // Text to display while loading
+    var loadingText = document.createTextNode(" Loading...");
+    
+    // Clear the button's content and append the spinner and loading text
+    button.innerHTML = '';
+    button.appendChild(spinner);
+    button.appendChild(loadingText);
+
+    var inputText = document.getElementById("input-text").value;
+    var wordCount = inputText.split(/\s+/).filter(Boolean).length;
+
+    if (wordCount < 30) {
+        // Show an error message
+        document.getElementById("error-message").textContent = "Word count must be at least 30.";
+        button.disabled = false;
+        button.innerHTML = "Check for AI"; // Restore the original button text
+        return;
+    }
+
+    // Hide the error message
+    document.getElementById("error-message").textContent = "";
+
+    // Send a request to the AI backend
+    fetch("/detect/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: inputText }),
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            // Handle the response from the AI backend
+            console.log(data);
+            var detectorAnswer = document.getElementById("detector-answer");
+
+            // Set the text color based on the detector_result
+            
+
+            // Set the result text
+            detectorAnswer.innerHTML = data.result_text;
+            
+            // Show the detector-answer element
+            detectorAnswer.style.display = "block";
+
+            // Re-enable the button and remove the spinner
+            button.disabled = false;
+            button.innerHTML = "Check for AI"; // Restore the original button text
+        })
+        .catch(function (error) {
+            console.error("Error:", error);
+
+            // Re-enable the button and remove the spinner in case of error
+            button.disabled = false;
+            button.innerHTML = "Check for AI"; // Restore the original button text
+        });
+});
