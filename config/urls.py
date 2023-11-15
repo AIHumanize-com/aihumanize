@@ -24,6 +24,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('accounts/password/reset/done/', CustomPasswordResetView.as_view(), name='account_reset_password_done'),
     path('accounts/resend-email-confirmation/signup/', resend_email_confirmation, name='resend_email_confirmation'),
+    path("", include("front.urls")),
 
 
     # path("users/", include("users.urls")),

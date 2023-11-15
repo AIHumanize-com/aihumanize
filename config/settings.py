@@ -55,7 +55,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     
     "django.contrib.messages.middleware.MessageMiddleware",
-     'allauth.account.middleware.AccountMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -164,3 +164,14 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "detectingai.com@gmail.com"
 EMAIL_HOST_PASSWORD = "tbsamlvxcboptpzq"
 DEFAULT_FROM_EMAIL = EMAIL_HOST
+
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+# settings.py
+
+ACCOUNT_ADAPTER = 'users.custom_email_adapter.CeleryEmailAdapter'
