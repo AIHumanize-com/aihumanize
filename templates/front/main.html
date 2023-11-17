@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{%static 'assets/css/style.css' %}" />
 
 
-    
+
 </head>
 
 <body>
@@ -64,38 +64,7 @@
                                     <li><a class="dropdown-item" href="index-2-lite.html">Home two lite</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Pages
-                                </a>
-                                <ul class="dropdown-menu megamenu megamenu-cols-2">
-                                    <li><a class="dropdown-item " href="about.html">About</a></li>
-                                    <li><a class="dropdown-item " href="about-lite.html">About lite</a></li>
-                                    <li><a class="dropdown-item " href="contact.html">Contact</a></li>
-                                    <li><a class="dropdown-item " href="contact-lite.html">Contact lite</a></li>
-                                    <li><a class="dropdown-item " href="blog.html">Blog</a></li>
-                                    <li><a class="dropdown-item " href="blog-lite.html">Blog lite</a></li>
-                                    <li><a class="dropdown-item " href="article.html">Article</a></li>
-                                    <li><a class="dropdown-item " href="article-lite.html">Article lite</a></li>
-                                    <li><a class="dropdown-item " href="use-cases.html">Use cases</a></li>
-                                    <li><a class="dropdown-item " href="use-cases-lite.html">Use cases lite</a></li>
-                                    <li><a class="dropdown-item " href="use-cases-details.html">Case details</a></li>
-                                    <li><a class="dropdown-item " href="use-cases-details-lite.html">Case details
-                                            lite</a></li>
-                                    <li><a class="dropdown-item " href="pricing-plan.html">Pricing</a></li>
-                                    <li><a class="dropdown-item " href="pricing-plan-lite.html">Pricing lite</a></li>
-                                    <li><a class="dropdown-item" href="login.html">Login</a></li>
-                                    <li><a class="dropdown-item" href="login-lite.html">Login lite</a></li>
-                                    <li><a class="dropdown-item" href="register.html">Register</a></li>
-                                    <li><a class="dropdown-item" href="register-lite.html">Register lite</a></li>
-                                    <li><a class="dropdown-item" href="forgot-password.html">Forgot password</a></li>
-                                    <li><a class="dropdown-item" href="forgot-password-lite.html">Forgot password
-                                            lite</a></li>
-                                    <li><a class="dropdown-item " href="404.html">404</a></li>
-                                    <li><a class="dropdown-item " href="404-lite.html">404 lite</a></li>
-                                </ul>
-                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link " href="use-cases.html">Use cases</a>
                             </li>
@@ -118,7 +87,7 @@
         </nav>
         {% block content %}
 
-       
+
 
         {% endblock %}
 
@@ -280,9 +249,11 @@
 
 
     <!-- JS -->
-   
+
     <script src="{% static  'assets/js/plugins.js' %}"></script>
     <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 
 
 </body>

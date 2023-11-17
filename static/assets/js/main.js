@@ -422,6 +422,15 @@ humanizeButton.addEventListener('click', function () {
 	})
 		.then(response => response.json())
 		.then(data => {
+			if (data.error) {
+				// Display the modal for word limit reached
+				var wordLimitModal = new bootstrap.Modal(document.getElementById('wordLimitModal'));
+				wordLimitModal.show();
+				// Other necessary actions
+				humanizeButton.disabled = false;
+				humanizeButton.innerHTML = 'Humanize';
+				return;
+			}
 			let result_text_area = document.querySelector('.reult-p');
 			result_text_area.innerHTML = data.text
 			document.getElementById('result-row').style.display = 'block';
@@ -464,12 +473,15 @@ document.querySelector('img[alt="copy"]').addEventListener('click', function () 
 		console.error('Error copying text: ', err);
 	});
 });
+
+
 document.getElementById("ai-btn").addEventListener("click", function () {
     var button = this;
     
     // Disable the button
     button.disabled = true;
-
+	var detectorAnswer = document.getElementById("detector-answer");
+	detectorAnswer.style.display = "none";
     // Create and append the spinner element
     var spinner = document.createElement("span");
     spinner.classList.add("spinner-border", "spinner-border-sm");
@@ -509,10 +521,21 @@ document.getElementById("ai-btn").addEventListener("click", function () {
         .then(function (response) {
             return response.json();
         })
+	
         .then(function (data) {
             // Handle the response from the AI backend
-            console.log(data);
-            var detectorAnswer = document.getElementById("detector-answer");
+			
+            if (data.error) {
+				// Show an error message
+				 // Show Bootstrap modal if the limit is reached
+				 var limitReachedModal = new bootstrap.Modal(document.getElementById('limitReachedModal'));
+				 limitReachedModal.show();
+		 
+				 // Reset the button state
+				 button.disabled = false;
+				 button.innerHTML = "Check for AI"; // Restore the original button text
+				 return;
+			}
 
             // Set the text color based on the detector_result
             
@@ -526,12 +549,73 @@ document.getElementById("ai-btn").addEventListener("click", function () {
             // Re-enable the button and remove the spinner
             button.disabled = false;
             button.innerHTML = "Check for AI"; // Restore the original button text
+
+			detectorAnswer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
         })
         .catch(function (error) {
             console.error("Error:", error);
-
+			
             // Re-enable the button and remove the spinner in case of error
             button.disabled = false;
             button.innerHTML = "Check for AI"; // Restore the original button text
         });
+});
+
+
+
+document.getElementById('input-file').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (!file) {
+        return;
+    }
+
+    let inputTextArea = document.getElementById('input-text');
+	let pasteDiv = document.querySelector('.text-area-btn-2');
+    if (file.type === 'application/pdf') {
+        // Handle PDF file
+        const fileReader = new FileReader();
+        fileReader.onload = function() {
+            const typedarray = new Uint8Array(this.result);
+			
+            pdfjsLib.getDocument(typedarray).promise.then(pdf => {
+                let text = '';
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    pdf.getPage(i).then(page => {
+                        page.getTextContent().then(content => {
+                            content.items.forEach(item => {
+                                text += item.str + ' ';
+                            });
+
+                            if (i === pdf.numPages) {
+								// Set the textarea value and hide the paste button div
+								
+								pasteDiv.style.display = 'none';
+                                inputTextArea.value = text;
+                            }
+                        });
+                    });
+                }
+            });
+        };
+        fileReader.readAsArrayBuffer(file);
+    } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+        // Handle Word file (.docx)
+        const fileReader = new FileReader();
+        fileReader.onload = function(event) {
+            const arrayBuffer = event.target.result;
+
+            mammoth.extractRawText({ arrayBuffer: arrayBuffer })
+                .then(result => {
+					pasteDiv.style.display = 'none';
+                    inputTextArea.value = result.value;
+                })
+                .catch(err => {
+                    console.error('Error reading .docx file:', err);
+                });
+        };
+        fileReader.readAsArrayBuffer(file);
+    } else {
+        inputTextArea.value = 'Unsupported file type.';
+    }
 });

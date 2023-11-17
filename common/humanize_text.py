@@ -16,7 +16,7 @@ def rewrite_text(original_text, text_type):
     Returns:
     str: The rewritten text.
     """
-    openai_api_key = "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"
+    openai_api_key = "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"
 
 
     prompts = {
@@ -28,7 +28,11 @@ def rewrite_text(original_text, text_type):
         "business_material": "Modify this text to be suitable for business material. The tone should be professional and to the point, focusing on clarity and efficiency. Highlight key points, use bullet points or numbered lists for easy readability, and ensure the language is appropriate for a business audience. Include calls to action or conclusions as needed.",
         "legal_material": "Convert this text into a format appropriate for legal material. Use precise and formal legal language, and ensure the content is thorough and detailed. The text should be clear, objective, and maintain a tone suitable for legal documents. Ensure all legal terms are used correctly and the text complies with relevant legal standards and formats.",
         "gpt3": "You are a expert to rewrite the text in a more natural and human-like manner",
-        "general": "You are a expert to  rewrite the text in a more natural and human-like manner to avoid ai detectors while keeping original writing style. use html p tag instead of new line."
+        "general": "You are a expert to  rewrite the text in a more natural and human-like manner to avoid ai detectors while keeping original writing style. use html p tag instead of new line.",
+        "easy": "Rewrite the following text with minimal changes, focusing on replacing a few keywords and phrases to make it slightly different. Maintain the original sentence structure and style. The goal is to lightly paraphrase the text without altering its core meaning.",
+        "medium": "Please modify the following text by altering its sentence structure moderately and using synonyms more liberally. The core message should remain clear, but the text should be noticeably different from the original while retaining a similar style.",
+        "aggresive": "Extensively rewrite the following text, changing both its sentence structure and vocabulary significantly. The essential meaning and style should be retained, but the paraphrased text should be substantially different from the original"
+
 
     }
 
