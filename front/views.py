@@ -3,7 +3,7 @@ from common.humanize_text import rewrite_text
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from .models import DetectRequestCounter, UnregisteredUserWordCount
+from .models import DetectRequestCounter
 # Create your views here.
 from common.detect_ai import detect_and_classify
 def index(request):
