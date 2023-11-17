@@ -16,7 +16,6 @@ def humanizer(request):
         body = json.loads(body_unicode)
         text = body["text"]
 
-
         if not request.user.is_authenticated:
             
             return JsonResponse({"error": "In order to humanize text you should register from our website"}, status=200)
