@@ -162,8 +162,8 @@ ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "detectingai.com@gmail.com"
-EMAIL_HOST_PASSWORD = "tbsamlvxcboptpzq"
+EMAIL_HOST_USER = "support@aihumanize.com"
+EMAIL_HOST_PASSWORD = "#Ashabdulla17012018"
 DEFAULT_FROM_EMAIL = EMAIL_HOST
 
 
@@ -176,3 +176,17 @@ CELERY_RESULT_SERIALIZER = 'json'
 # settings.py
 
 ACCOUNT_ADAPTER = 'users.custom_email_adapter.CeleryEmailAdapter'
+
+# settings.py
+import sentry_sdk
+
+sentry_sdk.init(
+    dsn="https://2106c9df129bca1c3e1507472a6c84bd@o4506244088791040.ingest.sentry.io/4506244093116416",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=1.0,
+)

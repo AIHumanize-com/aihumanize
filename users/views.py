@@ -14,19 +14,6 @@ from allauth.account.utils import send_email_confirmation
 from .forms import CustomSignupForm
 from django.utils import timezone
 from common.helpers import anonymous_required
-# class CustomPasswordResetView(PasswordResetView):
-#     def form_valid(self, form):
-#         email = form.cleaned_data["email"]
-#         if self.request.user.is_authenticated:
-#             get_adapter(self.request).logout(self.request)
-#         if not self.is_valid_email(email):
-#             messages.error(self.request, 'There is no user associated with this email address.')
-#             return redirect('account_reset_password')
-#         return super().form_valid(form)
-
-#     def is_valid_email(self, email):
-#         return get_user_model().objects.filter(email=email).exists()
-    
 
 User = get_user_model()
 
@@ -43,7 +30,7 @@ def signup_view(request):
             user.save()
 
 
-            EmailAddress.objects.add_email(request, user, email, confirm=True)
+            # EmailAddress.objects.add_email(request, user, email, confirm=True)
             send_email_confirmation(request, user, signup=True)
 
             request.session['email_for_verification'] = email

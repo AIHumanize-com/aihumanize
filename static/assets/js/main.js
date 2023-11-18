@@ -619,3 +619,147 @@ document.getElementById('input-file').addEventListener('change', function(event)
         inputTextArea.value = 'Unsupported file type.';
     }
 });
+
+function updatePrice() {
+	var words = parseInt(document.getElementById('customNumber').value, 10);
+	var costPerWord = 0.000899;
+	var newPrice = (words * costPerWord).toFixed(2);
+	document.getElementById('monthlyPrice').innerText = `$${newPrice}`;
+	document.getElementById('listWordsCount').innerText = words.toLocaleString(); // Formats the number with commas
+
+}
+
+function updatePriceBusines() {
+	var words = parseInt(document.getElementById('customNumberBusiness').value, 10);
+	var costPerWord = 0.0004;
+	var newPrice = (words * costPerWord).toFixed(2);
+	document.getElementById('monthlyPriceBusiness').innerText = `$${newPrice}`;
+	document.getElementById('listWordsCountBusiness').innerText = words.toLocaleString(); // Formats the number with commas
+
+}
+
+function updatePriceYearly() {
+	var words = parseInt(document.getElementById('customNumberYearly').value, 10);
+	
+	var costPerWord = 0.0005;
+	var newPrice = (words * costPerWord).toFixed(2);
+	var yearly_price = (newPrice * 12).toFixed(2);
+	document.getElementById('YearlyPrice').innerText = `$${newPrice}`;
+	document.getElementById('listWordsCountYearly').innerText = words.toLocaleString(); // Formats the number with commas
+	document.getElementById('annualChargePrice').innerText = `$${yearly_price}`; // Formats the number with commas
+	words *= 12;
+	document.getElementById('listWordsCountYearlyTotal').innerText = words.toLocaleString(); // Formats the number with commas
+
+}
+function setDefaultIfEmpty(element) {
+	var value = parseFloat(element.value); 
+	value = Math.round(value); 
+	if (isNaN(value) || value < 10000) {
+		element.value = 10000;
+	} else {
+		element.value = value;
+	}
+	updatePrice(); // Update the price whenever the input field loses focus
+}
+
+function setDefaultIfEmptyBusiness(element) {
+	var value = parseFloat(element.value); 
+	value = Math.round(value); 
+	if (isNaN(value) || value < 500000) {
+		element.value = 500000;
+	} else {
+		element.value = value;
+	}
+	updatePriceBusines(); // Update the price whenever the input field loses focus
+}
+
+function increment() {
+    var inputField = document.getElementById('customNumber');
+    var value = parseInt(inputField.value, 10);
+    value = isNaN(value) ? 10000 : value;
+    value += 1000;
+    inputField.value = value < 10000 ? 10000 : value;
+	updatePrice(); 
+}
+
+function decrement() {
+    var inputField = document.getElementById('customNumber');
+    var value = parseInt(inputField.value, 10);
+    value = isNaN(value) ? 10000 : value;
+    value -= 1000;
+    inputField.value = value < 10000 ? 10000 : value;
+	updatePrice(); 
+}
+
+
+function incrementBusiness() {
+    var inputField = document.getElementById('customNumberBusiness');
+    var value = parseInt(inputField.value, 10);
+    value = isNaN(value) ? 500000 : value;
+    value += 50000;
+    inputField.value = value < 500000 ? 500000 : value;
+	updatePriceBusines(); 
+}
+
+function decrementBusiness() {
+    var inputField = document.getElementById('customNumberBusiness');
+    var value = parseInt(inputField.value, 10);
+    value = isNaN(value) ? 500000 : value;
+    value -= 50000;
+    inputField.value = value < 500000 ? 500000 : value;
+	updatePriceBusines(); 
+}
+
+
+function incrementYearly() {
+    var inputField = document.getElementById('customNumberYearly');
+    var value = parseInt(inputField.value, 10);
+    value = isNaN(value) ? 10000 : value;
+    value += 1000;
+    inputField.value = value < 10000 ? 10000 : value;
+	updatePriceYearly();
+}
+
+function decrementYearly() {
+    var inputField = document.getElementById('customNumberYearly');
+    var value = parseInt(inputField.value, 10);
+    value = isNaN(value) ? 10000 : value;
+    value -= 1000;
+    inputField.value = value < 10000 ? 10000 : value;
+	updatePriceYearly();
+}
+
+// Enforce integer-only input and enforce minimum value
+function onInputUpdate() {
+	var inputField = document.getElementById('customNumber');
+	var value = Math.round(parseFloat(inputField.value));
+	// Enforce minimum and maximum limits
+	value = isNaN(value) ? 10000 : value;
+	value = value < 10000 ? 10000 : value;
+	value = value > 10000000 ? 10000000 : value;
+	inputField.value = value;
+	updatePrice();
+}
+
+function onInputUpdateBusiness() {
+	var inputField = document.getElementById('customNumberBusiness');
+	var value = Math.round(parseFloat(inputField.value));
+	// Enforce minimum and maximum limits
+	value = isNaN(value) ? 500000 : value;
+	value = value < 500000 ? 500000 : value;
+	value = value > 10000000 ? 10000000 : value;
+	inputField.value = value;
+	updatePrice();
+}
+
+
+function onInputUpdateYearly() {
+	var inputField = document.getElementById('customNumberYearly');
+	var value = Math.round(parseFloat(inputField.value));
+	// Enforce minimum and maximum limits
+	value = isNaN(value) ? 10000 : value;
+	value = value < 10000 ? 10000 : value;
+	value = value > 10000000 ? 10000000 : value;
+	inputField.value = value;
+	updatePriceYearly();
+}

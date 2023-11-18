@@ -36500,3 +36500,46 @@ img[alt="copy"] {
   .file > label > i {
     padding-right: 5px;
   }
+  .number-input {
+    position: relative;
+    display: inline-block;
+    width: 100%; /* Adjust as needed */
+}
+
+.number-input input[type='number'] {
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.number-input button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    background: #6A4DFF;
+    border: none;
+    outline: none;
+    color: white; /* Adjust text color for visibility */
+    /* Add more button styling as needed */
+}
+
+.number-input button:first-of-type {
+    left: 0;
+    background: #8B7DFF; /* Lighter shade for '-' button */
+}
+
+.number-input button:last-of-type {
+    right: 0;
+    background: #5733FF; /* Darker shade for '+' button */
+}
+
+/* Hide default number input arrows */
+.number-input input[type='number']::-webkit-inner-spin-button,
+.number-input input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+

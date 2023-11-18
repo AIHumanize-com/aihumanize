@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users.views import CustomPasswordResetView, signup_view,resend_email_confirmation
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     # path('accounts/password/reset/', CustomPasswordResetView.as_view(), name='account_reset_password'),
@@ -24,6 +26,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('accounts/password/reset/done/', CustomPasswordResetView.as_view(), name='account_reset_password_done'),
     path('accounts/resend-email-confirmation/signup/', resend_email_confirmation, name='resend_email_confirmation'),
+
     path("", include("front.urls")),
 
 

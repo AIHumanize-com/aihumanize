@@ -3,11 +3,14 @@ from common.humanize_text import rewrite_text
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from .models import DetectRequestCounter
+from .models import DetectRequestCounter, UnregisteredUserWordCount
 # Create your views here.
 from common.detect_ai import detect_and_classify
 def index(request):
     return render(request, 'front/index.html')
+
+def pricing(request):
+    return render(request, 'front/pricing.html')
 
 @csrf_exempt
 def humanizer(request):
@@ -16,10 +19,18 @@ def humanizer(request):
         body = json.loads(body_unicode)
         text = body["text"]
 
-        if not request.user.is_authenticated:
-            
-            return JsonResponse({"error": "In order to humanize text you should register from our website"}, status=200)
+        word_count = len(text.split())
+        word_count_limit = 300
 
+        if not request.user.is_authenticated:
+            ip_address = get_client_ip(request)
+            user_word_count, created = UnregisteredUserWordCount.objects.get_or_create(ip_address=ip_address)
+            
+            if user_word_count.word_count + word_count > word_count_limit:
+                return JsonResponse({"error": "Word limit exceeded. Sign up for additional words or subscribe for unlimited access."}, status=200)
+
+            user_word_count.word_count += word_count
+            user_word_count.save()
            
 
         # Process the text as usual
