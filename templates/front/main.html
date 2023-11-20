@@ -52,21 +52,10 @@
                     <div
                         class="navbar-content-inner ms-lg-auto d-flex flex-column flex-lg-row align-lg-center gap-4 gap-lg-10 p-2 p-lg-0">
                         <ul class="navbar-nav gap-lg-2 gap-xl-5">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle active" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false" aria-current="page">
-                                    Home
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="index.html">Home one</a></li>
-                                    <li><a class="dropdown-item" href="index-lite.html">Home one lite</a></li>
-                                    <li><a class="dropdown-item" href="index-2.html">Home two</a></li>
-                                    <li><a class="dropdown-item" href="index-2-lite.html">Home two lite</a></li>
-                                </ul>
-                            </li>
+
 
                             <li class="nav-item">
-                                <a class="nav-link " href="use-cases.html">Use cases</a>
+                                <a class="nav-link active" href="{% url 'index' %}">AI Detector and Humanizer</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="{% url 'pricing' %}">Pricing</a>
@@ -75,11 +64,11 @@
                                 <a class="nav-link " href="contact.html">Contact</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="login.html">Login</a>
+                                <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                             </li>
                         </ul>
                         <div class="">
-                            <a href="login.html" class="btn btn-outline-primary">Get started</a>
+                            <a href="{% url 'account_signup' %}" class="btn btn-outline-primary">Get started</a>
                         </div>
                     </div>
                 </div>
