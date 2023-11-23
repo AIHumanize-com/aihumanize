@@ -1,0 +1,50 @@
+{% extends 'dashboard/main.html' %}
+
+
+{% block content %}
+
+<div class="container-xl">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-page-head">
+                <div class="nk-block-head-between">
+                    <div class="nk-block-head-content">
+                        <h2 class="display-6">Edit Profile</h2>
+                    </div>
+                </div>
+            </div><!-- .nk-page-head -->
+            <div class="nk-block">
+
+                <div class="card shadown-none">
+                    <div class="card-body">
+                        <div class="row g-3 gx-gs">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="fullnameId" class="form-label">Full Name</label>
+                                    <div class="form-control-wrap">
+                                        <input type="text" class="form-control" id="fullnameId"
+                                            placeholder="Enter Full name here"  {% if request.user.fullname != None %} value="{{request.user.fullname}}" {% endif %}>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="countryID" class="form-label">Country</label>
+                                    <div class="form-control-wrap">
+                                        <input type="text" class="form-control" id="countryID"
+                                            placeholder="Enter Country here" {% if request.user.country != None %} value="{{request.user.country}}" {% endif %}>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                          <button class="btn btn-outline-primary">Update</button>
+                        </div>
+                        </div>
+                    </div><!-- .card-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

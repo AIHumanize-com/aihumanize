@@ -146,27 +146,40 @@ NioApp.Sidebar = {
 
   /* Add some class to current link */
   NioApp.CurrentLink = function (selector, parent, submenu, base, active, intoView) {
-    let elm = document.querySelectorAll(selector);
-    let currentURL = document.location.href,
-      removeHash = currentURL.substring(0, (currentURL.indexOf("#") == -1) ? currentURL.length : currentURL.indexOf("#")),
-      removeQuery = removeHash.substring(0, (removeHash.indexOf("?") == -1) ? removeHash.length : removeHash.indexOf("?")),
-      fileName = removeQuery;
+  let elm = document.querySelectorAll(selector);
+  let currentURL = window.location.href.split('#')[0]; // Ignore hash values
 
-    elm.forEach(function (item) {
-      var selfLink = item.getAttribute('href');
-      if (fileName.match(selfLink)) {
-        let parents = NioApp.getParents(item, `.${base}`, parent);
-        parents.forEach(parentElemets => {
-          parentElemets.classList.add(...active);
-          let subItem = parentElemets.querySelector(`.${submenu}`);
-          subItem !== null && (subItem.style.display = "block")
-        })
-        intoView && item.scrollIntoView({ block: "end" })
-      } else {
-        item.parentElement.classList.remove(...active);
-      }
-    })
+  // Function to normalize a URL for comparison
+  function normalizePath(url) {
+    let normalizedUrl = new URL(url, window.location.href).pathname.replace(/\/$/, '');
+    return normalizedUrl.replace(/\.html$/, ''); // Remove '.html'
   }
+
+  currentURL = normalizePath(currentURL);
+
+  // Find the best matching menu item
+  let bestMatch = { length: 0, elm: null };
+
+  elm.forEach(function (item) {
+    let menuItemURL = normalizePath(item.href);
+
+    if (currentURL.startsWith(menuItemURL) && menuItemURL.length > bestMatch.length) {
+      bestMatch = { length: menuItemURL.length, elm: item };
+    }
+  });
+
+  // Add active classes to the best matching item
+  if (bestMatch.elm) {
+    let parents = NioApp.getParents(bestMatch.elm, `.${base}`, parent);
+    parents.forEach(parentElement => {
+      parentElement.classList.add(...active);
+      let subItem = parentElement.querySelector(`.${submenu}`);
+      subItem !== null && (subItem.style.display = "block");
+    });
+    intoView && bestMatch.elm.scrollIntoView({ block: "end" });
+  }
+}
+
 
   /* Pristine - Form Validation */
   NioApp.Addons.pristine = function (elem, live) {
