@@ -641,7 +641,7 @@ function updatePriceBusines() {
 function updatePriceYearly() {
 	var words = parseInt(document.getElementById('customNumberYearly').value, 10);
 	
-	var costPerWord = 0.0005;
+	var costPerWord = 0.000499;
 	var newPrice = (words * costPerWord).toFixed(2);
 	var yearly_price = (newPrice * 12).toFixed(2);
 	document.getElementById('YearlyPrice').innerText = `$${newPrice}`;
@@ -763,3 +763,5 @@ function onInputUpdateYearly() {
 	inputField.value = value;
 	updatePriceYearly();
 }
+
+

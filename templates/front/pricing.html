@@ -1,4 +1,24 @@
 {% extends 'front/main.html' %} {% load static %} {% block content %}
+<style>
+    .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border-left-color: #09f;
+        animation: spin 1s ease infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
 <main class="flex-grow-1">
     <!-- Page header -->
 
@@ -42,9 +62,11 @@
                                 oninput="onInputUpdate()" onblur="setDefaultIfEmpty(this) " value="10000">
                             <button onclick="increment()">+</button>
                         </div>
-                        <a href="pricing-plan.html"
+                        <a href="javascript:void(0)" data-plan-type="monthly"
                             class="pricing-btn btn btn-lg w-full fs-4 lh-sm mt-9 btn-lite-blue-2 btn-outline-primary">Choose
-                            Monthly</a>
+                            Monthly
+
+                        </a>
                         <ul class="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">
                             <li>Rewrites <strong class=" fw-medium" id="listWordsCount">10,000</strong> words per month
                             </li>
@@ -58,6 +80,12 @@
                         </ul>
                     </div>
                 </div>
+
+
+
+
+
+
 
                 <div class="col-md-6 col-lg-4" data-aos="fade-up-sm" data-aos-delay="150">
                     <div class="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-whitedark">
@@ -75,7 +103,7 @@
                             <button onclick="incrementYearly()">+</button>
                         </div>
 
-                        <a href="pricing-plan.html"
+                        <a href="javascript:void(0)" data-plan-type="yearly"
                             class="pricing-btn btn btn-lg w-full fs-4 lh-sm mt-9 btn-lite-blue-2 btn-outline-primary">Choose
                             Yearly</a>
                         <ul class="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">
@@ -112,7 +140,7 @@
                                 value="500000">
                             <button onclick="incrementBusiness()">+</button>
                         </div>
-                        <a href="pricing-plan.html"
+                        <a href="javascript:void(0)" data-plan-type="enterprise"
                             class="pricing-btn btn btn-lg w-full fs-4 lh-sm mt-9 btn-lite-blue-2 btn-outline-primary">Choose
                             Enterprise</a>
                         <ul class="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">
@@ -300,6 +328,7 @@
                                 <div class="cta-img rounded-top-4">
                                     <img src="assets/images/screens/screen-6.jpg" alt=""
                                         class="img-fluid w-full h-full object-cover" />
+                                    {% csrf_token %}
                                 </div>
                             </div>
                         </div>
@@ -310,6 +339,96 @@
     </section>
 
 </main>
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var stripe = Stripe('pk_test_51OCnPQFG5G6BKxaQ0JDtM7dWfppLE77Z1jUwI80isYFpKLTwrBkxtLR32xrUl4rbcYlny0ifv1sCLTMtzMPPTN6P00wrp1eSoy');
+
+        document.querySelectorAll('.pricing-btn').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                var originalButtonText = button.textContent;
+                button.textContent = 'Loading';
+                button.disabled = true;
+
+                var dotCount = 0;
+                var loadingInterval = setInterval(function () {
+                    if (dotCount < 3) {
+                        button.textContent += '.';
+                        dotCount++;
+                    } else {
+                        button.textContent = 'Loading';
+                        dotCount = 0;
+                    }
+                }, 500); // Dot animation speed
+
+                var planType = this.getAttribute('data-plan-type');
+                var wordCount = getWordCount(planType);
+
+                createCheckoutSession(planType, wordCount)
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (sessionData) {
+                        if (sessionData.id) {
+                            clearInterval(loadingInterval); // Stop the animation
+                            return stripe.redirectToCheckout({ sessionId: sessionData.id });
+                        } else {
+                            throw new Error('Checkout session creation failed');
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error('Error:', error);
+                        clearInterval(loadingInterval); // Stop the animation
+                        button.textContent = originalButtonText;  // Restore original button text
+                        button.disabled = false;  // Re-enable the button
+                    });
+            });
+        });
+    });
 
 
+    function getWordCount(planType) {
+        switch (planType) {
+            case 'monthly':
+                return document.getElementById('customNumber').value;
+            case 'yearly':
+                return document.getElementById('customNumberYearly').value;
+            case 'enterprise':
+                return document.getElementById('customNumberBusiness').value;
+            default:
+                return 0;
+        }
+    }
+
+    function createCheckoutSession(planType, wordCount) {
+        let csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value
+        return fetch('/payments/create-checkout-session/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Include CSRF token as needed
+                'X-CSRFToken': csrf_token
+            },
+            body: JSON.stringify({
+                plan_type: planType,
+                word_count: parseInt(wordCount, 10)
+            }),
+        }).then(function (response) {
+            if (response.ok) {
+                return response;
+            } else if (response.status === 403) {
+                window.location.href = '/accounts/signup/';  // Redirect to sign-up
+                return null;
+            } else {
+                console.error('Unexpected response status:', response.status);
+                return response.text().then(text => { throw new Error(text) });
+            }
+        });
+    }
+
+
+</script>
 {% endblock %}

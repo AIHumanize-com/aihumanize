@@ -66,13 +66,3 @@ class UserModel(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 
-class Subscription(models.Model):
-    stripe_subscription_id = models.CharField(max_length=100)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    status = models.CharField(max_length=50)
-    plan = models.CharField(max_length=50)
-    current_period_start = models.DateTimeField()
-    current_period_end = models.DateTimeField()
-    cancel_at_period_end = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)

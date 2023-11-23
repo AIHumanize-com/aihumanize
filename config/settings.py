@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "common",
     "front",
     "dashboard",
+    "payments",
 
 ]
 
@@ -191,3 +192,6 @@ sentry_sdk.init(
     # We recommend adjusting this value in production.
     profiles_sample_rate=1.0,
 )
+
+STRIPE_PUBLIC_KEY = 'pk_test_51OCnPQFG5G6BKxaQ0JDtM7dWfppLE77Z1jUwI80isYFpKLTwrBkxtLR32xrUl4rbcYlny0ifv1sCLTMtzMPPTN6P00wrp1eSoy'
+STRIPE_SECRET_KEY = 'sk_test_51OCnPQFG5G6BKxaQgijAVV2XOt5cqI7MhEQNbYXuW5WR3bw7pNbhmzEFKRneflCPNp3iwISKiWbYHBwZw6YUaIUS00f2FKo0f5'
