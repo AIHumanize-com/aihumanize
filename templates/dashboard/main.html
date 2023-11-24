@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+{% load humanize %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Softnio">
@@ -24,8 +26,8 @@
                     <div class="nk-sidebar-brand">
                         <a href="index.html" class="logo-link">
                             <div class="logo-wrap">
-                                <img class="logo-img logo-light" src="{% static 'dashboard/images/logo.png' %}" srcset="{% static  'dashboard/images/logo2x.png' %} 2x"
-                                    alt="">
+                                <img class="logo-img logo-light" src="{% static 'dashboard/images/logo.png' %}"
+                                    srcset="{% static  'dashboard/images/logo2x.png' %} 2x" alt="">
                                 <img class="logo-img logo-dark" src="{% static  'dashboard/images/logo-dark.png' %}"
                                     srcset="{% static 'dashboard/images/logo-dark2x.png' %} 2x" alt="">
                                 <img class="logo-img logo-icon" src="{% static 'dashboard/images/logo-icon.png' %}"
@@ -53,11 +55,11 @@
                                         </span>
                                         <span class="nk-menu-text">Documents</span>
                                     </a>
-                                  
+
                                 </li>
-                             
-                            
-                          
+
+
+
                                 <li class="nk-menu-item">
                                     <a href="pricing-plans.html" class="nk-menu-link">
                                         <span class="nk-menu-icon">
@@ -82,7 +84,7 @@
                                         <span class="nk-menu-text">Payments</span>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </div><!-- .nk-sidebar-menu -->
                     </div><!-- .nk-sidebar-content -->
@@ -92,25 +94,36 @@
                         <div class="border border-light rounded-3">
                             <div class="px-3 py-2 bg-white border-bottom border-light rounded-top-3">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between">
-                                    <h6 class="lead-text">Free Plan</h6>
+                                    <h6 class="lead-text">{{ subscription_name }}</h6>
                                     <a class="link link-primary" href="pricing-plans.html">
                                         <em class="ni ni-spark-fill icon text-warning"></em>
                                         <span>Upgrade</span>
                                     </a>
                                 </div>
                                 <div class="progress progress-md">
-                                    <div class="progress-bar" data-progress="25%"></div>
+                                    <div class="progress-bar" data-progress="{{ used_percentage|floatformat:2 }}%">
+                                    </div>
                                 </div>
-                                <h6 class="lead-text mt-2">1,360 <span class="text-light">words left</span></h6>
+                                <h6 class="lead-text mt-2">{{ available_words|intcomma }} <span class="text-light">words
+                                        left</span>
+                                </h6>
                             </div>
-                            <a class="d-flex px-3 py-2 bg-primary bg-opacity-10 rounded-bottom-3" href="{% url 'profile' %}">
+                            <a class="d-flex px-3 py-2 bg-primary bg-opacity-10 rounded-bottom-3"
+                                href="{% url 'profile' %}">
                                 <div class="media-group">
                                     <div class="media media-sm media-middle media-circle text-bg-primary">
                                         <img src="{% static 'dashboard/images/user.png' %}" />
                                     </div>
                                     <div class="media-text">
-                                        <h6 class="fs-6 mb-0">{{ request.user.fullname }}</h6>
-                                        <span class="text-light fs-7">{{ request.user.email }}</span>
+                                        <h6 class="fs-6 mb-0">
+                                            {% if request.user.fullname != None %}
+                                            {{request.user.fullname}}
+                                            {% else %}
+                                            Please Enter your full name
+                                            {% endif %}
+
+                                        </h6>
+                                        <!-- <span class="text-light fs-7">{{ request.user.email }}</span> -->
                                     </div>
                                     <em class="icon ni ni-chevron-right ms-auto ps-1"></em>
                                 </div>
@@ -158,16 +171,19 @@
                                                         class="px-3 py-2 bg-white border-bottom border-light rounded-top-3">
                                                         <div
                                                             class="d-flex flex-wrap align-items-center justify-content-between">
-                                                            <h6 class="lead-text">Free Plan</h6>
+                                                            <h6 class="lead-text">{{ subscription_name }}</h6>
                                                             <a class="link link-primary" href="#">
                                                                 <em class="ni ni-spark-fill icon text-warning"></em>
                                                                 <span>Upgrade</span>
                                                             </a>
                                                         </div>
                                                         <div class="progress progress-md">
-                                                            <div class="progress-bar" data-progress="25%"></div>
+                                                            <div class="progress-bar"
+                                                                data-progress="{{ used_percentage|floatformat:2 }}%">
+                                                            </div>
                                                         </div>
-                                                        <h6 class="lead-text mt-2">1,360 <span class="text-light">words
+                                                        <h6 class="lead-text mt-2">{{ available_words|intcomma }} <span
+                                                                class="text-light">words
                                                                 left</span></h6>
                                                     </div>
                                                     <a class="d-flex px-3 py-2 bg-primary bg-opacity-10 rounded-bottom-3"

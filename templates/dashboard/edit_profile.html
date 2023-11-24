@@ -17,13 +17,15 @@
 
                 <div class="card shadown-none">
                     <div class="card-body">
+                        <form action="{% url 'edit_profile' %}" class="form" method="post"> {% csrf_token %}
                         <div class="row g-3 gx-gs">
+                            
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="fullnameId" class="form-label">Full Name</label>
                                     <div class="form-control-wrap">
                                         <input type="text" class="form-control" id="fullnameId"
-                                            placeholder="Enter Full name here"  {% if request.user.fullname != None %} value="{{request.user.fullname}}" {% endif %}>
+                                            placeholder="Enter Full name here" name="fullname" {% if request.user.fullname != None %} value="{{request.user.fullname}}" {% endif %}>
                                     </div>
                                 </div>
                             </div>
@@ -32,14 +34,17 @@
                                     <label for="countryID" class="form-label">Country</label>
                                     <div class="form-control-wrap">
                                         <input type="text" class="form-control" id="countryID"
-                                            placeholder="Enter Country here" {% if request.user.country != None %} value="{{request.user.country}}" {% endif %}>
+                                            placeholder="Enter Country here" {% if request.user.country != None %}
+                                            value="{{request.user.country}}" {% endif %} name="country">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
-                          <button class="btn btn-outline-primary">Update</button>
+                                <button class="btn btn-outline-primary" type="submit">Update</button>
+                            </div>
+                       
                         </div>
-                        </div>
+                    </form>
                     </div><!-- .card-body -->
                 </div>
             </div>

@@ -1,5 +1,6 @@
 {% extends 'dashboard/main.html' %}
 
+{% load humanize %}
 
 {% block content %}
 
@@ -22,8 +23,8 @@
                                     <div class="fs-6 text-light mb-0">Words Available</div>
                                     <a href="history.html" class="link link-purple">See History</a>
                                 </div>
-                                <h5 class="fs-1">452 <small class="fs-3">words</small></h5>
-                                <div class="fs-7 text-light mt-1"><span class="text-dark">1548</span>/2000 free words
+                                <h5 class="fs-1">{{ available_words|intcomma }} <small class="fs-3">words</small></h5>
+                                <div class="fs-7 text-light mt-1"><span class="text-dark">{{ used_words|intcomma }}</span>/{{ available_words|intcomma }}  words
                                     generated
                                 </div>
                             </div>

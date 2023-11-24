@@ -42,11 +42,13 @@ def calculate_price(plan_type: str, word_count: int):
     elif plan_type.lower() == "yearly":
         price = word_count * 0.000499 * 12
         plan = "year"
+        word_count *= 12
+        
     elif plan_type.lower() == "enterprise":
         price = word_count * 0.0004
         plan = "month"
 
-    return round(price, 2), plan
+    return round(price, 2), plan, word_count
 
 
   # Import your models
@@ -66,7 +68,7 @@ class CreateCheckoutSessionView(View):
      
         plan_type = data.get('plan_type')
         word_count = data.get('word_count')
-        price, plan = calculate_price(plan_type, word_count)  # Implement this function based on your pricing logic
+        price, plan, word_count = calculate_price(plan_type, word_count)  # Implement this function based on your pricing logic
         
         try:
             checkout_session = stripe.checkout.Session.create(
@@ -125,33 +127,33 @@ def handle_checkout_session(session):
 
     # Check for existing active subscription and carry over unused words
     existing_subscription = Subscription.objects.filter(user=user, is_active=True).first()
+    total_words_count = word_count
     if existing_subscription:
         # Renewal: carry over unused words
         cancel_stripe_subscription(existing_subscription.stripe_subscription_id)
         existing_subscription.is_active = False
         existing_subscription.actual_end_date = timezone.now()
         existing_subscription.save()
-        word_count += get_unused_words(existing_subscription)
+        total_words_count = word_count + get_unused_words(existing_subscription)
 
     # Update or create the subscription record in your database
-    subscription, created = Subscription.objects.update_or_create(
+    subscription = Subscription.objects.create(
         user=user,
-        defaults={
-            'plan_type': plan_type,
-            'price_in_cents': stripe_subscription.plan.amount,
-            'stripe_subscription_id': subscription_id,
-            'is_active': True,
-            'start_date': start_date,
-            'end_date': end_date,
-            'word_count': word_count
-        }
+        plan_type=plan_type,
+        price_in_cents=stripe_subscription.plan.amount,
+        stripe_subscription_id=subscription_id,
+        is_active=True,
+        start_date=start_date,
+        end_date=end_date,
+        word_count=word_count
+        
     )
 
     # Update word count tracker
     WordCountTracker.objects.update_or_create(
         subscription=subscription,
         defaults={
-            'words_purchased': word_count,
+            'words_purchased': total_words_count,
             # Reset words_used if needed, or handle it according to your logic
         }
     )
