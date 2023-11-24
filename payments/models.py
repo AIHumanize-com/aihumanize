@@ -20,7 +20,7 @@ class Subscription(models.Model):
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     plan_type = models.CharField(max_length=10, choices=PLAN_CHOICES)
     word_count = models.PositiveIntegerField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price_in_cents = models.DecimalField(max_digits=10, decimal_places=2)
     start_date = models.DateTimeField(default=timezone.now)
     end_date = models.DateTimeField(null=True, blank=True)  # For fixed duration subscriptions
     is_active = models.BooleanField(default=True)
