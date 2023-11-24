@@ -23,6 +23,7 @@ class Subscription(models.Model):
     price_in_cents = models.DecimalField(max_digits=10, decimal_places=2)
     start_date = models.DateTimeField(default=timezone.now)
     end_date = models.DateTimeField(null=True, blank=True)  # For fixed duration subscriptions
+    actual_end_date = models.DateTimeField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
     stripe_subscription_id = models.CharField(max_length=100, blank=True, null=True)  # To store the Stripe subscription ID
 

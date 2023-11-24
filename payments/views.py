@@ -93,6 +93,14 @@ class CreateCheckoutSessionView(View):
             return JsonResponse({'id': checkout_session.id})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
+        
+def cancel_stripe_subscription(subscription_id):
+    try:
+        stripe.Subscription.delete(subscription_id)
+    except stripe.error.StripeError as e:
+        # Handle Stripe API error
+        print(f"Stripe API error: {e}")
+        # Depending on your requirement, you might want to log this error or take additional actions
 
 def handle_checkout_session(session):
     customer_email = session.get('customer_email')
@@ -119,6 +127,10 @@ def handle_checkout_session(session):
     existing_subscription = Subscription.objects.filter(user=user, is_active=True).first()
     if existing_subscription:
         # Renewal: carry over unused words
+        cancel_stripe_subscription(existing_subscription.stripe_subscription_id)
+        existing_subscription.is_active = False
+        existing_subscription.actual_end_date = timezone.now()
+        existing_subscription.save()
         word_count += get_unused_words(existing_subscription)
 
     # Update or create the subscription record in your database
