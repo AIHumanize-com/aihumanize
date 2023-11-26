@@ -12,9 +12,9 @@ triangle = """<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fil
 </svg>"""
 def detect_and_classify(text):
     # Your Python code
-    payload = {"text": text, "secret": "#Temuriy1212Abdulla"}
-    response = requests.post("https://detecting-ai.com/check_humanizer/", data=json.dumps(payload))
-    detection = response.json()
+    payload = {"content": text, "user_secret": "#Temuriy1212Ash"}
+    response = requests.post("http://localhost:9000/detect/", data=json.dumps(payload))
+    detection = response.json()[0]
     
     label = detection['label']
     value = float(detection['score'])

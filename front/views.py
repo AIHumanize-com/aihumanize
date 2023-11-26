@@ -45,6 +45,7 @@ def detect_text(request):
 
     # Get or create a RequestCounter object for the user's IP address
     ip_address = get_client_ip(request)
+    # TODO make celery task to delete old records and create task for creating new records
     counter, created = DetectRequestCounter.objects.get_or_create(ip_address=ip_address)
 
     # Limit the usage to 3 times for non-authenticated users
