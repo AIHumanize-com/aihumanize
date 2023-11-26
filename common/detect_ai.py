@@ -13,21 +13,15 @@ triangle = """<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fil
 def detect_and_classify(text):
     # Your Python code
     payload = {"content": text, "user_secret": "#Temuriy1212Ash"}
-    response = requests.post("http://localhost:9000/detect/", data=json.dumps(payload))
-    detection = response.json()[0]
+    response = requests.post("https://api.aihumanize.com/detect/", data=json.dumps(payload))
+    detection = response.json()
+    ai_avarage = detection['avarage_result']
+    human_avarage = 1 - ai_avarage
     
-    label = detection['label']
-    value = float(detection['score'])
+    ai_score = round(ai_avarage * 100)
+    human_score = round(human_avarage * 100)
     
-    ai_score = 0
-    human_score = 0
-    
-    if label == "Fake":
-        ai_score = value * 100
-        human_score = 100 - (value * 100)
-    else:
-        ai_score = 100 - (value * 100)
-        human_score = value * 100
+   
     
     result_text = ""
     detector_result = ""
@@ -42,7 +36,7 @@ def detect_and_classify(text):
         result_text = f'This text is likely mixed content with <strong style="color:yellow;"> AI and Human-generated text {triangle}</strong>'
         detector_result = "Mixed"
     
-    return {"result_text": result_text, "detector_result": detector_result}
+    return {"result_text": result_text, "detector_result": detector_result, "ai_avarage": ai_score, "human_avarage": human_score}
 
 
 

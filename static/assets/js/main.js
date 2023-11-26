@@ -481,7 +481,11 @@ document.getElementById("ai-btn").addEventListener("click", function () {
     // Disable the button
     button.disabled = true;
 	var detectorAnswer = document.getElementById("detector-answer");
+	var tableDiv = document.getElementById("tableDiv");
+	var aiAvarage = document.getElementById("aiAvarage");
+	var humanAvarage = document.getElementById("humanAvarage");
 	detectorAnswer.style.display = "none";
+	tableDiv.style.display = "none";
     // Create and append the spinner element
     var spinner = document.createElement("span");
     spinner.classList.add("spinner-border", "spinner-border-sm");
@@ -542,8 +546,12 @@ document.getElementById("ai-btn").addEventListener("click", function () {
 
             // Set the result text
             detectorAnswer.innerHTML = data.result_text;
-            
+			
+            tableDiv.style.display = "block";
+			console.log(data)
             // Show the detector-answer element
+			aiAvarage.innerHTML = `${data.ai_avarage}%`;
+			humanAvarage.innerHTML = `${data.human_avarage}%`;
             detectorAnswer.style.display = "block";
 
             // Re-enable the button and remove the spinner
