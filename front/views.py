@@ -28,19 +28,13 @@ def humanizer(request):
         word_count_limit = 300
 
         if not request.user.is_authenticated:
-            ip_address = get_client_ip(request)
-            user_word_count, created = UnregisteredUserWordCount.objects.get_or_create(ip_address=ip_address)
-            
-            if user_word_count.word_count + word_count > word_count_limit:
-                return JsonResponse({"error": "Word limit exceeded. Sign up for additional words or subscribe for unlimited access."}, status=200)
-            else:
-                user_word_count.word_count += word_count
-                user_word_count.save()
+            return JsonResponse({"error": "Word limit exceeded. Sign up for additional words or subscribe for unlimited access."}, status=400)
+
            
 
         # Process the text as usual
         result = rewrite_text(text, purpose=purpose, readability=readability, strength=strength)
-        create_documents_record(text, result, request.user.id, purpose=purpose, level=strength, readibility=readability)
+        create_documents_record(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=strength, readibility=readability)
         return JsonResponse({"text": result})
         
 

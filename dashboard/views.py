@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from payments.models import Subscription, WordCountTracker
+from .models import Documents
+from django.core.paginator import Paginator
+
 # Create your views here.
 def get_dashboard_data(user):
     data = {'subscription_name': 'No Active Subscription', 'available_words': 0, 'used_words': 0, 'used_percentage': 0}
@@ -46,4 +49,22 @@ def edit_profile(request):
 
 @login_required
 def documents(request):
-    return render(request, "dashboard/documents.html")
+    # Fetch search query and sort parameters from the request
+    search_query = request.GET.get('search', '')
+    sort_by = request.GET.get('sort', '-created_at')  # Default sort is by created_at
+
+    # Filter and sort documents based on the search query and sort parameter
+    documents = Documents.objects.filter(
+        user=request.user, 
+        input_text__icontains=search_query  # Assuming you are searching by document name
+    ).order_by(sort_by)
+
+    # Add Pagination
+    paginator = Paginator(documents, 3)  # Show 10 documents per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'documents': page_obj
+    }
+    return render(request, "dashboard/documents.html", context=context)

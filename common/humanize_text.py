@@ -3,11 +3,11 @@ from .purposes_data import purposes, strength_levels, readability_levels
 
 # client = OpenAI()
 
-openai_api_key = "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"
+
 
 
 def rewrite_text(original_text, purpose, readability, strength):
-  
+    openai_api_key = "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"
 
     if purpose not in purposes:
         raise ValueError(

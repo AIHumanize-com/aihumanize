@@ -840,27 +840,51 @@
     </div>
   </div>
   <!-- Word Limit Modal -->
-  <!-- Word Limit Modal -->
-  <div class="modal fade" id="wordLimitModal" tabindex="-1" aria-labelledby="wordLimitModalLabel" aria-hidden="true">
+  <div class="modal fade" id="wordLimitModal" tabindex="-1">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="wordLimitModalLabel">Word Limit Reached</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          You have reached your 300-word limit for AI text processing.
-          <strong>Sign up</strong> for another 300 words or <strong>subscribe</strong> for unlimited access.
-        </div>
-        <div class="modal-footer">
-          <a href="/signup/" class="btn btn-primary">Sign Up</a>
-          <a href="/subscribe/" class="btn btn-success">Subscribe</a>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+        <div class="modal-content">
+            <div class="modal-body p-4">
+                <div class="media media-rg media-middle media-circle text-primary bg-primary bg-opacity-20 mb-3">
+                    <em class="icon ni ni-spark-fill"></em>
+                </div>
+                <h2 class="text-primary">Get started today with <span class="text-success">400</span> free words.</h2>
+                <p>Sign up to humanize and make this text undetectable.</p>
+                <div class="card bg-lighter bg-opacity-80 shadow-none mt-2">
+                    <div class="card-body">
+                        <h5>What you will lose after changing your active subscription?</h5>
+                        <ul class="pricing-list d-flex flex-column gap-3 fs-lg mt-5 mb-0">
+                            <li>You won’t have a dedicated account manager</li>
+                            <li>No custom tools will be existed for AI content generations.</li>
+                            <li>You’ll lose access to advance integrations.</li>
+                            <li>No prioritized support will be provided for you.</li>
+                            <li>Server response rate will be standard than faster.</li>
+                            <li>Regular model updates instead of special features early access.</li>
+                        </ul>
+                    </div>
+                </div><!-- .card -->
+              
+                  <div class="vstack gap-4 mt-4">
+                  <button type="button" class="btn account-btn py-4">
+                    <img src="{% static 'assets/images/icons/google.svg' %}" alt="" width="24" class="img-fluid icon" />
+                    <span>Continue With Google</span>
+                  </button>
+                  <button type="button" class="btn account-btn py-4">
+                    <img src="{% static 'assets/images/icons/email.svg' %}" alt="" width="24" class="img-fluid icon" />
+                    <span>Continue With Email</span>
+                  </button>
+                  <button type="button" class="btn account-btn py-4 mt-3" data-bs-dismiss="modal">
+                    <span>Close</span>
+                  </button>
+                </div>
+                    <!-- <div class="col-12 "><button class="btn btn-outline-light " data-bs-dismiss="modal">Keep Plan</button></div>
+                    <div class="col-12 mt-2"><a href="pricing-plans.html" class="btn btn-primary ">Change Plan</a></div> -->
 
+            </div><!-- .modal-body -->
+        </div><!-- .modal-content -->
+    </div><!-- .modal-dialog -->
+</div>
+  <!-- Word Limit Modal -->
+  
 
 </main>
 

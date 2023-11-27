@@ -1,6 +1,6 @@
 {% extends 'dashboard/main.html' %}
 
-
+{% load my_filters %}
 {% block content %}
 
 <div class="container-xl">
@@ -14,7 +14,7 @@
                     </div>
                     <div class="nk-block-head-content">
                         <ul class="nk-block-tools">
-                            <li><a class="btn btn-primary" href="#"><em class="icon ni ni-plus"></em><span>Create New</span></a></li>
+                            <li><a class="btn btn-primary" href="{% url 'index' %}"><em class="icon ni ni-plus"></em><span>Humanize New Text</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -30,16 +30,21 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-md dropdown-menu-end">
                                     <div class="dropdown-content py-3">
-                                        <div class="form-control-wrap">
-                                            <div class="form-control-icon start md text-light">
-                                                <em class="icon ni ni-search"></em>
+                                        <form action="{% url 'documents' %}" method="get">
+                                            <div class="form-control-wrap">
+                                                <div class="form-control-icon start md text-light">
+                                                    <em class="icon ni ni-search"></em>
+                                                </div>
+                                                <input type="text" name="search" class="form-control form-control-md" placeholder="Search Template" value="{{ request.GET.search|default_if_none:'' }}">
+                                                <button type="submit" style="display: none;">Search</button>
                                             </div>
-                                            <input type="text" class="form-control form-control-md" placeholder="Search Template">
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </li>
+                        
+                        
                         <li>
                             <div class="dropdown">
                                 <button class="btn btn-sm btn-icon btn-zoom text-base" type="button" data-bs-toggle="dropdown">
@@ -49,19 +54,27 @@
                                     <div class="dropdown-content">
                                         <ul class="link-list link-list-hover-bg-primary link-list-md">
                                             <li>
-                                                <a href="#"><em class="icon ni ni-calendar-check"></em><span>Date Created</span></a>
+                                                <a href="?sort={% if request.GET.sort == 'created_at' %}-{% endif %}created_at{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                                                    <em class="icon ni ni-calendar-check"></em><span>Date Created</span>
+                                                </a>
                                             </li>
                                             <li>
-                                                <a href="#"><em class="icon ni ni-edit"></em><span>Last Modified</span></a>
+                                                <a href="?sort={% if request.GET.sort == 'input_text' %}-{% endif %}input_text{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                                                    <em class="icon ni ni-text-a"></em><span>Alphabetical</span>
+                                                </a>
                                             </li>
                                             <li>
-                                                <a href="#"><em class="icon ni ni-text-a"></em><span>Alphabetical</span></a>
+                                                <a href="?sort={% if request.GET.sort == 'words_used' %}-{% endif %}words_used{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                                                    <em class="icon ni ni-list-ol"></em><span>Words Count</span>
+                                                </a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </li>
+                        
+                        
                     </ul>
                 </div>
                 <div class="card shadow-none">
@@ -70,61 +83,69 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Words Count</th>
+                                <th>Level</th>
+                                <th>Purpose</th>
+                                <th>Readability</th>
                                 <th>Created at</th>
                             </tr>
+                            {% for document in documents %}
                             <tr>
                                 <td class="tb-col">
-                                    <div class="caption-text line-clamp-2">The Impact of Artificial Intelligence on the Future of Work</div>
+                                    <div class="caption-text line-clamp-2">{{ document.input_text|first_eight_words  }}...</div>
                                 </td>
                                 <td class="tb-col tb-col-sm">
-                                    <div class="badge text-bg-dark-soft rounded-pill px-2 py-1 fs-6 lh-sm">Document</div>
+                                    <div class="badge text-bg-dark-soft rounded-pill px-2 py-1 fs-6 lh-sm">{{document.words_used}}</div>
+                                </td>
+                                <td class="tb-col">
+                                    <div class="caption-text line-clamp-2">{{ document.level  }}</div>
+                                </td>
+                                <td class="tb-col">
+                                    <div class="caption-text line-clamp-2">{{ document.purpose }}</div>
+                                </td>
+                                <td class="tb-col">
+                                    <div class="caption-text line-clamp-2">{{ document.readibility }}</div>
                                 </td>
                                 <td class="tb-col tb-col-md">
                                     <div class="fs-6 text-light d-inline-flex flex-wrap gap gx-2"><span>Feb 15,2023 </span> <span>02:31 PM</span></div>
                                 </td>
-                                <td class="tb-col tb-col-end">
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-icon btn-zoom me-n1" type="button" data-bs-toggle="dropdown">
-                                            <em class="icon ni ni-more-h"></em>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <div class="dropdown-content">
-                                                <ul class="link-list link-list-hover-bg-primary link-list-md">
-                                                    <li>
-                                                        <a href="#"><em class="icon ni ni-edit"></em><span>Rename</span></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><em class="icon ni ni-trash"></em><span>Discard Draft</span></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
+                               
                             
                             </tr>
-                         
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
                 <div class="table-pagination mt-4">
-                    <div class="table-pagination-info">1 – 9 of 9 items</div>
+                    <div class="table-pagination-info">{{ documents.start_index }} – {{ documents.end_index }} of {{ documents.paginator.count }} items</div>
                     <div class="table-pagination-select">
                         <div class="form-control-wrap">
-                            <select class="js-select" data-search="false" data-sort="false" data-cross="false">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                        </div> of 1 page
+                            <div class="choices" data-type="select-one" tabindex="0" role="listbox" aria-haspopup="true" aria-expanded="false">
+                                <div class="choices__inner">
+                                    <!-- Display Current Page Number -->
+                                    <span>Page {{ documents.number }} of {{ documents.paginator.num_pages }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <!-- Pagination Buttons -->
+                    <div class="table-pagination-btn-wrap">
+                        {% if documents.has_previous %}
+                            <a href="?page={{ documents.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}" class="table-pagination-btn">
+                                <em class="icon ni ni-caret-left-fill"></em>
+                            </a>
+                        {% endif %}
                     </div>
                     <div class="table-pagination-btn-wrap">
-                        <button class="table-pagination-btn"><em class="icon ni ni-caret-left-fill"></em></button>
-                    </div>
-                    <div class="table-pagination-btn-wrap">
-                        <button class="table-pagination-btn"><em class="icon ni ni-caret-right-fill"></em></button>
+                        {% if documents.has_next %}
+                            <a href="?page={{ documents.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}" class="table-pagination-btn">
+                                <em class="icon ni ni-caret-right-fill"></em>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
+                
             </div><!-- .nk-block -->
         </div>
     </div>
