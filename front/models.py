@@ -10,3 +10,5 @@ class DetectRequestCounter(models.Model):
 class UnregisteredUserWordCount(models.Model):
     ip_address = models.CharField(max_length=45)  # To accommodate IPv6
     word_count = models.IntegerField(default=0)
+
+

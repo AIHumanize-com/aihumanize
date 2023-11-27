@@ -398,7 +398,9 @@ document.querySelector('.text-area-btn-2').addEventListener('click', function (e
 });
 
 var humanizeButton = document.getElementById('hummani-main-btn');
-
+var purpose = document.getElementById('purpose');
+var readability = document.getElementById('readability');
+var level = document.getElementById('level');
 humanizeButton.addEventListener('click', function () {
 	var textareaContent = document.getElementById('input-text').value;
 	var wordCount = textareaContent.split(/\s+/).filter(function (n) { return n != '' }).length;
@@ -418,7 +420,7 @@ humanizeButton.addEventListener('click', function () {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ text: textareaContent }),
+		body: JSON.stringify({ text: textareaContent, purpose: purpose.value, readability: readability.value, level: level.value }),
 	})
 		.then(response => response.json())
 		.then(data => {

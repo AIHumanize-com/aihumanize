@@ -10,7 +10,8 @@ def get_dashboard_data(user):
         data['subscription_name'] = active_subscription.plan_type.capitalize()
         word_count_tracker = WordCountTracker.objects.filter(subscription=active_subscription).first()
         if word_count_tracker:
-            data['available_words'] = word_count_tracker.words_purchased
+            data['available_words'] = word_count_tracker.words_remaining
+            data['words_purchased'] = word_count_tracker.words_purchased
             data['used_words'] = word_count_tracker.words_used
             if word_count_tracker.words_purchased > 0:
                 data['used_percentage'] = (word_count_tracker.words_used / word_count_tracker.words_purchased) * 100
@@ -41,3 +42,8 @@ def edit_profile(request):
         return redirect('profile')
     
     return render(request, "dashboard/edit_profile.html", context=context)
+
+
+@login_required
+def documents(request):
+    return render(request, "dashboard/documents.html")

@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import DetectRequestCounter, UnregisteredUserWordCount
 # Create your views here.
+from dashboard.tasks import create_documents_record
 from common.detect_ai import detect_and_classify
 def index(request):
     return render(request, 'front/index.html')
@@ -17,7 +18,11 @@ def humanizer(request):
     if request.method == "POST":
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
+    
         text = body["text"]
+        purpose = body["purpose"]
+        readability = body["readability"]
+        strength = body["level"]
 
         word_count = len(text.split())
         word_count_limit = 300
@@ -28,13 +33,14 @@ def humanizer(request):
             
             if user_word_count.word_count + word_count > word_count_limit:
                 return JsonResponse({"error": "Word limit exceeded. Sign up for additional words or subscribe for unlimited access."}, status=200)
-
-            user_word_count.word_count += word_count
-            user_word_count.save()
+            else:
+                user_word_count.word_count += word_count
+                user_word_count.save()
            
 
         # Process the text as usual
-        result = rewrite_text(text, "general")
+        result = rewrite_text(text, purpose=purpose, readability=readability, strength=strength)
+        create_documents_record(text, result, request.user.id, purpose=purpose, level=strength, readibility=readability)
         return JsonResponse({"text": result})
         
 
