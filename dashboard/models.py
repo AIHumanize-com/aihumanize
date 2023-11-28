@@ -1,6 +1,7 @@
 from django.db import models
 from users.models import UserModel
 # Create your models here.
+import uuid 
 
 
 class Documents(models.Model):
@@ -12,3 +13,4 @@ class Documents(models.Model):
     purpose = models.CharField(max_length=100, null=True, blank=True)
     level = models.CharField(max_length=100, null=True, blank=True)
     readibility = models.CharField(max_length=100, null=True, blank=True)
+    document_id = models.UUIDField(default = uuid.uuid4, editable = False)

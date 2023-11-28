@@ -3,7 +3,10 @@ from django.contrib.auth.decorators import login_required
 from payments.models import Subscription, WordCountTracker
 from .models import Documents
 from django.core.paginator import Paginator
-
+from django.db.models import Avg
+from django.core.exceptions import PermissionDenied
+from django.http import JsonResponse, Http404
+import uuid
 # Create your views here.
 def get_dashboard_data(user):
     data = {'subscription_name': 'No Active Subscription', 'available_words': 0, 'used_words': 0, 'used_percentage': 0}
@@ -12,10 +15,18 @@ def get_dashboard_data(user):
     if active_subscription:
         data['subscription_name'] = active_subscription.plan_type.capitalize()
         word_count_tracker = WordCountTracker.objects.filter(subscription=active_subscription).first()
+        documents_count = Documents.objects.filter(user=user).count()
+        average_words_per_document = Documents.objects.filter(user=user).aggregate(average_words=Avg('words_used'))['average_words']
+
+# You might want to handle the case where there are no documents
+        if average_words_per_document is None:
+            average_words_per_document = 0
         if word_count_tracker:
             data['available_words'] = word_count_tracker.words_remaining
             data['words_purchased'] = word_count_tracker.words_purchased
             data['used_words'] = word_count_tracker.words_used
+            data["documents_count"] = documents_count
+            data["average_words_per_document"] = average_words_per_document
             if word_count_tracker.words_purchased > 0:
                 data['used_percentage'] = (word_count_tracker.words_used / word_count_tracker.words_purchased) * 100
 
@@ -70,3 +81,36 @@ def documents(request):
         'documents': page_obj
     }
     return render(request, "dashboard/documents.html", context=context)
+
+
+@login_required
+def document_detail(request, document_id):
+    try:
+        # Make sure we have a valid UUID
+        uuid.UUID(document_id)
+    except ValueError:
+        raise Http404("Invalid document ID format.")
+
+    # Retrieve the document, making sure it exists and belongs to the current user
+    try:
+        document = Documents.objects.get(document_id=document_id, user=request.user)
+    except Documents.DoesNotExist:
+        raise Http404("Document not found.")
+
+    # If the user is not the owner of the document, raise PermissionDenied
+    if document.user != request.user:
+        raise PermissionDenied
+
+    # Prepare the data to be returned as JSON
+    data = {
+        'input_text': document.input_text,
+        'output_text': document.output_text,
+        'created_at': document.created_at.isoformat(),
+        'words_used': document.words_used,
+        'purpose': document.purpose,
+        'level': document.level,
+        'readibility': document.readibility,
+        'document_id': str(document.document_id),  # Convert UUID to string
+    }
+
+    return JsonResponse(data)
