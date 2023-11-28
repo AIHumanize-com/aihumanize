@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/resend-email-confirmation/signup/', resend_email_confirmation, name='resend_email_confirmation'),
     path("dashboard/", include("dashboard.urls")),
     path("payments/", include("payments.urls")),
+
     path("", include("front.urls")),
 
 

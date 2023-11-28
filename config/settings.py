@@ -38,10 +38,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'django.contrib.humanize',
+    "django.contrib.sites",
     # installed apps
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
     # local apps    
     "users",
     "common",
@@ -156,6 +158,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory' 
+AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend", "allauth.account.auth_backends.AuthenticationBackend",)
 
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
@@ -198,3 +201,12 @@ STRIPE_PUBLIC_KEY = 'pk_test_51OCnPQFG5G6BKxaQ0JDtM7dWfppLE77Z1jUwI80isYFpKLTwrB
 STRIPE_SECRET_KEY = 'sk_test_51OCnPQFG5G6BKxaQgijAVV2XOt5cqI7MhEQNbYXuW5WR3bw7pNbhmzEFKRneflCPNp3iwISKiWbYHBwZw6YUaIUS00f2FKo0f5'
 
 STRIPE_WEBHOOK_SECRET = "whsec_e49507dc8a07bd882f73686615f63a56694240cd05362906b49a741c9557dfc1"
+
+SITE_ID = 2
+SOCIALACCOUNT_LOGIN_ON_GET=True
+
+
+SOCIALACCOUNT_PROVIDERS = {"google": {"SCOPE": ["profile", "email"], "AUTH_PARAMS": {"access_type": "online"}}}
+
+LOGIN_REDIRECT_URL = "/pricing/"
+LOGOUT_REDIRECT_URL = "/"

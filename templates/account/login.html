@@ -1,6 +1,8 @@
 {% extends 'account/auth_main.html' %} {% block content %} {% load static %}
 
 <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+  {% load socialaccount %}
+
   <div class="close-btn">
     <a href="{% url 'index' %}"
       class="icon w-12 h-12 rounded p-3 d-flex align-center justify-center ms-auto bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">
@@ -17,14 +19,13 @@
         <img src="{% static 'assets/images/logo-blue.svg' %}" alt="" class="img-fluid" width="165" />
       </a>
       <div class="vstack gap-4 mt-10">
-        <button type="button" class="btn account-btn py-4">
+       
+        <a class="btn account-btn py-4" href="{% provider_login_url 'google' %}?next=/">
           <img src="{% static 'assets/images/icons/google.svg' %}" alt="" width="24" class="img-fluid icon" />
           <span>Continue With Google</span>
-        </button>
-        <button type="button" class="btn account-btn py-4">
-          <img src="{% static 'assets/images/icons/apple-dark.svg' %}" alt="" width="24" class="img-fluid icon" />
-          <span>Continue With Apple</span>
-        </button>
+        </a>
+      
+       
       </div>
 
       <div class="divider-with-text my-10">

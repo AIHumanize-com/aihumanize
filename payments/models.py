@@ -9,11 +9,13 @@ class Subscription(models.Model):
     MONTHLY = 'monthly'
     YEARLY = 'yearly'
     ENTERPRISE = 'enterprise'
+    FREE = 'free'
 
     PLAN_CHOICES = [
         (MONTHLY, 'Monthly'),
         (YEARLY, 'Yearly'),
         (ENTERPRISE, 'Enterprise'),
+        (FREE, 'Free')
     ]
 
     # Fields

@@ -14,11 +14,17 @@ from allauth.account.utils import send_email_confirmation
 from .forms import CustomSignupForm
 from django.utils import timezone
 from common.helpers import anonymous_required
+from payments.models import Subscription, WordCountTracker  
+from django.shortcuts import redirect
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from allauth.socialaccount.models import SocialApp
 
 User = get_user_model()
 
 @anonymous_required(redirect_to='admin:index')
 def signup_view(request):
+    
     if request.method == 'POST':
         form = CustomSignupForm(request.POST)
         if form.is_valid():
@@ -32,7 +38,9 @@ def signup_view(request):
 
             # EmailAddress.objects.add_email(request, user, email, confirm=True)
             send_email_confirmation(request, user, signup=True)
-
+        
+            subscriopton = Subscription.objects.create(user_id=user.id, plan_type='free', word_count=400, price_in_cents=0, start_date=timezone.now(), is_active=True)
+            word_counter = WordCountTracker.objects.create(subscription_id=subscriopton.id, words_purchased=400, words_used=0)
             request.session['email_for_verification'] = email
             if 'password_reset_email' in request.session:
                 del request.session['password_reset_email']
@@ -82,3 +90,9 @@ def resend_email_confirmation(request):
         return render(request, "account/verification_sent.html")
 
     return render(request, "account/verification_sent.html")
+
+
+
+
+
+
