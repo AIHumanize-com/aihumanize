@@ -24,6 +24,8 @@ def get_dashboard_data(user):
 @login_required
 def index(request):
     context = get_dashboard_data(request.user)
+    recent_documents = Documents.objects.filter(user=request.user).order_by('-created_at')[:5]
+    context["recent_documents"] = recent_documents
     return render(request, "dashboard/dashboard.html", context)
 
 
@@ -60,7 +62,7 @@ def documents(request):
     ).order_by(sort_by)
 
     # Add Pagination
-    paginator = Paginator(documents, 3)  # Show 10 documents per page
+    paginator = Paginator(documents, 15)  # Show 10 documents per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

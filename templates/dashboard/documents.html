@@ -79,7 +79,7 @@
                 </div>
                 <div class="card shadow-none">
                     <table class="table table-middle mb-0">
-                        <tbody>
+                        <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Words Count</th>
@@ -88,6 +88,9 @@
                                 <th>Readability</th>
                                 <th>Created at</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                           
                             {% for document in documents %}
                             <tr>
                                 <td class="tb-col">
@@ -119,7 +122,7 @@
                     <div class="table-pagination-info">{{ documents.start_index }} – {{ documents.end_index }} of {{ documents.paginator.count }} items</div>
                     <div class="table-pagination-select">
                         <div class="form-control-wrap">
-                            <div class="choices" data-type="select-one" tabindex="0" role="listbox" aria-haspopup="true" aria-expanded="false">
+                            <div  data-type="select-one" tabindex="0" role="listbox" aria-haspopup="true" aria-expanded="false">
                                 <div class="choices__inner">
                                     <!-- Display Current Page Number -->
                                     <span>Page {{ documents.number }} of {{ documents.paginator.num_pages }}</span>

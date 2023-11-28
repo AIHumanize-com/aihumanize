@@ -7,7 +7,7 @@ from .purposes_data import purposes, strength_levels, readability_levels
 
 
 def rewrite_text(original_text, purpose, readability, strength):
-    openai_api_key = "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"
+    openai_api_key = ""
 
     if purpose not in purposes:
         raise ValueError(

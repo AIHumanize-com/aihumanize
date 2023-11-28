@@ -841,8 +841,10 @@
   </div>
   <!-- Word Limit Modal -->
   <div class="modal fade" id="wordLimitModal" tabindex="-1">
+    {% load socialaccount %}
     <div class="modal-dialog">
         <div class="modal-content">
+          {% if not user.is_authenticated %}
             <div class="modal-body p-4">
                 <div class="media media-rg media-middle media-circle text-primary bg-primary bg-opacity-20 mb-3">
                     <em class="icon ni ni-spark-fill"></em>
@@ -866,22 +868,60 @@
                 </div><!-- .card -->
               
                   <div class="vstack gap-4 mt-4">
-                  <button type="button" class="btn account-btn py-4">
+                  <a href="{% provider_login_url 'google' %}?next=/" class="btn account-btn py-4">
                     <img src="{% static 'assets/images/icons/google.svg' %}" alt="" width="24" class="img-fluid icon" />
                     <span>Continue With Google</span>
-                  </button>
-                  <button type="button" class="btn account-btn py-4">
+                  </a>
+                  <a href="{% url 'account_signup' %}" class="btn account-btn py-4">
                     <img src="{% static 'assets/images/icons/email.svg' %}" alt="" width="24" class="img-fluid icon" />
                     <span>Continue With Email</span>
-                  </button>
+                  </a>
                   <button type="button" class="btn account-btn py-4 mt-3" data-bs-dismiss="modal">
-                    <span>Close</span>
+                    <span>Continue Exploring</span>
                   </button>
                 </div>
                     <!-- <div class="col-12 "><button class="btn btn-outline-light " data-bs-dismiss="modal">Keep Plan</button></div>
                     <div class="col-12 mt-2"><a href="pricing-plans.html" class="btn btn-primary ">Change Plan</a></div> -->
 
-            </div><!-- .modal-body -->
+            </div>
+          {% else %}
+          <div class="modal-body p-4">
+            <div class="media media-rg media-middle media-circle text-primary bg-primary bg-opacity-20 mb-3">
+              <em class="icon ni ni-check-thick"></em>
+            </div>
+            <h2 class="text-primary">Continue Your Journey with Us!</h2>
+            <p>Thank you for being a part of our community. Explore more advanced features and continue enjoying high-quality
+              content.</p>
+            <div class="card bg-lighter bg-opacity-80 shadow-none mt-2">
+              <div class="card-body">
+                <h5>Why Upgrade Your Account?</h5>
+                <ul class="pricing-list d-flex flex-column gap-3 fs-lg mt-5 mb-0">
+                  <li>Rewrites <strong class=" fw-medium" id="listWordsCount">more</strong> words per month
+                  </li>
+                
+                  <li>Built-in AI detector</li>
+                  <li> No weird or random words</li>
+                  <li>Passes AI detectors</li>
+                  <li>High quality, legible content</li>
+                  <li>Writing level matching</li>
+                  <li>Priority customer support</li>
+                  <li>Special discounts and offers</li>
+                </ul>
+              </div>
+            </div><!-- .card -->
+          
+            <div class="vstack gap-4 mt-4">
+              <a href="{% url 'pricing' %}" class="btn btn-primary py-4">
+                <span>View Subscription Plans</span>
+              </a>
+              <button type="button" class="btn account-btn py-4 mt-3" data-bs-dismiss="modal">
+                <span>Continue Exploring</span>
+              </button>
+            </div>
+          </div>
+
+          {% endif %}
+            <!-- .modal-body -->
         </div><!-- .modal-content -->
     </div><!-- .modal-dialog -->
 </div>

@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import DetectRequestCounter, UnregisteredUserWordCount
+from payments.models import WordCountTracker
 # Create your views here.
 from dashboard.tasks import create_documents_record
 from common.detect_ai import detect_and_classify
@@ -25,14 +26,16 @@ def humanizer(request):
         strength = body["level"]
 
         word_count = len(text.split())
-        word_count_limit = 300
+    
 
         if not request.user.is_authenticated:
             return JsonResponse({"error": "Word limit exceeded. Sign up for additional words or subscribe for unlimited access."}, status=400)
 
            
 
-        # Process the text as usual
+        word_count_tracker = WordCountTracker.objects.filter(subscription__user=request.user).last()
+        if word_count > word_count_tracker.words_remaining:
+            return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
         result = rewrite_text(text, purpose=purpose, readability=readability, strength=strength)
         create_documents_record(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=strength, readibility=readability)
         return JsonResponse({"text": result})
