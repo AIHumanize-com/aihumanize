@@ -1,6 +1,6 @@
 {% extends 'dashboard/main.html' %}
 
-
+{% load static %}
 {% block content %}
 <div class="container-xl">
     <div class="nk-content-inner">
@@ -115,7 +115,7 @@
                                 <div class="card shadow-none">
                                     <div class="card-body">
                                         <div class="text-light mb-2">Plan</div>
-                                        <h3 class="fw-normal">Professional Plan</h3>
+                                        <h3 class="fw-normal">{{subscription_name}}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@
                                 <div class="card shadow-none">
                                     <div class="card-body">
                                         <div class="text-light mb-2">Recurring Payment</div>
-                                        <h3 class="fw-normal">$23/Month</h3>
+                                        <h3 class="fw-normal">${{subscrioption_price}}/{{subscription_name_period}}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +131,7 @@
                                 <div class="card shadow-none">
                                     <div class="card-body">
                                         <div class="text-light mb-2">Next Due Date</div>
-                                        <h3 class="fw-normal">Mar 15, 2023</h3>
+                                        <h3 class="fw-normal">{{next_due_date}}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -140,8 +140,7 @@
                                     <div class="card-body">
                                         <div class="text-light mb-2">Payment Method</div>
                                         <div class="d-flex align-items-center">
-                                            <img src="images//icons/paypal.png" alt="" class="icon" />
-                                            <h3 class="fw-normal ms-2">PayPal</h3>
+                                            <h3 class="fw-normal ms-2">Stripe</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -151,6 +150,7 @@
                             class="d-flex align-items-center justify-content-between border-bottom border-light mt-5 mb-4 pb-2">
                             <h5>Billing History</h5>
                         </div>
+                        {% if invoices %}
                         <div class="card">
                             <table class="table table-middle mb-0">
                                 <thead class="table-light">
@@ -171,51 +171,39 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for invoice in invoices %}
                                     <tr>
                                         <td class="tb-col">
-                                            <div class="caption-text">Starter - 12 Months <div
+                                            <div class="caption-text">{{invoice.subscription_name}} <div
                                                     class="d-sm-none dot bg-success"></div>
                                             </div>
                                         </td>
-                                        <td class="tb-col tb-col-md">
-                                            <div class="fs-6 text-light d-inline-flex flex-wrap gap gx-2"><span>Feb
-                                                    15,2023 </span> <span>02:31 PM</span></div>
+                                        <td class="tb-col tb-col-sm">
+                                            <div class="fs-6 text-light ">{{invoice.payment_date}}</div>
                                         </td>
                                         <td class="tb-col tb-col-sm">
-                                            <div class="fs-6 text-light">$23.00</div>
+                                            <div class="fs-6 text-light">${{invoice.total}}</div>
                                         </td>
                                         <td class="tb-col tb-col-sm">
+                                            {% if invoice.status == 'paid' %}
                                             <div class="badge text-bg-success-soft rounded-pill px-2 py-1 fs-6 lh-sm">
-                                                Paid</div>
-                                        </td>
-                                        <td class="tb-col tb-col-end">
-                                            <a href="#" class="link">Get Invoice</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tb-col">
-                                            <div class="caption-text">Starter - 12 Months <div
-                                                    class="d-sm-none dot bg-warning"></div>
-                                            </div>
-                                        </td>
-                                        <td class="tb-col tb-col-md">
-                                            <div class="fs-6 text-light d-inline-flex flex-wrap gap gx-2"><span>Feb
-                                                    15,2023 </span> <span>02:31 PM</span></div>
-                                        </td>
-                                        <td class="tb-col tb-col-sm">
-                                            <div class="fs-6 text-light">$23.00</div>
-                                        </td>
-                                        <td class="tb-col tb-col-sm">
+                                                {{invoice.status}}</div>
+                                                {% else %}
                                             <div class="badge text-bg-warning-soft rounded-pill px-2 py-1 fs-6 lh-sm">
-                                                Faild</div>
+                                                {{invoice.status}}</div>
+                                            {% endif %}
                                         </td>
                                         <td class="tb-col tb-col-end">
-                                            <a href="#" class="link">Get Invoice</a>
+                                            <a href="{{ invoice.invoice_pdf }}" class="link">Get Invoice</a>
                                         </td>
                                     </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
+                        {% else %}
+                            <div class="alert alert-info">No billing history available.</div>
+                        {% endif %}
                     </div><!-- .tab-pane -->
                  
                 </div><!-- .tab-content -->

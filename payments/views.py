@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 # views.py
-
+import datetime
 import stripe
 from django.conf import settings
 from django.http import JsonResponse
@@ -13,8 +13,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseForbidden
 import json
 from django.utils import timezone
-from datetime import timedelta
-
+from django.db.models import F
+from dateutil.relativedelta import relativedelta
+from django.contrib.auth.decorators import login_required
 def calculate_price(plan_type: str, word_count: int):
     # Validate plan_type
     valid_plan_types = ["monthly", "yearly", "enterprise"]
@@ -89,8 +90,8 @@ class CreateCheckoutSessionView(View):
                 ],
                 metadata={'word_count': word_count, "plan_type": plan_type},
                 mode='subscription',
-                success_url='http://localhost:8000',
-                cancel_url='http://localhost:8000',
+                success_url='http://127.0.0.1:8000',
+                cancel_url='http://127.0.0.1:8000',
             )
             return JsonResponse({'id': checkout_session.id})
         except Exception as e:
@@ -107,12 +108,14 @@ def cancel_stripe_subscription(subscription_id):
 def handle_checkout_session(session):
     customer_email = session.get('customer_email')
     subscription_id = session.get('subscription')
+    stripe_customer_id = session.get('customer')
 
     try:
         user = UserModel.objects.get(email=customer_email)
+
     except UserModel.DoesNotExist:
         # Handle user not found
-        return
+        return HttpResponse(status=400)
 
     # Retrieve the subscription from Stripe
     stripe_subscription = stripe.Subscription.retrieve(subscription_id)
@@ -157,14 +160,16 @@ def handle_checkout_session(session):
             # Reset words_used if needed, or handle it according to your logic
         }
     )
+    user.stripe_customer_id = stripe_customer_id
+    user.save()
 
     # Additional actions...
 
 def calculate_end_date(start_date, interval):
     if interval == 'month':
-        return start_date + timedelta(days=30)
+        return start_date + relativedelta(months=1)
     elif interval == 'year':
-        return start_date + timedelta(days=365)
+        return start_date + relativedelta(years=1)
     return None
 
 def get_unused_words(subscription):
@@ -172,6 +177,44 @@ def get_unused_words(subscription):
     if word_count_tracker:
         return max(word_count_tracker.words_purchased - word_count_tracker.words_used, 0)
     return 0
+
+
+def handle_successful_payment(invoice):
+    # Get the customer ID and subscription ID from the invoice
+    customer_id = invoice.get('customer')
+    subscription_id = invoice.get('subscription')
+    
+    # Retrieve the corresponding user and subscription in your database
+    try:
+        user = UserModel.objects.get(stripe_customer_id=customer_id)
+        subscription = Subscription.objects.get(stripe_subscription_id=subscription_id, user=user)
+    except UserModel.DoesNotExist:
+        return HttpResponse(status=400)
+    except Subscription.DoesNotExist:
+        subscription = Subscription.objects.get(user=user).last()
+        subscription_id = subscription.stripe_subscription_id
+
+    # Update subscription details
+    # For instance, you might want to update the subscription's end date
+    # based on the current billing cycle of the Stripe subscription
+    stripe_subscription = stripe.Subscription.retrieve(subscription_id)
+    
+    subscription.start_date = timezone.now()
+    subscription.end_date = timezone.now() + relativedelta(months=1)
+    subscription.save()
+
+    # You might also want to reset or update the word count tracker for the new billing period
+    WordCountTracker.objects.filter(subscription=subscription).update(
+        words_purchased=F('words_purchased') + subscription.word_count
+        # Optionally update other fields if needed
+    )
+    return HttpResponse(status=200)
+
+def handle_failed_payment(invoice):
+    # Logic to handle failed payment scenarios
+    pass
+
+
 @csrf_exempt
 def stripe_webhook(request):
     payload = request.body
@@ -194,9 +237,19 @@ def stripe_webhook(request):
         session = event['data']['object']
      
         handle_checkout_session(session)
-        # Perform some action after a successful checkout session
-        # e.g., create or update the subscription in your database
+
+    elif event['type'] == 'invoice.payment_succeeded':
+        invoice = event['data']['object']
+        handle_successful_payment(invoice)
+    elif event['type'] == 'invoice.payment_failed':
+        invoice = event['data']['object']
+        handle_failed_payment(invoice)
 
     # Other event types can be handled here
 
     return HttpResponse(status=200)
+
+@login_required
+def cancel_stripe_subscription_view(request, subscription_id):
+    cancel_stripe_subscription(subscription_id)
+    return redirect("profile")

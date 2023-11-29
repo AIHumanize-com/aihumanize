@@ -11,7 +11,9 @@
             <div class="nk-block-head nk-page-head">
                 <div class="nk-block-head-between">
                     <div class="nk-block-head-content">
-                        <h2 class="display-6">Welcome Shawn!</h2>
+                        {% if user.fullname %}
+                        <h2 class="display-6">Welcome {{user.fullname}} !</h2>
+                        {% endif %}
                     </div>
                 </div>
             </div><!-- .nk-page-head -->
@@ -82,6 +84,7 @@
                     </div>
                 </div>
             </div><!-- .nk-block-head -->
+            {% if documents %}
             <div class="nk-block">
                 <div class="card">
                     <table class="table table-middle mb-0">
@@ -137,7 +140,11 @@
                         </tbody>
                     </table>
                 </div>
-            </div><!-- .nk-block -->
+            </div>
+            {% else %}
+            <div class="alert alert-info mt-3">No  available documents.</div>
+            {% endif %}
+            <!-- .nk-block -->
         </div>
     </div>
 </div>
