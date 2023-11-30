@@ -22,7 +22,7 @@ from allauth.socialaccount.models import SocialApp
 
 User = get_user_model()
 
-@anonymous_required(redirect_to='admin:index')
+@anonymous_required(redirect_to='dashboard')
 def signup_view(request):
     
     if request.method == 'POST':
@@ -70,7 +70,7 @@ class CustomPasswordResetView(PasswordResetView):
         return context
     
 
-@anonymous_required(redirect_to='admin:index')
+@anonymous_required(redirect_to='dashboard')
 def resend_email_confirmation(request):
     if request.method == 'POST':
         email = request.POST.get('email')

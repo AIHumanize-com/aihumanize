@@ -61,7 +61,7 @@
                                 <a class="nav-link " href="{% url 'pricing' %}">Pricing</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="contact.html">Contact</a>
+                                <a class="nav-link " href="{% url 'contact' %}">Contact</a>
                             </li>
                             {% if not user.is_authenticated %}
                             <li class="nav-item">
@@ -95,52 +95,45 @@
                         <div class="row g-6">
                             <div class="col-md-4 col-lg-4">
                                 <div class="footer-widget text-center text-md-start">
-                                    <h6 class=" mb-2">Gen AI</h6>
+                                    <h6 class=" mb-2">AIHumanize</h6>
                                     <ul class="link-list list-unstyled mb-0">
                                         <li>
-                                            <a href="about.html">About</a>
+                                            <a href="{% url 'index' %}">Home</a>
                                         </li>
                                         <li>
-                                            <a href="blog.html">Blog</a>
+                                            <a href="{% url 'pricing' %}">Pricing</a>
+                                        </li>
+                                       
+                                        <li>
+                                            <a href="{% url 'account_login' %}">Sign in</a>
                                         </li>
                                         <li>
-                                            <a href="login.html">Sign in</a>
+                                            <a href="{% url 'account_signup' %}">Register</a>
                                         </li>
                                         <li>
-                                            <a href="register.html">Register</a>
-                                        </li>
-                                        <li>
-                                            <a href="contact.html">Contact</a>
+                                            <a href="{% url 'contact' %}">Contact</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-md-4 col-lg-4">
                                 <div class="footer-widget text-center text-md-start">
-                                    <h6 class=" mb-2">Use Cases</h6>
+                                    <h6 class=" mb-2">Company</h6>
                                     <ul class="link-list list-unstyled mb-0">
                                         <li>
-                                            <a href="use-cases-details.html">AI writer</a>
+                                            <a href="{% url 'terms' %}">Terms & Conditions</a>
                                         </li>
                                         <li>
-                                            <a href="use-cases-details.html">Businesses AI</a>
+                                            <a href="{% url 'privacy' %}">Privacy Policy</a>
                                         </li>
-                                        <li>
-                                            <a href="use-cases-details.html">AI Blog writer</a>
-                                        </li>
-                                        <li>
-                                            <a href="use-cases-details.html">AI Content Creator</a>
-                                        </li>
-                                        <li>
-                                            <a href="use-cases-details.html">Article write</a>
-                                        </li>
+                                      
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-md-4 col-lg-4">
                                 <div class="footer-widget text-center text-md-start">
-                                    <h6 class=" mb-4">News & Update</h6>
-                                    <form action="#">
+                                    <h6 class=" mb-4">Social Media</h6>
+                                    <!-- <form action="#">
                                         <div class="input-group">
                                             <input type="email" class="form-control" placeholder="Enter your email" />
                                             <button class="btn btn-primary px-4" type="button">
@@ -152,7 +145,7 @@
                                                 </svg>
                                             </button>
                                         </div>
-                                    </form>
+                                    </form> -->
                                     <ul
                                         class="list-unstyled d-flex flex-wrap align-center justify-center justify-md-start gap-3 social-list mb-0 mt-5">
                                         <li>

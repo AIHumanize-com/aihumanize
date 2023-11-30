@@ -20,7 +20,11 @@ def get_dashboard_data(user):
     if active_subscription:
         data['subscription_name'] = active_subscription.plan_type.capitalize()
         data["subscrioption_price"] = active_subscription.price_in_cents / 100
-        data["next_due_date"] = active_subscription.end_date.date
+        try:
+            data["next_due_date"] = active_subscription.next_due_date.date
+        except: 
+            pass
+        data["next_due_date"] = active_subscription.end_date
         word_count_tracker = WordCountTracker.objects.filter(subscription=active_subscription).first()
         documents_count = Documents.objects.filter(user=user).count()
         average_words_per_document = Documents.objects.filter(user=user).aggregate(average_words=Avg('words_used'))['average_words']
@@ -33,7 +37,7 @@ def get_dashboard_data(user):
             data['words_purchased'] = word_count_tracker.words_purchased
             data['used_words'] = word_count_tracker.words_used
             data["documents_count"] = documents_count
-            data["average_words_per_document"] = average_words_per_document
+            data["average_words_per_document"] = round(average_words_per_document)
             if word_count_tracker.words_purchased > 0:
                 data['used_percentage'] = (word_count_tracker.words_used / word_count_tracker.words_purchased) * 100
 

@@ -79,3 +79,12 @@ def get_client_ip(request):
     return ip
 
 
+
+def terms_view(request):
+    return render(request, 'front/terms_of_use.html')
+
+def privacy_view(request):
+    return render(request, 'front/privacy_policy.html')
+
+def contact_view(request):
+    return render(request, 'front/contact.html')
