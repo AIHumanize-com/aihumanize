@@ -251,5 +251,19 @@ def stripe_webhook(request):
 
 @login_required
 def cancel_stripe_subscription_view(request, subscription_id):
-    cancel_stripe_subscription(subscription_id)
-    return redirect("profile")
+    user = request.user
+    subscrioption = Subscription.objects.filter(stripe_subscription_id=subscription_id, user=user)
+
+    if  subscrioption.exists():
+        cancel_stripe_subscription(subscription_id)
+        subscrioption = subscrioption.first()
+        subscrioption.is_active = False
+        subscrioption.actual_end_date = timezone.now()
+        subscrioption.end_date = None
+        subscrioption.save()
+        return redirect("profile")
+    else:
+        return redirect("profile")
+
+    
+  

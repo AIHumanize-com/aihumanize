@@ -8,18 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Title -->
-    <title>
-      GenAI - AI Content Writing & Copywriting HTML5 Landing Page Template
-    </title>
-
+    {% block meta_tags %}
+   {% endblock %}
+    <link rel="icon" href="{% static 'assets/images/ai-humanize-icon.svg' %}" type="image/svg+xml" />
+    <meta property="og:image" content="{% static 'assets/images/ai-humanize-icon.svg' %}" />
     <!-- SEO meta tags -->
-    <meta
-      name="description"
-      content="Author: Marvel Theme, AI content writing and copywriting html5 and Bootstrap 5 landing page template"
-    />
-
+   
     <!-- Favicon -->
-    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
 
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/plugins.css' %}" />
@@ -42,12 +37,12 @@
                 >
                   <h2 class="mb-12">
                     Unlock the Power of <br class="d-none d-xl-block" />
-                    <span class="text-primary">GenAI</span> Copywriting Tool
+                    <span class="text-primary">AIHumanize</span> 
                   </h2>
                   <img
-                    src="{% static 'assets/images/screens/screen-8.png' %}"
+                    src="{% static 'assets/images/illustrations/feature-illustration-1-blue.svg' %}"
                     alt=""
-                    class="img-fluid w-full mt-n24 mb-n10"
+                    class="img-fluid w-full mt-n24 mb-n10 "
                   />
                 </div>
               </div>

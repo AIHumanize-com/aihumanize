@@ -3,13 +3,17 @@
   {% load static %}
   <head>
     <meta charset="UTF-8" />
-    <meta name="author" content="Softnio" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="images/favicon.png" />
-    <title>
-      Confirm Email - CopyGen - AI Writer &amp; Copywriting Landing Page HTML
-      Template.
-    </title>
+    <link rel="icon" href="{% static 'assets/images/ai-humanize-icon.svg' %}" type="image/svg+xml" />
+    <meta property="og:image" content="{% static 'assets/images/ai-humanize-icon.svg' %}" />
+    <title>Email Confirmation - AI Humanize</title>
+    <meta property="og:title" content="Email Confirmation - AI Humanize" />
+    <meta property="og:description" content="Complete your registration with AI Humanize by confirming your email. Ensure your account's security and access our advanced AI text humanizing tools." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://aihumanize.com/" />
+    <meta name="description" content="Confirm your email to complete the registration process for AI Humanize. Secure your account and start exploring our AI text humanizing tools." />
+
+
     <link
       rel="stylesheet"
       href="{% static 'dashboard/assets/css/style.css' %}?v1.0.0"
@@ -23,7 +27,7 @@
           <div class="nk-shape bg-shape-blur-a start-0 top-0"></div>
           <div class="nk-shape bg-shape-blur-b end-0 bottom-0"></div>
           <div class="text-center pt-5">
-            <a href="index.html" class="logo-link">
+            <a href="{% url 'index' %}" class="logo-link">
               <div class="logo-wrap">
                 <img
                   class="logo-img logo-light"

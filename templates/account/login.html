@@ -1,4 +1,13 @@
-{% extends 'account/auth_main.html' %} {% block content %} {% load static %}
+{% extends 'account/auth_main.html' %} {% block content %} 
+{% block meta_tags %}
+<title>Login - AI Humanize</title>
+<meta name="description" content="Login to your AI Humanize account to access our advanced AI text humanizing tools and manage your services." />
+<meta property="og:title" content="Login - AI Humanize" />
+<meta property="og:description" content="Access your AI Humanize account. Login now to use our AI text humanizing tools and manage your services effectively." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://aihumanize.com/accounts/login/" />
+{% endblock %}
+{% load static %}
 
 <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
   {% load socialaccount %}
@@ -16,7 +25,7 @@
   <div class="account-wrapper h-full d-flex flex-column justify-center">
     <div class="text-center">
       <a href="">
-        <img src="{% static 'assets/images/logo-blue.svg' %}" alt="" class="img-fluid" width="165" />
+        <img src="{% static 'assets/images/ai-humanize-logo.svg' %}" alt="" class="img-fluid" width="165" />
       </a>
       <div class="vstack gap-4 mt-10">
        

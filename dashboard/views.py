@@ -20,26 +20,29 @@ def get_dashboard_data(user):
     if active_subscription:
         data['subscription_name'] = active_subscription.plan_type.capitalize()
         data["subscrioption_price"] = active_subscription.price_in_cents / 100
+        data["subscrioption_id"] =  active_subscription.stripe_subscription_id
+        
         try:
-            data["next_due_date"] = active_subscription.next_due_date.date
+            data["next_due_date"] = active_subscription.end_date.date
         except: 
-            pass
-        data["next_due_date"] = active_subscription.end_date
-        word_count_tracker = WordCountTracker.objects.filter(subscription=active_subscription).first()
-        documents_count = Documents.objects.filter(user=user).count()
-        average_words_per_document = Documents.objects.filter(user=user).aggregate(average_words=Avg('words_used'))['average_words']
+          
+            data["next_due_date"] = active_subscription.end_date
+    word_count_tracker = WordCountTracker.objects.filter(subscription__user=user).last()
+    documents_count = Documents.objects.filter(user=user).count()
+    average_words_per_document = Documents.objects.filter(user=user).aggregate(average_words=Avg('words_used'))['average_words']
 
 # You might want to handle the case where there are no documents
-        if average_words_per_document is None:
-            average_words_per_document = 0
-        if word_count_tracker:
-            data['available_words'] = word_count_tracker.words_remaining
-            data['words_purchased'] = word_count_tracker.words_purchased
-            data['used_words'] = word_count_tracker.words_used
-            data["documents_count"] = documents_count
-            data["average_words_per_document"] = round(average_words_per_document)
-            if word_count_tracker.words_purchased > 0:
-                data['used_percentage'] = (word_count_tracker.words_used / word_count_tracker.words_purchased) * 100
+    if average_words_per_document is None:
+        average_words_per_document = 0
+    
+    if word_count_tracker:
+        data['available_words'] = word_count_tracker.words_remaining
+        data['words_purchased'] = word_count_tracker.words_purchased
+        data['used_words'] = word_count_tracker.words_used
+        data["documents_count"] = documents_count
+        data["average_words_per_document"] = round(average_words_per_document)
+        if word_count_tracker.words_purchased > 0:
+            data['used_percentage'] = (word_count_tracker.words_used / word_count_tracker.words_purchased) * 100
 
     return data
 
@@ -167,3 +170,4 @@ def document_detail(request, document_id):
     }
 
     return JsonResponse(data)
+

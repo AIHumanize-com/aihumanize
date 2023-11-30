@@ -7,16 +7,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta name="robots" content="follow, index">
     <!-- Title -->
-    <title>GenAI - AI Content Writing & Copywriting HTML5 Landing Page Template</title>
 
     <!-- SEO meta tags -->
-    <meta name="description"
-        content="Author: Marvel Theme, AI content writing and copywriting html5 and Bootstrap 5 landing page template" />
-
-    <!-- Favicon -->
+   {% block meta_tags %}
+   {% endblock %}
     <link rel="icon" href="{% static 'assets/images/ai-humanize-icon.svg' %}" type="image/svg+xml" />
+    <meta property="og:image" content="{% static 'assets/images/ai-humanize-icon.svg' %}" />
 
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/plugins.css' %}" />
@@ -227,8 +225,9 @@
 
                 <div class="text-center py-6 mt-8">
                     <p class="fs-sm mb-0">
-                        Copyright <span class="text-primary">GenAI</span>.
-                        Design By Marvel_Theme
+                        Copyright <span class="text-primary">TEMURIYDEVS LTD</span>.
+                        All right reserved.
+                        
                     </p>
                 </div>
             </div>

@@ -12,3 +12,12 @@ class UnregisteredUserWordCount(models.Model):
     word_count = models.IntegerField(default=0)
 
 
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=150, null=True)
+    message = models.TextField()
+
+    def __str__(self):
+        return f"Contact from {self.name}"

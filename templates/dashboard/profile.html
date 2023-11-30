@@ -84,22 +84,26 @@
                         </table>
                       
                     </div><!-- .tab-pane -->
+                   
                     <div class="tab-pane fade" id="payment-billing-tab-pane">
+                        
                         <div
                             class="d-flex flex-wrap align-items-center justify-content-between border-bottom border-light mt-5 mb-4 pb-1">
                             <h5 class="mb-0">Your Subscription</h5>
                             <ul class="d-flex gap gx-4">
+                                {% if subscrioption_id != none %}
                                 <li>
                                     <a class="link link-danger fw-normal" data-bs-toggle="modal"
                                         href="#cancelSubscriptionModal">Cancel Subscription</a>
                                 </li>
+                                {% endif %}
                                 <li>
                                     <a class="link link-primary fw-normal" data-bs-toggle="modal"
                                         href="#changePlanModal">Change Plan</a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="alert alert-warning alert-dismissible fade show mb-4 rounded-6" role="alert">
+                        <!-- <div class="alert alert-warning alert-dismissible fade show mb-4 rounded-6" role="alert">
                             <p class="small mb-0">Save big up to 75% on your upgrade to our <strong><a
                                         class="alert-link" href="#">Enterprise plan</a></strong> and enjoy premium
                                 features at a fraction of the cost!</p>
@@ -109,7 +113,7 @@
                                     <em class="icon ni ni-cross"></em>
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row g-gs">
                             <div class="col-xl-3 col-sm-6">
                                 <div class="card shadow-none">
@@ -123,7 +127,12 @@
                                 <div class="card shadow-none">
                                     <div class="card-body">
                                         <div class="text-light mb-2">Recurring Payment</div>
+                                        {% if subscrioption_id != none %}
                                         <h3 class="fw-normal">${{subscrioption_price}}/{{subscription_name_period}}</h3>
+                                        {% else %}
+                                        <h3 class="fw-normal">No Active Subscription
+                                        </h3>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +140,11 @@
                                 <div class="card shadow-none">
                                     <div class="card-body">
                                         <div class="text-light mb-2">Next Due Date</div>
+                                        {% if next_due_date != none %}
                                         <h3 class="fw-normal">{{next_due_date}}</h3>
+                                        {% else %}
+                                        <h3 class="fw-normal">No Active Subscription</h3>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +153,11 @@
                                     <div class="card-body">
                                         <div class="text-light mb-2">Payment Method</div>
                                         <div class="d-flex align-items-center">
+                                            {% if next_due_date != none %}
                                             <h3 class="fw-normal ms-2">Stripe</h3>
+                                            {% else %}
+                                            <h3 class="fw-normal ms-2">No Active Subscription</h3>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +222,7 @@
                             <div class="alert alert-info">No billing history available.</div>
                         {% endif %}
                     </div><!-- .tab-pane -->
-                 
+                    
                 </div><!-- .tab-content -->
             </div><!-- .nk-block -->
         </div>
@@ -220,30 +237,20 @@
                     <em class="icon ni ni-spark-fill"></em>
                 </div>
                 <h2 class="h1">Change Subscription</h2>
-                <p>Are you sure you want to change your subscription? Your paid plan is valid till <span
-                        class="text-dark">23 Mar, 2023</span>.</p>
+                <p>Are you sure you want to change your subscription? You can change your plan while keep your remaining unused words from current plan. We will add unused words to new plan</p>
                 <div class="card bg-lighter bg-opacity-80 shadow-none mt-2">
-                    <div class="card-body">
-                        <h5>What you will lose after changing your active subscription?</h5>
-                        <ul class="list-dot gap gy-2 mt-2">
-                            <li>You won’t have a dedicated account manager</li>
-                            <li>No custom tools will be existed for AI content generations.</li>
-                            <li>You’ll lose access to advance integrations.</li>
-                            <li>No prioritized support will be provided for you.</li>
-                            <li>Server response rate will be standard than faster.</li>
-                            <li>Regular model updates instead of special features early access.</li>
-                        </ul>
-                    </div>
+                    
                 </div><!-- .card -->
                 <ul class="row gx-4 mt-4">
                     <li class="col-6"><button class="btn btn-outline-light w-100" data-bs-dismiss="modal">Keep
                             Plan</button></li>
-                    <li class="col-6"><a href="pricing-plans.html" class="btn btn-primary w-100">Change Plan</a></li>
+                    <li class="col-6"><a href="{% url 'pricing' %}" class="btn btn-primary w-100">Change Plan</a></li>
                 </ul>
             </div><!-- .modal-body -->
         </div><!-- .modal-content -->
     </div><!-- .modal-dialog -->
 </div><!-- .modal -->
+{% if subscrioption_id != none %}
 <div class="modal fade" id="cancelSubscriptionModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -253,11 +260,11 @@
                 </div>
                 <h2 class="h1">Cancel Subscription</h2>
                 <p>Are you sure you want to cancel your subscription? Your paid plan is valid till <span
-                        class="text-dark">23 Mar, 2023</span>.</p>
-                <p>Don't forget to review our other <a href="pricing-plans.html">pricing plans</a> before cancelling
+                        class="text-dark">{{next_due_date}}</span>.</p>
+                <p>Don't forget to review our other <a href="{% url 'pricing' %}">pricing plans</a> before cancelling
                     your current subscription. If you still want to cancel, your account will change to a free plan.</p>
                 <div class="card bg-lighter bg-opacity-80 shadow-none mt-2">
-                    <div class="card-body">
+                    <!-- <div class="card-body">
                         <h5>What you will lose after cancelling you subscription?</h5>
                         <ul class="list-dot gap gy-2 mt-2">
                             <li>All your generated in Copygen will be removed.</li>
@@ -266,18 +273,18 @@
                             <li>Server response may become slow as we highly prioritized our premium users.</li>
                             <li>There will be no recovery options once you cancel subscription.</li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div><!-- .card -->
                 <ul class="row gx-4 mt-4">
                     <li class="col-6"><button class="btn btn-outline-light w-100" data-bs-dismiss="modal">Keep
                             Plan</button></li>
-                    <li class="col-6"><a href="pricing-plans.html" class="btn btn-danger w-100">I Understand, Cancel</a>
+                    <li class="col-6"><a href="{% url 'cancel_subscrioption' subscrioption_id %}" class="btn btn-danger w-100">I Understand, Cancel</a>
                     </li>
                 </ul>
             </div><!-- .modal-body -->
         </div><!-- .modal-content -->
     </div><!-- .modal-dialog -->
 </div><!-- .modal -->
-
+{% endif %}
 
 {% endblock %}

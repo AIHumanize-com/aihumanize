@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from common.humanize_text import rewrite_text
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -8,6 +8,9 @@ from payments.models import WordCountTracker
 # Create your views here.
 from dashboard.tasks import create_documents_record
 from common.detect_ai import detect_and_classify
+from .forms import ContactForm
+from django.contrib import messages
+
 def index(request):
     return render(request, 'front/index.html')
 
@@ -87,4 +90,15 @@ def privacy_view(request):
     return render(request, 'front/privacy_policy.html')
 
 def contact_view(request):
-    return render(request, 'front/contact.html')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your message has been sent successfully!')
+            return redirect('contact')
+
+    else:
+        
+
+        return render(request, 'front/contact.html')
+

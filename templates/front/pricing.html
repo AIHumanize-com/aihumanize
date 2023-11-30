@@ -1,4 +1,14 @@
-{% extends 'front/main.html' %} {% load static %} {% block content %}
+{% extends 'front/main.html' %} {% load static %}
+{% block meta_tags %}
+<title>Pricing - AI Humanize</title>
+<meta name="description" content="Explore affordable pricing plans for AI Humanize's services. Choose the best plan to humanize your AI-generated content seamlessly." />
+<meta property="og:title" content="Pricing - AI Humanize" />
+<meta property="og:description" content="Explore affordable pricing plans for AI Humanize's services. Choose the best plan for your needs." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://aihumanize.com/pricing/" />
+{% endblock %}
+
+{% block content %}
 <style>
     .spinner {
         border: 4px solid rgba(0, 0, 0, 0.1);
@@ -282,7 +292,7 @@
             </div>
         </div>
     </section>
-
+{% csrf_token %}
 
     <!-- CTA -->
  
