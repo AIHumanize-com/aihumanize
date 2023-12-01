@@ -30,7 +30,7 @@ jobs:
 
       - name: Run down
         run: |
-          ssh target "cd /var/www/pixelcraft-backend && sudo docker compose down &&  git pull "
+          ssh target "cd //var/www/aihumanize && sudo docker compose down &&  git pull "
       - name: Run Build
         run: |
-          ssh target "cd /var/www/pixelcraft-backend && sudo docker compose up --build -d"
+          ssh target "cd //var/www/aihumanize && sudo docker compose up --build -d"
