@@ -7,7 +7,7 @@ from .purposes_data import purposes, strength_levels, readability_levels
 
 
 def rewrite_text(original_text, purpose, readability, strength):
-    openai_api_key = "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"
+    openai_api_key = "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"
 
     if purpose not in purposes:
         raise ValueError(
@@ -29,7 +29,7 @@ def rewrite_text(original_text, purpose, readability, strength):
             messages=[
                 {
                     "role": "system",
-                    "content": "rephrase the following text in a concise and clear manner, ensuring that the essential information and technical details remain intact. Aim for a simplified yet accurate representation of the original content, suitable for a broader audience. increae degree ",
+                    "content": system_prompt,
                 },
                 {
                     "role": "user",

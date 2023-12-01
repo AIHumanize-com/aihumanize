@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-&xrj%kwu62!t$c2yl%q+wpky#t7h^1f_6rg745fjp&h*&yfgg$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["django:8000", "localhost", "aihumanize.com", "django"]
 
 
 # Application definition
@@ -101,6 +101,16 @@ DATABASES = {
 }
 
 
+if "POSTGRES_DB" in os.environ:
+    DATABASES["default"] = {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ["POSTGRES_DB"],
+        "USER": os.environ["POSTGRES_USER"],
+        "PASSWORD": os.environ["POSTGRES_PASSWORD"],
+        "HOST": os.environ["POSTGRES_HOST"],
+        "PORT": os.environ["POSTGRES_PORT"],
+    }
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -135,7 +145,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -150,6 +159,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+MEDIA_ROOT = os.getenv("DJANGO_MEDIA_ROOT", "/var/www/media")
+
+# URL that handles the media served from MEDIA_ROOT.
+MEDIA_URL = os.getenv("DJANGO_MEDIA_URL", "/media/")
 
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
@@ -173,11 +186,16 @@ EMAIL_HOST_PASSWORD = "#Ashabdulla17012018"
 DEFAULT_FROM_EMAIL = EMAIL_HOST
 
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
+
+
+CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_RESULT_BACKEND = "redis://redis:6379/0"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+CSRF_TRUSTED_ORIGINS = ["https://aihumanize.com"]
 
 # settings.py
 

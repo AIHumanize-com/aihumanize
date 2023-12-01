@@ -1,19 +1,21 @@
+local:
+	docker compose -f docker-compose.debug.yml up --build
+
+localdown:
+	docker compose -f docker-compose.debug.yml down
+
+app:
+	docker compose  -f docker-compose.debug.yml run --rm django sh -c "python manage.py startapp ${appname}"
+	
 migrate:
-	python manage.py makemigrations
-	python manage.py migrate
-run:
-	python manage.py runserver
+	docker compose  -f docker-compose.debug.yml run --rm django sh -c "python manage.py makemigrations && python manage.py migrate"
+clear:
+	docker-compose -f docker-compose.debug.yml down --rmi all --volumes
+
+super:
+	docker compose  -f docker-compose.debug.yml run --rm django sh -c "python manage.py createsuperuser"
 
 push:
 	git add .
-	git commit -m "update"
+	git commit -m 'update'
 	git push
-
-redis:
-	docker run -d -p 6379:6379 redis
-
-celery:
-	celery -A config worker -l info
-
-flower:
-	celery -A config flower

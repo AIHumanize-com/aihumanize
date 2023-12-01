@@ -1,0 +1,120 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:15
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - "postgres-data:/var/lib/postgresql/data/"
+
+  django:
+    build: .
+    image: django-docker
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - "staticfiles-data:/var/www/static"
+      - "media-data:/var/www/media"
+      - "/var/www/media:/var/www/media"
+
+    depends_on:
+      - postgres
+    environment:
+      - VIRTUAL_HOST=${ALLOWED_HOST}     
+      - LETSENCRYPT_HOST=${ALLOWED_HOST}
+
+      
+
+  proxy:
+    build:      
+      dockerfile: ./Dockerfile     
+      context: ./docker/nginx/
+    restart: always
+    depends_on:
+      - django
+    ports:
+      - 80:80
+      - 443:443
+    volumes:      
+      - staticfiles-data:/var/www/static   
+      - media-data:/var/www/media
+      - /var/www/media:/var/www/media
+      - certs:/etc/nginx/certs      
+      - vhost:/etc/nginx/vhost.d      
+      - html:/usr/share/nginx/html      
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+    environment:
+      - DOMAIN=${DOMAIN}
+
+  acme_companion:
+    image: nginxproxy/acme-companion:2.2
+    container_name: acme_companion
+    volumes_from:
+      - proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - acme:/etc/acme.sh
+
+
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    volumes:
+      - "redis-data:/data"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+  
+  celery-worker:
+    build: .
+    image: django-docker-celery
+    env_file: .env
+    environment:
+      - "DJANGO_DEBUG=true"
+    restart: unless-stopped
+    command: ["celery", "-A", "config", "worker", "--loglevel=info"]
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - "staticfiles-data:/var/www/static"
+      - "media-data:/var/www/media" 
+      - "/var/www/media:/var/www/media"
+    
+  celery-beat:
+    build: .
+    image: django-docker-beat
+    env_file: .env
+    environment:
+      - "DJANGO_DEBUG=true"
+    restart: unless-stopped
+    command: ["celery", "-A", "config", "beat", "--loglevel=info"]
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - "staticfiles-data:/var/www/static"
+      - "media-data:/var/www/media"
+      - "celery-beat-data:/var/run/celery"
+      - "/var/www/media:/var/www/media"
+
+  flower:
+    build: .
+    image: django-docker-flower
+    env_file: .env
+    command: ["celery", "-A", "config", "flower",   "--port=5555", "--basic-auth=username:password"]
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+
+volumes:
+  postgres-data:
+  certs:  
+  vhost:  
+  html:  
+  acme:
+  celery-beat-data:
+  redis-data:
+  staticfiles-data:
+  media-data:
