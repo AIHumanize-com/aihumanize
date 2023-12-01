@@ -4,8 +4,7 @@ FROM base as builder
 
 RUN apk update && apk --no-cache add python3-dev curl build-base linux-headers gcc libc-dev libffi-dev libpq-dev && mkdir /install
 
-RUN curl -s https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -o /usr/local/bin/wait-for-it
-RUN chmod +x /usr/local/bin/wait-for-it
+
 
 WORKDIR /install
 COPY requirements.txt ./
