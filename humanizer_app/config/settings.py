@@ -154,11 +154,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.UserModel"
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+# ]
+STATIC_URL = "/static/"
+STATIC_ROOT = "static"
 MEDIA_ROOT = os.getenv("DJANGO_MEDIA_ROOT", "/var/www/media")
 
 # URL that handles the media served from MEDIA_ROOT.
