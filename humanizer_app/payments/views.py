@@ -90,8 +90,8 @@ class CreateCheckoutSessionView(View):
                 ],
                 metadata={'word_count': word_count, "plan_type": plan_type},
                 mode='subscription',
-                success_url='http://127.0.0.1:8000',
-                cancel_url='http://127.0.0.1:8000',
+                success_url='https://aihumanize.com/dashboard/',
+                cancel_url='https://aihumanize.com/dashboard/',
             )
             return JsonResponse({'id': checkout_session.id})
         except Exception as e:
