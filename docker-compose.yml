@@ -14,6 +14,7 @@ services:
     restart: unless-stopped
     volumes:
       - "staticfiles-data:/var/www/static"
+      - "/var/www/aihumanize/humanizer_app/static/:/var/www/static"
       - "media-data:/var/www/media"
       - "/var/www/media:/var/www/media"
 

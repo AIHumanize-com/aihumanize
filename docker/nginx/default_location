@@ -1,5 +1,5 @@
 location /static/ {
-    alias /var/www/aihumanize/static/;
+    alias /var/www/static;
 }
 
 location /media/ {
