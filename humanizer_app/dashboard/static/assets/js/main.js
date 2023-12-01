@@ -703,7 +703,7 @@ function increment() {
     var inputField = document.getElementById('customNumber');
     var value = parseInt(inputField.value, 10);
     value = isNaN(value) ? 20000 : value;
-    value += 1000;
+    value += 2000;
     inputField.value = value < 20000 ? 20000 : value;
 	updatePrice(); 
 }
@@ -712,7 +712,7 @@ function decrement() {
     var inputField = document.getElementById('customNumber');
     var value = parseInt(inputField.value, 10);
     value = isNaN(value) ? 20000 : value;
-    value -= 1000;
+    value -= 2000;
     inputField.value = value < 20000 ? 20000 : value;
 	updatePrice(); 
 }
@@ -722,7 +722,7 @@ function incrementBusiness() {
     var inputField = document.getElementById('customNumberBusiness');
     var value = parseInt(inputField.value, 10);
     value = isNaN(value) ? 1000000 : value;
-    value += 50000;
+    value += 10000;
     inputField.value = value < 1000000 ? 1000000 : value;
 	updatePriceBusines(); 
 }
@@ -731,7 +731,7 @@ function decrementBusiness() {
     var inputField = document.getElementById('customNumberBusiness');
     var value = parseInt(inputField.value, 10);
     value = isNaN(value) ? 1000000 : value;
-    value -= 50000;
+    value -= 10000;
     inputField.value = value < 1000000 ? 1000000 : value;
 	updatePriceBusines(); 
 }
@@ -741,7 +741,7 @@ function incrementYearly() {
     var inputField = document.getElementById('customNumberYearly');
     var value = parseInt(inputField.value, 10);
     value = isNaN(value) ? 20000 : value;
-    value += 1000;
+    value += 2000;
     inputField.value = value < 20000 ? 20000 : value;
 	updatePriceYearly();
 }
@@ -750,7 +750,7 @@ function decrementYearly() {
     var inputField = document.getElementById('customNumberYearly');
     var value = parseInt(inputField.value, 10);
     value = isNaN(value) ? 20000 : value;
-    value -= 1000;
+    value -= 2000;
     inputField.value = value < 20000 ? 20000 : value;
 	updatePriceYearly();
 }
