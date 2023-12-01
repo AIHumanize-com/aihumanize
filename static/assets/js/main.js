@@ -397,10 +397,13 @@ document.querySelector('.text-area-btn-2').addEventListener('click', function (e
 		});
 });
 
+
+
+
 var humanizeButton = document.getElementById('hummani-main-btn');
 var purpose = document.getElementById('purpose');
-var readability = document.getElementById('readability');
-var level = document.getElementById('level');
+// var readability = document.getElementById('readability');
+// var level = document.getElementById('level');
 humanizeButton.addEventListener('click', function () {
 	var textareaContent = document.getElementById('input-text').value;
 	var wordCount = textareaContent.split(/\s+/).filter(function (n) { return n != '' }).length;
@@ -420,25 +423,38 @@ humanizeButton.addEventListener('click', function () {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ text: textareaContent, purpose: purpose.value, readability: readability.value, level: level.value }),
+		body: JSON.stringify({ text: textareaContent, purpose: purpose.value }),
 	})
 		.then(response => response.json())
 		.then(data => {
 			if (data.error) {
-				// Display the modal for word limit reached
-				var wordLimitModal = new bootstrap.Modal(document.getElementById('wordLimitModal'));
+				console.log(data.error)
+				if (data.error == 'word_limit_reached') {
+					let errorMessageP = document.getElementById('error-message');
+					errorMessageP.textContent = "Now we can proccess up to 1000 words. Please enter fewer words";
+					humanizeButton.disabled = false;
+					humanizeButton.innerHTML = 'Humanize';
+					return
+				}
+				else{
+					var wordLimitModal = new bootstrap.Modal(document.getElementById('wordLimitModal'));
 				wordLimitModal.show();
 				// Other necessary actions
 				humanizeButton.disabled = false;
 				humanizeButton.innerHTML = 'Humanize';
 				return;
+				}
+				// Display the modal for word limit reached
+				
 			}
 			let result_text_area = document.querySelector('.reult-p');
-			result_text_area.innerHTML = data.text
-			document.getElementById('result-row').style.display = 'block';
+			let resultRow = document.getElementById('result-row')
+			result_text_area.textContent = '';
+			result_text_area.textContent = data.text
+			resultRow.style.display = 'block';
 
 
-			result_text_area.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			resultRow.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 			// Re-enable the button and remove spinner
 			humanizeButton.disabled = false;

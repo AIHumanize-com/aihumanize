@@ -25,10 +25,13 @@ def humanizer(request):
     
         text = body["text"]
         purpose = body["purpose"]
-        readability = body["readability"]
-        strength = body["level"]
+        # readability = body["readability"]
+        # strength = body["level"]
 
         word_count = len(text.split())
+
+        if word_count > 1000:
+            return JsonResponse({"error": "word_limit_reached"}, status=400)
     
 
         if not request.user.is_authenticated:
@@ -39,8 +42,15 @@ def humanizer(request):
         word_count_tracker = WordCountTracker.objects.filter(subscription__user=request.user).last()
         if word_count > word_count_tracker.words_remaining:
             return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
-        result = rewrite_text(text, purpose=purpose, readability=readability, strength=strength)
-        create_documents_record(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=strength, readibility=readability)
+        result = rewrite_text(text, purpose=purpose, readability=None, strength=None)
+        # detection_result = detect_and_classify(result)
+        # if detection_result["human_avarage"] < 70:
+        #     result = rewrite_text(text, purpose=purpose, readability=None, strength=None)
+
+
+        create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=None, readibility=None)
+        word_count_tracker.words_used += word_count
+        word_count_tracker.save()
         return JsonResponse({"text": result})
         
 

@@ -1,6 +1,8 @@
 {% extends 'front/main.html' %} {% load static %} 
 {% block meta_tags %}
 <title>AI Humanize: Transform AI Texts into Natural, Human-Like Content</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 <meta name="description" content="Our AI humanizer ensures your AI content passes as human-written, perfect for evading AI detectors. Try it for seamless, natural results." />
 <meta property="og:title" content="AI Humanize: Transform AI Texts into Natural, Human-Like Content" />
 <meta property="og:description" content="Our AI humanizer ensures your AI content passes as human-written, perfect for evading AI detectors. Try it for seamless, natural results." />
@@ -78,14 +80,14 @@
                     Humanize
                   </button>
                 </div>
-                <div class="button-2">
+                <!-- <div class="button-2">
                   <select class="select-box" aria-invalid="false"  id="level">
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="aggressive" selected="">Aggressive</option>
                   </select>
                   <p>Level</p>
-                </div>
+                </div> -->
                 <div class="button-2">
                   <select class="select-box" aria-invalid="false"  id="purpose">
                     <option value="general">General Writing</option>
@@ -100,7 +102,7 @@
                   </select>
                   <p>Purpose</p>
                 </div>
-                <div class="button-2">
+                <!-- <div class="button-2">
                   <select class="select-box" aria-invalid="false"  id="readability">
                       <option value="high_school">High School</option>
                       <option value="university" selected>University</option>
@@ -109,7 +111,7 @@
                       <option value="marketing">Marketing</option>
                   </select>
                   <p>Readability</p>
-                </div>
+                </div> -->
               </div>
 
               <div>
@@ -153,7 +155,7 @@
           </div>
         </div>
       </div>
-      <div class="row" id="result-row" style="display: none">
+      <div class="row" id="result-row" style="display:none ">
         <div class="box-outer d-flex justify-center">
           <div class="result-box">
             <div>
@@ -164,19 +166,19 @@
               <div class="super-box">
                 <div class="result-main-box">
                   <div class="result-main-left-text">
-                    <p>some text here</p>
+                    <p>Humanized text:</p>
                   </div>
                   <div class="result-main-right-icons">
                     <img width="32" height="32" src="https://img.icons8.com/windows/32/000000/copy.png" alt="copy" />
-                    <img width="32" height="32" src="https://img.icons8.com/ios/50/000000/facebook-like--v1.png"
+                    <!-- <img width="32" height="32" src="https://img.icons8.com/ios/50/000000/facebook-like--v1.png"
                       alt="facebook-like--v1" />
                     <img width="32" height="32"
                       src="https://img.icons8.com/external-outline-andi-nur-abdillah/64/000000/external-Dislike-survey-(outline)-outline-andi-nur-abdillah.png"
-                      alt="external-Dislike-survey-(outline)-outline-andi-nur-abdillah" />
+                      alt="external-Dislike-survey-(outline)-outline-andi-nur-abdillah" /> -->
                   </div>
                 </div>
                 <div class="border-b"></div>
-                <p style="margin: 0" class="reult-p"></p>
+                <p style="margin: 0; white-space: pre-line" class="reult-p"></p>
               </div>
             </div>
           </div>

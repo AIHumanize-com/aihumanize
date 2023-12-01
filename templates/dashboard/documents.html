@@ -137,9 +137,9 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Words Count</th>
-                                <th>Level</th>
+                                <!-- <th>Level</th> -->
                                 <th>Purpose</th>
-                                <th>Readability</th>
+                                <!-- <th>Readability</th> -->
                                 <th>Created at</th>
                             </tr>
                         </thead>
@@ -156,15 +156,15 @@
                                 <td class="tb-col tb-col-sm">
                                     <div class="badge text-bg-dark-soft rounded-pill px-2 py-1 fs-6 lh-sm">{{ document.words_used }}</div>
                                 </td>
-                                <td class="tb-col">
+                                <!-- <td class="tb-col">
                                     <div class="caption-text line-clamp-2">{{ document.level }}</div>
-                                </td>
+                                </td> -->
                                 <td class="tb-col">
                                     <div class="caption-text line-clamp-2">{{ document.purpose }}</div>
                                 </td>
-                                <td class="tb-col">
+                                <!-- <td class="tb-col">
                                     <div class="caption-text line-clamp-2">{{ document.readibility }}</div>
-                                </td>
+                                </td> -->
                                 <td class="tb-col tb-col-md">
                                     <div class="fs-6 text-light d-inline-flex flex-wrap gap gx-2"><span>{{ document.created_at|date:"M d,Y" }}
                                         </span> <span>{{ document.created_at|time:"H:i A" }}</span></div>
@@ -276,7 +276,7 @@
                         document.querySelector('#DocumentModal #output_text').value = outputText;
 
                         // Update the modal title with additional information including HTML tags
-                        var modalTitle = `<strong>Level</strong>: ${data.level}, <strong>Readibility</strong>: ${data.readibility}, <strong>Purpose</strong>: ${data.purpose}`;
+                        var modalTitle = `<strong>Purpose</strong>: ${data.purpose}`;
                         document.querySelector('#DocumentModal .modal-title').innerHTML = modalTitle;
 
                         document.querySelector('#DocumentModal .document-id').textContent = 'Document ID: ' + data.document_id;

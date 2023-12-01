@@ -7,7 +7,7 @@ from .purposes_data import purposes, strength_levels, readability_levels
 
 
 def rewrite_text(original_text, purpose, readability, strength):
-    openai_api_key = "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"
+    openai_api_key = "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"
 
     if purpose not in purposes:
         raise ValueError(
@@ -22,15 +22,14 @@ def rewrite_text(original_text, purpose, readability, strength):
     readability_prompt = f"This text should be written at a {readability_description}"
 
     # Updated system prompt
-    system_prompt = purposes[purpose] + " " + readability_prompt + " " + strength_prompt + " " + "use html p tag instead of new line."
-
+    system_prompt = purposes[purpose]  + " " + "change words and terms with snonymous"
     try:
         response = client.chat.completions.create(
-            model="gpt-4-1106-preview",  # You can experiment with different models
+            model="gpt-3.5-turbo-1106",  # You can experiment with different models
             messages=[
                 {
                     "role": "system",
-                    "content": system_prompt,
+                    "content": "rephrase the following text in a concise and clear manner, ensuring that the essential information and technical details remain intact. Aim for a simplified yet accurate representation of the original content, suitable for a broader audience. increae degree ",
                 },
                 {
                     "role": "user",
