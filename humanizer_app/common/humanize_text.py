@@ -1,13 +1,13 @@
 import openai
 from .purposes_data import purposes, strength_levels, readability_levels
-
+import os
 # client = OpenAI()
 
 
 
 
 def rewrite_text(original_text, purpose, readability, strength):
-    openai_api_key = "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"
+    openai_api_key = os.environ.get("OPEN_AI_KEY")
 
     if purpose not in purposes:
         raise ValueError(
