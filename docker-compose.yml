@@ -98,15 +98,15 @@ services:
       - "celery-beat-data:/var/run/celery"
       - "/var/www/media:/var/www/media"
 
-  flower:
-    build: .
-    image: django-docker-flower
-    env_file: .env
-    command: ["celery", "-A", "config", "flower",   "--port=5555", "--basic-auth=username:password"]
-    ports:
-      - "5555:5555"
-    depends_on:
-      - redis
+  # flower:
+  #   build: .
+  #   image: django-docker-flower
+  #   env_file: .env
+  #   command: ["celery", "-A", "config", "flower",   "--port=5555", "--basic-auth=username:password"]
+  #   ports:
+  #     - "5555:5555"
+  #   depends_on:
+  #     - redis
 
 volumes:
   postgres-data:
