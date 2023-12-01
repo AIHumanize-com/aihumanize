@@ -71,31 +71,31 @@ class CreateCheckoutSessionView(View):
         word_count = data.get('word_count')
         price, plan, word_count = calculate_price(plan_type, word_count)  # Implement this function based on your pricing logic
         
-        try:
-            checkout_session = stripe.checkout.Session.create(
-                customer_email=user.email,
-                payment_method_types=['card'],
-                line_items=[
-                    {
-                        'price_data': {
-                            'currency': 'usd',
-                            "recurring":{'interval': plan},
-                            'product_data': {
-                                'name': f'{plan_type.capitalize()} Plan - {word_count} Words',
-                            },
-                            'unit_amount': int(price * 100),  # Stripe expects the amount in cents
+        # try:
+        checkout_session = stripe.checkout.Session.create(
+            customer_email=user.email,
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    'price_data': {
+                        'currency': 'usd',
+                        "recurring":{'interval': plan},
+                        'product_data': {
+                            'name': f'{plan_type.capitalize()} Plan - {word_count} Words',
                         },
-                        'quantity': 1,
+                        'unit_amount': int(price * 100),  # Stripe expects the amount in cents
                     },
-                ],
-                metadata={'word_count': word_count, "plan_type": plan_type},
-                mode='subscription',
-                success_url='https://aihumanize.com/dashboard/',
-                cancel_url='https://aihumanize.com/dashboard/',
-            )
-            return JsonResponse({'id': checkout_session.id})
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=400)
+                    'quantity': 1,
+                },
+            ],
+            metadata={'word_count': word_count, "plan_type": plan_type},
+            mode='subscription',
+            success_url='https://aihumanize.com/dashboard/',
+            cancel_url='https://aihumanize.com/dashboard/',
+        )
+        return JsonResponse({'id': checkout_session.id})
+        # except Exception as e:
+        #     return JsonResponse({'error': str(e)}, status=400)
         
 def cancel_stripe_subscription(subscription_id):
     try:
