@@ -38,6 +38,7 @@ services:
       - 443:443
     volumes:      
       - staticfiles-data:/var/www/static   
+      - /var/www/aihumanize/humanizer_app/static/:/var/www/static
       - media-data:/var/www/media
       - /var/www/media:/var/www/media
       - certs:/etc/nginx/certs      
@@ -79,6 +80,7 @@ services:
       - redis
     volumes:
       - "staticfiles-data:/var/www/static"
+      - "/var/www/aihumanize/humanizer_app/static/:/var/www/static"
       - "media-data:/var/www/media" 
       - "/var/www/media:/var/www/media"
     
@@ -95,6 +97,7 @@ services:
       - redis
     volumes:
       - "staticfiles-data:/var/www/static"
+      - "/var/www/aihumanize/humanizer_app/static/:/var/www/static"
       - "media-data:/var/www/media"
       - "celery-beat-data:/var/run/celery"
       - "/var/www/media:/var/www/media"
