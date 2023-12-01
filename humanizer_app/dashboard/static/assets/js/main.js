@@ -648,7 +648,7 @@ document.getElementById('input-file').addEventListener('change', function(event)
 
 function updatePrice() {
 	var words = parseInt(document.getElementById('customNumber').value, 10);
-	var costPerWord = 0.000899;
+	var costPerWord = 0.0004495;
 	var newPrice = (words * costPerWord).toFixed(2);
 	document.getElementById('monthlyPrice').innerText = `$${newPrice}`;
 	document.getElementById('listWordsCount').innerText = words.toLocaleString(); // Formats the number with commas
@@ -657,7 +657,7 @@ function updatePrice() {
 
 function updatePriceBusines() {
 	var words = parseInt(document.getElementById('customNumberBusiness').value, 10);
-	var costPerWord = 0.0004;
+	var costPerWord = 0.0002;
 	var newPrice = (words * costPerWord).toFixed(2);
 	document.getElementById('monthlyPriceBusiness').innerText = `$${newPrice}`;
 	document.getElementById('listWordsCountBusiness').innerText = words.toLocaleString(); // Formats the number with commas
@@ -667,7 +667,7 @@ function updatePriceBusines() {
 function updatePriceYearly() {
 	var words = parseInt(document.getElementById('customNumberYearly').value, 10);
 	
-	var costPerWord = 0.000499;
+	var costPerWord = 0.0002495;
 	var newPrice = (words * costPerWord).toFixed(2);
 	var yearly_price = (newPrice * 12).toFixed(2);
 	document.getElementById('YearlyPrice').innerText = `$${newPrice}`;
@@ -680,8 +680,8 @@ function updatePriceYearly() {
 function setDefaultIfEmpty(element) {
 	var value = parseFloat(element.value); 
 	value = Math.round(value); 
-	if (isNaN(value) || value < 10000) {
-		element.value = 10000;
+	if (isNaN(value) || value < 20000) {
+		element.value = 20000;
 	} else {
 		element.value = value;
 	}
@@ -691,8 +691,8 @@ function setDefaultIfEmpty(element) {
 function setDefaultIfEmptyBusiness(element) {
 	var value = parseFloat(element.value); 
 	value = Math.round(value); 
-	if (isNaN(value) || value < 500000) {
-		element.value = 500000;
+	if (isNaN(value) || value < 1000000) {
+		element.value = 1000000;
 	} else {
 		element.value = value;
 	}
@@ -702,18 +702,18 @@ function setDefaultIfEmptyBusiness(element) {
 function increment() {
     var inputField = document.getElementById('customNumber');
     var value = parseInt(inputField.value, 10);
-    value = isNaN(value) ? 10000 : value;
+    value = isNaN(value) ? 20000 : value;
     value += 1000;
-    inputField.value = value < 10000 ? 10000 : value;
+    inputField.value = value < 20000 ? 20000 : value;
 	updatePrice(); 
 }
 
 function decrement() {
     var inputField = document.getElementById('customNumber');
     var value = parseInt(inputField.value, 10);
-    value = isNaN(value) ? 10000 : value;
+    value = isNaN(value) ? 20000 : value;
     value -= 1000;
-    inputField.value = value < 10000 ? 10000 : value;
+    inputField.value = value < 20000 ? 20000 : value;
 	updatePrice(); 
 }
 
@@ -721,18 +721,18 @@ function decrement() {
 function incrementBusiness() {
     var inputField = document.getElementById('customNumberBusiness');
     var value = parseInt(inputField.value, 10);
-    value = isNaN(value) ? 500000 : value;
+    value = isNaN(value) ? 1000000 : value;
     value += 50000;
-    inputField.value = value < 500000 ? 500000 : value;
+    inputField.value = value < 1000000 ? 1000000 : value;
 	updatePriceBusines(); 
 }
 
 function decrementBusiness() {
     var inputField = document.getElementById('customNumberBusiness');
     var value = parseInt(inputField.value, 10);
-    value = isNaN(value) ? 500000 : value;
+    value = isNaN(value) ? 1000000 : value;
     value -= 50000;
-    inputField.value = value < 500000 ? 500000 : value;
+    inputField.value = value < 1000000 ? 1000000 : value;
 	updatePriceBusines(); 
 }
 
@@ -740,18 +740,18 @@ function decrementBusiness() {
 function incrementYearly() {
     var inputField = document.getElementById('customNumberYearly');
     var value = parseInt(inputField.value, 10);
-    value = isNaN(value) ? 10000 : value;
+    value = isNaN(value) ? 20000 : value;
     value += 1000;
-    inputField.value = value < 10000 ? 10000 : value;
+    inputField.value = value < 20000 ? 20000 : value;
 	updatePriceYearly();
 }
 
 function decrementYearly() {
     var inputField = document.getElementById('customNumberYearly');
     var value = parseInt(inputField.value, 10);
-    value = isNaN(value) ? 10000 : value;
+    value = isNaN(value) ? 20000 : value;
     value -= 1000;
-    inputField.value = value < 10000 ? 10000 : value;
+    inputField.value = value < 20000 ? 20000 : value;
 	updatePriceYearly();
 }
 
@@ -760,8 +760,8 @@ function onInputUpdate() {
 	var inputField = document.getElementById('customNumber');
 	var value = Math.round(parseFloat(inputField.value));
 	// Enforce minimum and maximum limits
-	value = isNaN(value) ? 10000 : value;
-	value = value < 10000 ? 10000 : value;
+	value = isNaN(value) ? 20000 : value;
+	value = value < 20000 ? 20000 : value;
 	value = value > 10000000 ? 10000000 : value;
 	inputField.value = value;
 	updatePrice();
@@ -771,8 +771,8 @@ function onInputUpdateBusiness() {
 	var inputField = document.getElementById('customNumberBusiness');
 	var value = Math.round(parseFloat(inputField.value));
 	// Enforce minimum and maximum limits
-	value = isNaN(value) ? 500000 : value;
-	value = value < 500000 ? 500000 : value;
+	value = isNaN(value) ? 1000000 : value;
+	value = value < 1000000 ? 1000000 : value;
 	value = value > 10000000 ? 10000000 : value;
 	inputField.value = value;
 	updatePrice();
@@ -783,8 +783,8 @@ function onInputUpdateYearly() {
 	var inputField = document.getElementById('customNumberYearly');
 	var value = Math.round(parseFloat(inputField.value));
 	// Enforce minimum and maximum limits
-	value = isNaN(value) ? 10000 : value;
-	value = value < 10000 ? 10000 : value;
+	value = isNaN(value) ? 20000 : value;
+	value = value < 20000 ? 20000 : value;
 	value = value > 10000000 ? 10000000 : value;
 	inputField.value = value;
 	updatePriceYearly();

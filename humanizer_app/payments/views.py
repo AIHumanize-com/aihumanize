@@ -28,9 +28,9 @@ def calculate_price(plan_type: str, word_count: int):
 
     # Define minimum word counts for each plan to prevent unrealistic low word counts
     min_word_counts = {
-        "monthly": 10000,  # Example: 10,000 words minimum for monthly
-        "yearly": 10000,   # Example: 10,000 words minimum for yearly
-        "enterprise": 500000  # Example: 500,000 words minimum for enterprise
+        "monthly": 20000,  # Example: 20,000 words minimum for monthly
+        "yearly": 20000,   # Example: 20,000 words minimum for yearly
+        "enterprise": 1000000  # Example: 500,000 words minimum for enterprise
     }
 
     if word_count < min_word_counts[plan_type.lower()]:
@@ -38,15 +38,15 @@ def calculate_price(plan_type: str, word_count: int):
 
     # Price calculation
     if plan_type.lower() == "monthly":
-        price = word_count * 0.000899
+        price = word_count * 0.0004495
         plan = "month"
     elif plan_type.lower() == "yearly":
-        price = word_count * 0.000499 * 12
+        price = word_count * 0.0002495 * 12
         plan = "year"
         word_count *= 12
         
     elif plan_type.lower() == "enterprise":
-        price = word_count * 0.0004
+        price = word_count * 0.0002
         plan = "month"
 
     return round(price, 2), plan, word_count
