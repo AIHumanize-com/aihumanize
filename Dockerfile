@@ -2,9 +2,10 @@ FROM python:3.11-alpine as base
 
 FROM base as builder
 
-RUN apk update && apk --no-cache add python3-dev build-base linux-headers gcc libc-dev libffi-dev libpq-dev && mkdir /install
+RUN apk update && apk --no-cache add python3-dev curl build-base linux-headers gcc libc-dev libffi-dev libpq-dev && mkdir /install
 
-
+RUN curl -s https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -o /usr/local/bin/wait-for-it
+RUN chmod +x /usr/local/bin/wait-for-it
 
 WORKDIR /install
 COPY requirements.txt ./
@@ -47,6 +48,7 @@ ENV \
 	DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD \
 	DJANGO_SUPERUSER_EMAIL=$DJANGO_SUPERUSER_EMAIL \
 	DJANGO_DEV_SERVER_PORT=$DJANGO_DEV_SERVER_PORT
+
 
 
 COPY --from=builder /install /usr/local
