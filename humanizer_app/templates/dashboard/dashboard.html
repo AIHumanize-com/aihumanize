@@ -94,7 +94,9 @@
                     </div>
                 </div>
             </div><!-- .nk-block-head -->
-            {% if documents != None %}
+            {% if documents == None %}
+            <div class="alert alert-info mt-3">No available documents.</div>
+            {% else %}
             <div class="nk-block">
                 <div class="card">
                     <table class="table table-middle mb-0">
@@ -121,14 +123,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+            
                             {% for document in recent_documents %}
                             <tr>
                                 <td class="tb-col">
                                     <div class="caption-text line-clamp-2">{{ document.input_text|first_eight_words }}...</div>
                                 </td>
                                 <td class="tb-col tb-col-sm">
-                                    <div class="badge text-bg-dark-soft rounded-pill px-2 py-1 fs-6 lh-sm">{{document.words_used}}</div>
+                                    <div class="badge text-bg-dark-soft rounded-pill px-2 py-1 fs-6 lh-sm">{{document.words_used}}
+                                    </div>
                                 </td>
                                 <td class="tb-col">
                                     <div class="caption-text line-clamp-2">{{ document.level }}</div>
@@ -140,19 +143,19 @@
                                     <div class="caption-text line-clamp-2">{{ document.readibility }}</div>
                                 </td>
                                 <td class="tb-col tb-col-md">
-                                    <div class="fs-6 text-light d-inline-flex flex-wrap gap gx-2"><span>Feb 15,2023 </span> <span>02:31
+                                    <div class="fs-6 text-light d-inline-flex flex-wrap gap gx-2"><span>Feb 15,2023 </span>
+                                        <span>02:31
                                             PM</span></div>
                                 </td>
-                    
-                    
+            
+            
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
-            {% else %}
-            <div class="alert alert-info mt-3">No  available documents.</div>
+            
             {% endif %}
             <!-- .nk-block -->
         </div>
