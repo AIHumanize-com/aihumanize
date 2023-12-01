@@ -50,6 +50,10 @@ def get_dashboard_data(user):
 def index(request):
     context = get_dashboard_data(request.user)
     recent_documents = Documents.objects.filter(user=request.user).order_by('-created_at')[:5]
+    if recent_documents.count() > 0:
+        context["recent_documents"] = recent_documents
+    else:
+        context["recent_documents"] = None
     context["recent_documents"] = recent_documents
     return render(request, "dashboard/dashboard.html", context)
 
