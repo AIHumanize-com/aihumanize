@@ -10,6 +10,7 @@ import uuid
 import stripe
 from django.conf import settings
 import datetime
+from django.contrib.auth import logout
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # Create your views here.
@@ -175,3 +176,8 @@ def document_detail(request, document_id):
 
     return JsonResponse(data)
 
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('index')
