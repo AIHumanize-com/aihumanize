@@ -110,12 +110,12 @@ def handle_checkout_session(session):
     subscription_id = session.get('subscription')
     stripe_customer_id = session.get('customer')
 
-    # try:
-    user = UserModel.objects.get(email=customer_email)
+    try:
+        user = UserModel.objects.get(email=customer_email)
 
-    # except UserModel.DoesNotExist:
-    #     # Handle user not found
-    #     return HttpResponse(status=400)
+    except UserModel.DoesNotExist:
+        # Handle user not found
+        return HttpResponse(status=400)
 
     # Retrieve the subscription from Stripe
     stripe_subscription = stripe.Subscription.retrieve(subscription_id)
