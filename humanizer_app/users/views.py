@@ -19,7 +19,7 @@ from django.shortcuts import redirect
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from allauth.socialaccount.models import SocialApp
-from .tasks import send_eman_confirm_sign_up
+
 User = get_user_model()
 
 @anonymous_required(redirect_to='dashboard')
@@ -37,8 +37,7 @@ def signup_view(request):
 
 
             # EmailAddress.objects.add_email(request, user, email, confirm=True)
-            # send_email_confirmation(request, user, signup=True)
-            send_eman_confirm_sign_up.delay(request, user.id)
+            send_email_confirmation(request, user, signup=True)
         
             subscriopton = Subscription.objects.create(user_id=user.id, plan_type='free', word_count=400, price_in_cents=0, start_date=timezone.now(), is_active=True)
             word_counter = WordCountTracker.objects.create(subscription_id=subscriopton.id, words_purchased=400, words_used=0)

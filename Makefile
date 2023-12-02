@@ -1,5 +1,5 @@
 local:
-	docker compose -f docker-compose.debug.yml up --build
+	docker compose -f docker-compose.debug.yml up 
 
 localdown:
 	docker compose -f docker-compose.debug.yml down
