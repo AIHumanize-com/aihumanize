@@ -235,4 +235,3 @@ LOGOUT_REDIRECT_URL = "/"
 
 
 
-handler404 = 'front.views.handler404'

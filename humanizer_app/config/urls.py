@@ -17,7 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users.views import CustomPasswordResetView, signup_view,resend_email_confirmation
+from django.conf.urls import handler404
 
+handler404 = 'front.views.error_404_view'
 
 urlpatterns = [
     path("admin/", admin.site.urls),
