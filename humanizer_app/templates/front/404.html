@@ -1,0 +1,35 @@
+{% extends 'front/main.html' %} {% load static %}
+{% block meta_tags %}
+<title>Page not found</title>
+<meta name="description"
+    content="Page not found from our system" />
+<meta property="og:title" content="Page not found" />
+<meta property="og:description"
+    content="Page not found from our system" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://aihumanize.com/" />
+{% endblock %}
+
+{% block content %}
+
+<main class="flex-grow-1">
+    <section class="py-10 py-lg-15">
+        <div class="container">
+            <div class="row justify-center">
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <img src="{% static 'assets/images/illustrations/error-blue.svg' %}" alt="" class="img-fluid mb-10" />
+                        <h2 class="mb-4">Oops! Page Not Found.</h2>
+                        <p class="mb-8">
+                            The page you are looking for is not available or has been moved. Try a different
+                            page or go to homepage with the button below.
+                        </p>
+                        <a href="{% url 'index' %}" class="btn btn-primary">Go to home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

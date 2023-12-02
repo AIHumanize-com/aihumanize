@@ -112,3 +112,6 @@ def contact_view(request):
 
         return render(request, 'front/contact.html')
 
+
+def view_404(request, exception):
+    return render(request, 'front/404.html', status=404)

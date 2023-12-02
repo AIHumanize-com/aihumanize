@@ -232,3 +232,7 @@ LOGIN_REDIRECT_URL = "/pricing/"
 LOGOUT_REDIRECT_URL = "/"
 # ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 
+
+
+
+handler404 = 'front.views.handler404'
