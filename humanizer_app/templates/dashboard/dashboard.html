@@ -14,7 +14,66 @@
 {% endblock %}
 {% block content %}
 {% load my_filters %}
+<style>
+    .modal-header,
+    .modal-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
+    .modal-footer {
+        background-color: #f8f9fa;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .modal-footer .document-id {
+        font-weight: bold;
+    }
+
+    .modal-footer .timestamp {
+        font-size: 0.8em;
+        color: #6c757d;
+    }
+
+    .humanized-result h6,
+    .original-submission h6 {
+        font-size: 1em;
+        color: #495057;
+        margin-bottom: 0.5em;
+    }
+
+    .humanized-result,
+    .original-submission {
+
+        background-color: #e9ecef;
+        border-radius: 0.25em;
+        margin-bottom: 1em;
+    }
+
+    .original-submission {
+        background-color: #f8d7da;
+    }
+
+    .modal-body textarea {
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        font-family: inherit;
+        /* This makes the font consistent with the rest of your modal */
+        margin-bottom: 1rem;
+        /* This adds space below each textarea */
+        padding: 0.375rem 0.75rem;
+        /* This adds some padding inside the textarea */
+        resize: none;
+        /* Prevents the textarea from being resizable */
+    }
+
+    /* You might want to apply a different background to the 'Original Submission' textarea to differentiate it, as in your image */
+    .original-submission textarea {
+        background-color: #f8d7da;
+    }
+</style>
 <div class="container-xl">
     <div class="nk-content-inner">
         <div class="nk-content-body">
@@ -108,15 +167,11 @@
                                 <th class="tb-col tb-col-sm">
                                     <h6 class="overline-title">Words Count</h6>
                                 </th>
-                                <th class="tb-col tb-col-sm">
-                                    <h6 class="overline-title">Level</h6>
-                                </th>
+                              
                                 <th class="tb-col tb-col-sm">
                                     <h6 class="overline-title">Purpose</h6>
                                 </th>
-                                <th class="tb-col tb-col-sm">
-                                    <h6 class="overline-title">Readability</h6>
-                                </th>
+                              
                                 <th class="tb-col tb-col-sm">
                                     <h6 class="overline-title">Created at</h6>
                                 </th>
@@ -127,21 +182,20 @@
                             {% for document in recent_documents %}
                             <tr>
                                 <td class="tb-col">
-                                    <div class="caption-text line-clamp-2">{{ document.input_text|first_eight_words }}...</div>
+                                    <a data-bs-target="#DocumentModal" data-bs-toggle="modal" class="document-link" href="#DocumentModal"
+                                        data-document-id="{{ document.document_id }}">
+                                        <div class="caption-text line-clamp-2">{{ document.input_text|first_eight_words }}...</div>
+                                    </a>
                                 </td>
                                 <td class="tb-col tb-col-sm">
                                     <div class="badge text-bg-dark-soft rounded-pill px-2 py-1 fs-6 lh-sm">{{document.words_used}}
                                     </div>
                                 </td>
-                                <td class="tb-col">
-                                    <div class="caption-text line-clamp-2">{{ document.level }}</div>
-                                </td>
+                            
                                 <td class="tb-col">
                                     <div class="caption-text line-clamp-2">{{ document.purpose }}</div>
                                 </td>
-                                <td class="tb-col">
-                                    <div class="caption-text line-clamp-2">{{ document.readibility }}</div>
-                                </td>
+                             
                                 <td class="tb-col tb-col-md">
                                     <div class="fs-6 text-light d-inline-flex flex-wrap gap gx-2"><span>Feb 15,2023 </span>
                                         <span>02:31
@@ -161,5 +215,92 @@
         </div>
     </div>
 </div>
+
+<div class="modal" id="DocumentModal" aria-hidden="true" aria-labelledby="DocumentModalLabel" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title" id="DocumentModalLabel"></p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" data-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Humanized Result Section -->
+                <div class="float-end">
+                    <button class="js-copy" data-clipboard-target="#output_text"><em
+                            class="icon ni ni-copy"></em><span>Copy</span></button>
+                </div>
+                <h6 class="text-success">Humanized Result</h6>
+
+
+
+                <section class="humanized-result">
+
+                    <textarea class="form-control" rows="7" id="output_text" readonly></textarea>
+                </section>
+                <!-- Original Submission Section -->
+                <div class="float-end">
+                    <button class="js-copy" data-clipboard-target="#input_text"><em
+                            class="icon ni ni-copy"></em><span>Copy</span></button>
+                </div>
+                <h6 class="text-danger">Original Submission</h6>
+                <section class="original-submission">
+
+                    <textarea class="form-control" rows="7" id="input_text" readonly></textarea>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <span class="document-id">Document ID: </span>
+                <span class="timestamp"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('.document-link').forEach(item => {
+            item.addEventListener('click', event => {
+                const documentId = item.getAttribute('data-document-id');
+
+                fetch(`/dashboard/documents/${documentId}/`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Document not found.');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        var parser = new DOMParser();
+                        var doc = parser.parseFromString(data.output_text, 'text/html');
+                        var outputText = doc.body.textContent || "";
+
+                        // Update the modal content
+                        document.querySelector('#DocumentModal #input_text').value = data.input_text;
+                        document.querySelector('#DocumentModal #output_text').value = outputText;
+
+                        // Update the modal title with additional information including HTML tags
+                        var modalTitle = `<strong>Purpose</strong>: ${data.purpose}`;
+                        document.querySelector('#DocumentModal .modal-title').innerHTML = modalTitle;
+
+                        document.querySelector('#DocumentModal .document-id').textContent = 'Document ID: ' + data.document_id;
+                        document.querySelector('#DocumentModal .timestamp').textContent = 'Created at: ' + data.created_at;
+
+                        // Show the modal
+                        // var myModal = new bootstrap.Modal(document.getElementById('DocumentModal'));
+                        // myModal.show();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    });
+
+
+
+
+
+</script>
 
 {% endblock %}
