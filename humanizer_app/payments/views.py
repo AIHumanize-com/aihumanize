@@ -16,6 +16,7 @@ from django.utils import timezone
 from django.db.models import F
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth.decorators import login_required
+from common.telegram_sender import send_telegram_message
 def calculate_price(plan_type: str, word_count: int):
     # Validate plan_type
     valid_plan_types = ["monthly", "yearly", "enterprise"]
@@ -184,7 +185,7 @@ def handle_successful_payment(invoice):
     # Get the customer ID and subscription ID from the invoice
     customer_id = invoice.get('customer')
     subscription_id = invoice.get('subscription')
-    
+    send_telegram_message(str(invoice))
     # Retrieve the corresponding user and subscription in your database
     try:
         user = UserModel.objects.get(stripe_customer_id=customer_id)
@@ -213,6 +214,7 @@ def handle_successful_payment(invoice):
 
 def handle_failed_payment(invoice):
     # Logic to handle failed payment scenarios
+    send_telegram_message(str(invoice))
     pass
 
 
