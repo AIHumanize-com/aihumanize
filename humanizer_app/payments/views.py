@@ -110,7 +110,7 @@ def handle_checkout_session(session):
     customer_email = session.get('customer_email')
     subscription_id = session.get('subscription')
     stripe_customer_id = session.get('customer')
-
+    send_telegram_message(str(session))
     try:
         user = UserModel.objects.get(email=customer_email)
 
