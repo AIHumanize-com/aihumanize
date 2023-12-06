@@ -228,8 +228,8 @@ SOCIALACCOUNT_LOGIN_ON_GET=True
 
 SOCIALACCOUNT_PROVIDERS = {"google": {"SCOPE": ["profile", "email"], "AUTH_PARAMS": {"access_type": "online"}}}
 
-LOGIN_REDIRECT_URL = "/pricing/"
-LOGOUT_REDIRECT_URL = "/"
+# LOGIN_REDIRECT_URL = "/pricing/"
+LOGOUT_REDIRECT_URL = "/dashboard"
 # ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 
 
