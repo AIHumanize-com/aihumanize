@@ -103,15 +103,15 @@ DATABASES = {
 }
 
 
-# if "POSTGRES_DB" in os.environ:
-#     DATABASES["default"] = {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": os.environ["POSTGRES_DB"],
-#         "USER": os.environ["POSTGRES_USER"],
-#         "PASSWORD": os.environ["POSTGRES_PASSWORD"],
-#         "HOST": os.environ["POSTGRES_HOST"],
-#         "PORT": os.environ["POSTGRES_PORT"],
-#     }
+if "POSTGRES_DB" in os.environ:
+    DATABASES["default"] = {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ["POSTGRES_DB"],
+        "USER": os.environ["POSTGRES_USER"],
+        "PASSWORD": os.environ["POSTGRES_PASSWORD"],
+        "HOST": os.environ["POSTGRES_HOST"],
+        "PORT": os.environ["POSTGRES_PORT"],
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -163,7 +163,7 @@ AUTH_USER_MODEL = "users.UserModel"
 # ]
 STATIC_URL = "/static/"
 STATIC_ROOT = "static"
-# MEDIA_ROOT = os.getenv("DJANGO_MEDIA_ROOT", "/var/www/media")
+MEDIA_ROOT = os.getenv("DJANGO_MEDIA_ROOT", "/var/www/media")
 
 # URL that handles the media served from MEDIA_ROOT.
 MEDIA_URL = os.getenv("DJANGO_MEDIA_URL", "/media/")
@@ -224,7 +224,7 @@ STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
 STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET")
 # TODO change this to 3
-SITE_ID = 2
+SITE_ID = 3
 SOCIALACCOUNT_LOGIN_ON_GET=True
 # key is added
 
