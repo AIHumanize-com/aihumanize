@@ -1,25 +1,47 @@
 from django.contrib import admin
 from .models import UserModel
 from payments.models import  Subscription, WordCountTracker
+from dashboard.models import Documents
 # Inline admin for Subscription in the UserModel admin
+# Inline admin for Subscription in the UserModel admin
+
+
+class DocumentsInline(admin.TabularInline):
+    model = Documents
+    extra = 0
+    fields = ['input_text', 'output_text', 'words_used', 'purpose', 'document_id']
+    readonly_fields = ['input_text', 'output_text', 'words_used', 'purpose', 'document_id']
+
 class SubscriptionInline(admin.TabularInline):
     model = Subscription
     extra = 0
-    readonly_fields = ['plan_type', 'word_count', 'price_in_cents', 'start_date', 'end_date', 'actual_end_date']
+    fields = ['id','plan_type', 'word_count', 'price_in_cents', 'start_date', 'end_date', 'actual_end_date', 'used_words', 'remaining_words']
+    readonly_fields = ['id','plan_type', 'word_count', 'price_in_cents', 'start_date', 'end_date', 'actual_end_date', 'used_words', 'remaining_words']
+    
+    def used_words(self, instance):
+        # Access the related WordCountTracker instance and return the used words
+        if hasattr(instance, 'wordcounttracker'):
+            return instance.wordcounttracker.words_used
+        return 'N/A'
+    used_words.short_description = 'Words Used'
+
+    def remaining_words(self, instance):
+        # Access the related WordCountTracker instance and return the remaining words
+        return instance.wordcounttracker.words_purchased - instance.wordcounttracker.words_used
+    remaining_words.short_description = 'Words Remaining'
 
 # Inline admin for WordCountTracker in the Subscription admin
 class WordCountTrackerInline(admin.TabularInline):
     model = WordCountTracker
     extra = 0
-    readonly_fields = ('words_purchased', 'words_used', 'words_remaining')
+    readonly_fields = ('words_purchased', 'words_used')
 
 # Custom admin for the UserModel
 class UserAdmin(admin.ModelAdmin):
-    inlines = [SubscriptionInline]
+    inlines = [SubscriptionInline, DocumentsInline]
     list_display = ('email', 'fullname', 'is_active')
     search_fields = ('email',)
 
-    # Custom filter for filtering users by subscription type
     class SubscriptionTypeListFilter(admin.SimpleListFilter):
         title = 'subscription type'
         parameter_name = 'subscription_type'
@@ -41,8 +63,11 @@ class UserAdmin(admin.ModelAdmin):
 
 # Custom admin for the Subscription model
 class SubscriptionAdmin(admin.ModelAdmin):
-    inlines = [WordCountTrackerInline]
-    list_display = ('user', 'plan_type', 'start_date', 'end_date')
+   
+    inlines = [WordCountTrackerInline] 
+    list_display = ('id', 'user', 'plan_type', 'start_date', 'end_date')
+    list_display_links = ('id', 'plan_type', 'user')  # Making 'user' and 'plan_type' clickable
+
     search_fields = ('user__email',)
 
 # Register your custom admin classes
