@@ -19,6 +19,9 @@ from django.urls import path, include
 from users.views import CustomPasswordResetView, signup_view,resend_email_confirmation
 from django.conf.urls import handler404
 from blog.views import article
+from django.conf.urls.static import static
+from django.conf import settings
+
 handler404 = 'front.views.view_404'
 
 urlpatterns = [
@@ -38,4 +41,4 @@ urlpatterns = [
 
     # path("users/", include("users.urls")),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
