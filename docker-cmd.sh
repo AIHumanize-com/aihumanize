@@ -14,7 +14,8 @@ else
   # Gunicorn
   su-exec "$USER" gunicorn "config.wsgi:application" \
     --bind "0.0.0.0:8000" \
-    --workers "$GUNICORN_WORKERS" \
+    --workers "5" \
     --timeout "$GUNICORN_TIMEOUT" \
-    --log-level "$GUNICORN_LOG_LEVEL"
+    --log-level "$GUNICORN_LOG_LEVEL" \
+    --threads "4"
 fi
