@@ -24,9 +24,13 @@
     <!-- SEO meta tags -->
    {% block meta_tags %}
    {% endblock %}
-    <link rel="icon" href="{% static 'assets/images/ai-humanize-icon.svg' %}" type="image/svg+xml" />
-    <meta property="og:image" content="{% static 'assets/images/ai-humanize-icon.svg' %}" />
-
+    <!-- <link rel="icon" href="{% static 'assets/images/ai-humanize-icon.svg' %}" type="image/svg+xml" /> -->
+    <!-- <meta property="og:image" content="{% static 'assets/images/ai-humanize-icon.svg' %}" /> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/aihumanize_icon_180x_180.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/aihumanize_icon_32_32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/aihumanize_icon_16_16.png' %}">
+    <meta property="og:image" content="{% static 'assets/images/aihumanize_icon_512_512.png' %}">
+    <meta property="twitter:image" content="{% static 'assets/images/aihumanize_icon_512_512.png' %}">
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/plugins.css' %}" />
     <link rel="stylesheet" href="{%static 'assets/css/style.css' %}" />
