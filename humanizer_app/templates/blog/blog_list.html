@@ -1,0 +1,120 @@
+{% extends 'front/main.html' %}
+{% block meta_tags %}
+<title>AIHumanize Blog: Stay Updated with the Latest Trends and Insights </title>
+<meta name="title" content="AIHumanize Blog: Stay Updated with the Latest Trends and Insights ">
+<meta name="description"
+    content="Stay informed and up-to-date with the latest trends, news, and insights in the world of Artificial Intelligence. Explore our  Blog for expert analysis and valuable resources. ">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aihumanize.com/">
+<meta property="og:title" content="AIHumanize Blog: Stay Updated with the Latest Trends and Insights ">
+<meta property="og:description"
+    content="Stay informed and up-to-date with the latest trends, news, and insights in the world of Artificial Intelligence. Explore our  Blog for expert analysis and valuable resources. ">
+
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://aihumanize.com/">
+<meta property="twitter:title" content="AIHumanize Blog: Stay Updated with the Latest Trends and Insights ">
+<meta property="twitter:description"
+    content="Stay informed and up-to-date with the latest trends, news, and insights in the world of Artificial Intelligence. Explore our  Blog for expert analysis and valuable resources. ">
+{% endblock %}
+{% block content %}
+<main class="flex-grow-1">
+    <!-- Page Header -->
+    <section class="py-10 py-lg-15 bg-striped" data-aos="fade-up-sm" data-aos-delay="50">
+        <div class="container">
+            <div class="text-center">
+                <h3 class=" mb-2">Blog Posts</h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-center fs-sm">
+                        <li class="breadcrumb-item"><a href="{% url  'index' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Blog Posts</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Blog -->
+    <section class="pt-20 pb-10 pt-lg-30 pb-lg-15">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-6 gy-10 gy-lg-16">
+                {% for post in post_list %}
+                <div class="col" data-aos="fade-up-sm" data-aos-delay="50">
+                    <div class="blog-card card border-0">
+                        <div class="card-header border-0 bg-transparent ratio ratio-6x4 rounded overflow-hidden">
+                            <a href="{% url 'article' post.slug %}" class="d-block">
+                                <img src="{{post.image.url}}" alt="{{post.title}}"
+                                    class="img-fluid post-thumbnail w-full h-full object-cover" />
+                            </a>
+                        </div>
+                        <div class="card-body p-0 mt-6">
+                            <ul class="list-unstyled d-flex flex-wrap align-center fs-sm meta-list">
+                                <li>{{post.category.name}}</li>
+                                <li>{{post.date_posted.date}}</li>
+                                <li>{{post.average_read_time}} Min. Read</li>
+                            </ul>
+
+                            <h4 class="post-title fw-medium mb-0">
+                                <a href="{% url 'article' post.slug %}">{{post.title}}</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        {% if is_paginated %}
+        <div class="text-center mt-18">
+            <ul class="pagination flex-wrap justify-center gap-4">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" height="24">
+                            <path stroke="none" d="M0 0h24v24H0z" />
+                            <path d="M5 12h14M5 12l4 4m-4-4 4-4" />
+                        </svg>
+                    </a>
+                </li>
+                {% endif %}
+        
+                {% for i in page_obj.paginator.page_range %}
+                {% if i == page_obj.number %}
+                <li class="page-item active">
+                    <span class="page-link">{{ i }}</span>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+        
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" height="24">
+                            <path stroke="none" d="M0 0h24v24H0z" />
+                            <path d="M5 12h14m-4 4 4-4m-4-4 4 4" />
+                        </svg>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% endif %}
+
+        </div>
+    </section>
+
+    <!-- CTA -->
+
+
+</main>
+
+{% endblock %}

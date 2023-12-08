@@ -1,0 +1,136 @@
+{% extends 'front/main.html' %}
+{% load static %}
+{% block meta_tags %}
+<title>{{post.title}}</title>
+<meta name="title" content="{{post.title}}">
+<meta name="description" content="{{post.short_description}} ">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://detecting-ai.com/">
+<meta property="og:title" content="{{post.title}}">
+<meta property="og:description" content="{{post.short_description}} ">
+
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://detecting-ai.com/">
+<meta property="twitter:title" content="{{post.title}}">
+<meta property="twitter:description" content="{{post.short_description}} ">
+{% endblock %}
+{% block content %}
+<main class="flex-grow-1">
+    <!-- Page header -->
+   
+
+
+    <!-- Article -->
+    <section class="pt-20 pb-10 pt-lg-30 pb-lg-15">
+        <div class="container">
+            <div class="row justify-center mb-10">
+                <div class="col-lg-8">
+                    <h2 class="fw-medium mb-0">
+                        {{ post.title }}
+                    </h2>
+                </div>
+            </div>
+           
+            <div class="row justify-center mt-8">
+                <div class="col-lg-8">
+                    <div class="">
+                        <div class="d-flex flex-wrap justify-between align-center mb-6 gap-6">
+                            <div class="d-flex flex-wrap align-center gap-4">
+                                <img src="assets/images/blog/author.jpg" alt=""
+                                    class="w-8 h-8 object-cover rounded-circle flex-shrink-0" />
+                                <p class="fw-medium mb-0 post-author">{{post.author.fullname}}</p>
+                            </div>
+
+                            <ul class="list-unstyled d-flex flex-wrap align-center fs-sm meta-list mb-0">
+                                <li>{{post.category.name}}</li>
+                                <li>{{post.date_posted.date}}</li>
+                                <li>{{post.average_read_time}} Min. Read</li>
+                            </ul>
+                        </div>
+
+                        <article class="blog-post" id="article_content_id">
+                            {{post.content|safe}}
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related posts -->
+    <section class="py-10 pb-lg-15">
+        <div class="container">
+            <h2 class="mb-10">Related Article</h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-6 gy-10 gy-lg-16">
+                {% for releted in releted_articles %}
+                <div class="col" data-aos="fade-up-sm" data-aos-delay="50">
+                    <div class="blog-card card border-0">
+                        <div class="card-header border-0 bg-transparent ratio ratio-6x4 rounded overflow-hidden">
+                            <a href="article.html" class="d-block">
+                                <img src="{{ releted.image.url }}" alt=""
+                                    class="img-fluid post-thumbnail w-full h-full object-cover" />
+                            </a>
+                        </div>
+                        <div class="card-body p-0 mt-6">
+                            <ul class="list-unstyled d-flex flex-wrap align-center fs-sm meta-list">
+                                <li>{{releted.category.name}}</li>
+                                <li>{{releted.date_posted}}</li>
+                                <li>{{releted.average_read_time}} Min. Read</li>
+                            </ul>
+
+                            <h4 class="post-title fw-medium mb-0">
+                                <a href="{% url 'article' releted.slug %}">{{releted.title}}</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+              
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+   
+
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let li_templates = ""
+    let content = document.getElementById("article_content_id")
+    // Get all the h3 elements on the page
+    const h3Elements = content.querySelectorAll('h3');
+
+    // Iterate over each h3 element
+    h3Elements.forEach((element) => {
+        // Get the inner text of the h3 element
+        const text = element.innerText;
+
+        // Create a slug from the text
+        const slug = text.toLowerCase().replace(/\s+/g, '-');
+        let li = `<li><a href="#${slug}">${text}</a></li>`
+        // Set the slug as the ID of the h3 element
+        element.setAttribute('id', slug);
+        li_templates += li
+    });
+    let content_template = `
+	<h3>Table of contents</h3>
+	<ol>
+		${li_templates}
+	</ol>
+	`
+
+
+    content.insertAdjacentHTML('afterbegin', content_template);
+
+
+
+</script>
+{% endblock %}

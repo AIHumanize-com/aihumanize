@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from users.views import CustomPasswordResetView, signup_view,resend_email_confirmation
 from django.conf.urls import handler404
-
+from blog.views import article
 handler404 = 'front.views.view_404'
 
 urlpatterns = [
@@ -30,7 +30,9 @@ urlpatterns = [
     path('accounts/resend-email-confirmation/signup/', resend_email_confirmation, name='resend_email_confirmation'),
     path("dashboard/", include("dashboard.urls")),
     path("payments/", include("payments.urls")),
-
+    path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
+    path("blog/", include("blog.urls")),
+     path("<slug:slug>/", article, name="article"),
     path("", include("front.urls")),
 
 
