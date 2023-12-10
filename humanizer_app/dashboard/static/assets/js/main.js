@@ -531,12 +531,14 @@ document.getElementById("ai-btn").addEventListener("click", function () {
 
     // Hide the error message
     document.getElementById("error-message").textContent = "";
-
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+	
     // Send a request to the AI backend
     fetch("/detect/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+			"X-CSRFToken": csrftoken,
         },
         body: JSON.stringify({ text: inputText }),
     })

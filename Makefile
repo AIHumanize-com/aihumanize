@@ -1,5 +1,5 @@
 local:
-	docker compose -f docker-compose.debug.yml up 
+	docker compose -f docker-compose.debug.yml up --build
 
 localdown:
 	docker compose -f docker-compose.debug.yml down
@@ -19,3 +19,6 @@ push:
 	git add .
 	git commit -m 'update'
 	git push
+
+createsuperuser:
+	docker compose  -f docker-compose.debug.yml run --rm django sh -c "python manage.py createsuperuser"

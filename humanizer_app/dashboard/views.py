@@ -112,9 +112,16 @@ def edit_profile(request):
     if request.method == 'POST':
         fullname = request.POST.get('fullname')
         country = request.POST.get('country')
+        is_checked = 'check_box' in request.POST
+
+        if is_checked:
+            checked = True
+        else:
+            checked = False
         user = request.user
         user.fullname = fullname
         user.country = country
+        user.does_email_receive = checked
         user.save()
         return redirect('profile')
     
@@ -181,3 +188,8 @@ def document_detail(request, document_id):
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+
+@login_required
+def text_editor(request):
+    return render(request, 'dashboard/editor.html')

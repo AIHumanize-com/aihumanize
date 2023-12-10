@@ -58,7 +58,7 @@ class UserModel(AbstractBaseUser, PermissionsMixin):
     country = models.CharField(max_length=255, null=True, blank=True)
     stripe_customer_id = models.CharField(max_length=100, blank=True, null=True)
     default_payment_method = models.CharField(max_length=100, blank=True, null=True)
-
+    does_email_receive = models.BooleanField(default=True)
     USERNAME_FIELD = "email"
     objects = UserManager()
 

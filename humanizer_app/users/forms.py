@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
 User = get_user_model()
+from django_ckeditor_5.fields import CKEditor5Field
 
 from django import forms
 from django.contrib.auth import get_user_model
@@ -42,4 +43,8 @@ class CustomSignupForm(forms.Form):
 
         validate_password(password1)
         return cleaned_data
+
+
+
+
 

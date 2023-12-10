@@ -54,7 +54,7 @@ def humanizer(request):
         return JsonResponse({"text": result})
         
 
-@csrf_exempt
+# @csrf_exempt
 def detect_text(request):
     if request.user.is_authenticated:
         return handle_request(request)
