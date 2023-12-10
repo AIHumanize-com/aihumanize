@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import index, profile, edit_profile, documents, document_detail,logout_view, text_editor
+from .views import index, profile, edit_profile, documents, document_detail,logout_view, text_editor, generate_text
 
 urlpatterns = [
     path('', index, name='dashboard'),
@@ -10,6 +10,7 @@ urlpatterns = [
     path('documents/<str:document_id>/', document_detail, name='document_detail_api'),
     path("logout/", logout_view, name="logout"),
     path("generate_content/", text_editor, name='editor'),
+    path("generate_text/", generate_text, name='generate_text')
 
 
 ]
