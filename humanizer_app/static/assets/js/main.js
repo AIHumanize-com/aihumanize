@@ -424,13 +424,17 @@ humanizeButton.addEventListener('click', function () {
 	// Disable the button and add spinner
 	humanizeButton.disabled = true;
 	humanizeButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+	
+	let level = document.getElementById("level").value
+	let readability = document.getElementById("readability").value
 
+	
 	fetch('humanizer/', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ text: textareaContent, purpose: purpose.value, model: selectedModel }),
+		body: JSON.stringify({ text: textareaContent, purpose: purpose.value, model: selectedModel, level:level, readability:readability }),
 	})
 		.then(response => response.json())
 		.then(data => {
@@ -805,11 +809,15 @@ document.addEventListener('DOMContentLoaded', function () {
     var ninjaBox = document.querySelector('.ninja-box');
     var ghostBox = document.querySelector('.ghost-box');
 	var masteroInfo = document.getElementById("masteroInfo")
+	var readabilityButton = document.getElementById("readabilityButton")
+	var levelButton = document.getElementById("levelButton")
     ninjaBox.addEventListener('click', function () {
         // Remove 'active' class from ghost box and add to ninja box
         ghostBox.classList.remove('active');
         ninjaBox.classList.add('active');
 		masteroInfo.style.display = "none"
+		readabilityButton.style.display = "none"
+		levelButton.style.display = "none"
     });
 
     ghostBox.addEventListener('click', function () {
@@ -819,6 +827,8 @@ document.addEventListener('DOMContentLoaded', function () {
             ninjaBox.classList.remove('active');
             ghostBox.classList.add('active');
 			masteroInfo.style.display = "block"
+			readabilityButton.style.display = "block"
+			levelButton.style.display = "block"
         }
         // If it is disabled, do nothing (this prevents toggling when disabled)
     });

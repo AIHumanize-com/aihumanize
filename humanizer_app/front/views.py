@@ -41,8 +41,11 @@ def humanizer(request):
         text = body["text"]
         purpose = body["purpose"]
         model = body["model"]
-        # readability = body["readability"]
-        # strength = body["level"]
+        readability = None
+        strength = None
+        if model == "Maestro":
+            readability = body["readability"]
+            strength = body["level"]
 
         word_count = len(text.split())
 
@@ -56,9 +59,9 @@ def humanizer(request):
            
 
         word_count_tracker = WordCountTracker.objects.filter(subscription__user=request.user).last()
-        if word_count > word_count_tracker.words_remaining:
+        if word_count + word_count_tracker.words_used > word_count_tracker.words_remaining:
             return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
-        result = rewrite_text(text, purpose=purpose, readability=None, strength=None, model_name=model)
+        result = rewrite_text(text, purpose=purpose, readability=readability, strength=strength, model_name=model)
         # detection_result = detect_and_classify(result)
         # if detection_result["human_avarage"] < 70:
         #     result = rewrite_text(text, purpose=purpose, readability=None, strength=None)
