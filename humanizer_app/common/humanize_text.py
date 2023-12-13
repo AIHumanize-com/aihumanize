@@ -6,7 +6,7 @@ import os
 
 
 
-def rewrite_text(original_text, purpose, readability, strength):
+def rewrite_text(original_text, purpose, readability, strength, model_name):
     openai_api_key = os.environ.get("OPEN_AI_KEY")
 
     if purpose not in purposes:
@@ -20,12 +20,16 @@ def rewrite_text(original_text, purpose, readability, strength):
 
     strength_prompt = f"The paraphrasing should be '{strength_description}' in nature."
     readability_prompt = f"This text should be written at a {readability_description}"
-
+    if model_name == "Falcon":
+        model = "gpt-3.5-turbo-1106"
+    elif model_name == "Maestro":
+        model = "gpt-4-1106-preview"
     # Updated system prompt
     system_prompt = purposes[purpose]  + " " + "change words and terms with snonymous"
+    print(model)
     try:
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo-1106",  # You can experiment with different models
+            model=model,  # You can experiment with different models
             messages=[
                 {
                     "role": "system",

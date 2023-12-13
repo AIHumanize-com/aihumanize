@@ -4,15 +4,30 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import DetectRequestCounter, UnregisteredUserWordCount
-from payments.models import WordCountTracker
+from payments.models import WordCountTracker, Subscription
 # Create your views here.
 from dashboard.tasks import create_documents_record
 from common.detect_ai import detect_and_classify
 from .forms import ContactForm
 from django.contrib import messages
+from django.utils import timezone
 
 def index(request):
-    return render(request, 'front/index.html')
+    context = {'paid': False}  # Default context
+
+    if request.user.is_authenticated:
+        # Get the latest paid subscription for the user (excluding 'FREE' plan type)
+        latest_subscription = Subscription.objects.filter(
+            user=request.user, 
+            plan_type__in=[Subscription.MONTHLY, Subscription.YEARLY, Subscription.ENTERPRISE]
+        ).order_by('-end_date').first()
+
+        if latest_subscription and latest_subscription.end_date:
+            # Check if the end_date is greater than today
+            if latest_subscription.end_date > timezone.now():
+                context['paid'] = True
+
+    return render(request, 'front/index.html', context)
 
 def pricing(request):
     return render(request, 'front/pricing.html')
@@ -25,6 +40,7 @@ def humanizer(request):
     
         text = body["text"]
         purpose = body["purpose"]
+        model = body["model"]
         # readability = body["readability"]
         # strength = body["level"]
 
@@ -42,7 +58,7 @@ def humanizer(request):
         word_count_tracker = WordCountTracker.objects.filter(subscription__user=request.user).last()
         if word_count > word_count_tracker.words_remaining:
             return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
-        result = rewrite_text(text, purpose=purpose, readability=None, strength=None)
+        result = rewrite_text(text, purpose=purpose, readability=None, strength=None, model_name=model)
         # detection_result = detect_and_classify(result)
         # if detection_result["human_avarage"] < 70:
         #     result = rewrite_text(text, purpose=purpose, readability=None, strength=None)

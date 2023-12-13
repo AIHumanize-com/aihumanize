@@ -413,7 +413,14 @@ humanizeButton.addEventListener('click', function () {
 		error_p.style.display = ''
 		return;
 	}
-
+	// Identify the selected model
+    var selectedModel = '';
+    if (document.querySelector('.ninja-box').classList.contains('active')) {
+        selectedModel = 'Falcon';
+    } else if (document.querySelector('.ghost-box').classList.contains('active')) {
+        selectedModel = 'Maestro';
+    }
+	console.log(selectedModel)
 	// Disable the button and add spinner
 	humanizeButton.disabled = true;
 	humanizeButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
@@ -423,7 +430,7 @@ humanizeButton.addEventListener('click', function () {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ text: textareaContent, purpose: purpose.value }),
+		body: JSON.stringify({ text: textareaContent, purpose: purpose.value, model: selectedModel }),
 	})
 		.then(response => response.json())
 		.then(data => {
@@ -532,8 +539,7 @@ document.getElementById("ai-btn").addEventListener("click", function () {
     // Hide the error message
     document.getElementById("error-message").textContent = "";
 	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-	console.log("for token")
-	console.log(csrftoken)
+	
     // Send a request to the AI backend
     fetch("/detect/", {
         method: "POST",
@@ -794,3 +800,35 @@ function onInputUpdateYearly() {
 }
 
 
+
+document.addEventListener('DOMContentLoaded', function () {
+    var ninjaBox = document.querySelector('.ninja-box');
+    var ghostBox = document.querySelector('.ghost-box');
+	var masteroInfo = document.getElementById("masteroInfo")
+    ninjaBox.addEventListener('click', function () {
+        // Remove 'active' class from ghost box and add to ninja box
+        ghostBox.classList.remove('active');
+        ninjaBox.classList.add('active');
+		masteroInfo.style.display = "none"
+    });
+
+    ghostBox.addEventListener('click', function () {
+        // Check if the ghost box is disabled
+        if (!ghostBox.classList.contains('disabled')) {
+            // If not disabled, toggle the 'active' class
+            ninjaBox.classList.remove('active');
+            ghostBox.classList.add('active');
+			masteroInfo.style.display = "block"
+        }
+        // If it is disabled, do nothing (this prevents toggling when disabled)
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+  popoverTriggerList.forEach(function (popoverTriggerEl) {
+    new bootstrap.Popover(popoverTriggerEl, {
+      trigger: 'hover'
+    });
+  });
+});

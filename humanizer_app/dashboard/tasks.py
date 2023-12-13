@@ -52,8 +52,8 @@ def create_documents_record(input_text, output_text, user_id, purpose, level, re
 @shared_task
 def send_email_batch(campaign_id):
     campaign = EmailCampaign.objects.get(id=campaign_id)
-    batch_recipient_ids = campaign.recipients[:400]
-    remaining_recipient_ids = campaign.recipients[400:]
+    batch_recipient_ids = campaign.recipients[:1000]
+    remaining_recipient_ids = campaign.recipients[1000:]
 
     subject = campaign.subject
     from_email = 'support@aihumanize.com'  # Replace with your actual sender email

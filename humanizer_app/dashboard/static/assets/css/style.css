@@ -35983,39 +35983,60 @@ article img {
   font-weight: 600;
   font-weight: bold;
 }
-.ninja-box{
+.ninja-box,
+.ghost-box {
+  /* Shared styles for both boxes */
   display: flex;
-  flex-direction: row;
   align-items: center;
-  gap:8px;
+  justify-content: center;
   padding-block: 14px;
-  padding-inline: 80px;
-  background-color: white;
   border-radius: 10px;
   width: 50%;
-  justify-content: center;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* Smooth transition for background color */
 }
-.ninja-box p{
+
+.ninja-box {
+  /* Specific styles for ninja box */
+  flex-direction: row;
+  gap: 8px;
+  padding-inline: 80px;
+
+  /* Default background color for ninja box */
+}
+
+.ninja-box p,
+.ghost-box p {
+  /* Shared paragraph styles */
   font-weight: 500;
   line-height: 1.27rem;
   margin: 0;
 }
-.ghost-box{
-  display: flex;
-  align-items: center;
+
+.ghost-box {
+  /* Specific styles for ghost box */
   flex-direction: row;
   gap: 4px;
   padding-inline: 70px;
-  width: 50%;
-  justify-content: center;
-  cursor: pointer;
-}
-.ghost-box p{
-  font-weight: 500;
-  line-height: 1.27rem;
-  margin: 0;
+  background-color: transparent;
+  /* Default background color for ghost box */
   margin-right: 4px;
+}
+
+/* Active state styles */
+.active {
+  background-color: white;
+  /* Example active state background color */
+  /* Add other styles if needed */
+}
+
+/* Disabled state styles */
+.disabled {
+  opacity: 0.5;
+  /* pointer-events: none; */
+  background-color: #f0f0f0;
+  /* Example background color for disabled state */
 }
 .larger-svg {
   height: 27px !important;
