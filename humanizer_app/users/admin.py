@@ -65,7 +65,7 @@ class UserAdmin(admin.ModelAdmin):
 
 # Custom admin for the Subscription model
 class SubscriptionAdmin(admin.ModelAdmin):
-   
+    list_per_page = 600
     inlines = [WordCountTrackerInline] 
     list_display = ('id', 'user', 'plan_type', 'start_date', 'end_date')
     list_display_links = ('id', 'plan_type', 'user')  # Making 'user' and 'plan_type' clickable
