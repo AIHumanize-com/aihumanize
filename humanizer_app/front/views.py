@@ -56,11 +56,17 @@ def humanizer(request):
         if not request.user.is_authenticated:
             return JsonResponse({"error": "Word limit exceeded. Sign up for additional words or subscribe for unlimited access."}, status=400)
 
-           
+        
+        # get last subscrioption of user
+        subscrioption = Subscription.objects.filter(user=request.user).last()
 
         word_count_tracker = WordCountTracker.objects.filter(subscription__user=request.user).last()
-        if word_count + word_count_tracker.words_used > word_count_tracker.words_remaining:
+        if word_count  > word_count_tracker.words_remaining:
             return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
+        if subscrioption and subscrioption.end_date < timezone.now():
+            return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
+        # restrict if user subscription is not active
+        
         result = rewrite_text(text, purpose=purpose, readability=readability, strength=strength, model_name=model)
         # detection_result = detect_and_classify(result)
         # if detection_result["human_avarage"] < 70:

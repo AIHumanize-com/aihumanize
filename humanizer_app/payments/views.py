@@ -213,10 +213,23 @@ def handle_successful_payment(invoice):
     return HttpResponse(status=200)
 
 def handle_failed_payment(invoice):
-    # Logic to handle failed payment scenarios
-    send_telegram_message(str(invoice))
-    pass
+    # Handle failed payment webhook and block access to paid features
+    customer_id = invoice.get('customer')
+    subscription_id = invoice.get('subscription')
+    try:
+        user = UserModel.objects.get(stripe_customer_id=customer_id)
+        subscription = Subscription.objects.get(stripe_subscription_id=subscription_id, user=user)
+    except UserModel.DoesNotExist:
+        return HttpResponse(status=400)
+    except Subscription.DoesNotExist:
+        return HttpResponse(status=400)
+    
+    subscription.is_active = False
+    subscription.save()
+    return HttpResponse(status=200)
 
+
+   
 
 @csrf_exempt
 def stripe_webhook(request):
