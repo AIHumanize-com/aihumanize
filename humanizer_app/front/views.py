@@ -65,10 +65,10 @@ def humanizer(request):
         word_count_tracker = WordCountTracker.objects.filter(subscription__user=request.user).last()
         if word_count  > word_count_tracker.words_remaining:
             return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
-        # if subscrioption.plan_type in [Subscription.MONTHLY, ] and subscrioption.end_date < timezone.now():
-        #     return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
-        # restrict if user subscription is not active
-        
+        # even if user has remanining words but subscrioption is expired, we need to check user is in paid plan
+        if subscrioption.plan_type in [Subscription.MONTHLY, Subscription.YEARLY, Subscription.ENTERPRISE]:
+            if subscrioption.end_date < timezone.now():
+                return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
 
         result = rewrite_text(text, purpose=purpose, readability=readability, strength=strength, model_name=model)
         

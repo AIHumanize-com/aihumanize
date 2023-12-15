@@ -4,6 +4,7 @@ from payments.models import  Subscription, WordCountTracker
 from dashboard.models import Documents
 # Inline admin for Subscription in the UserModel admin
 # Inline admin for Subscription in the UserModel admin
+from csvexport.actions import csvexport
 
 
 class DocumentsInline(admin.TabularInline):
@@ -41,6 +42,7 @@ class UserAdmin(admin.ModelAdmin):
     inlines = [SubscriptionInline, DocumentsInline]
     list_display = ('email', 'fullname', 'is_active')
     search_fields = ('email',)
+    actions = [csvexport]
 
     class SubscriptionTypeListFilter(admin.SimpleListFilter):
         title = 'subscription type'
@@ -69,6 +71,7 @@ class SubscriptionAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'plan_type', 'user')  # Making 'user' and 'plan_type' clickable
 
     search_fields = ('user__email',)
+    actions = [csvexport]
 
 # Register your custom admin classes
 admin.site.register(UserModel, UserAdmin)

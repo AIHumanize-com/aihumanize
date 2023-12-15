@@ -13,4 +13,5 @@ wait-for-it==2.2.1
 gunicorn==20.1.0
 requests
 django-ckeditor-5
+django-admin-csvexport
 
