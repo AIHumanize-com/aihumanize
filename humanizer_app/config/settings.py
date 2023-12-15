@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "django_ckeditor_5",
+    'csvexport',
     # local apps    
     "users",
     "common",
