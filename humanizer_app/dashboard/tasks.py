@@ -40,10 +40,10 @@ def create_documents_record(input_text, output_text, user_id, purpose, level, re
         )
 
         # Update the WordCountTracker
-        WordCountTracker.objects.filter(
-            subscription__user_id=user_id,
-            subscription__is_active=True
-        ).update(words_used=F('words_used') + word_count)
+        # WordCountTracker.objects.filter(
+        #     subscription__user_id=user_id,
+        #     subscription__is_active=True
+        # ).update(words_used=F('words_used') + word_count)
         
     return document.id  # Optionally return the document ID for further reference
 

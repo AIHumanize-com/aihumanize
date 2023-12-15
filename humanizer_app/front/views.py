@@ -67,10 +67,9 @@ def humanizer(request):
             return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
         # restrict if user subscription is not active
         
+
         result = rewrite_text(text, purpose=purpose, readability=readability, strength=strength, model_name=model)
-        # detection_result = detect_and_classify(result)
-        # if detection_result["human_avarage"] < 70:
-        #     result = rewrite_text(text, purpose=purpose, readability=None, strength=None)
+        
 
 
         create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=None, readibility=None)
