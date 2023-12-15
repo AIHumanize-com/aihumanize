@@ -82,13 +82,13 @@ def create_documents_record(input_text, output_text, user_id, purpose, level, re
 #         campaign.save()
 
 @shared_task
-def send_email_batch(campaign_id, start_index=101):
+def send_email_batch(campaign_id, start_index=0):
     campaign = EmailCampaign.objects.get(id=campaign_id)
     all_recipient_ids = campaign.recipients[start_index:]
 
     # Calculate batch sizes and limits
-    batch_size = 500  # Number of recipients per email
-    daily_limit = 1000  # Half of your daily limit (2000 / 2)
+    batch_size = 100  # Number of recipients per email
+    daily_limit = 100  # Half of your daily limit (2000 / 2)
     daily_recipient_limit = daily_limit * batch_size
 
     # Determine the range for this batch
