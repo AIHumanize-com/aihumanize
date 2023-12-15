@@ -13,7 +13,7 @@ from django.template.loader import render_to_string
 from django.core.mail import get_connection
 
 @shared_task
-def create_documents_record(input_text, output_text, user_id, purpose, level, readibility):
+def create_documents_record(input_text, output_text, user_id, purpose, level, readibility, model):
     """
     Create a record for Documents model with the given input_text, output_text, and user.
 
@@ -27,23 +27,20 @@ def create_documents_record(input_text, output_text, user_id, purpose, level, re
     """
     word_count = len(input_text.split())
     
-    with transaction.atomic():
+    # with transaction.atomic():
         # Create the Documents record
-        document = Documents.objects.create(
-            input_text=input_text,
-            output_text=output_text,
-            user_id=user_id,
-            words_used=word_count,
-            purpose=purpose,
-            level=level,
-            readibility=readibility
-        )
+    document = Documents.objects.create(
+        input_text=input_text,
+        output_text=output_text,
+        user_id=user_id,
+        words_used=word_count,
+        purpose=purpose,
+        level=level,
+        readibility=readibility,
+        model=model,
+    )
 
-        # Update the WordCountTracker
-        # WordCountTracker.objects.filter(
-        #     subscription__user_id=user_id,
-        #     subscription__is_active=True
-        # ).update(words_used=F('words_used') + word_count)
+       
         
     return document.id  # Optionally return the document ID for further reference
 
