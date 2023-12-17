@@ -1,9 +1,12 @@
 {% extends 'dashboard/main.html' %}
 
 {% load static %}
+
 {% block content %}
 
+<style>
 
+</style>
     <div class="nk-editor">
         <div class="nk-editor-header">
             <div class="nk-editor-title">
@@ -79,9 +82,14 @@
                                     <div class="form-group">
                                         <label class="form-label">Select Template</label>
                                         <div class="form-control-wrap">
-                                            <select class="js-select" data-search="true" data-sort="false">
-                                                <option value="1">Social Media Posts</option>
-                                                <option value="2">Website Copy</option>
+                                            <select class="js-select" data-search="true" data-sort="false" id="content_type">
+                                                <option value="Blog Title">Blog Title</option>
+                                                <option value="Blog Outline">Blog Outline</option>
+                                                <option value="blog_post">Blog Post</option>
+                                                <option value="social_media_facebook">Social Media Post - Facebook</option>
+                                                <option value="social_media_twitter">Social Media Post - Twitter</option>
+                                                <option value="ad_content">Ad Content</option>
+                                                <option value="email">Email Content</option>
                                             </select>
                                         </div>
                                     </div>
@@ -113,9 +121,9 @@
                                         <label class="form-label">Select Language</label>
                                         <div class="form-control-wrap">
                                             <select class="js-select" id="selectLanguage" data-search="true" data-sort="false">
-                                                <option value="1">English US</option>
-                                                <option value="2">Español</option>
-                                                <option value="3">Français</option>
+                                                <option value="English US">English US</option>
+                                                <option value="Español">Español</option>
+                                                <option value="Français">Français</option>
                                             </select>
                                         </div>
                                     </div>
@@ -125,9 +133,9 @@
                                         <label class="form-label">Select Tone</label>
                                         <div class="form-control-wrap">
                                             <select class="js-select" id="selectTone" data-search="true" data-sort="false">
-                                                <option value="1">Friendly</option>
-                                                <option value="2">Creative</option>
-                                                <option value="3">Extreme</option>
+                                                <option value="Friendly">Friendly</option>
+                                                <option value="Creative">Creative</option>
+                                                <option value="Extreme">Extreme</option>
                                             </select>
                                         </div>
                                     </div>
@@ -161,7 +169,7 @@
 <div id="customPopover" class="popover" style="display: none; position: absolute;">
     <div class="popover-body">
         
-        <button class="btn btn-outline-light" style="display: flex; align-items: center;">
+        <button class="btn btn-outline-light" id="extendButton" style="display: flex; align-items: center;">
             <img src="{% static '/assets/images/aihumanize_icon.png' %}" alt="" class="popover-img"
                 style="width: 40px; height: 30px; margin-right: 10px;">
 
@@ -191,13 +199,15 @@
         var keywords = document.getElementById('primaryKeywords').value;
         var language = document.getElementById('selectLanguage').value;
         var tone = document.getElementById('selectTone').value;
+        var content_type = document.getElementById('content_type').value;
 
         // Prepare the data to be sent
         var data = {
             topic: topic,
             keywords: keywords,
             language: language,
-            tone: tone
+            tone: tone,
+            content_type: content_type
         };
 
         // Send a POST request
@@ -211,14 +221,14 @@
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
+              
                 tinymce.get('editor-v1').setContent(data.result);
                 updateCounts(); // Update the HTML with the response
                 button.innerHTML = originalButtonText;
                 button.disabled = false;
             })
             .catch((error) => {
-                console.error('Error:', error);
+           
                 button.innerHTML = originalButtonText;
                 button.disabled = false;
             });
@@ -293,25 +303,143 @@
 </script>
 
 <script>
+    var currentSelection = null; 
+     function hidePopover(event) {
+            var popover = document.getElementById('customPopover');
+            var extendButton = document.getElementById('extendButton');
+           
+            // Only hide the popover if the click was outside the popover and not on the extend button
+            if (popover && (!event || (!popover.contains(event.target) && event.target !== extendButton))) {
+                popover.style.display = 'none';
+            }
+        }
+    function getFullParagraphsFromSelection(iframeDocument, selection) {
+            var range = selection.getRangeAt(0);
+
+            // Starting and ending nodes of the selection
+            var startNode = range.startContainer;
+            var endNode = range.endContainer;
+
+            // Get the closest paragraph ancestor of the starting and ending nodes
+            var startParagraph = startNode.nodeType === 1 ? startNode : startNode.parentNode;
+            while (startParagraph && startParagraph.nodeName !== 'P') {
+                startParagraph = startParagraph.parentNode;
+            }
+
+            var endParagraph = endNode.nodeType === 1 ? endNode : endNode.parentNode;
+            while (endParagraph && endParagraph.nodeName !== 'P') {
+                endParagraph = endParagraph.parentNode;
+            }
+
+            // Collect all paragraphs from the start to the end of the selection
+            var paragraphs = [];
+            var currentElement = startParagraph;
+            while (currentElement) {
+                paragraphs.push(currentElement.textContent || currentElement.innerText);
+                if (currentElement === endParagraph) {
+                    break;
+                }
+                currentElement = currentElement.nextElementSibling;
+            }
+
+            return paragraphs.join('\n\n'); // Join paragraphs with two newlines
+        }
+
     document.addEventListener('DOMContentLoaded', function () {
-        window.onload = function () {
+        window.onload = function (event) {
             var iframe = document.getElementById('editor-v1_ifr');
-            console.log('Iframe loaded');
-            console.log(iframe);
+     
+            var extendButton = document.getElementById('extendButton');
+
+            extendButton.addEventListener('click', function () {
+                if (currentSelection) {
+                    if (currentSelection) {
+                        this.innerHTML = 'Extending... <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+                        this.disabled = true;
+                        var fullText = getFullParagraphsFromSelection(iframe.contentDocument || iframe.contentWindow.document, currentSelection);
+        
+                        var keywords = document.getElementById('primaryKeywords').value;
+                        var language = document.getElementById('selectLanguage').value;
+                        var tone = document.getElementById('selectTone').value;
+
+                        var dataToSend = {
+                            text: fullText, // Assuming the full text is the topic
+                            keywords: keywords,
+                            language: language,
+                            tone: tone
+                        };
+
+                        fetch('/dashboard/extend_text_view/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': getCsrfToken() // Ensure you have a CSRF token if required by your Django setup
+                            },
+                            body: JSON.stringify(dataToSend)
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                hidePopover(event);
+                                var editor = tinymce.get('editor-v1');
+                                if (editor && currentSelection) {
+                                    var range = currentSelection.getRangeAt(0);
+                                    var endContainer = range.endContainer;
+
+                                    // Traverse up to find the paragraph node
+                                    var paragraphNode = endContainer.nodeType === 3 ? endContainer.parentNode : endContainer; // 3 is a text node
+                                    while (paragraphNode.nodeName !== 'P' && paragraphNode.parentNode) {
+                                        paragraphNode = paragraphNode.parentNode;
+                                    }
+
+                                    // Define the new content as a separate paragraph
+                                    var newContentHtml = '<p style="background-color: #90ee90; transition: background-color 3s;">' + data.result + '</p>';
+
+                                    // Insert the new content after the paragraph
+                                    if (paragraphNode && paragraphNode.nodeName === 'P') {
+                                        // We insert a new paragraph after the current paragraph
+                                        var newParagraph = editor.getDoc().createElement('p');
+                                        newParagraph.innerHTML = data.result; // Insert the result
+                                        newParagraph.style.backgroundColor = '#90ee90'; // Apply background color
+
+                                        // Place the new paragraph after the last paragraph of the selection
+                                        paragraphNode.parentNode.insertBefore(newParagraph, paragraphNode.nextSibling);
+
+                                        // Set a timer to remove the background color after 3 seconds
+                                        setTimeout(() => {
+                                            newParagraph.style.backgroundColor = ''; // Remove the background color
+                                        }, 3000);
+                                    }
+
+                                    editor.focus(); // Focus the editor
+                                }
+                                console.log('Response from server:', data);
+                                extendButton.innerHTML = `<img src="{% static '/assets/images/aihumanize_icon.png' %}" alt="" class="popover-img"
+                style="width: 40px; height: 30px; margin-right: 10px;"> Extend Content`;
+                                extendButton.disabled = false;
+                                // Process the response data as needed
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    }
+                    // Handle the extended text as needed
+                }
+            });
             // Make sure the iframe is completely loaded
             iframe.addEventListener('load', function () {
                 var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-                console.log('Iframe loaded');
+             
                 // Function to show the popover at the selected text position
-                function showPopover() {
+                function showPopover(event) {
                     var enhancementModeCheckbox = document.getElementById('flexSwitchChecked');
                     if (!enhancementModeCheckbox.checked) {
                         // If the enhancement mode checkbox is not checked, do nothing
                         return;
                     }
 
-                    var selection = iframeDocument.getSelection();
+                    var selection = iframeDocument.getSelection(event);
                     if (selection.rangeCount > 0 && !selection.isCollapsed) {
+                        currentSelection = selection;
                         var range = selection.getRangeAt(0);
                         var rect = range.getBoundingClientRect();
 
@@ -328,10 +456,10 @@
                             popover.style.left = left + 'px';
                             popover.style.display = 'block';
                         } else {
-                            hidePopover();
+                            // hidePopover(event);
                         }
-                    } else {
-                        hidePopover();
+                    }  else {
+                        // hidePopover(event);
                     }
                 }
 
@@ -339,15 +467,12 @@
 
 
                 // Function to hide the popover
-                function hidePopover() {
-                    var popover = document.getElementById('customPopover');
-                    popover.style.display = 'none';
-                }
+               
 
                 // Attach event listener for text selection within the iframe
                 iframeDocument.addEventListener('selectionchange', function () {
                     setTimeout(function () { // Timeout allows for accurate selection range calculation
-                        console.log('Selection changed');
+                     
                         showPopover();
                     }, 0);
                 });
@@ -355,17 +480,20 @@
                 // Optionally, hide the popover when clicking outside
                 document.addEventListener('click', function (event) {
                     if (!iframe.contains(event.target)) {
-                        hidePopover();
+                        // hidePopover(event);
                     }
                 });
 
                 // Optionally, hide the popover when the iframe body loses focus
-                iframeDocument.body.addEventListener('blur', function () {
-                    hidePopover();
+                iframeDocument.body.addEventListener('blur', function (event) {
+                    // hidePopover(event);
                 });
             });
         }});
-
-
+        
+    document.addEventListener('click', function (event) {
+        hidePopover(event);
+    });
+    
 </script>
 {% endblock %}
