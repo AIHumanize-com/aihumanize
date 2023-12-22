@@ -22,10 +22,10 @@ def rewrite_text(original_text, purpose, readability, strength, model_name):
     readability_prompt = f"This text should be written at a {readability_description}"
     if model_name == "Falcon":
         model = "gpt-3.5-turbo-1106"
-        system_prompt = purposes[purpose]  + " " + "change words and terms with snonymous"
+        system_prompt = purposes[purpose]  + " " + "keep wiriting style and tone"
     elif model_name == "Maestro":
         model = "gpt-4-1106-preview"
-        system_prompt = prompts[purpose] + " " + "change words and terms with snonymous"
+        system_prompt = prompts[purpose] + " " + "keep wiriting style and tone"
 
     print(system_prompt)
     # Updated system prompt
