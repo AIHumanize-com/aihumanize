@@ -39,13 +39,14 @@ def humanizer(request):
         body = json.loads(body_unicode)
     
         text = body["text"]
-        purpose = body["purpose"]
+        # purpose = body["purpose"]
         model = body["model"]
-        readability = None
-        strength = None
+        # readability = None
+        # strength = None
         if model == "Maestro":
-            readability = body["readability"]
-            strength = body["level"]
+            pass
+            # readability = body["readability"]
+            # strength = body["level"]
         else:
             model = "Falcon"
 
@@ -70,11 +71,11 @@ def humanizer(request):
             if subscrioption.end_date < timezone.now():
                 return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
 
-        result = rewrite_text(text, purpose=purpose, readability=readability, strength=strength, model_name=model)
+        result = rewrite_text(text, purpose="general", readability="university", strength="easy", model_name=model)
         
 
 
-        create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=None, readibility=None, model=model)
+        create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose="general", level=None, readibility=None, model=model)
         word_count_tracker.words_used += word_count
         word_count_tracker.save()
         return JsonResponse({"text": result})
