@@ -7,7 +7,7 @@ purposes = {
     "business_material": "Modify this text for business material, enhancing its perplexity and burstiness. Introduce unpredictability in language and varied sentence structures. Keep the tone professional, focusing on clarity and efficiency, while adding natural human nuances.",
     "legal_material": "Convert this text into legal material format, increasing its perplexity and burstiness. Use precise and formal language, but introduce varied sentence structures and unpredictability in word choices. Ensure clarity, objectivity, and a tone suitable for legal documents.",
     "marketing_material": "Rewrite this text for marketing purposes by increasing its perplexity and burstiness, use short words and low amount of syllables in sentences, use short words and low amount of syllables in sentences.  The language should grab attention, spark interest, and prompt action, all while preserving the core message. Aim for a balance between creativity and clarity that resonates with a marketing audience and enhances the text's appeal, ensuring it feels unique and less formulaic.",
-    "general": "Rewrite the text with high degree of perplexity and burstiness, use short words and low amount of syllables in sentences. Introduce unpredictability in language choices, and create more variation in sentence structures and lengths. Avoid monotonous tones, predictable word choices, and overly formal language."
+    "general": "Rewrite the text with high degree of perplexity and burstiness, use short words and low amount of syllables in sentences."
 }
 
 strength_levels = {
