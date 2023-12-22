@@ -1,5 +1,5 @@
 local:
-	docker compose -f docker-compose.debug.yml up 
+	docker compose -f docker-compose.debug.yml up  --build
 
 test:
 	docker compose  -f docker-compose.debug.yml run --rm django sh -c "python manage.py test"
