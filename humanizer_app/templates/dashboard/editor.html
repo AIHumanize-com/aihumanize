@@ -1,7 +1,13 @@
 {% extends 'dashboard/main.html' %}
 
 {% load static %}
+{% block meta_tags %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.js"></script>
 
+
+<title>AI Content Writer</title>
+{% endblock %}
 {% block content %}
 
 <style>
@@ -10,31 +16,8 @@
     <div class="nk-editor">
         <div class="nk-editor-header">
             <div class="nk-editor-title">
-                <h4 class="me-3 mb-0 line-clamp-1">2023-02-03 Untitled</h4>
-                <ul class="d-inline-flex align-item-center">
-                    <li>
-                        <button class="btn btn-sm btn-icon btn-zoom">
-                            <em class="icon ni ni-pen"></em>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="btn btn-sm btn-icon btn-zoom">
-                            <em class="icon ni ni-star"></em>
-                        </button>
-                    </li>
-                    <li class="d-xl-none me-n1">
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-icon btn-zoom" type="button" data-bs-toggle="dropdown">
-                                <em class="icon ni ni-menu-alt-r"></em>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
+                <h4 class="me-3 mb-0 line-clamp-1">AI Content Writer - Beta</h4>
+               
             </div>
             <div class="nk-editor-tools d-none d-xl-flex">
                 <ul class="d-inline-flex gap gx-3 gx-lg-4 pe-4 pe-lg-5">
@@ -53,14 +36,13 @@
                                 <em class="icon ni ni-chevron-down"></em>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="#doc">Export as Doc</a></li>
+                                
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <button class="btn btn-md btn-primary rounded-pill" type="button"> Save </button>
+                        <a href="{% url 'index' %}" target="_blank" class="btn btn-md btn-primary rounded-pill" type="button"> Humanize </a>
                     </li>
                 </ul>
             </div>
@@ -83,13 +65,16 @@
                                         <label class="form-label">Select Template</label>
                                         <div class="form-control-wrap">
                                             <select class="js-select" data-search="true" data-sort="false" id="content_type">
+                                                <option value="essay">Essay</option>
+                                                <option value="blog_post" selected>Blog Post</option>
                                                 <option value="Blog Title">Blog Title</option>
-                                                <option value="Blog Outline">Blog Outline</option>
-                                                <option value="blog_post">Blog Post</option>
+                                                <option value="blog_outline">Blog Outline</option>
                                                 <option value="social_media_facebook">Social Media Post - Facebook</option>
                                                 <option value="social_media_twitter">Social Media Post - Twitter</option>
+                                                <option value="social_media_linkedin">Social Media Post - Linkedin</option>
                                                 <option value="ad_content">Ad Content</option>
                                                 <option value="email">Email Content</option>
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -99,9 +84,10 @@
                                         <label class="form-label">What do you want to generate?</label>
                                         <div class="form-control-wrap">
                                             <textarea cols="30" rows="4"
-                                                class="form-control" id="textToGenerate">Write a Facebook post about openai that revolutionizes the world through the power of data.</textarea>
+                                                class="form-control" id="textToGenerate">How AI detectors work?</textarea>
                                         </div>
-                                        <div class="form-note d-flex justify-content-end"><span>0/500 Characters</span>
+                                        <div class="form-note d-flex justify-content-end"><span>Please enter only the topic for your request. Avoid using phrases such as 'write' or 'generate' to ensure the best
+                                        results.</span>
                                         </div>
                                     </div>
                                 </div><!-- .col -->
@@ -110,7 +96,7 @@
                                         <label for="primaryKeywords" class="form-label">Primary Keywords</label>
                                         <div class="form-control-wrap">
                                             <input  id="primaryKeywords" type="text" class="form-control"
-                                                value="chatgpt, openai, facebook" />
+                                                value="AI detectors, AI content, AI Humanizers" />
                                         </div>
                                         <div class="form-note d-flex justify-content-between"><span>Separated with a
                                                 comma</span><span>0/10</span></div>
@@ -124,6 +110,7 @@
                                                 <option value="English US">English US</option>
                                                 <option value="Español">Español</option>
                                                 <option value="Français">Français</option>
+                                               
                                             </select>
                                         </div>
                                     </div>
@@ -184,7 +171,37 @@
     let myContent = document.getElementById("myContent");
     myContent.classList.add("nk-content-empty");
 </script>
+<script>
+    
 
+
+
+
+
+
+
+       document.querySelector('.dropdown-item[href="#doc"]').addEventListener('click', function () {
+            var content = tinymce.get('editor-v1').getContent({ format: 'html' });
+
+            // Create a temporary element to hold the content
+            var tempDiv = document.createElement('div');
+            tempDiv.innerHTML = content;
+
+            // Try to find the first h1 element
+            var firstH1 = tempDiv.querySelector('h1');
+            var filename = firstH1 ? firstH1.textContent.trim() : 'default-filename';
+            filename = filename || 'default-filename'; // Fallback if h1 was found but was empty
+
+            // Replace any characters that are invalid in filenames
+            filename = filename.replace(/[<>:"\/\\|?*\x00-\x1F]/g, '_').substring(0, 255);
+
+            // Convert the content to a DOCX blob
+            var converted = htmlDocx.asBlob(content);
+            saveAs(converted, filename + '.docx');
+        });
+
+
+</script>
 <script>
    document.getElementById('generateButton').addEventListener('click', function (event) {
         event.preventDefault(); // Prevents the default form submission
@@ -316,34 +333,38 @@
     function getFullParagraphsFromSelection(iframeDocument, selection) {
             var range = selection.getRangeAt(0);
 
+            // Define a list of block elements to include in the selection
+            var blockElements = ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+
             // Starting and ending nodes of the selection
             var startNode = range.startContainer;
             var endNode = range.endContainer;
 
-            // Get the closest paragraph ancestor of the starting and ending nodes
-            var startParagraph = startNode.nodeType === 1 ? startNode : startNode.parentNode;
-            while (startParagraph && startParagraph.nodeName !== 'P') {
-                startParagraph = startParagraph.parentNode;
+            // Get the closest block element ancestor of the starting and ending nodes
+            var startBlock = startNode.nodeType === 1 ? startNode : startNode.parentNode;
+            while (startBlock && !blockElements.includes(startBlock.nodeName)) {
+                startBlock = startBlock.parentNode;
             }
 
-            var endParagraph = endNode.nodeType === 1 ? endNode : endNode.parentNode;
-            while (endParagraph && endParagraph.nodeName !== 'P') {
-                endParagraph = endParagraph.parentNode;
+            var endBlock = endNode.nodeType === 1 ? endNode : endNode.parentNode;
+            while (endBlock && !blockElements.includes(endBlock.nodeName)) {
+                endBlock = endBlock.parentNode;
             }
 
-            // Collect all paragraphs from the start to the end of the selection
-            var paragraphs = [];
-            var currentElement = startParagraph;
+            // Collect all block elements from the start to the end of the selection
+            var blocks = [];
+            var currentElement = startBlock;
             while (currentElement) {
-                paragraphs.push(currentElement.textContent || currentElement.innerText);
-                if (currentElement === endParagraph) {
+                blocks.push(currentElement.textContent || currentElement.innerText);
+                if (currentElement === endBlock) {
                     break;
                 }
                 currentElement = currentElement.nextElementSibling;
             }
 
-            return paragraphs.join('\n\n'); // Join paragraphs with two newlines
+            return blocks.join('\n\n'); // Join blocks with two newlines
         }
+
 
     document.addEventListener('DOMContentLoaded', function () {
         window.onload = function (event) {
@@ -412,7 +433,7 @@
 
                                     editor.focus(); // Focus the editor
                                 }
-                                console.log('Response from server:', data);
+                                
                                 extendButton.innerHTML = `<img src="{% static '/assets/images/aihumanize_icon.png' %}" alt="" class="popover-img"
                 style="width: 40px; height: 30px; margin-right: 10px;"> Extend Content`;
                                 extendButton.disabled = false;
@@ -456,7 +477,7 @@
                             popover.style.left = left + 'px';
                             popover.style.display = 'block';
                         } else {
-                            // hidePopover(event);
+                            hidePopover(event);
                         }
                     }  else {
                         // hidePopover(event);

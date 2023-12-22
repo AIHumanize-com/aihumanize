@@ -13,7 +13,7 @@ triangle = """<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fil
 def detect_and_classify(text):
     # Your Python code
     payload = {"content": text, "user_secret": "#Temuriy1212Ash"}
-    response = requests.post("https://api.aihumanize.com/detect/", data=json.dumps(payload))
+    response = requests.post("https://detect.detecting-ai.com/detect/", data=json.dumps(payload))
     detection = response.json()
     ai_avarage = detection['avarage_result']
     human_avarage = 1 - ai_avarage
