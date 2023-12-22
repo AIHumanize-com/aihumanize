@@ -11,7 +11,7 @@ import stripe
 from django.conf import settings
 import datetime
 from django.contrib.auth import logout
-from common.content_writer import generate_content
+from common.content_writer import generate_content, extend_text
 import json
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -202,19 +202,41 @@ def generate_text(request):
     if request.method == 'POST':
         # Parse JSON data from the request body
         data = json.loads(request.body)
-
         topic = data.get('topic')
         tone = data.get('tone')
         keywords = data.get('keywords')
         language = data.get('language')
+        content_type = data.get('content_type')
         min_words_count = data.get('min_words_count')
         max_words_count = data.get('max_words_count')
         user = request.user
         document_id = uuid.uuid4()
 
         # Call your custom text generation function
-        result = generate_content(topic, tone, keywords, language, max_words_count, min_words_count)
-        print(result)
+        result = generate_content(content_type, topic, tone, keywords, language)
+        
         # Return the result as JSON
         return JsonResponse({'result': result, 'document_id': str(document_id)})
+    
+
+
+@login_required
+def extend_text_view(request):
+    if request.method == 'POST':
+        # Parse JSON data from the request body
+        data = json.loads(request.body)
+        text = data.get('text')
+        tone = data.get('tone')
+        keywords = data.get('keywords')
+        language = data.get('language')
+        min_words_count = data.get('min_words_count')
+        max_words_count = data.get('max_words_count')
+       
+       
+
+        # Call your custom text generation function
+        result = extend_text(text, tone, keywords, language, max_words_count, min_words_count)
+   
+        
+        return JsonResponse({'result': result})
     
