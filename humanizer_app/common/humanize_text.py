@@ -25,7 +25,9 @@ def rewrite_text(original_text, purpose, readability, strength, model_name):
         system_prompt = purposes[purpose]  + " " + "change words and terms with snonymous"
     elif model_name == "Maestro":
         model = "gpt-4-1106-preview"
-        system_prompt = prompts[purpose] + " " + readability_prompt + " " + strength_prompt
+        system_prompt = prompts[purpose] + " " + "change words and terms with snonymous"
+
+    print(system_prompt)
     # Updated system prompt
     print(model)
     try:
@@ -42,6 +44,7 @@ def rewrite_text(original_text, purpose, readability, strength, model_name):
                 },
             ],
         )
+        
         return response.choices[0].message.content
     except Exception as e:
         print(f"An error occurred: {e}")
