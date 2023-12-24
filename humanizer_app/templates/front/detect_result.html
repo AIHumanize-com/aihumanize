@@ -1,0 +1,101 @@
+<div class="row" id="result-row-detect" style="display: none;">
+    <div class="box-outer d-flex justify-center">
+        <div class="result-box">
+            <div>
+                <h2>AI Detector Results:</h2>
+            </div>
+
+            <div>
+                <div class="super-box">
+                    <div class="result-main-box">
+                  
+                    </div>
+                  
+                        <div class="row justify-content-center" >
+                            <div class="col-md-2">
+                                <div id="ai-detection-gauge" style="width: 150px; height: 150px; margin: 0 auto"></div>
+                            </div>
+                            <div class="col-md-10" id="ai-detection-text">
+                                <!-- The AI detection text will be inserted here by JavaScript -->
+                            </div>
+                            <div class="border-b"></div>
+                        </div>
+                      <div class="row" > 
+                        <div class="col-md-12">
+                            <div style="display: flex; justify-content: center;">
+                                <div style="width: 70%; max-width: 900px;">
+                                    <div id="myRadarChart"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-b"></div>
+
+                        <div class="col-md-6" style="display: flex; justify-content: center;">
+                            <div class="row">
+                            <div class="col-md-12 " style="display: flex; justify-content: center;">
+                                <div id="gaugePerplexity" style="width: 300px; height: 200px; float: left"></div>
+                            </div>
+                            <div class="col-md-10">
+                                <p class="text-secondary mt-3"><strong>Perplexity</strong> is a measure of how unpredictable a text is and how likely it is to confuse or perplex the average reader. AI
+                                language models strive to produce texts with low perplexity</p>
+                            </div>
+                            </div>
+                            
+
+                        </div>
+                        <div class="col-md-6" style="display: flex; justify-content: center;">
+                            <div class="row">
+                                <div class="col-md-12" >
+                                <div id="gaugeSentenceLength" style="width: 300px; height: 200px; float: left"></div>
+                                </div>
+                                
+                                <div class="col-md-12 " >
+                                    <p class="text-secondary mt-3"><strong>Sentence Length</strong> indicates the average number of words per sentence in a text. Shorter sentences may suggest human
+                                    writing, while unusually long or uniform sentences can be a marker of AI-generated content.</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="border-b"></div>
+                        <div class="col-md-6" style="display: flex; justify-content: center;">
+                            <div class="row">
+                                <div class="col-md-12" style="display: flex; justify-content: center;">
+                            <div id="gaugeLengthVariation" style="width: 300px; height: 200px; float: left"></div>
+                            </div>
+                            <div class="col-md-10 ">
+                                <p class="text-secondary mt-3"><strong>Length Variation </strong>  reflects the diversity of sentence lengths in text. Higher variation suggests human writing, while low
+                                variation may indicate AI generation.</p>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="display: flex; justify-content: center;">
+                            <div class="row">
+                                <div class="col-md-12" >
+                                    <div id="gaugeLengthNormality" style="width: 300px; height: 200px; float: left"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="text-secondary mt-3"> <strong> Length Normality </strong> scores text's adherence to typical sentence length patterns. Higher scores could suggest AI generation,
+                                    as AI tends to closely follow these norms, while lower scores often indicate human authorship..</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    
+                    <div class="border-b"></div>
+                    <h5>Perplexities</h5>
+                    <div id="breakdown-container"></div>
+
+                        
+                        </div>
+           
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

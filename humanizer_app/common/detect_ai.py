@@ -41,3 +41,17 @@ def detect_and_classify(text):
 
 
 # print(detect_and_classify("I am not AI beleive me"))
+
+
+def detect_with_perx(text):
+    payload = {"content": text, "user_secret": "#Temuriy1212Ash"}
+    response = requests.post("https://prex.detecting-ai.com/detect/", data=json.dumps(payload))
+    try:
+      detection = response.json()
+    except:
+        
+      payload = {"content": text, "user_secret": "#Temuriy1212Ash"}
+      response = requests.post("https://prex.detecting-ai.com/detect/", data=json.dumps(payload))
+      detection = response.json()
+    
+    return [detection]

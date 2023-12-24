@@ -407,7 +407,8 @@ var purpose = document.getElementById('purpose');
 humanizeButton.addEventListener('click', function () {
 	var textareaContent = document.getElementById('input-text').value;
 	var wordCount = textareaContent.split(/\s+/).filter(function (n) { return n != '' }).length;
-
+	let resultDivDetect = document.getElementById("result-row-detect");
+	resultDivDetect.style.display = "none";
 	if (wordCount < 30) {
 		let error_p = document.getElementById("min_word_error")
 		error_p.style.display = ''
@@ -504,102 +505,102 @@ document.querySelector('img[alt="copy"]').addEventListener('click', function () 
 });
 
 
-document.getElementById("ai-btn").addEventListener("click", function () {
-    var button = this;
+// document.getElementById("ai-btn").addEventListener("click", function () {
+//     var button = this;
     
-    // Disable the button
-    button.disabled = true;
-	var detectorAnswer = document.getElementById("detector-answer");
-	var tableDiv = document.getElementById("tableDiv");
-	var aiAvarage = document.getElementById("aiAvarage");
-	var humanAvarage = document.getElementById("humanAvarage");
-	detectorAnswer.style.display = "none";
-	tableDiv.style.display = "none";
-    // Create and append the spinner element
-    var spinner = document.createElement("span");
-    spinner.classList.add("spinner-border", "spinner-border-sm");
-    spinner.setAttribute("role", "status");
-    spinner.setAttribute("aria-hidden", "true");
+//     // Disable the button
+//     button.disabled = true;
+// 	var detectorAnswer = document.getElementById("detector-answer");
+// 	var tableDiv = document.getElementById("tableDiv");
+// 	var aiAvarage = document.getElementById("aiAvarage");
+// 	var humanAvarage = document.getElementById("humanAvarage");
+// 	detectorAnswer.style.display = "none";
+// 	tableDiv.style.display = "none";
+//     // Create and append the spinner element
+//     var spinner = document.createElement("span");
+//     spinner.classList.add("spinner-border", "spinner-border-sm");
+//     spinner.setAttribute("role", "status");
+//     spinner.setAttribute("aria-hidden", "true");
     
-    // Text to display while loading
-    var loadingText = document.createTextNode(" Loading...");
+//     // Text to display while loading
+//     var loadingText = document.createTextNode(" Loading...");
     
-    // Clear the button's content and append the spinner and loading text
-    button.innerHTML = '';
-    button.appendChild(spinner);
-    button.appendChild(loadingText);
+//     // Clear the button's content and append the spinner and loading text
+//     button.innerHTML = '';
+//     button.appendChild(spinner);
+//     button.appendChild(loadingText);
 
-    var inputText = document.getElementById("input-text").value;
-    var wordCount = inputText.split(/\s+/).filter(Boolean).length;
+//     var inputText = document.getElementById("input-text").value;
+//     var wordCount = inputText.split(/\s+/).filter(Boolean).length;
 
-    if (wordCount < 30) {
-        // Show an error message
-        document.getElementById("error-message").textContent = "Word count must be at least 30.";
-        button.disabled = false;
-        button.innerHTML = "Check for AI"; // Restore the original button text
-        return;
-    }
+//     if (wordCount < 30) {
+//         // Show an error message
+//         document.getElementById("error-message").textContent = "Word count must be at least 30.";
+//         button.disabled = false;
+//         button.innerHTML = "Check for AI"; // Restore the original button text
+//         return;
+//     }
 
-    // Hide the error message
-    document.getElementById("error-message").textContent = "";
-	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+//     // Hide the error message
+//     document.getElementById("error-message").textContent = "";
+// 	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 	
-    // Send a request to the AI backend
-    fetch("/detect/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-			"X-CSRFToken": csrftoken,
-        },
-        body: JSON.stringify({ text: inputText }),
-    })
-        .then(function (response) {
-            return response.json();
-        })
+//     // Send a request to the AI backend
+//     fetch("/detect/", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+// 			"X-CSRFToken": csrftoken,
+//         },
+//         body: JSON.stringify({ text: inputText }),
+//     })
+//         .then(function (response) {
+//             return response.json();
+//         })
 	
-        .then(function (data) {
-            // Handle the response from the AI backend
+//         .then(function (data) {
+//             // Handle the response from the AI backend
 			
-            if (data.error) {
-				// Show an error message
-				 // Show Bootstrap modal if the limit is reached
-				 var limitReachedModal = new bootstrap.Modal(document.getElementById('limitReachedModal'));
-				 limitReachedModal.show();
+//             if (data.error) {
+// 				// Show an error message
+// 				 // Show Bootstrap modal if the limit is reached
+// 				 var limitReachedModal = new bootstrap.Modal(document.getElementById('limitReachedModal'));
+// 				 limitReachedModal.show();
 		 
-				 // Reset the button state
-				 button.disabled = false;
-				 button.innerHTML = "Check for AI"; // Restore the original button text
-				 return;
-			}
+// 				 // Reset the button state
+// 				 button.disabled = false;
+// 				 button.innerHTML = "Check for AI"; // Restore the original button text
+// 				 return;
+// 			}
 
-            // Set the text color based on the detector_result
+//             // Set the text color based on the detector_result
             
 
-            // Set the result text
-            detectorAnswer.innerHTML = data.result_text;
+//             // Set the result text
+//             detectorAnswer.innerHTML = data.result_text;
 			
-            tableDiv.style.display = "block";
-			console.log(data)
-            // Show the detector-answer element
-			aiAvarage.innerHTML = `${data.ai_avarage}%`;
-			humanAvarage.innerHTML = `${data.human_avarage}%`;
-            detectorAnswer.style.display = "block";
+//             tableDiv.style.display = "block";
+// 			console.log(data)
+//             // Show the detector-answer element
+// 			aiAvarage.innerHTML = `${data.ai_avarage}%`;
+// 			humanAvarage.innerHTML = `${data.human_avarage}%`;
+//             detectorAnswer.style.display = "block";
 
-            // Re-enable the button and remove the spinner
-            button.disabled = false;
-            button.innerHTML = "Check for AI"; // Restore the original button text
+//             // Re-enable the button and remove the spinner
+//             button.disabled = false;
+//             button.innerHTML = "Check for AI"; // Restore the original button text
 
-			detectorAnswer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+// 			detectorAnswer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-        })
-        .catch(function (error) {
-            console.error("Error:", error);
+//         })
+//         .catch(function (error) {
+//             console.error("Error:", error);
 			
-            // Re-enable the button and remove the spinner in case of error
-            button.disabled = false;
-            button.innerHTML = "Check for AI"; // Restore the original button text
-        });
-});
+//             // Re-enable the button and remove the spinner in case of error
+//             button.disabled = false;
+//             button.innerHTML = "Check for AI"; // Restore the original button text
+//         });
+// });
 
 
 
@@ -842,3 +843,375 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+
+function renderGauge(renderTo, value, label, description, colors) {
+                Highcharts.chart(renderTo, {
+                    chart: {
+                        type: 'solidgauge',
+                        height: '110%',
+                        events: {
+                            render: function () {
+                                if (!this.customLabel) {
+                                    this.customLabel = this.renderer.label(description,
+                                        this.plotLeft,
+                                        this.plotTop + this.plotHeight + 15,
+                                        'rect',
+                                        0,
+                                        0,
+                                        false,
+                                        false,
+                                        {
+                                            align: 'center',
+                                            zIndex: 5
+                                        })
+                                        .css({
+                                            width: this.plotWidth + 'px',
+                                        })
+                                        .add();
+                                }
+                            }
+                        }
+                    },
+                    title: {text: label },
+                    tooltip: {
+                        enabled: false
+                    },
+                    pane: {
+                        startAngle: -90,
+                        endAngle: 90,
+                        background: {
+                            backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#EEE',
+                            innerRadius: '60%',
+                            outerRadius: '100%',
+                            shape: 'arc'
+                        }
+                    },
+                    yAxis: {
+                        stops: colors
+                        ,
+                        lineWidth: 0,
+                        tickWidth: 0,
+                        minorTickInterval: null,
+                        tickAmount: 2,
+                        title: {
+                            y: -70
+                        },
+                        labels: {
+                            y: 16
+                        },
+                        min: 0,
+                        max: 100,
+                        title: {
+                            text: ''
+                        }
+                    },
+                    plotOptions: {
+                        solidgauge: {
+                            dataLabels: {
+                                y: -50,
+                                borderWidth: 0,
+                                useHTML: true
+                            }
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        name: label,
+                        data: [value],
+                        dataLabels: {
+                            format: '<div style="text-align:center"><span style="font-size:16px;">{y}</span><br/></div>'
+                        }
+                    }]
+                });
+            }
+function updateRadarChart(newDataValues) {
+    const categoryNames = ['Perplexity', 'Sentence Length', 'Length Variation', 'Length Normality'];
+
+    // Function to determine the label based on the value and category
+    function getLabelForValue(value, categoryName) {
+        let isReverse = categoryName === 'Sentence Length' || categoryName === 'Length Normality';
+
+        // For reverse categories: Low values are good (green), high values are bad (red)
+        if (isReverse) {
+            if (value <= 50) {
+                return '<span style="font-weight: bold; color: green;">Low: ' + value + '</span>';
+            } else if (value > 50 && value <= 80) {
+                return '<span style="font-weight: bold; color: orange;">Moderate: ' + value + '</span>';
+            } else {
+                return '<span style="font-weight: bold; color: red;">High: ' + value + '</span>';
+            }
+        }
+        // For standard categories: High values are good (green), low values are bad (red)
+        else {
+            if (value > 80) {
+                return '<span style="font-weight: bold; color: green;">High: ' + value + '</span>';
+            } else if (value > 50 && value <= 80) {
+                return '<span style="font-weight: bold; color: orange;">Moderate: ' + value + '</span>';
+            } else {
+                return '<span style="font-weight: bold; color: red;">Low: ' + value + '</span>';
+            }
+        }
+    }
+
+    // Map categories to their values with labels
+    const categoriesWithValues = categoryNames.map((name, i) => {
+        return name + '<br>' + getLabelForValue(newDataValues[i], name);
+    });
+
+    Highcharts.chart('myRadarChart', {
+        chart: {
+            polar: true,
+            type: 'area'
+        },
+        title: {
+            text: 'Text Analysis Metrics'
+        },
+        pane: {
+            startAngle: 0,
+            endAngle: 360
+        },
+        xAxis: {
+            categories: categoriesWithValues,
+            labels: {
+                useHTML: true // This will allow HTML in the labels
+            },
+            tickmarkPlacement: 'on',
+            lineWidth: 0
+        },
+        yAxis: {
+            min: 0,
+            max: 100,
+            endOnTick: false,
+            showLastLabel: true,
+            title: {
+                text: null
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            },
+            reversedStacks: false
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal',
+                shadow: false,
+                groupPadding: 0,
+                pointPlacement: 'on'
+            }
+        },
+        series: [{
+            name: 'Metrics',
+            data: newDataValues,
+            pointPlacement: 'on'
+        }],
+        credits: {
+            enabled: false // Disable the Highcharts.com credit
+        }
+    });
+}
+
+
+function displayDetailedBreakdown(breakdown) {
+    const breakdownContainer = document.getElementById('breakdown-container');
+    breakdownContainer.innerHTML = ''; // Clear previous content
+
+    breakdown.forEach(wordScorePair => {
+        const word = wordScorePair[0];
+        const score = wordScorePair[1];
+
+        // Create a span element for each word
+        const span = document.createElement('span');
+        span.textContent = word + ' ';
+
+        // Calculate the color based on the score: Lower score gets more intense red
+		
+        const backgroundColor = `rgba(239, 68, 60, ${score})`;
+
+        // Apply styles to the span
+        span.style.backgroundColor = backgroundColor;
+        span.style.margin = '0 2px';
+        span.style.padding = '2px';
+
+        // Append the span to the container
+        breakdownContainer.appendChild(span);
+    });
+}
+
+
+function renderAIDetectionGauge(score) {
+    // Define colors based on the AI score ranges
+     let color;
+		if (score >= 50) {
+			color = '#F60004'; // Light red for AI probability above 50%
+		} else if (score >= 20) {
+			color = '#4CAF50'; // Green for moderate AI probability (20-49%)
+		} else {
+			color = '#8BC34A'; // Lime for low AI probability (below 20%)
+		}
+
+    // Define text based on the AI score
+    let text;
+    if (score < 50) {
+        text = `<h5 class="mt-9">This text is likely to be written by a <span style="color:${color}">Human</span></h5>
+                <p>There is a ${score}% probability this text was entirely written by <span style="color:${color}">AI</span></p>`;
+    } else {
+        text = `<h5 class="mt-9">This text is likely to be written by <span style="color:${color}">AI</span></h5>
+                <p>There is a ${score}% probability this text was entirely written by <span style="color:${color}">AI</span></p>`;
+    }
+
+    // Render the gauge chart
+    Highcharts.chart('ai-detection-gauge', {
+        chart: {
+            type: 'solidgauge',
+            height: '110%',
+        },
+        title: null,
+        pane: {
+            startAngle: 0,
+            endAngle: 360,
+            background: {
+                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#EEE',
+                innerRadius: '80%',
+                outerRadius: '100%',
+                shape: 'arc',
+                borderColor: 'transparent'
+            }
+        },
+        tooltip: {
+            enabled: false
+        },
+        yAxis: {
+            stops: [
+                [1, color] // Use the determined color
+            ],
+            lineWidth: 0,
+            tickPositions: [],
+            min: 0,
+            max: 100,
+            labels: {
+                enabled: false
+            }
+        },
+        plotOptions: {
+            solidgauge: {
+				
+                dataLabels: {
+                    y: -20,
+                    borderWidth: 0,
+                    useHTML: true,
+                    format: '<div style="text-align:center"><span style="font-size:2em;color:' + color + '">{y}%</span></div>'
+                },
+				
+				
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            data: [score],
+            dataLabels: {
+                format: '<div style="text-align:center"><span style="font-size:2em;color:' + color + '">{y}%</span></div>'
+            },
+			radius: '100%',        // Adjust these values to change the thickness of the gauge line
+    		innerRadius: '80%',
+        }]
+    });
+
+    // Update the text element
+    document.getElementById('ai-detection-text').innerHTML = text;
+}
+detectButton = document.getElementById("ai-btn");
+    detectButton.addEventListener("click", function() {
+        var inputText = document.getElementById("input-text").value;
+	    var wordCount = inputText.split(/\s+/).filter(Boolean).length;
+		var spinner = document.createElement("span");
+		let resultDivDetect = document.getElementById("result-row-detect");
+		resultDivDetect.style.display = "none";
+		spinner.classList.add("spinner-border", "spinner-border-sm");
+		spinner.setAttribute("role", "status");
+		spinner.setAttribute("aria-hidden", "true");
+		
+		// Text to display while loading
+		var loadingText = document.createTextNode(" Loading...");
+		
+		// Clear the button's content and append the spinner and loading text
+		detectButton.innerHTML = '';
+		detectButton.appendChild(spinner);
+		detectButton.appendChild(loadingText);
+		if (wordCount < 30) {
+			// Show an error message
+			document.getElementById("error-message").textContent = "Word count must be at least 30.";
+			detectButton.disabled = false;
+			detectButton.innerHTML = "Check for AI"; // Restore the original button text
+			return;
+		}
+       const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+       fetch("/detect/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrftoken,
+            },
+            body: JSON.stringify({ text: inputText }),
+        })
+            .then(function (response) {
+                return response.json();
+            })
+
+            .then(function (data) {
+			
+                // Handle the response from the AI backend
+                if (data.error) {
+                    // Show an error message
+                    // Show Bootstrap modal if the limit is reached
+                    var limitReachedModal = new bootstrap.Modal(document.getElementById('limitReachedModal'));
+                    limitReachedModal.show();
+
+                    // Reset the button state
+                    detectButton.disabled = false;
+                    detectButton.innerHTML = "Check for AI"; // Restore the original button text
+                    return;
+                }
+				console.log(data)
+				const metrics = data[0][1];
+				let aiScorePrex = data[0][0]["AI"];
+				
+				let roundedAIScore = Math.round(aiScorePrex * 100);
+				renderAIDetectionGauge(roundedAIScore);
+				displayDetailedBreakdown(data[0][2]);
+				const updatedValues = Object.values(metrics).map(val => Math.round(val * 100));
+				updateRadarChart(updatedValues);
+				
+				resultDivDetect.style.display = "block";
+				resultDivDetect.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				// Update each gauge with new values
+				
+
+				prex_colors = [[0.1, '#FFC107'], [0.5, '#03A9F4'], [0.9, '#4DB6AC']] 
+				sentence_length_colors = [[0.9, '#4DB6AC'], [0.5, '#03A9F4'], [0.1, '#FFC107']]
+				renderGauge('gaugePerplexity', updatedValues[0], 'Perplexity', 'How familiar a piece of text is to large language models like ChatGPT.', prex_colors);
+				renderGauge('gaugeSentenceLength', updatedValues[1], 'Sentence Length', 'Average length of sentences in a text.', sentence_length_colors);
+				renderGauge('gaugeLengthVariation', updatedValues[2], 'Length Variation', 'Variability of sentence lengths in the text.', prex_colors);
+				renderGauge('gaugeLengthNormality', updatedValues[3], 'Length Normality', 'Conformity of sentence lengths to typical patterns.', sentence_length_colors);
+                // Re-enable the button and remove the spinner
+                detectButton.disabled = false;
+                detectButton.innerHTML = "Check for AI"; // Restore the original button text
+
+                
+
+            })
+            .catch(function (error) {
+                console.error("Error:", error);
+
+                // Re-enable the button and remove the spinner in case of error
+                detectButton.disabled = false;
+                detectButton.innerHTML = "Check for AI"; // Restore the original button text
+            });
+
+    });
