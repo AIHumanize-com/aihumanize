@@ -81,7 +81,7 @@ def humanizer(request):
         return JsonResponse({"text": result})
         
 
-# @csrf_exempt
+@csrf_exempt
 def detect_text(request):
     if request.user.is_authenticated:
         return handle_request(request)
@@ -92,9 +92,9 @@ def detect_text(request):
     counter, created = DetectRequestCounter.objects.get_or_create(ip_address=ip_address)
 
     # Limit the usage to 3 times for non-authenticated users
-    if counter.request_count >= 100:
+    if counter.request_count >= 50:
         return JsonResponse({'error': 'Limit reached'})
-
+    print(ip_address)
     # Increment the request count
     counter.request_count += 1
     counter.save()
