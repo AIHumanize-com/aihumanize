@@ -7,7 +7,7 @@ from .models import DetectRequestCounter, UnregisteredUserWordCount
 from payments.models import WordCountTracker, Subscription
 # Create your views here.
 from dashboard.tasks import create_documents_record
-from common.detect_ai import detect_and_classify
+from common.detect_ai import detect_and_classify, detect_with_perx
 from .forms import ContactForm
 from django.contrib import messages
 from django.utils import timezone
@@ -75,7 +75,7 @@ def humanizer(request):
         
 
 
-        # create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose="general", level=None, readibility=None, model=model)
+        create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose="general", level=None, readibility=None, model=model)
         word_count_tracker.words_used += word_count
         word_count_tracker.save()
         return JsonResponse({"text": result})
@@ -107,8 +107,9 @@ def handle_request(request):
         # Parse JSON from the request body
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
-        result = detect_and_classify(body["text"])
-        return JsonResponse(result)
+        # result = detect_and_classify(body["text"])
+        result  = detect_with_perx(body["text"])
+        return JsonResponse(result, safe=False)
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
