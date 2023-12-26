@@ -403,3 +403,13 @@ CKEDITOR_5_CONFIGS = {
         }
     },
 }
+
+
+from celery.schedules import crontab
+
+CELERY_BEAT_SCHEDULE = {
+    'sync_with_crm_daily': {
+        'task': 'common.tasks.sync_with_crm',
+        'schedule': crontab(hour=1, minute=0),
+    },
+}
