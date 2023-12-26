@@ -25,17 +25,62 @@ readability_levels = {
 }
 
 prompts = {
-    "essay": "Rewrite the text for an academic essay, focusing on high perplexity and burstiness. Use short, simple words and sentences with few syllables. Maintain the original word count, ensuring the text still adheres to academic standards with a precise, formal structure.",
-    "article": "Transform the text into an article format with high perplexity and burstiness. Use concise language with short words and limited syllables per sentence. The article should be engaging and informative, keeping the word count similar to the original, without distinct headers or titles.",
-    "story": "Rewrite the text as a story, emphasizing high perplexity and burstiness. Utilize short words and sentences with minimal syllables. Ensure the narrative is vivid and engaging, while maintaining the original word count.",
-    "cover_letter": "Adapt the text into a cover letter with high perplexity and burstiness. Use simple, brief words and sentences. Keep the word count close to the original, ensuring the letter remains professional and concise, tailored to the specific job and company.",
-    "report": "Revise the text into a formal report format, focusing on high perplexity and burstiness. Employ short words and sentences with few syllables. Keep the word count similar to the original, ensuring the report is clear, concise, and factual, with organized sections.",
-    "business_material": "Modify the text for business material, aiming for high perplexity and burstiness. Use straightforward, short words and simple sentences. Maintain the original word count, focusing on clarity and efficiency for a business audience.",
-    "legal_material": "Convert the text to legal material with high perplexity and burstiness. Use precise, short legal terms and concise sentences. Keep the word count similar to the original, ensuring the content is thorough, clear, and suitable for legal documents.",
-    "marketing_material": "Transform the text for marketing purposes, emphasizing high perplexity and burstiness. Employ engaging, short words and sentences with limited syllables. Maintain the word count of the original text, ensuring the language is persuasive and appealing to the target audience.",
-    "general": "Rewrite the text with high degree of perplexity and burstiness, use short words and low amount of syllables in sentences. Keep the word count similar to the original"
-
+    "essay": (
+        "Rewrite the following text as an academic essay to increase its complexity and unpredictability. "
+        "Maintain a formal and precise structure. Focus on varying sentence length and structure (burstiness), "
+        "using a mix of simple and complex vocabulary. The sentences should be concise, with a low number of syllables. "
+        "Include around 5% SAT words."
+    ),
+    "article": (
+        "Rewrite the text into an article format to increase its complexity and unpredictability. "
+        "Make it engaging and informative, without distinct headers or titles. Focus on varying sentence length and structure "
+        "(burstiness), using a mix of simple and complex vocabulary. The sentences should be concise, with a low number of syllables. "
+        "Include around 5% SAT words."
+    ),
+    "story": (
+        "Rewrite the text as a story to increase its complexity and unpredictability. "
+        "Ensure the narrative is vivid and engaging. Focus on varying sentence length and structure (burstiness), "
+        "using a mix of simple and complex vocabulary. The sentences should be concise, with a low number of syllables. "
+        "Include around 5% SAT words."
+    ),
+    "cover_letter": (
+        "Rewrite the text into a cover letter to increase its complexity and unpredictability. "
+        "Keep it professional and concise, tailored to the specific job and company. Focus on varying sentence length and structure "
+        "(burstiness), using a mix of simple and complex vocabulary. The sentences should be concise, with a low number of syllables. "
+        "Include around 5% SAT words."
+    ),
+    "report": (
+        "Rewrite the text into a formal report format to increase its complexity and unpredictability. "
+        "Ensure the report is clear, concise, and factual, with organized sections. Focus on varying sentence length and structure "
+        "(burstiness), using a mix of simple and complex vocabulary. The sentences should be concise, with a low number of syllables. "
+        "Include around 5% SAT words."
+    ),
+    "business_material": (
+        "Rewrite the text for business material to increase its complexity and unpredictability. "
+        "Focus on clarity and efficiency for a business audience. Focus on varying sentence length and structure "
+        "(burstiness), using a mix of simple and complex vocabulary. The sentences should be concise, with a low number of syllables. "
+        "Include around 5% SAT words."
+    ),
+    "legal_material": (
+        "Rewrite the text to legal material to increase its complexity and unpredictability. "
+        "Ensure the content is thorough, clear, and suitable for legal documents. Focus on varying sentence length and structure "
+        "(burstiness), using a mix of simple and complex vocabulary. The sentences should be concise, with a low number of syllables. "
+        "Include around 5% SAT words."
+    ),
+    "marketing_material": (
+        "Rewrite the text for marketing purposes to increase its complexity and unpredictability. "
+        "Ensure the language is persuasive and appealing to the target audience. Focus on varying sentence length and structure "
+        "(burstiness), using a mix of simple and complex vocabulary. The sentences should be concise, with a low number of syllables. "
+        "Include around 5% SAT words."
+    ),
+    "general": (
+        "Rewrite the following text to increase its complexity and unpredictability. "
+        "Focus on varying sentence length and structure (burstiness) and using a mix of simple and complex vocabulary. "
+        "The sentences should be concise, with a low number of syllables. "
+        "Include a balanced mix of common language and occasional advanced vocabulary (around 5% SAT words)."
+    )
 }
+
 
 
 # marketing_material

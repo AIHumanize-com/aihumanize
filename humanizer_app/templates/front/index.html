@@ -208,8 +208,19 @@
                   </select>
                   <p>Level</p>
                 </div>
+                
+                <div class="button-2" style="display: none;" id="readabilityButton">
+                  <select class="select-box" aria-invalid="false"  id="readability">
+                      <option value="high_school">High School</option>
+                      <option value="university" selected>University</option>
+                      <option value="doctorate">Doctorate</option>
+                      <option value="journalist">Journalist</option>
+                      <option value="marketing">Marketing</option>
+                  </select>
+                  <p>Readability</p>
+                </div> -->
                 <div class="button-2">
-                  <select class="select-box" aria-invalid="false"  id="purpose">
+                  <select class="select-box" aria-invalid="false" id="purpose">
                     <option value="general">General Writing</option>
                     <option value="essay">Essay</option>
                     <option value="article">Article</option>
@@ -222,16 +233,6 @@
                   </select>
                   <p>Purpose</p>
                 </div>
-                <div class="button-2" style="display: none;" id="readabilityButton">
-                  <select class="select-box" aria-invalid="false"  id="readability">
-                      <option value="high_school">High School</option>
-                      <option value="university" selected>University</option>
-                      <option value="doctorate">Doctorate</option>
-                      <option value="journalist">Journalist</option>
-                      <option value="marketing">Marketing</option>
-                  </select>
-                  <p>Readability</p>
-                </div> -->
               </div>
 
               <div>
@@ -281,6 +282,18 @@
           <div class="result-box">
             <div>
               <h2>Your New Content:</h2>
+            </div>
+            <div class="result-box-inner-box">
+              <div class="result-box-first-row">
+                <div class="result-box-leftpart">
+                 <button class="btn btn-outline-primary">Check For AI</button>
+                </div>
+                <div class="result-box-rightpart">
+                  <div class="button-result-box">
+                    <button id="humanize-btn">Humanize Again</button>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div>
