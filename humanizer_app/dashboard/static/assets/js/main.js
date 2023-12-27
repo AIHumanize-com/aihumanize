@@ -298,23 +298,7 @@ Last Update: 9 May 2023
 		}
 	}
 })();
-//textarea function
-// document.getElementById('humanize-btn').addEventListener('click', function() {
-// 	var inputText = document.getElementById('input-text');
-// 	var errorMessage = document.getElementById('error-message');
 
-// 	if (inputText.value.trim() === '') {
-// 	  inputText.classList.add('error-border');
-// 	  errorMessage.textContent = 'Please enter a valid text.';
-// 	  errorMessage.style.color='#d53737';
-// 	  inputText.style.borderColor = '#d53737';   
-// 	} else {
-// 	  inputText.classList.remove('error-border');
-// 	  errorMessage.textContent = '';
-// 	  // Perform humanize action here if needed
-// 	}
-//   });
-//hidebuttons
 var textarea = document.getElementById('input-text');
 var textareaButtons = document.getElementById('textarea-buttons');
 
@@ -400,11 +384,14 @@ document.querySelector('.text-area-btn-2').addEventListener('click', function (e
 
 
 
-var humanizeButton = document.getElementById('hummani-main-btn');
+
 var purpose = document.getElementById('purpose');
 // var readability = document.getElementById('readability');
 // var level = document.getElementById('level');
-humanizeButton.addEventListener('click', function () {
+
+
+function handleHumanizeText(event){
+
 	var textareaContent = document.getElementById('input-text').value;
 	var wordCount = textareaContent.split(/\s+/).filter(function (n) { return n != '' }).length;
 	let resultDivDetect = document.getElementById("result-row-detect");
@@ -423,8 +410,9 @@ humanizeButton.addEventListener('click', function () {
     }
 	console.log(selectedModel)
 	// Disable the button and add spinner
-	humanizeButton.disabled = true;
-	humanizeButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+	clickedButton = event.currentTarget;
+	clickedButton.disabled = true;
+	clickedButton.innerHTML = '<span class="spinner-border spinner-border-sm text-white" role="status" aria-hidden="true"></span> Loading...';
 	
 	// let level = document.getElementById("level").value
 	// let readability = document.getElementById("readability").value
@@ -435,7 +423,7 @@ humanizeButton.addEventListener('click', function () {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ text: textareaContent, model: selectedModel }),
+		body: JSON.stringify({ text: textareaContent, model: selectedModel, purpose: purpose.value }),
 	})
 		.then(response => response.json())
 		.then(data => {
@@ -444,16 +432,16 @@ humanizeButton.addEventListener('click', function () {
 				if (data.error == 'word_limit_reached') {
 					let errorMessageP = document.getElementById('error-message');
 					errorMessageP.textContent = "Now we can proccess up to 1000 words. Please enter fewer words";
-					humanizeButton.disabled = false;
-					humanizeButton.innerHTML = 'Humanize';
+					clickedButton.disabled = false;
+					clickedButton.innerHTML = 'Humanize';
 					return
 				}
 				else{
 					var wordLimitModal = new bootstrap.Modal(document.getElementById('wordLimitModal'));
 				wordLimitModal.show();
 				// Other necessary actions
-				humanizeButton.disabled = false;
-				humanizeButton.innerHTML = 'Humanize';
+				clickedButton.disabled = false;
+				clickedButton.innerHTML = 'Humanize';
 				return;
 				}
 				// Display the modal for word limit reached
@@ -469,18 +457,26 @@ humanizeButton.addEventListener('click', function () {
 			resultRow.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 			// Re-enable the button and remove spinner
-			humanizeButton.disabled = false;
-			humanizeButton.innerHTML = 'Humanize';
+			clickedButton.disabled = false;
+			if (clickedButton.id == "humanize-btn"){
+				clickedButton.innerHTML = '<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>  Humanize Again';
+			} else {
+				clickedButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span> Humanize`;
+			}
+			
 		})
 		.catch(error => {
 			console.error('Error:', error);
 
 			// Re-enable the button and remove spinner in case of error
-			humanizeButton.disabled = false;
-			humanizeButton.innerHTML = 'Humanize';
+			clickedButton.disabled = false;
+			clickedButton.innerHTML = 'Humanize';
 		});
-});
-
+}
+var humanizeButton = document.getElementById('hummani-main-btn');
+var resultHumanizeButton = document.getElementById("humanize-btn")
+humanizeButton.addEventListener('click', handleHumanizeText);
+resultHumanizeButton.addEventListener('click', handleHumanizeText);
 
 document.querySelector('img[alt="copy"]').addEventListener('click', function () {
 	let resultTextArea = document.querySelector('.reult-p');
@@ -1030,7 +1026,7 @@ function displayDetailedBreakdown(breakdown) {
 
         // Calculate the color based on the score: Lower score gets more intense red
 		
-        const backgroundColor = `rgba(239, 68, 60, ${score})`;
+        const backgroundColor = `rgba(144, 238, 144, ${score})`;
 
         // Apply styles to the span
         span.style.backgroundColor = backgroundColor;
@@ -1126,9 +1122,16 @@ function renderAIDetectionGauge(score) {
     // Update the text element
     document.getElementById('ai-detection-text').innerHTML = text;
 }
-detectButton = document.getElementById("ai-btn");
-    detectButton.addEventListener("click", function() {
-        var inputText = document.getElementById("input-text").value;
+
+
+function handleAICheck(event){
+		const clickedButton = event.currentTarget;
+		if (clickedButton.id == "checkAiInresult"){
+			var inputText = document.getElementById("humanizedResult").textContent;
+		} else{
+			var inputText = document.getElementById("input-text").value;
+		}
+		
 	    var wordCount = inputText.split(/\s+/).filter(Boolean).length;
 		var spinner = document.createElement("span");
 		let resultDivDetect = document.getElementById("result-row-detect");
@@ -1141,14 +1144,15 @@ detectButton = document.getElementById("ai-btn");
 		var loadingText = document.createTextNode(" Loading...");
 		
 		// Clear the button's content and append the spinner and loading text
-		detectButton.innerHTML = '';
-		detectButton.appendChild(spinner);
-		detectButton.appendChild(loadingText);
+		clickedButton.innerHTML = '';
+		clickedButton.appendChild(spinner);
+		clickedButton.appendChild(loadingText);
+		clickedButton.disabled = true;
 		if (wordCount < 30) {
 			// Show an error message
 			document.getElementById("error-message").textContent = "Word count must be at least 30.";
-			detectButton.disabled = false;
-			detectButton.innerHTML = "Check for AI"; // Restore the original button text
+			clickedButton.disabled = false;
+			clickedButton.innerHTML = "Check for AI"; // Restore the original button text
 			return;
 		}
        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -1174,8 +1178,8 @@ detectButton = document.getElementById("ai-btn");
                     limitReachedModal.show();
 
                     // Reset the button state
-                    detectButton.disabled = false;
-                    detectButton.innerHTML = "Check for AI"; // Restore the original button text
+                    clickedButton.disabled = false;
+                    clickedButton.innerHTML = "Check for AI"; // Restore the original button text
                     return;
                 }
 				console.log(data)
@@ -1206,8 +1210,8 @@ detectButton = document.getElementById("ai-btn");
                
 
                 // Re-enable the button and remove the spinner
-                detectButton.disabled = false;
-                detectButton.innerHTML = "Check for AI"; // Restore the original button text
+                clickedButton.disabled = false;
+                clickedButton.innerHTML = "Check for AI"; // Restore the original button text
 
                 
 
@@ -1216,8 +1220,10 @@ detectButton = document.getElementById("ai-btn");
                 console.error("Error:", error);
 
                 // Re-enable the button and remove the spinner in case of error
-                detectButton.disabled = false;
-                detectButton.innerHTML = "Check for AI"; // Restore the original button text
+                clickedButton.disabled = false;
+                clickedButton.innerHTML = "Check for AI"; // Restore the original button text
             });
+}
 
-    });
+document.getElementById("ai-btn").addEventListener("click", handleAICheck);
+document.getElementById("checkAiInresult").addEventListener("click", handleAICheck);

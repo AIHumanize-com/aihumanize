@@ -39,7 +39,7 @@ def humanizer(request):
         body = json.loads(body_unicode)
     
         text = body["text"]
-        # purpose = body["purpose"]
+        purpose = body["purpose"]
         model = body["model"]
         # readability = None
         # strength = None
@@ -71,7 +71,7 @@ def humanizer(request):
             if subscrioption.end_date < timezone.now():
                 return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
 
-        result = rewrite_text(text, purpose="general", readability="university", strength="easy", model_name=model)
+        result = rewrite_text(text, purpose=purpose, readability="university", strength="easy", model_name=model)
         
 
 

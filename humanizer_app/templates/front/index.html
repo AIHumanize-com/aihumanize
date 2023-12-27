@@ -195,7 +195,7 @@
             <div style="" class="words-count">
               <div class="buttons">
                 <div class="button-1">
-                  <button id="hummani-main-btn" class="btn btn-lg btn-gradient-1 aos-init aos-animate">
+                  <button id="hummani-main-btn" class="btn btn-lg btn-gradient-1 aos-init aos-animate text-white">
                     <span><img width="24" height="24" src="{% static 'assets/images/icon2.svg' %}" /></span>
                     Humanize
                   </button>
@@ -208,8 +208,19 @@
                   </select>
                   <p>Level</p>
                 </div>
+                
+                <div class="button-2" style="display: none;" id="readabilityButton">
+                  <select class="select-box" aria-invalid="false"  id="readability">
+                      <option value="high_school">High School</option>
+                      <option value="university" selected>University</option>
+                      <option value="doctorate">Doctorate</option>
+                      <option value="journalist">Journalist</option>
+                      <option value="marketing">Marketing</option>
+                  </select>
+                  <p>Readability</p>
+                </div> -->
                 <div class="button-2">
-                  <select class="select-box" aria-invalid="false"  id="purpose">
+                  <select class="select-box" aria-invalid="false" id="purpose">
                     <option value="general">General Writing</option>
                     <option value="essay">Essay</option>
                     <option value="article">Article</option>
@@ -222,16 +233,6 @@
                   </select>
                   <p>Purpose</p>
                 </div>
-                <div class="button-2" style="display: none;" id="readabilityButton">
-                  <select class="select-box" aria-invalid="false"  id="readability">
-                      <option value="high_school">High School</option>
-                      <option value="university" selected>University</option>
-                      <option value="doctorate">Doctorate</option>
-                      <option value="journalist">Journalist</option>
-                      <option value="marketing">Marketing</option>
-                  </select>
-                  <p>Readability</p>
-                </div> -->
               </div>
 
               <div>
@@ -282,6 +283,18 @@
             <div>
               <h2>Your New Content:</h2>
             </div>
+            <div class="result-box-inner-box">
+              <div class="result-box-first-row">
+                <div class="result-box-leftpart">
+                 <button class="btn btn-outline-primary" id="checkAiInresult">Check For AI</button>
+                </div>
+                <div class="result-box-rightpart">
+                  <div class="button-result-box">
+                    <button id="humanize-btn"><span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span> Humanize Again</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div>
               <div class="super-box">
@@ -299,7 +312,7 @@
                   </div>
                 </div>
                 <div class="border-b"></div>
-                <p style="margin: 0; white-space: pre-line" class="reult-p"></p>
+                <p style="margin: 0; white-space: pre-line" class="reult-p" id="humanizedResult"></p>
               </div>
             </div>
           </div>
