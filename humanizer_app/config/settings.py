@@ -208,16 +208,13 @@ ACCOUNT_ADAPTER = 'users.custom_email_adapter.CeleryEmailAdapter'
 
 # settings.py
 import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 sentry_sdk.init(
-    dsn="https://2106c9df129bca1c3e1507472a6c84bd@o4506244088791040.ingest.sentry.io/4506244093116416",
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    traces_sample_rate=1.0,
-    # Set profiles_sample_rate to 1.0 to profile 100%
-    # of sampled transactions.
-    # We recommend adjusting this value in production.
-    profiles_sample_rate=1.0,
+    dsn="https://234f932c9af243cb9bfbe5c5bb3c0c70@errors.aihumanize.com/1",
+    integrations=[DjangoIntegration()],
+    auto_session_tracking=False,
+    traces_sample_rate=0
 )
 
 STRIPE_PUBLIC_KEY = 'pk_live_51OCnPQFG5G6BKxaQX3AhVm3iEcPmrjNgs49WQ9FvYnSII5oIdNxc77FMB5RamU23S1PpgBfCfeVax4zJQ2o2XxlW00dkI9KDWA'
