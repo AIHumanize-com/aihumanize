@@ -424,6 +424,7 @@ function handleHumanizeText(event){
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({ text: textareaContent, model: selectedModel, purpose: purpose.value }),
+
 	})
 		.then(response => response.json())
 		.then(data => {
@@ -1169,7 +1170,7 @@ function handleAICheck(event){
             })
 
             .then(function (data) {
-			
+				console.log(data)
                 // Handle the response from the AI backend
                 if (data.error) {
                     // Show an error message

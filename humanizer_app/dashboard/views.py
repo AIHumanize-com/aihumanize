@@ -211,7 +211,6 @@ def generate_text(request):
         max_words_count = data.get('max_words_count')
         user = request.user
         document_id = uuid.uuid4()
-
         # Call your custom text generation function
         result = generate_content(content_type, topic, tone, keywords, language)
         
