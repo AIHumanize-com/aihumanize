@@ -73,7 +73,7 @@ def humanizer(request):
 
         result = rewrite_text(text, purpose=purpose, readability="university", strength="easy", model_name=model)
         
-        # create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=None, readibility=None, model=model)
+        create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=None, readibility=None, model=model)
         word_count_tracker.words_used += word_count
         word_count_tracker.save()
         return JsonResponse({"text": result})
