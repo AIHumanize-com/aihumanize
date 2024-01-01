@@ -207,6 +207,73 @@
     </div>
 </div>
 
+<div class="modal fade" id="wordLimitModal" tabindex="-1">
+    {% load socialaccount %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {% if not user.is_authenticated %}
+            <div class="modal-body p-4">
+                <div class="media media-rg media-middle media-circle text-primary bg-primary bg-opacity-20 mb-3">
+                    <em class="icon ni ni-spark-fill"></em>
+                </div>
+                <h2 class="text-primary">Get started today with <span class="text-success">400</span> free words.</h2>
+                <p>Sign up to humanize and make this text undetectable.</p>
+                <div class="card bg-lighter bg-opacity-80 shadow-none mt-2">
+                    <div class="card-body">
+                        <h5>What you will gain after signing up?</h5>
+                        <ul class="pricing-list d-flex flex-column gap-3 fs-lg mt-5 mb-0">
+                            <li>Rewrites <strong class=" fw-medium" id="listWordsCount">400</strong> words for free
+                            </li>
+
+                            <li>Built-in AI detector</li>
+                            <li> No weird or random words</li>
+                            <li>Passes AI detectors</li>
+                            <li>High quality, legible content</li>
+                            <li>Writing level matching</li>
+                        </ul>
+                    </div>
+                </div><!-- .card -->
+
+                <div class="vstack gap-4 mt-4">
+                    <a href="{% provider_login_url 'google' %}" class="btn account-btn py-4">
+                        <img src="{% static 'assets/images/icons/google.svg' %}" alt="" width="24"
+                            class="img-fluid icon" />
+                        <span>Continue With Google</span>
+                    </a>
+                    <a href="{% url 'account_signup' %}" class="btn account-btn py-4">
+                        <img src="{% static 'assets/images/icons/email.svg' %}" alt="" width="24"
+                            class="img-fluid icon" />
+                        <span>Continue With Email</span>
+                    </a>
+                    <button type="button" class="btn account-btn py-4 mt-3" data-bs-dismiss="modal">
+                        <span>Continue Exploring</span>
+                    </button>
+                </div>
+                <!-- <div class="col-12 "><button class="btn btn-outline-light " data-bs-dismiss="modal">Keep Plan</button></div>
+                    <div class="col-12 mt-2"><a href="pricing-plans.html" class="btn btn-primary ">Change Plan</a></div> -->
+
+            </div>
+            {% else %}
+            <div class="modal-body p-4">
+               
+                <h2 class="text-primary">Word Limit Reached</h2>
+                <p>You've used all your words for this period. Would you like to subscribe again? Don't worry about double subscriptions. If you choose to subscribe again, we'll automatically cancel your previous
+                subscription and only keep the latest one.</p>
+                
+
+                <div class="vstack gap-4 mt-4">
+                    <a href="{% url 'pricing' %}" class="btn btn-primary">
+                        <span>View Subscription Plans</span>
+                    </a>
+                    
+                </div>
+            </div>
+
+            {% endif %}
+            <!-- .modal-body -->
+        </div><!-- .modal-content -->
+    </div><!-- .modal-dialog -->
+</div>
 
 <script>
     document.getElementById('humanizeButton').addEventListener('click', function () {
@@ -242,6 +309,15 @@
             })
                 .then(response => response.json())
                 .then(data => {
+                     if (data.error) {
+                        console.log(data.error)
+                        // show modal with id wordLimitModal
+                        var limitReachedModal = new bootstrap.Modal(document.getElementById('wordLimitModal'));
+                        limitReachedModal.show();
+                        button.innerHTML = originalButtonText;
+                        button.disabled = false;
+                        return
+                    }
                     // Update the editor content with the new text
                     tinymce.get('editor-v1').setContent(data.text);
 
@@ -413,6 +489,15 @@
         })
             .then(response => response.json())
             .then(data => {
+                if (data.error) {
+                    console.log(data.error)
+                    // show modal with id wordLimitModal
+                    var limitReachedModal = new bootstrap.Modal(document.getElementById('wordLimitModal'));
+                    limitReachedModal.show();
+                    button.innerHTML = originalButtonText;
+                    button.disabled = false;
+                    return 
+                }
               
                 tinymce.get('editor-v1').setContent(data.result);
                 updateCounts(); // Update the HTML with the response
@@ -695,6 +780,8 @@
     });
     
 </script>
+
+
 {% endblock %}
 
 

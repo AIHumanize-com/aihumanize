@@ -212,7 +212,14 @@ def generate_text(request):
         user = request.user
         document_id = uuid.uuid4()
         # Call your custom text generation function
+        subscrioption = Subscription.objects.filter(user=request.user).last()
+
+        word_count_tracker = WordCountTracker.objects.filter(subscription__user=request.user).last()
+        if 100  > word_count_tracker.words_remaining:
+            return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
         result = generate_content(content_type, topic, tone, keywords, language)
+        word_count_tracker.words_used += 100
+        word_count_tracker.save()
         
         # Return the result as JSON
         return JsonResponse({'result': result, 'document_id': str(document_id)})

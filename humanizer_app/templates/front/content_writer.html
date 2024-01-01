@@ -16,27 +16,6 @@
   /* Other styles as needed */
 }
 
-                          .cls-1,
-                          .cls-2 {
-                            fill: none;
-                            stroke: #6A4DFF;
-                            stroke-linecap: round;
-                            stroke-width: 2px;
-                          }
-                    
-                          .cls-1 {
-                            stroke-linejoin: round;
-                          }
-                    
-                          .cls-2 {
-                            stroke-miterlimit: 10;
-                          }
-                    
-                          .cls-3 {
-                            fill: #353535;
-                          }
-                      
-
 
 </style>
 {% endblock %}
@@ -46,282 +25,88 @@
 <main class="flex-grow-1">
   <!-- Hero -->
   <!-- Hero -->
-  <section class="hero-section style-2 position-relative py-10 py-lg-15">
-    <div class="striped-shape">
-      <img src="{% static 'assets/images/shapes/stripe-lite.svg' %}" alt="" />
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="text-center">
-          <div class="position-relative z-1">
-            <p class="text-primary" data-aos="fade-up-sm">
-              Best AI Detector and Humanizer
-            </p>
-            <h1 class="text-dark mb-8" data-aos="fade-up-sm" data-aos-delay="150">
-              Transform AI Generated Text to <br />
-
-              <span class="fw-bold text-gradient-1 typed-animation"
-                data-strings='["Human Content ", "Authentic Content", "Original Content", "Undetectable Content"]'>Undetectable
-                Content</span>
-            </h1>
-            <!-- <a href="login.html" class="btn btn-lg btn-gradient-1" data-aos="fade-up-sm" data-aos-delay="200">Start Writing - It's Free</a> -->
-          </div>
-        </div>
-        <div class="box-outer d-flex justify-center">
-          <div class="box">
-
-            <div class="inner-box">
-              <div class="sub-boxes">
-                <div class="box-1">
-                  <div class="ninja-box active" data-bs-toggle="popover" data-bs-placement="top"  data-bs-content="Our Falcon model is engineered for speed, seamlessly bypassing most AI detection systems with its rapid processing capabilities.">
-                    <svg height="30pt" viewBox="31 16.6 309.2 337.4" width="30pt" xmlns="http://www.w3.org/2000/svg">
-                      <g fill="#D32BF4">
-                        <path
-                          d="m65.9 24.7c-23.2 24-34.9 48.2-34.9 72.3 0 5.5.4 10.2 1 10.5s1 1.6 1 2.8c0 2.8 2.4 9.7 5.6 16.2 4.2 8.7 10.3 14.8 26.9 26.8 13 9.4 20.2 20 22.6 33.4l1.3 7.2 3.6-1.5c9.1-3.9 16.1-5.3 37-7.5 13.4-1.4 18.6-3.4 24.8-9.5 8.8-8.8 4.6-14.5-22.9-30.8-29.6-17.6-40.2-25.8-51.7-40.1-9.2-11.5-13.9-21-16.2-32.8-2.2-11 .8-28.4 7.5-44 1.9-4.6 3.5-8.6 3.5-9 0-2.1-3.3.1-9.1 6z" />
-                        <path
-                          d="m332.5 32.8c-.5.4-1.8 2.4-2.7 4.4-5.8 12.4-25 24.1-55.3 33.5-2.7.9-7.5 2.3-10.5 3.3-3 .9-8.9 2.8-13 4-50.9 15.5-59.8 23.5-78 69.5-8.2 20.6-12.5 27.5-21 33.1-7.1 4.8-12.9 6.4-29 8.4-25.6 3.1-35.5 6.1-43.5 13.2-4.9 4.2-6.5 8.6-6.5 17.4 0 4-.4 7.5-.8 7.8-.5.3-1.4 3-2.1 6.1-1 4.2-1 6.3-.1 9 1.4 4.1 5.3 7.5 8.8 7.5 2.5 0 2.6-.7.7-5.2-.4-1.1.2-2.5 1.9-4.3 2.2-2.2 3.3-2.5 10.1-2.5 7.8 0 10.4-.8 14.1-4.2 2.1-1.9 2.2-1.9 5 1.2 5.9 6.5 21.3 15.7 40.5 24.3 9.1 4.1 14.8 9 19.1 16.6 2.9 5 3.3 6.4 3.3 13.6 0 11.7-4.2 19.7-12.4 23.5-1.4.7-3.4 1.6-4.3 2.1-1 .5-4.7.9-8.3.9h-6.5l-2.1 4.7c-1.2 2.7-2.7 6-3.5 7.4-1.1 2.2-1.1 2.9 0 4.5 1.3 1.7 1.7 1.5 6.5-3.4 5-5.1 8.1-6.6 8.1-3.8 0 .8-1.8 2.8-3.9 4.5-4.9 3.9-5.6 6.7-3.3 13.3 1.9 5.4 4.4 7 5 3.3.2-1.1 1.7-3.3 3.3-4.9 1.6-1.5 2.9-3.4 2.9-4.1s.7-1.8 1.5-2.5c2.2-1.8 3.1 1.4 1.7 6.4-.9 3.4-.8 4.4.5 5.8 1 1.1 1.3 2.6.9 4.3-.4 1.8-.2 2.5.7 2.5 1.4 0 4.7-3.1 4.7-4.4 0-.4.9-2.1 2.1-3.7 2.1-3 2.2-3.6.3-14.2-.3-2-.2-3.7.2-3.7 2.1 0 9.3 4.6 9.7 6.2.7 2.6 3.7 1.1 3.7-1.9 0-3.8-2.7-8-6-9.5-3.3-1.4-3.9-3.6-1.2-4.4 6.3-2 12.2-5.6 17.5-10.9 6.4-6.2 7.5-7.5 11.6-13.5 5.7-8.3 11-12 17.1-12 8.4 0 34.8 11.8 55.2 24.7 9.5 6 28.1 19 31.2 21.8.6.6 4 3.1 7.6 5.7 3.6 2.5 9.8 7.3 13.8 10.7 4 3.3 7.6 6.1 8 6.1 3.3 0 4.4-8.6 1.5-11.2-1-.8-4.5-3-7.8-4.8-7.3-4.1-21.4-13.6-27.5-18.7-13.8-11.3-31.4-33.4-43.1-54.1-1.1-1.7-2.8-4.8-3.9-6.8-8.4-14.7-24.4-33.4-28.7-33.4-1.7 0-1.7-.1 1-13 .8-4.1 2-11.1 2.6-15.5 1.8-12.2 4.4-26.1 6.3-33 5.4-20.3 16.9-34.4 37.8-46.2 29.3-16.7 41-27 49.4-43.7 4.5-8.9 5.4-11.1 8.1-21.1 1.4-5.1 3.1-17.5 2.4-17.5-.2 0-.8.4-1.4.8z" />
-                        <path
-                          d="m159.5 269.3c-.2.7-.5 3.2-.8 5.8-.6 7-5.3 16.3-10.7 21.3-6.5 6.1-10.5 8-13.9 6.7-1.4-.5-5.4-1.3-8.8-1.6-5-.6-6.8-.3-9.2 1.1-2.6 1.5-3.1 2.5-3.1 5.6 0 4.4-.1 4.3 3.6 2.3 1.6-.8 3.5-1.5 4.2-1.5 2.1 0 1.3 2-1.3 3.2-2.9 1.3-3.7 3.8-3.9 11.6-.1 5.9 1.7 8.2 3.3 4 .5-1.3 2.4-3.1 4.2-4.1 1.9-1 4.5-3.6 5.9-5.7 2.6-4.4 4-5.1 4-2.1 0 6.4 3.3 6.7 6.1.5 1.7-3.4 2.6-4.3 3.8-3.8 3.3 1.4 7.2 1.6 8.6.4s1.3-1.6-.6-3.6c-1.2-1.3-2.1-2.5-1.8-2.7 2.2-1.6 7-2.7 11.9-2.7 8.8 0 10-1.5 10-12.8 0-11.5-3-19.7-7.9-21.8-2.5-1-3.3-1.1-3.6-.1zm80.5 21.5c0 .5 3.7 2.8 8.3 5.1 22.1 11.7 35.7 24.4 40.8 38.5 2.3 6.1 2.4 8.3.4 12.9-2.5 6.1-2.9 6 13.3 5.5 14.6-.5 23.2-2.1 23.2-4.4 0-1.1-12-12.4-16.4-15.3-1.2-.8-2.3-1.8-2.6-2.1s-2.3-1.9-4.5-3.6c-2.2-1.6-4.6-3.4-5.2-3.9-.7-.6-2.3-1.8-3.5-2.7-1.3-1-4.1-3.2-6.3-4.9s-5.6-4-7.5-5c-4.6-2.5-7.4-4.3-8-5-.7-.8-14.5-8.3-21-11.4-3-1.4-6.3-3-7.2-3.5-2.2-1.2-3.8-1.3-3.8-.2z" />
-                      </g>
-                    </svg>
-                    <p>Falcon</p>
-                  </div>
-              
-                  <!-- The Ghost box should be selectable only if the user is authenticated -->
-                  <div class="ghost-box  {% if not paid %}disabled{% endif %}" data-bs-toggle="popover" data-bs-placement="top"  data-bs-content="Our Maestro model is the smartest choice, easily bypassing advanced detectors. Available with a paid plan only.">
-                    <svg width="30pt" height="30pt" viewBox="0 0 48 48" data-name="Layer 1" id="Layer_1"
-                      xmlns="http://www.w3.org/2000/svg">
-                    
-                      <defs>
-                    
-                       
-                    
-                      </defs>
-                    
-                      <title />
-                    
-                      <g>
-                    
-                        <g>
-                    
-                          <path class="cls-1"
-                            d="M17.30639,11.25243a5.29412,5.29412,0,1,0-10.58824,0,5.23707,5.23707,0,0,0,.584,2.37007A5.27955,5.27955,0,0,0,8.8358,23.95831" />
-                    
-                          <path class="cls-2" d="M3.58191,21.56266a7.00047,7.00047,0,1,0,11.32225,6.78321V28" />
-                    
-                          <path class="cls-1"
-                            d="M8.43086,42.32855A6.21606,6.21606,0,0,1,5.108,36.82494a6.14985,6.14985,0,0,1,.68573-2.78316" />
-                    
-                          <path class="cls-2" d="M19,16a5,5,0,0,1-5,5" />
-                    
-                          <g>
-                    
-                            <polyline class="cls-2" points="19 16.01 30.5 16.01 32.521 13.99" />
-                    
-                            <polyline class="cls-2" points="25.5 20.01 31.5 20.01 33.521 17.99 39 17.99" />
-                    
-                            <polyline class="cls-2" points="24.917 31.99 30.5 31.99 32.521 34.01" />
-                    
-                            <polyline class="cls-2" points="24.917 27.99 31.5 27.99 33.521 30.01 39 30.01" />
-                    
-                            <path class="cls-2" d="M39,38.01018H31.52094l-1.52061-2.02061-4.95867.00011v6.05209a5,5,0,0,1-10,0" />
-                    
-                          </g>
-                    
-                          <path class="cls-2" d="M17.04167,4.13392a4.05277,4.05277,0,0,1,8,.91833V12.01l4.45868.00013L31.521,9.98956H39" />
-                    
-                          <line class="cls-2" x1="36" x2="25.04167" y1="24" y2="24" />
-                    
-                          <circle class="cls-3" cx="11" cy="20" r="1" />
-                    
-                          <circle class="cls-3" cx="11.79167" cy="43.5" r="1" />
-                    
-                        </g>
-                    
-                        <circle class="cls-2" cx="41.47922" cy="10" r="2" />
-                    
-                        <circle class="cls-2" cx="41.47922" cy="18" r="2" />
-                    
-                        <circle class="cls-2" cx="41.47922" cy="30" r="2" />
-                    
-                        <circle class="cls-2" cx="41.47922" cy="38" r="2" />
-                    
-                      </g>
-                    
-                    </svg>
-                    <p>Maestro {% if not user.is_authenticated %}{% endif %}</p>
-                  </div>
-                </div>
-              
-              </div>
-
-             
-            
-            </div>
-            <p class="p-simple">Select your prefered model</p>
-            <p class="alert alert-secondary" id="masteroInfo" style="display: none;">The Maestro model takes <span style="color:#D32BF4">up to 1 minute</span> for text rewriting, ensuring high-quality and intelligent enhancements.</p>
-            <div class="text-area-inner-buttons" style="position: relative">
-              <textarea rows="15" style="height: 280px; width: 100%" aria-invalid="false" id="input-text"
-                name="input_text" placeholder="Enter the text that you want to make it unique and human"
-                class=""></textarea>
-              <div id="error-message" class="text-danger"></div>
-              <div class="textarea-buttons" id="textarea-buttons">
-                <!-- <div class="text-area-btn-1">
-                                    <img src="{% static 'assets/images/icons/icons8-hand-32.png' %}" alt="">
-                                    <p>Try Sample Text</p>
-                                </div> -->
-                <div class="text-area-btn-2">
-                  <img src="{% static 'assets/images/icons/icons8-paste-50.png' %}" alt="" height="24px" width="22px" />
-                  <p>Paste Text</p>
-                </div>
-              </div>
-            </div>
-            {% csrf_token %}
-
-            <p style="color: red; display: none" id="min_word_error">
-              Error: Please enter at least 30 words.
-            </p>
-            <!-- file -->
-            <div class="file ">
-              <label for="input-file">
-                <i><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-                    <path d="M0 0h24v24H0z" fill="none" />
+<section class="hero-section style-2 position-relative py-10 py-lg-15">
+  <div class="striped-shape">
+    <img src="{% static 'assets/images/shapes/stripe-lite.svg' %}" alt="" />
+  </div>
+  <div class="container">
+    <div class="row align-center">
+      <div class="col-lg-5">
+        <div class="text-center text-lg-start position-relative z-1">
+          <p class="text-primary" data-aos="fade-up-sm" data-aos-delay="50">
+            <span class="border px-4 py-2 rounded-3 d-inline-block">Best AI Copywriting Tool</span>
+          </p>
+          <h1 class=" mb-8" data-aos="fade-up-sm" data-aos-delay="100">
+            Create better content in less time; the future of
+            <span class="text-primary">AI writing</span>
+            tools is arrived.
+          </h1>
+          <form action="#" class="pe-xl-10" data-aos="fade-up-sm" data-aos-delay="150">
+            <div class="input-group with-icon">
+              <input type="email" class="form-control" placeholder="Enter Your Email" />
+              <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                  <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2">
                     <path
-                      d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4s1.79-4 4-4h.71C7.37 7.69 9.48 6 12 6c3.04 0 5.5 2.46 5.5 5.5v.5H19c1.66 0 3 1.34 3 3s-1.34 3-3 3z" />
-                  </svg></i>Select a file
-              </label>
-              <input id="input-file" class="btn btn-lg" type="file" />
+                      d="M2.25 5.25a1.5 1.5 0 0 1 1.5-1.5h10.5a1.5 1.5 0 0 1 1.5 1.5v7.5a1.5 1.5 0 0 1-1.5 1.5H3.75a1.5 1.5 0 0 1-1.5-1.5v-7.5Z" />
+                    <path d="M2.25 5.25 9 9.75l6.75-4.5" />
+                  </g>
+                </svg>
+              </span>
+              <button class="btn btn-primary px-4" type="button">
+                Sign Up Free
+              </button>
             </div>
-            <!-- end file -->
-            <div style="" class="words-count">
-              <div class="buttons">
-                <div class="button-1">
-                  <button id="hummani-main-btn" class="btn btn-lg btn-gradient-1 aos-init aos-animate text-white">
-                    <span><img width="24" height="24" src="{% static 'assets/images/icon2.svg' %}" /></span>
-                    Humanize
-                  </button>
-                </div>
-                <!-- <div class="button-2" style="display: none;" id="levelButton">
-                  <select class="select-box" aria-invalid="false"  id="level">
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="aggressive" selected="">Aggressive</option>
-                  </select>
-                  <p>Level</p>
-                </div>
-                
-                <div class="button-2" style="display: none;" id="readabilityButton">
-                  <select class="select-box" aria-invalid="false"  id="readability">
-                      <option value="high_school">High School</option>
-                      <option value="university" selected>University</option>
-                      <option value="doctorate">Doctorate</option>
-                      <option value="journalist">Journalist</option>
-                      <option value="marketing">Marketing</option>
-                  </select>
-                  <p>Readability</p>
-                </div> -->
-                <div class="button-2">
-                  <select class="select-box" aria-invalid="false" id="purpose">
-                    <option value="general">General Writing</option>
-                    <option value="essay">Essay</option>
-                    <option value="article">Article</option>
-                    <option value="marketing_material">Marketing Material</option>
-                    <option value="story">Story</option>
-                    <option value="cover_letter">Cover Letter</option>
-                    <option value="report">Report</option>
-                    <option value="business_material">Business Material</option>
-                    <option value="legal_material">Legal Material</option>
-                  </select>
-                  <p>Purpose</p>
-                </div>
-              </div>
-
-              <div>
-                <h3>
-                  Words Count:
-                  <span id="word-count" class="text-dark"> 0</span>
-                </h3>
-              </div>
-            </div>
-            <div class="mt-2 ai-button">
-              <button class="ai-btn" id="ai-btn">Check for Ai</button>
-
-            </div>
-
-
-
-            <div>
-              
-              <div class="box-last-text text-center mb-2" style="display: none;" id="detector-answer">
-
-              
-              </div>
-              <div id="tableDiv" style="display: none;">
-                <table class="table table-bordered border-primary mx-auto" style="width: 50%;"> 
-                  <tr>
-                   <th>#</th>
-                   <th>Score</th>
-                  </tr>
-                  <tr>
-                   <td class="text-danger"><strong>AI</strong></td>
-                   <td class="text-danger"><strong id="aiAvarage"></strong></td>
-                  </tr>
-                  <tr>
-                   <td class="text-success"><strong>Human</strong></td>
-                   <td class="text-success"><strong id="humanAvarage"></strong></td>
-                  </tr>
- 
-                 </table>
-              </div>
-            </div>
+          </form>
+          <div class="d-flex gap-8 align-center justify-center justify-lg-start mt-12 review-badges"
+            data-aos="fade-up-sm" data-aos-delay="200">
+            <img class="img-fluid" src="{% static 'assets/images/review-logos/trustpilot_reviews_2.svg' %}" alt="" />
+            <img class="img-fluid" src="{% static 'assets/images/review-logos/capterra_reviews_2.svg' %}" alt="" />
           </div>
         </div>
       </div>
-      {% include 'front/detect_result.html' %}
-      <div class="row" id="result-row" style="display:none ">
-        <div class="box-outer d-flex justify-center">
-          <div class="result-box">
-            <div>
-              <h2>Your New Content:</h2>
-            </div>
-            <div class="result-box-inner-box">
-              <div class="result-box-first-row">
-                <div class="result-box-leftpart">
-                 <button class="btn btn-outline-primary" id="checkAiInresult">Check For AI</button>
-                </div>
-                <div class="result-box-rightpart">
-                  <div class="button-result-box">
-                    <button id="humanize-btn"><span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span> Humanize Again</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <div class="super-box">
-                <div class="result-main-box">
-                  <div class="result-main-left-text">
-                    <p>Humanized text:</p>
-                  </div>
-                  <div class="result-main-right-icons">
-                    <img width="32" height="32" src="https://img.icons8.com/windows/32/000000/copy.png" alt="copy" />
-                    <!-- <img width="32" height="32" src="https://img.icons8.com/ios/50/000000/facebook-like--v1.png"
-                      alt="facebook-like--v1" />
-                    <img width="32" height="32"
-                      src="https://img.icons8.com/external-outline-andi-nur-abdillah/64/000000/external-Dislike-survey-(outline)-outline-andi-nur-abdillah.png"
-                      alt="external-Dislike-survey-(outline)-outline-andi-nur-abdillah" /> -->
-                  </div>
-                </div>
-                <div class="border-b"></div>
-                <p style="margin: 0; white-space: pre-line" class="reult-p" id="humanizedResult"></p>
-              </div>
-            </div>
+      <div class="col-lg-7" data-aos="fade-up-sm" data-aos-delay="200">
+        <div class="image-with-shape">
+          <img src="{% static 'assets/images/shapes/blurry-shape-2.svg' %}" alt="" class="shape animate-scale" />
+          <div class="mt-12 rounded-4 border shadow-lg overflow-hidden">
+            <img class="img-fluid d-inline-block" src="{% static 'assets/images/content_writer.png' %}" alt="" />
           </div>
         </div>
       </div>
-
     </div>
-  </section>
+
+    <div class="row justify-center mt-18">
+      <div class="col-lg-10">
+        <div class="text-center">
+          <h4 class="mb-10" data-aos="fade-up-sm" data-aos-delay="50">
+            <span class="text-gradient-1">20,000+</span>
+            Professionals & Teams Choose
+            <span class="text-primary">GenAI.</span>
+          </h4>
+
+          <div class="row align-center justify-center row-cols-3 row-cols-md-5 g-6 g-lg-10 g-xl-20">
+            <div class="col" data-aos="fade-up-sm" data-aos-delay="100" data-aos-offset="10">
+              <img src="{% static 'assets/images/brands/1.png' %}" alt="" class="img-fluid brand-img" />
+            </div>
+            <div class="col" data-aos="fade-up-sm" data-aos-delay="150" data-aos-offset="10">
+              <img src="{% static 'assets/images/brands/2.png' %}" alt="" class="img-fluid brand-img" />
+            </div>
+            <div class="col" data-aos="fade-up-sm" data-aos-delay="200" data-aos-offset="10">
+              <img src="{% static 'assets/images/brands/3.png' %}" alt="" class="img-fluid brand-img" />
+            </div>
+            <div class="col" data-aos="fade-up-sm" data-aos-delay="250" data-aos-offset="10">
+              <img src="{% static 'assets/images/brands/4.png' %}" alt="" class="img-fluid brand-img" />
+            </div>
+            <div class="col" data-aos="fade-up-sm" data-aos-delay="300" data-aos-offset="10">
+              <img src="{% static 'assets/images/brands/5.png' %}" alt="" class="img-fluid brand-img" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
   <!-- Features -->
   <section class="features-section has-blurry-shape position-relative overflow-hidden py-10 py-lg-15">
