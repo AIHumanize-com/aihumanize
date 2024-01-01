@@ -64,7 +64,7 @@ Write an academic essay on the topic: {topic}. important: Write over 1000 words.
 
 
 def generate_content(content_type, topic, tone, keywords, language):
-    openai_api_key = os.environ.get("OPEN_AI_KEY")
+    openai_api_key = os.environ.get("OPEN_AI_KEY_AIHUMANIZE")
     client = openai.OpenAI(api_key=openai_api_key)
     # Framing the AI as an expert in the given field
     user_context = prompts[content_type](topic, tone, keywords)

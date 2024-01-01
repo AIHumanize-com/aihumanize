@@ -73,9 +73,7 @@ def humanizer(request):
 
         result = rewrite_text(text, purpose=purpose, readability="university", strength="easy", model_name=model)
         
-
-
-        create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=None, readibility=None, model=model)
+        # create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=None, readibility=None, model=model)
         word_count_tracker.words_used += word_count
         word_count_tracker.save()
         return JsonResponse({"text": result})
@@ -94,7 +92,7 @@ def detect_text(request):
     # Limit the usage to 3 times for non-authenticated users
     if counter.request_count >= 50:
         return JsonResponse({'error': 'Limit reached'})
-    print(ip_address)
+  
     # Increment the request count
     counter.request_count += 1
     counter.save()
@@ -143,3 +141,8 @@ def contact_view(request):
 
 def view_404(request, exception):
     return render(request, 'front/404.html', status=404)
+
+
+
+def content_writer(request):
+    return render(request, 'front/content_writer.html')
