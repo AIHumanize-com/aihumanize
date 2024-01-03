@@ -10,6 +10,6 @@ urlpatterns = [
     path("terms-and-conditions/", views.terms_view, name="terms"),
     path("privacy-policy/", views.privacy_view, name="privacy"),
     path("contact-us/", views.contact_view, name="contact"),
-    # path("ai-content-writer", views.content_writer, name="content_writer"),
+    path("ai-content-writer/", views.content_writer, name="content_writer"),
    
 ]

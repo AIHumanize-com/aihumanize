@@ -7,8 +7,12 @@ import os
 
 
 def rewrite_text(original_text, purpose, readability, strength, model_name):
-    openai_api_key = os.environ.get("OPEN_AI_KEY")
-    print(purpose, readability, strength)
+    
+    if model_name == "Falcon":
+        openai_api_key = os.environ.get("OPEN_AI_KEY_AIHUMANIZE")
+    else:
+        openai_api_key = os.environ.get("OPEN_AI_KEY")
+
     if purpose not in purposes:
         raise ValueError(
             "Unsupported text type. Please choose from 'essay', 'article', etc."
@@ -23,6 +27,7 @@ def rewrite_text(original_text, purpose, readability, strength, model_name):
    
     if model_name == "Falcon":
         model = "gpt-3.5-turbo-1106"
+        openai_api_key = os.environ.get("OPEN_AI_KEY_AIHUMANIZE")
         system_prompt = prompts[purpose]  #+ " " + "replace some words with similar words"
     elif model_name == "Maestro":
         model = "gpt-4-1106-preview"

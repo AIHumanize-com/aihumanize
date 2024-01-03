@@ -1,13 +1,15 @@
 {% extends 'front/main.html' %} {% load static %} 
 {% block meta_tags %}
-<title>AI Humanize: Transform AI Texts into Natural, Human-Like Content</title>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-<meta name="description" content="Our AI humanizer ensures your AI content passes as human-written, perfect for evading AI detectors. Try it for seamless, natural results." />
-<meta property="og:title" content="AI Humanize: Transform AI Texts into Natural, Human-Like Content" />
-<meta property="og:description" content="Our AI humanizer ensures your AI content passes as human-written, perfect for evading AI detectors. Try it for seamless, natural results." />
+<title>Advanced AI Writer - Create Original, Engaging Content | AIHumanize.com</title>
+<meta name="description"
+  content="Discover AIHumanize.com, an advanced AI writer tool. Effortlessly create original, engaging content for articles, essays, and more." />
+<meta property="og:title" content="Advanced AI Writer - Create Original, Engaging Content | AIHumanize.com" />
+<meta property="og:description"
+  content="Discover AIHumanize.com, an advanced AI writer tool designed to effortlessly create original, engaging content for a variety of needs." />
+
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://aihumanize.com" />
+<meta property="og:url" content="https://aihumanize.com/ai-content-writer" />
 <style>
   .ghost-box.disabled {
   /* Your styles for disabled mode */
@@ -16,6 +18,32 @@
   /* Other styles as needed */
 }
 
+                  .st0 {
+                    fill: none;
+                    stroke: #9884FF;
+                    stroke-width: 2;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-miterlimit: 10;
+                  }
+
+                  .st1 {
+                    fill: none;
+                    stroke: white;
+                    stroke-width: 2;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                  }
+
+                  .st2 {
+                    fill: none;
+                    stroke: white;
+                    stroke-width: 2;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-dasharray: 5.2066, 0;
+                  }
+       
 
 </style>
 {% endblock %}
@@ -43,26 +71,22 @@
           </h1>
           <form action="#" class="pe-xl-10" data-aos="fade-up-sm" data-aos-delay="150">
             <div class="input-group with-icon">
-              <input type="email" class="form-control" placeholder="Enter Your Email" />
-              <span class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2">
-                    <path
-                      d="M2.25 5.25a1.5 1.5 0 0 1 1.5-1.5h10.5a1.5 1.5 0 0 1 1.5 1.5v7.5a1.5 1.5 0 0 1-1.5 1.5H3.75a1.5 1.5 0 0 1-1.5-1.5v-7.5Z" />
-                    <path d="M2.25 5.25 9 9.75l6.75-4.5" />
-                  </g>
-                </svg>
-              </span>
-              <button class="btn btn-primary px-4" type="button">
+            {% if user.is_authenticated %}
+              <a class="btn btn-primary px-4" href="{% url 'editor' %}">
+                GO TO DASHBOARD
+                
+              </a>
+            {% else %}
+              <a class="btn btn-primary px-4" href="{% url 'account_signup' %}">
                 Sign Up Free
-              </button>
+              </a>
+
+            {% endif %}
+
+
             </div>
           </form>
-          <div class="d-flex gap-8 align-center justify-center justify-lg-start mt-12 review-badges"
-            data-aos="fade-up-sm" data-aos-delay="200">
-            <img class="img-fluid" src="{% static 'assets/images/review-logos/trustpilot_reviews_2.svg' %}" alt="" />
-            <img class="img-fluid" src="{% static 'assets/images/review-logos/capterra_reviews_2.svg' %}" alt="" />
-          </div>
+        
         </div>
       </div>
       <div class="col-lg-7" data-aos="fade-up-sm" data-aos-delay="200">
@@ -75,35 +99,7 @@
       </div>
     </div>
 
-    <div class="row justify-center mt-18">
-      <div class="col-lg-10">
-        <div class="text-center">
-          <h4 class="mb-10" data-aos="fade-up-sm" data-aos-delay="50">
-            <span class="text-gradient-1">20,000+</span>
-            Professionals & Teams Choose
-            <span class="text-primary">GenAI.</span>
-          </h4>
 
-          <div class="row align-center justify-center row-cols-3 row-cols-md-5 g-6 g-lg-10 g-xl-20">
-            <div class="col" data-aos="fade-up-sm" data-aos-delay="100" data-aos-offset="10">
-              <img src="{% static 'assets/images/brands/1.png' %}" alt="" class="img-fluid brand-img" />
-            </div>
-            <div class="col" data-aos="fade-up-sm" data-aos-delay="150" data-aos-offset="10">
-              <img src="{% static 'assets/images/brands/2.png' %}" alt="" class="img-fluid brand-img" />
-            </div>
-            <div class="col" data-aos="fade-up-sm" data-aos-delay="200" data-aos-offset="10">
-              <img src="{% static 'assets/images/brands/3.png' %}" alt="" class="img-fluid brand-img" />
-            </div>
-            <div class="col" data-aos="fade-up-sm" data-aos-delay="250" data-aos-offset="10">
-              <img src="{% static 'assets/images/brands/4.png' %}" alt="" class="img-fluid brand-img" />
-            </div>
-            <div class="col" data-aos="fade-up-sm" data-aos-delay="300" data-aos-offset="10">
-              <img src="{% static 'assets/images/brands/5.png' %}" alt="" class="img-fluid brand-img" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -129,14 +125,13 @@
           <div class="d-flex flex-column flex-lg-row gap-6">
             <div
               class="icon w-14 h-14 flex-shrink-0 d-flex align-center  justify-center rounded-3  border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
-              <img src="{% static 'assets/images/bypass_ai_detectors.svg' %}" alt="">
+            <h4 class="mb-0">01</h4>
             </div>
             <div class="content">
-              <h4 class="mb-4">Bypass the most advanced AI detectors.
+              <h4 class="mb-4">All-in-One Content Generation: Humanize and AI Detection
               </h4>
               <p>
-                AIHumanize easily avoids AI detectors, guaranteeing that your material remains undetected and
-                unrestricted.
+              Elevate your writing with automatic content generation, humanize text, and built-in AI originality checks.
 
               </p>
             </div>
@@ -146,14 +141,14 @@
           <div class="d-flex flex-column flex-lg-row gap-6">
             <div
               class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
-              <img src="{% static 'assets/images/seo.svg' %}" alt="">
+            <h4 class="mb-0">02</h4>
             </div>
             <div class="content">
-              <h4 class="mb-4">Craft human-like, SEO-rich content for high rankings.
+              <h4 class="mb-4">Extend Mode: Effortless Content Expansion
               </h4>
               <p>
-                AIHUmanize keeps important keywords, improving your text for search engines without sacrificing quality
-                or readability.
+                Easily expand your ideas: select text, hit 'Extend', and watch as our AI writer seamlessly adds well-integrated, relevant
+                paragraphs.
               </p>
             </div>
           </div>
@@ -162,16 +157,15 @@
           <div class="d-flex flex-column flex-lg-row gap-6">
             <div
               class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3  border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
-              <img src="{% static 'assets/images/grammarly_text.svg' %}" alt="">
+            <h4 class="mb-0">03</h4>
             </div>
             <div class="content">
-              <h4 class="mb-4">Get clean, typo-free, and articulate text.
+              <h4 class="mb-4">Multilingual Support: Write in Your Preferred Language
 
 
               </h4>
               <p>
-                AIHumanize preserves content integrity by avoiding grammatical errors and unusual terminology,
-                guaranteeing that the material is polished and undetectable.
+              Write confidently in multiple languages with our AI writer, user-friendly multilingual capabilities.
               </p>
             </div>
           </div>
@@ -179,7 +173,7 @@
       </div>
 
       <div class="text-center mt-12">
-        <a href="{% url 'account_signup' %}" class="btn btn-primary">Try for Free</a>
+        <a href="{% url 'account_signup' %}" class="btn btn-primary">Sign up for Free</a>
       </div>
     </div>
   </section>
@@ -191,14 +185,13 @@
         <div class="row g-6 g-lg-14 g-xl-20 align-center">
           <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
             <div class="content">
-              <p class="text-primary">AI Humanizer</p>
+              <p class="text-primary">AI Writer</p>
               <h1 class="mb-8">
-                Transform AI generated text into undetectable human-like content
-
+                Intuitive Interface: Tailor-Made Content Creation
               </h1>
               <p class="mb-6">
-                Elevate your content strategy with our AI text humanizer. Achieve undetectable, human-like quality that
-                effortlessly bypasses AI detection.
+                Craft personalized content with ease. Our intuitive interface lets you input your topic, choose templates, set the
+                language and tone, and input keywords.
               </p>
               <ul class="list-unstyled list-check mb-8">
                 <li>
@@ -208,8 +201,7 @@
                         d="m3.75 9 3.75 3.75 7.5-7.5" />
                     </g>
                   </svg>
-                  <span>Our AI detection remover tool ensures your content is free from odd or misplaced vocabulary,
-                    maintaining clarity and relevance.</span>
+                  <span>Topic Entry: Begin with your subject; our system guides you to clarity and relevance.</span>
                 </li>
                 <li>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
@@ -218,8 +210,7 @@
                         d="m3.75 9 3.75 3.75 7.5-7.5" />
                     </g>
                   </svg>
-                  <span>Our AI Humanizer matches the writing style, ensuring consistency and naturalness in your
-                    content.</span>
+                  <span>Template Selection: Choose a template that sets the structure for your piece's intended purpose.</span>
                 </li>
                 <li>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
@@ -228,8 +219,16 @@
                         d="m3.75 9 3.75 3.75 7.5-7.5" />
                     </g>
                   </svg>
-                  <span>Attain high standards of quality and legibility, making your content appealing and
-                    readable.</span>
+                  <span>Select the language and tone to match your audience and message.</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>Keyword Integration: Incorporate critical keywords to optimize your content for search relevance.</span>
                 </li>
               </ul>
               <a href="{% url 'account_signup' %}" class="arrow-link arrow-link-primary text-primary gap-3">
@@ -243,7 +242,7 @@
           </div>
           <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
             <div class="feature-img">
-              <img src="{% static 'assets/images/illustrations/feature-illustration-1-blue.svg' %}" alt=""
+              <img src="{% static 'assets/images/settings_easy.svg' %}" style="height: 527px;" alt=""
                 class="img-fluid" />
             </div>
           </div>
@@ -253,15 +252,14 @@
         <div class="row g-6 g-lg-14 g-xl-20 align-center flex-row-reverse">
           <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
             <div class="content">
-              <p class="text-primary">SEO-FRIENDLY OPTIMIZATION </p>
+              <p class="text-primary">AI Writer: Extend mode</p>
               <h1 class="mb-8">
-                Boost SEO with Humanized AI Content
+                Extend Content: Unlimited Writing Potential
               </h1>
               <p class="mb-6">
-                The AI humanizer tool transforms AI-generated content into human-like narratives, enhancing SEO and user
-                engagement. It aligns with search engine algorithms, avoiding penalties while making content more
-                relatable and engaging. This bridges AI efficiency with human authenticity, boosting visibility and
-                appeal in the digital landscape.
+              Elevate your writing with our Extend Content feature, designed to push past the limitations of traditional AI models.
+              Create extensive, detailed narratives without word count constraints, ensuring your ideas are fully developed and your
+              narratives remain engaging, no matter the length.
               </p>
               <a href="{% url 'account_signup' %}" class="arrow-link arrow-link-primary text-primary gap-3">
                 <span>Get Started Free</span>
@@ -274,7 +272,7 @@
           </div>
           <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
             <div class="feature-img">
-              <img src="{% static 'assets/images/illustrations/feature-illustration-2-blue.svg' %}" alt=""
+              <img src="{% static 'assets/images/extend-ai-writer.gif' %}" alt=""
                 class="img-fluid" />
             </div>
           </div>
@@ -284,14 +282,14 @@
         <div class="row g-6 g-lg-14 g-xl-20 align-center">
           <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
             <div class="content">
-              <p class="text-primary">AI DETECTOR</p>
+              <p class="text-primary">All In one AI Writer</p>
               <h1 class="mb-8">
-                Check Your Content for AI with Our
-                <span class="text-primary">AI Detector</span>.
+                All-in-One Suite:
+                <span class="text-primary">Write, Humanize, and Verify</span>.
               </h1>
               <p class="mb-6">
-                AIHumanize, also positioned as a leading solution in AI detection, presents a robust, free AI detector &
-                checker, expertly analyzing content for AI-generated probability.
+                Enjoy streamlined content creation, ai humanization, and assurance of originality, all within a single, efficient
+                platform.
               </p>
               <ul class="list-unstyled list-check mb-8">
                 <li>
@@ -302,7 +300,7 @@
                     </g>
                   </svg>
                   <span>
-                    Our AI detector supports various input formats like PDF, Word, Text.</span>
+                    AI Writer: Produce diverse content swiftly..</span>
                 </li>
                 <li>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
@@ -311,7 +309,7 @@
                         d="m3.75 9 3.75 3.75 7.5-7.5" />
                     </g>
                   </svg>
-                  <span>Let's Communicate with your customers with emotions.</span>
+                  <span>Content Humanizer: Add a natural, human-like quality.</span>
                 </li>
                 <li>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
@@ -320,8 +318,7 @@
                         d="m3.75 9 3.75 3.75 7.5-7.5" />
                     </g>
                   </svg>
-                  <span>Our AI checker can detect ai content from models like ChatGPT, GPT3/4, Jasper, and
-                    others.</span>
+                  <span>AI Detector: Ensure content originality and uniqueness.</span>
                 </li>
               </ul>
               <a href="{% url 'account_signup' %}" class="arrow-link arrow-link-primary text-primary gap-3">
@@ -335,7 +332,7 @@
           </div>
           <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
             <div class="feature-img">
-              <img src="{% static 'assets/images/illustrations/feature-illustration-3-blue.svg' %}" alt=""
+              <img src="{% static 'assets/images/ai-writer-all-in-one.svg' %}" alt=""
                 class="img-fluid" />
             </div>
           </div>
@@ -348,245 +345,7 @@
 
 
   <!-- App users -->
-  <section class="bg-primary py-20 py-lg-30">
-    <div class="container">
-      <div class="row justify-center mb-18">
-        <div class="col-lg-9">
-          <div class="text-center">
-            <h1 class="text-white mb-0" data-aos="fade-up-sm" data-aos-delay="50">
-              Who are the users of AIHumanize?
-            </h1>
-          </div>
-        </div>
-      </div>
 
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-10 g-xl-24 divider-x">
-        <div class="col" data-aos="fade-up-sm" data-aos-delay="50">
-          <div class="h-full">
-            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path stroke="#9884FF" stroke-width="1.5"
-                  d="M8 13.333A5.333 5.333 0 0 1 13.333 8h37.334A5.333 5.333 0 0 1 56 13.333v37.334A5.333 5.333 0 0 1 50.667 56H13.333A5.333 5.333 0 0 1 8 50.667V13.333Z" />
-                <path stroke="#fff" stroke-width="2" d="M24 40h-5.333m16-8h-16m10.666-8H18.667" />
-              </svg>
-            </div>
-            <div class="content text-white">
-              <h4 class="mb-4">Content Creators and Writers</h4>
-              <p class="mb-0">
-                Individuals who generate digital content, such as articles, blogs, and marketing materials, and seek to
-                ensure their work is original and undetectable by AI detectors.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
-          <div class="h-full">
-            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path stroke="#fff" stroke-width="2"
-                  d="M24 37.334c0 4.418 7.163 8 16 8s16-3.582 16-8c0-4.42-7.163-8-16-8s-16 3.58-16 8Z" />
-                <path stroke="#fff" stroke-width="2" d="M24 37.334V48c0 4.416 7.163 8 16 8s16-3.584 16-8V37.334" />
-                <path stroke="#9884FF" stroke-width="1.5"
-                  d="M8 16c0 2.859 3.05 5.499 8 6.928 4.95 1.43 11.05 1.43 16 0 4.95-1.43 8-4.07 8-6.928 0-2.859-3.05-5.499-8-6.928-4.95-1.43-11.05-1.43-16 0-4.95 1.43-8 4.07-8 6.928Z" />
-                <path stroke="#9884FF" stroke-width="1.5" d="M8 16v26.667c0 2.368 2.059 3.866 5.333 5.333" />
-                <path stroke="#9884FF" stroke-width="1.5" d="M8 29.334c0 2.367 2.059 3.866 5.333 5.333" />
-              </svg>
-            </div>
-            <div class="content text-white">
-              <h4 class="mb-4">Business Professionals</h4>
-              <p class="mb-0">
-                Individuals in business who need to create reports, presentations, and other documents that are
-                professional, error-free, and original.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
-          <div class="h-full">
-            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path stroke="#9884FF" stroke-width="1.5"
-                  d="M32 8c19.2 0 24 4.8 24 24s-4.8 24-24 24S8 51.2 8 32 12.8 8 32 8Z" />
-                <path stroke="#fff" stroke-width="2"
-                  d="M21.333 36a6.666 6.666 0 1 0 13.333 0 6.666 6.666 0 0 0-13.333 0Z" />
-                <path stroke="#fff" stroke-width="2" d="M21.333 21.334h21.334v21.333" />
-              </svg>
-            </div>
-            <div class="content text-white">
-              <h4 class="mb-4">Marketing and PR Agencies</h4>
-              <p class="mb-0">
-                Agencies that produce large volumes of content and require tools to help them maintain originality and
-                undetectability while catering to diverse client needs.
-              </p>
-            </div>
-          </div>
-        </div>
-
-
-
-
-      </div>
-      <div class="row mt-2 row-cols-1 row-cols-md-2 row-cols-lg-3 g-10 g-xl-24 divider-x">
-        <div class="col" data-aos="fade-up-sm" data-aos-delay="50">
-          <div class="h-full">
-            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
-              <?xml version="1.0" encoding="utf-8"?>
-
-              <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-              <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
-                <style type="text/css">
-                  .st0 {
-                    fill: none;
-                    stroke: #9884FF;
-                    stroke-width: 2;
-                    stroke-linecap: round;
-                    stroke-linejoin: round;
-                    stroke-miterlimit: 10;
-                  }
-
-                  .st1 {
-                    fill: none;
-                    stroke: white;
-                    stroke-width: 2;
-                    stroke-linecap: round;
-                    stroke-linejoin: round;
-                  }
-
-                  .st2 {
-                    fill: none;
-                    stroke: white;
-                    stroke-width: 2;
-                    stroke-linecap: round;
-                    stroke-linejoin: round;
-                    stroke-dasharray: 5.2066, 0;
-                  }
-                </style>
-                <path class="st0" d="M22.2,19.4l4.2,4.2c0.8,0.8,0.8,2.1,0,2.8l0,0c-0.8,0.8-2.1,0.8-2.8,0l-5.7-5.7" />
-                <circle class="st0" cx="13" cy="13" r="9" />
-                <line class="st0" x1="13" y1="8" x2="13" y2="17" />
-                <line class="st0" x1="9" y1="12" x2="9" y2="17" />
-                <line class="st0" x1="17" y1="10" x2="17" y2="17" />
-              </svg>
-            </div>
-            <div class="content text-white">
-              <h4 class="mb-4">SEO Specialists</h4>
-              <p class="mb-0">
-                Professionals who focus on search engine optimization and need to produce or modify content that is both
-                SEO-friendly and free from AI detection.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
-          <div class="h-full">
-            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
-              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                y="0px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
-
-                <g>
-                  <g>
-                    <path fill="#9884FF"
-                      d="M168.6,236c-0.4,0.1-0.8,0.1-1.3,0.1c-1,0-2-0.2-2.9-0.7l-16.8-8.9l-16.8,8.9c-0.9,0.5-1.9,0.7-2.9,0.7c-1.3,0-2.6-0.4-3.7-1.2c-1.9-1.3-2.9-3.7-2.5-6l3.2-18.7l-13.6-13.3c-1.7-1.6-2.3-4.1-1.6-6.4c0.7-2.3,2.7-3.9,5-4.2l18.8-2.8l8.4-17c1-2.1,3.2-3.5,5.6-3.5c2.4,0,4.6,1.3,5.6,3.5l4.8,9.7c-3.6-11.6-8.1-22.3-13.4-29.1c-7.8-13.2-20.9-18-31-19.7c-1.5-0.3-3.1,0.4-4,1.7l-10.3,14l-11.1-15.1l7.8,26.4c0.2,0.7,0.2,1.4,0.1,2.1L88,194.1c0,0.1-0.1,0.2-0.1,0.4v0.2l-0.1-0.2v-0.2l-8.7-37.6c-0.1-0.8-0.1-1.5,0.1-2.2l8.5-26.8l-11.8,16.2l-10.1-13.7c-1-1.4-2.7-2-4.4-1.6c-8.1,2-18.7,6.8-26.3,17.6c-0.2,0.3-0.5,0.7-0.7,1.1c-0.2,0.2-0.3,0.3-0.6,0.5c-0.5,0.8-1.1,1.7-1.6,2.7c0.1,0,0.2,0.1,0.2,0.1c-1.1,2.1-2.2,4.4-3.3,7c-0.1-0.1-0.2-0.1-0.4-0.1c-9.9,23.4-18.9,70.1-18.8,74.4h0.4c0.1,4.6,1.9,14.2,16.3,13.9h124.7C151.5,245.7,164.6,245.9,168.6,236z" />
-                    <path fill="#9884FF"
-                      d="M141.9,64.9c0,30.1-24.4,54.5-54.7,54.5c-30.1,0-54.5-24.4-54.5-54.5c0-30.2,24.4-54.6,54.5-54.6C117.5,10.3,141.9,34.7,141.9,64.9z" />
-                    <path fill="white"
-                      d="M145.3,173.1c0.4-0.8,1.2-1.3,2.1-1.3s1.7,0.5,2.1,1.3l7.8,15.7l17.3,2.5c0.9,0.1,1.6,0.7,1.9,1.6c0.3,0.8,0,1.8-0.6,2.4l-12.5,12.2l3,17.2c0.1,0.9-0.2,1.8-0.9,2.3c-0.7,0.5-1.7,0.6-2.5,0.2l-15.5-8.2l-15.5,8.2c-0.8,0.4-1.7,0.4-2.5-0.2c-0.7-0.6-1.1-1.4-0.9-2.3l2.9-17.2L119,195.3c-0.7-0.6-0.9-1.6-0.6-2.4c0.3-0.8,1-1.5,1.9-1.6l17.3-2.5L145.3,173.1z" />
-                    <path fill="white"
-                      d="M214.7,173.1c0.4-0.8,1.2-1.3,2.1-1.3c0.9,0,1.7,0.5,2.1,1.3l7.7,15.7l17.3,2.5c0.9,0.1,1.6,0.7,1.9,1.6c0.3,0.8,0,1.8-0.6,2.4l-12.5,12.2l3,17.2c0.1,0.9-0.2,1.8-0.9,2.3c-0.7,0.5-1.7,0.6-2.5,0.2l-15.5-8.2l-15.5,8.2c-0.8,0.4-1.8,0.3-2.5-0.2c-0.7-0.5-1.1-1.4-0.9-2.3l3-17.2l-12.5-12.2c-0.7-0.6-0.9-1.6-0.6-2.4c0.3-0.9,1-1.5,1.9-1.6l17.3-2.5L214.7,173.1z" />
-                    <path fill="white"
-                      d="M178.2,113.6c0.4-0.8,1.2-1.3,2.1-1.3c0.9,0,1.7,0.5,2.1,1.3l7.7,15.7l17.3,2.5c0.9,0.1,1.6,0.7,1.9,1.6c0.3,0.8,0,1.8-0.6,2.4l-12.5,12.2l3,17.2c0.1,0.9-0.2,1.8-0.9,2.3c-0.7,0.6-1.7,0.6-2.5,0.2l-15.5-8.1l-15.5,8.1c-0.8,0.4-1.8,0.4-2.5-0.2c-0.7-0.5-1.1-1.4-0.9-2.3l2.9-17.2l-12.5-12.2c-0.6-0.6-0.9-1.5-0.6-2.4c0.3-0.9,1-1.5,1.9-1.6l17.3-2.5L178.2,113.6z" />
-                  </g>
-                </g>
-              </svg>
-            </div>
-            <div class="content text-white">
-              <h4 class="mb-4">Academic Professionals and Students</h4>
-              <p class="mb-0">
-                Those in the academic field who want to ensure their work is plagiarism-free and not flagged by AI
-                detection tools used by educational institutions.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
-          <div class="h-full">
-            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
-
-              <svg fill="#9884FF" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 419.931 419.931" xml:space="preserve">
-                <g>
-                  <g>
-                    <g>
-                      <path
-                        d="M282.895,352.367c-2.176-1.324-4.072-3.099-5.579-5.25c-0.696-0.992-1.284-2.041-1.771-3.125H28.282V100.276h335.624
-     v159.138c7.165,0.647,13.177,5.353,15.701,11.797c2.235-1.225,4.726-1.982,7.344-2.213c1.771-0.154,3.53-0.044,5.236,0.293
-     V39.561c0-12.996-10.571-23.569-23.566-23.569H23.568C10.573,15.992,0,26.565,0,39.561v309.146
-     c0,12.996,10.573,23.568,23.568,23.568h257.179c-2.007-4.064-2.483-8.652-1.302-13.066
-     C280.126,356.67,281.304,354.354,282.895,352.367z M338.025,55.569c0-4.806,3.896-8.703,8.702-8.703h8.702
-     c4.807,0,8.702,3.896,8.702,8.703v9.863c0,4.806-3.896,8.702-8.702,8.702h-8.702c-4.807,0-8.702-3.896-8.702-8.702V55.569z
-      M297.56,55.569c0-4.806,3.896-8.703,8.702-8.703h8.703c4.807,0,8.702,3.896,8.702,8.703v9.863c0,4.806-3.896,8.702-8.702,8.702
-     h-8.703c-4.806,0-8.702-3.896-8.702-8.702V55.569z M257.094,55.569c0-4.806,3.897-8.703,8.702-8.703h8.702
-     c4.807,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.896,8.702-8.703,8.702h-8.702c-4.805,0-8.702-3.896-8.702-8.702V55.569z" />
-                      <path
-                        d="M419.875,335.77l-2.615-14.83c-0.353-1.997-2.256-3.331-4.255-2.979l-13.188,2.324c-1.583-3.715-3.605-7.195-6.005-10.38
-     l8.614-10.268c0.626-0.744,0.931-1.709,0.847-2.68c-0.086-0.971-0.554-1.867-1.3-2.494l-11.534-9.68
-     c-0.746-0.626-1.713-0.93-2.683-0.845c-0.971,0.085-1.867,0.552-2.493,1.298l-8.606,10.26c-3.533-1.8-7.312-3.188-11.271-4.104
-     v-13.392c0-2.028-1.645-3.674-3.673-3.674h-15.06c-2.027,0-3.673,1.646-3.673,3.674v13.392
-     c-3.961,0.915-7.736,2.304-11.271,4.104l-8.608-10.259c-1.304-1.554-3.62-1.756-5.175-0.453l-11.535,9.679
-     c-0.746,0.627-1.213,1.523-1.299,2.494c-0.084,0.971,0.22,1.937,0.846,2.683l8.615,10.266c-2.396,3.184-4.422,6.666-6.005,10.38
-     l-13.188-2.325c-1.994-0.351-3.901,0.982-4.255,2.979l-2.614,14.83c-0.169,0.959,0.05,1.945,0.607,2.744
-     c0.561,0.799,1.41,1.342,2.37,1.511l13.198,2.326c0.215,4.089,0.927,8.045,2.073,11.812l-11.6,6.695
-     c-0.844,0.485-1.459,1.289-1.712,2.229c-0.252,0.941-0.119,1.943,0.367,2.787l7.529,13.041c0.485,0.844,1.289,1.459,2.229,1.711
-     c0.313,0.084,0.632,0.125,0.951,0.125c0.639,0,1.272-0.166,1.836-0.492l11.609-6.703c2.73,2.925,5.812,5.517,9.18,7.709
-     l-4.584,12.593c-0.332,0.916-0.289,1.926,0.123,2.809s1.157,1.566,2.072,1.898l14.148,5.149c0.406,0.148,0.832,0.224,1.257,0.224
-     c0.53,0,1.063-0.115,1.554-0.345c0.883-0.411,1.564-1.157,1.897-2.073l4.583-12.593c1.965,0.238,3.965,0.361,5.994,0.361
-     s4.029-0.125,5.994-0.361l4.584,12.593c0.332,0.916,1.016,1.662,1.897,2.073c0.49,0.229,1.021,0.345,1.554,0.345
-     c0.424,0,0.85-0.074,1.256-0.224l14.15-5.149c0.913-0.332,1.659-1.017,2.07-1.898c0.412-0.883,0.456-1.893,0.123-2.809
-     l-4.584-12.591c3.365-2.192,6.447-4.786,9.18-7.709l11.609,6.703c0.563,0.324,1.197,0.492,1.836,0.492
-     c0.318,0,0.64-0.043,0.951-0.125c0.941-0.252,1.743-0.869,2.229-1.711l7.529-13.043c0.486-0.842,0.619-1.846,0.367-2.787
-     c-0.253-0.938-0.868-1.742-1.712-2.229l-11.598-6.693c1.146-3.768,1.856-7.724,2.071-11.812l13.198-2.327
-     c0.96-0.169,1.812-0.712,2.37-1.511C419.825,337.715,420.044,336.729,419.875,335.77z M354.184,359.336
-     c-11.155,0-20.2-9.045-20.2-20.201s9.046-20.2,20.2-20.2c11.156,0,20.201,9.044,20.201,20.2S365.34,359.336,354.184,359.336z" />
-                      <g>
-                        <path d="M164.695,235.373c0-4.752-2.785-9.117-7.096-11.119l-39.455-18.332l39.456-18.334c4.31-2.004,7.095-6.368,7.095-11.118
-       v-0.319c0-4.21-2.119-8.075-5.665-10.334c-1.962-1.253-4.247-1.916-6.606-1.916c-1.778,0-3.563,0.391-5.16,1.133l-63.078,29.333
-       c-4.309,2.004-7.092,6.368-7.092,11.117v0.877c0,4.743,2.782,9.104,7.093,11.118l63.084,29.336
-       c1.631,0.755,3.368,1.138,5.162,1.138c2.338,0,4.616-0.664,6.597-1.924c3.548-2.268,5.666-6.13,5.666-10.335L164.695,235.373
-       L164.695,235.373z" />
-                        <path d="M226.932,134.012c-2.301-3.15-6.002-5.03-9.901-5.03h-0.314c-5.354,0-10.048,3.425-11.679,8.516L163.478,266.27
-       c-1.183,3.718-0.517,7.813,1.781,10.962c2.301,3.148,6.002,5.029,9.901,5.029h0.315c5.352,0,10.043-3.426,11.672-8.516
-       l41.555-128.762C229.896,141.268,229.234,137.167,226.932,134.012z" />
-                        <path d="M308.001,194.366l-63.079-29.333c-1.592-0.74-3.374-1.131-5.152-1.131c-2.358,0-4.644,0.661-6.605,1.912
-       c-3.552,2.263-5.671,6.127-5.671,10.337v0.319c0,4.746,2.783,9.111,7.097,11.123l39.454,18.33l-39.455,18.331
-       c-4.311,2.002-7.096,6.367-7.096,11.119v0.321c0,4.205,2.119,8.066,5.669,10.336c1.974,1.258,4.254,1.923,6.595,1.923
-       c1.792,0,3.527-0.383,5.169-1.141l63.082-29.336c4.307-2.009,7.088-6.371,7.088-11.114v-0.877
-       C315.094,200.735,312.311,196.371,308.001,194.366z" />
-                      </g>
-                    </g>
-                  </g>
-                </g>
-              </svg>
-            </div>
-            <div class="content text-white">
-              <h4 class="mb-4">Web Developers and Designers</h4>
-              <p class="mb-0">
-                Professionals who integrate content into websites and digital platforms, ensuring it is both engaging
-                and undetectable as AI-generated.
-              </p>
-            </div>
-          </div>
-        </div>
-
-
-
-
-      </div>
-    </div>
-  </section>
 
   <!-- Reviews -->
 
@@ -595,263 +354,14 @@
 
 
   <!-- FAQ -->
-  <section class="py-10 py-lg-15">
-    <div class="container">
-      <div class="row justify-center mb-18">
-        <div class="col-lg-10">
-          <div class="text-center">
-            <h1 class="mb-0" data-aos="fade-up-sm" data-aos-delay="50">
-              Questions About our AIHumanize? <br class="d-none d-md-block" />
-              We have Answers!
-            </h1>
-          </div>
-        </div>
-      </div>
 
-      <div class="row justify-center">
-        <div class="col-lg-8" data-aos="fade-up-sm" data-aos-delay="100">
-          <div class="accordion accordion-flush d-flex flex-column gap-6" id="faqAccordion">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#faq-collapseOne" aria-expanded="false" aria-controls="faq-collapseOne">
-                  <span class="icon"></span>
-                  What is AIHumanize?
-                </button>
-              </h2>
-              <div id="faq-collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                AI Humanize is a tool that we created to detect AI-generated text and make AI-generated text more
-                human-like. We achieve this using a number of machine learning models as well as text pre- and post-processing to
-                guarantee that AI detection has been deleted and you can bypass AI detectors.
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#faq-collapseTwo" aria-expanded="false" aria-controls="faq-collapseTwo">
-                  <span class="icon"></span>
-                  Does AI Humanize Bypass AI detectors?
-                </button>
-              </h2>
-              <div id="faq-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                  Certainly, AI Humanize is tailored for content creators such as marketers, writers, bloggers, among others, to make
-                  their work appear more human-like. It successfully avoids being caught by AI detection tools. By using AI Humanize,
-                  users can produce content that is less prone to being identified as AI-created, ensuring it retains a natural,
-                  human-like essence. Nonetheless, it is crucial to employ AI Humanize ethically and in compliance with relevant
-                  guidelines and platform rules.
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#faq-collapseThree" aria-expanded="false" aria-controls="faq-collapseThree">
-                  <span class="icon"></span>
-                  Can Content Created with AI Humanize Perform Well in Search Engine Rankings?
-                </button>
-              </h2>
-              <div id="faq-collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                  Absolutely, content crafted using AI Humanize can achieve good rankings on search engines. Studies suggest that
-                  AI-generated content often ranks lower than human-made content, owing to aspects such as relevance, engagement, and
-                  authenticity. Yet, AI Humanize is designed to overcome these challenges by producing content that mirrors the
-                  qualities of human writing. This approach increases the likelihood of the content appealing to both readers and search
-                  engine algorithms.
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#faq-collapseFour" aria-expanded="false" aria-controls="faq-collapseFour">
-                  <span class="icon"></span>
-                  How Does Our Pricing Work?
-                </button>
-              </h2>
-              <div id="faq-collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                  We've made our pricing straightforward: you're billed solely based on the number of words in your input text. No hidden
-                  fees or complicated calculations! Plus, all your billing details are conveniently accessible in our user-friendly
-                  dashboard. Stay informed and in control of your usage with ease.
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#faq-collapseFive" aria-expanded="false" aria-controls="faq-collapseFive">
-                  <span class="icon"></span>
-                  How does the built-in AI detector work?
-                </button>
-              </h2>
-              <div id="faq-collapseFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                  Our built-in AI detector allows you to verify the undetectability of your content against AI detectors, providing an
-                  additional layer of assurance before you use the transformed content.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- CTA -->
-  <section class="cta-section style-2 py-10 py-lg-15" data-aos="fade-up-sm" data-aos-delay="150">
-    <div class="container">
-      <div
-        class="rounded-5 border position-relative pt-6 px-6 overflow-hidden bg-striped bg-striped-bottom gradient-bg border-primary">
-        <div class="row align-center justify-center g-0">
-          <div class="col-lg-5">
-            <div class="p-0 pt-md-6 text-center text-lg-start p-lg-6 p-xl-10">
-              <h2 class="mb-6">
-                Discover the power of AI Humanizer and AI
-                Detector with <span class="text-primary">AIHumanize.</span>
 
-
-              </h2>
-              <a href="{% url 'account_signup' %}" class="btn btn-primary">Get Started Free</a>
-            </div>
-          </div>
-
-          <div class="col-lg-7">
-            <div class="cta-image-container mt-10">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 86 42" class="text-primary arrow-shape">
-                <path fill="currentColor"
-                  d="M83.007 5.063c-8.303-4.146-19.138-3.888-27.778-.97C46.956 6.888 37.093 13.477 37.1 23.3c0 3.58 2.13 7.126 6.128 6.453 3.714-.623 5.706-4.227 4.922-7.795-2.116-9.638-15.81-9.008-22.92-6.476a30.564 30.564 0 0 0-11.9 7.744c-3.05 3.222-6.07 7.587-6.6 12.094-.075.65.97.914 1.24.332 1.429-3.109 2.544-6.172 4.632-8.935 2.168-2.869 4.92-5.3 7.982-7.161 6.077-3.694 15.03-5.894 21.7-2.497 3.533 1.802 6.914 7.774 2.361 10.55-1.845 1.124-4.263.905-5.36-1.113-1-1.843-.788-4.302-.285-6.253 2.048-7.951 10.417-12.945 17.706-15.252a39.207 39.207 0 0 1 12.77-1.803c4.621.113 8.847 1.265 13.224 2.615.426.133.72-.536.308-.74Z" />
-                <path fill="currentColor"
-                  d="M85.318 6.107C77.431-.542 66.216-1.539 56.765 2.153 52.217 3.93 48.075 6.62 44.43 9.867c-3.718 3.315-7.686 7.46-9.29 12.29-1.122 3.37-.827 9.393 3.792 9.836 4.065.392 8.748-3.306 9.751-7.167 1.123-4.321-2.065-8.325-5.861-9.91-4.533-1.89-10.034-1.255-14.67-.028C18.004 17.574 9.163 24.89 4.811 34.499c-.414.917.925 1.725 1.358.797 3.22-6.944 8.669-12.606 15.433-16.148 3.447-1.805 7.224-3.029 11.08-3.527 4.417-.568 9.8-.516 12.977 3.1 3.508 3.99 1.106 8.906-3.196 10.993-2.51 1.218-5.217 1.2-6.206-1.88-.804-2.498.079-5.313 1.285-7.533C41.411 13.192 48.878 7.087 56.22 3.912 65.421-.067 76.632.335 84.582 6.835c.51.424 1.248-.296.736-.728Z" />
-                <path fill="currentColor"
-                  d="M14.65 30.337c-1.917.849-3.728 1.993-5.56 3.01-.866.48-1.735.96-2.602 1.445-.4.223-2.362 1.634-2.766 1.416-.21-.111-.02-2.62-.02-2.95l-.022-2.95c-.015-1.918.346-4.259-.32-6.075-.237-.65-1.107-.667-1.334.005-.423 1.245-.241 2.569-.222 3.873.02 1.474.044 2.95.065 4.423.022 1.364-.587 4.544.89 5.408 1.41.826 3.676-1.342 4.81-2.007 2.547-1.49 5.266-2.848 7.666-4.563a.595.595 0 0 0-.585-1.035Z" />
-                <path fill="currentColor"
-                  d="M14.241 29.944c-1.847 1.293-3.383 3.118-5.07 4.618-1.96 1.739-3.985 3.433-6.174 4.873l1.349.775a76.48 76.48 0 0 1 .125-7.34c.158-2.375.909-4.93.706-7.287-.06-.686-1.104-1.162-1.452-.39-.928 2.06-.94 4.768-1.106 6.995a64.81 64.81 0 0 0-.072 8.036c.042.81.939 1.134 1.53.635 1.972-1.665 3.983-3.264 5.88-5.02 1.705-1.578 3.703-3.259 4.913-5.258.224-.38-.243-.907-.629-.637Z" />
-                <path fill="currentColor"
-                  d="M14.98 28.142C10.7 32.102 6.441 36.087 2.12 40l1.531.634c-.332-2.723-.642-5.443-.777-8.184-.123-2.526.22-5.24-.273-7.715-.155-.782-1.317-.715-1.506.006-.67 2.525-.275 5.5-.115 8.079.166 2.698.443 5.394.902 8.056.118.686 1.054.85 1.499.402 4.119-4.124 8.302-8.18 12.467-12.258.576-.558-.285-1.422-.87-.878Z" />
-              </svg>
-              <div class="cta-img rounded-top-4">
-                <img src="{% static 'assets/images/screens/screen-7.png' %}" alt=""
-                  class="img-fluid w-full h-full object-cover" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   <!-- Bootstrap Modal -->
   <!-- Bootstrap Modal for Limit Reached -->
-  <div class="modal fade" id="limitReachedModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalLabel">Limit Reached</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>You have reached the limit for AI detection as a guest user.</p>
-          <p><strong>Sign up now</strong> to gain unlimited access to our AI detection features.</p>
-        </div>
-        <div class="modal-footer">
-          <a href="{% url 'account_signup' %}" class="btn btn-primary">Sign Up</a>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Word Limit Modal -->
-  <div class="modal fade" id="wordLimitModal" tabindex="-1">
-    {% load socialaccount %}
-    <div class="modal-dialog">
-        <div class="modal-content">
-          {% if not user.is_authenticated %}
-            <div class="modal-body p-4">
-                <div class="media media-rg media-middle media-circle text-primary bg-primary bg-opacity-20 mb-3">
-                    <em class="icon ni ni-spark-fill"></em>
-                </div>
-                <h2 class="text-primary">Get started today with <span class="text-success">400</span> free words.</h2>
-                <p>Sign up to humanize and make this text undetectable.</p>
-                <div class="card bg-lighter bg-opacity-80 shadow-none mt-2">
-                    <div class="card-body">
-                        <h5>What you will gain after signing up?</h5>
-                        <ul class="pricing-list d-flex flex-column gap-3 fs-lg mt-5 mb-0">
-                          <li>Rewrites <strong class=" fw-medium" id="listWordsCount">400</strong> words for free
-                          </li>
 
-                          <li>Built-in AI detector</li>
-                          <li> No weird or random words</li>
-                          <li>Passes AI detectors</li>
-                          <li>High quality, legible content</li>
-                          <li>Writing level matching</li>
-                        </ul>
-                    </div>
-                </div><!-- .card -->
-              
-                  <div class="vstack gap-4 mt-4">
-                  <a href="{% provider_login_url 'google' %}" class="btn account-btn py-4">
-                    <img src="{% static 'assets/images/icons/google.svg' %}" alt="" width="24" class="img-fluid icon" />
-                    <span>Continue With Google</span>
-                  </a>
-                  <a href="{% url 'account_signup' %}" class="btn account-btn py-4">
-                    <img src="{% static 'assets/images/icons/email.svg' %}" alt="" width="24" class="img-fluid icon" />
-                    <span>Continue With Email</span>
-                  </a>
-                  <button type="button" class="btn account-btn py-4 mt-3" data-bs-dismiss="modal">
-                    <span>Continue Exploring</span>
-                  </button>
-                </div>
-                    <!-- <div class="col-12 "><button class="btn btn-outline-light " data-bs-dismiss="modal">Keep Plan</button></div>
-                    <div class="col-12 mt-2"><a href="pricing-plans.html" class="btn btn-primary ">Change Plan</a></div> -->
 
-            </div>
-          {% else %}
-          <div class="modal-body p-4">
-            <div class="media media-rg media-middle media-circle text-primary bg-primary bg-opacity-20 mb-3">
-              <em class="icon ni ni-check-thick"></em>
-            </div>
-            <h2 class="text-primary">Continue Your Journey with Us!</h2>
-            <p>Thank you for being a part of our community. Explore more advanced features and continue enjoying high-quality
-              content.</p>
-            <div class="card bg-lighter bg-opacity-80 shadow-none mt-2">
-              <div class="card-body">
-                <h5>Why Upgrade Your Account?</h5>
-                <ul class="pricing-list d-flex flex-column gap-3 fs-lg mt-5 mb-0">
-                  <li>Rewrites <strong class=" fw-medium" id="listWordsCount">more</strong> words per month
-                  </li>
-                
-                  <li>Built-in AI detector</li>
-                  <li> No weird or random words</li>
-                  <li>Passes AI detectors</li>
-                  <li>High quality, legible content</li>
-                  <li>Writing level matching</li>
-                  <li>Priority customer support</li>
-                  <li>Special discounts and offers</li>
-                </ul>
-              </div>
-            </div><!-- .card -->
-          
-            <div class="vstack gap-4 mt-4">
-              <a href="{% url 'pricing' %}" class="btn btn-primary py-4">
-                <span>View Subscription Plans</span>
-              </a>
-              <button type="button" class="btn account-btn py-4 mt-3" data-bs-dismiss="modal">
-                <span>Continue Exploring</span>
-              </button>
-            </div>
-          </div>
-
-          {% endif %}
-            <!-- .modal-body -->
-        </div><!-- .modal-content -->
-    </div><!-- .modal-dialog -->
-</div>
   <!-- Word Limit Modal -->
  
 
