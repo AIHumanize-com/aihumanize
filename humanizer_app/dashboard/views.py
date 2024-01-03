@@ -237,7 +237,11 @@ def extend_text_view(request):
         min_words_count = data.get('min_words_count')
         max_words_count = data.get('max_words_count')
        
-       
+        subscrioption = Subscription.objects.filter(user=request.user).last()
+
+        
+        if  subscrioption.is_active == False or subscrioption.plan_type == Subscription.FREE:
+            return JsonResponse({"error": "Upgrade required"}, status=400)
 
         # Call your custom text generation function
         result = extend_text(text, tone, keywords, language, max_words_count, min_words_count)
