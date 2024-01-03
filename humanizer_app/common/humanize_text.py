@@ -7,8 +7,12 @@ import os
 
 
 def rewrite_text(original_text, purpose, readability, strength, model_name):
-    openai_api_key = os.environ.get("OPEN_AI_KEY")
     
+    if model_name == "Falcon":
+        openai_api_key = os.environ.get("OPEN_AI_KEY_AIHUMANIZE")
+    else:
+        openai_api_key = os.environ.get("OPEN_AI_KEY")
+
     if purpose not in purposes:
         raise ValueError(
             "Unsupported text type. Please choose from 'essay', 'article', etc."
