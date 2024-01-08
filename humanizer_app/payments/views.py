@@ -275,7 +275,7 @@ def cancel_stripe_subscription_view(request, subscription_id):
         subscrioption = subscrioption.first()
         subscrioption.is_active = False
         subscrioption.actual_end_date = timezone.now()
-        subscrioption.end_date = None
+    
         subscrioption.save()
         return redirect("profile")
     else:
