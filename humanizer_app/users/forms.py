@@ -37,9 +37,10 @@ class CustomSignupForm(forms.Form):
         cleaned_data = super().clean()
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
-
+        if not password1 or not password2:
+            raise ValidationError("Please enter a password and confirm it.")
         if password1 and password2 and password1 != password2:
-            raise ValidationError("The two password fields didn’t match.")
+            raise ValidationError("The two password fields didn't match.")
 
         validate_password(password1)
         return cleaned_data
