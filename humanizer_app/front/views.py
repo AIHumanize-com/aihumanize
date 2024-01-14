@@ -69,7 +69,7 @@ def humanizer(request):
         # even if user has remanining words but subscrioption is expired, we need to check user is in paid plan
         if subscrioption.plan_type in [Subscription.MONTHLY, Subscription.YEARLY, Subscription.ENTERPRISE]:
             if subscrioption.end_date < timezone.now():
-                return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
+                return JsonResponse({"error": "word_limit_reached"}, status=400)
 
         result = rewrite_text(text, purpose=purpose, readability="university", strength="easy", model_name=model)
         
