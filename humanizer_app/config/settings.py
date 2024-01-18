@@ -224,6 +224,8 @@ STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET")
 # TODO change this to 3
 SITE_ID = 3
 SOCIALACCOUNT_LOGIN_ON_GET=True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+
 # key is added
 
 SOCIALACCOUNT_PROVIDERS = {"google": {"SCOPE": ["profile", "email"], "AUTH_PARAMS": {"access_type": "online"}}}
