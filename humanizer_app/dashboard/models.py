@@ -62,3 +62,11 @@ class EmailCampaign(models.Model):
             send_email_batch.delay(self.id)
 
 
+
+
+
+class WritingStyle(models.Model):
+    name = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    analyze = models.JSONField(null=True, blank=True)

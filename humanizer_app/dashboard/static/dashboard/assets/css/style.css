@@ -34218,3 +34218,58 @@ pre[class*=language-] {
   color: #83878F;
   font-size: 13px;
 }
+
+ .file {
+   position: relative;
+   display: flex;
+   justify-content: left;
+   align-items: left;
+   height: 60%;
+
+ }
+
+ .file>label {
+   font-size: 1rem;
+   font-weight: 300;
+   cursor: pointer;
+   outline: 0;
+   user-select: none;
+   border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+   border-style: solid;
+   border-radius: 4px;
+   border-width: 1px;
+   background-color: hsl(0, 0%, 100%);
+   color: hsl(0, 0%, 29%);
+   padding-left: 16px;
+   padding-right: 16px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .file>input[type="file"] {
+   display: none;
+ }
+.button-1 {
+  width: 100%;
+}
+.button-1 button {
+  border: none;
+  border-radius: 10px;
+  padding-inline: 4rem;
+  padding-block: 0.75rem;
+  font-weight: 500;
+  font-size: 20px;
+  background-image: linear-gradient(to right, #6A4DFF, #5343EE) !important;
+
+  box-shadow: 0 0 30px rgba(192, 192, 192, 0.5);
+  color: white;
+}
+
+    .btn-gradient-1 {
+      background: linear-gradient(92.73deg, #b324d7 7.07%, #fe577f 97.81%);
+      color: #fff;
+      border: 0;
+    }
