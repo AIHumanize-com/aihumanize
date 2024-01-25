@@ -249,3 +249,7 @@ def extend_text_view(request):
         
         return JsonResponse({'result': result})
     
+
+
+def stye_view(request):
+    return render(request, 'dashboard/style.html')

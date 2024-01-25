@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import index, profile, edit_profile, documents, document_detail,logout_view, text_editor, generate_text, extend_text_view
+from .views import index, profile, edit_profile, documents, document_detail,logout_view, text_editor, generate_text, extend_text_view, stye_view
 
 urlpatterns = [
     path('', index, name='dashboard'),
@@ -11,7 +11,8 @@ urlpatterns = [
     path("logout/", logout_view, name="logout"),
     path("generate_content/", text_editor, name='editor'),
     path("generate_text/", generate_text, name='generate_text'),
-    path("extend_text_view/", extend_text_view, name='extend_text')
+    path("extend_text_view/", extend_text_view, name='extend_text'),
+    path("style/add/",  stye_view, name='add_style')
 
 
 ]

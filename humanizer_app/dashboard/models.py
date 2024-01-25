@@ -62,3 +62,14 @@ class EmailCampaign(models.Model):
             send_email_batch.delay(self.id)
 
 
+
+
+
+class WritingStyle(models.Model):
+    name = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    analyze = models.JSONField(null=True, blank=True)
+    word_limit = models.IntegerField(default=1000)  # New field
+    price = models.DecimalField(max_digits=6, decimal_places=2, default=5.00)
+

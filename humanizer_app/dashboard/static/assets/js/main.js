@@ -414,7 +414,7 @@ function handleHumanizeText(event){
 	clickedButton.disabled = true;
 	clickedButton.innerHTML = '<span class="spinner-border spinner-border-sm text-white" role="status" aria-hidden="true"></span> Loading...';
 	
-	// let level = document.getElementById("level").value
+	let level = document.getElementById("level").value
 	// let readability = document.getElementById("readability").value
 
 	
@@ -423,7 +423,7 @@ function handleHumanizeText(event){
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ text: textareaContent, model: selectedModel, purpose: purpose.value }),
+		body: JSON.stringify({ text: textareaContent, model: selectedModel, purpose: purpose.value, level: level }),
 	})
 		.then(response => response.json())
 		.then(data => {
