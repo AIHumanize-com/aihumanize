@@ -1,6 +1,7 @@
 from openai import OpenAI
 import json
 from purposes_data import prompts
+from test_data import input_text, text_rewrite
 client = OpenAI(api_key="")
 
 example = writing_style_analysis = {
@@ -72,7 +73,7 @@ def anaylze_style(text):
     
         {
         "role": "user",
-        "content": f"Please analyze the following text in detail, focusing on the writing style. Pay attention to the language use (formality, technicality, colloquialisms), sentence structure (length, complexity, variety), vocabulary level (basic, advanced, specialized), tone and voice (emotional tone, author's personality), rhythm and flow (pacing, stylistic elements), use of literary devices (metaphors, similes, symbolism, irony), rhetorical strategies (persuasion techniques, argument structure), formatting and presentation (paragraph structure, use of headings), audience engagement (direct address, questions, call to action), and consistency and coherence (flow of ideas, consistent tense/style). Provide a comprehensive analysis of these elements to understand the author's unique writing style. Text:  {text}"
+        "content": f"Please analyze the following text in detail, focusing on the writing style. Pay attention to the language use (formality, technicality, colloquialisms), sentence structure (length, complexity, variety), vocabulary level (basic, advanced, specialized), tone and voice (emotional tone, author's personality), rhythm and flow (pacing, stylistic elements), use of literary devices (metaphors, similes, symbolism, irony), rhetorical strategies (persuasion techniques, argument structure), formatting and presentation (paragraph structure, use of headings), audience engagement (direct address, questions, call to action), and consistency and coherence (flow of ideas, consistent tense/style). Provide a comprehensive analysis of these elements to understand the author's unique writing style. Text:  {input_text}"
         },
     
     ],
@@ -204,7 +205,7 @@ def rewrite(style_analysis, text_to_rewrite):
     prompt = f"Rewrite the given text according to specific writing guidelines: {formatted_instructions}."
    
     response = client.chat.completions.create(
-    model="gpt-3.5-turbo-1106",
+    model="gpt-4-1106-preview",
 
     messages=[
         {
@@ -214,7 +215,7 @@ def rewrite(style_analysis, text_to_rewrite):
     
         {
         "role": "user",
-        "content": text_to_rewrite
+        "content": text_rewrite
         },
     
     ],
@@ -243,7 +244,6 @@ print("-----------------------------original-------------------------")
 print(original_text)
 print("-----------------------------analyses--------------------------")
 print(analyses)
-print("----------------------------given text-----------------------------")
-print(give_text)
+
 print("-----------------------------rewriten--------------------------")
 print(rewriten)

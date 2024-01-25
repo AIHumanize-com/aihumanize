@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-&xrj%kwu62!t$c2yl%q+wpky#t7h^1f_6rg745fjp&h*&yfgg$"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["django:8000", "localhost", "aihumanize.com", "django", "127.0.0.1"]
 
@@ -222,7 +222,7 @@ STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
 STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET")
 # TODO change this to 3
-SITE_ID = 2
+SITE_ID = 3
 SOCIALACCOUNT_LOGIN_ON_GET=True
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
