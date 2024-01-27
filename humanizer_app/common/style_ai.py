@@ -1,6 +1,6 @@
 from openai import OpenAI
 import json
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="")
 
 example = {
     "language_use": {
