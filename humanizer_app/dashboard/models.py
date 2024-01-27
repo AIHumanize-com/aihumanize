@@ -65,11 +65,21 @@ class EmailCampaign(models.Model):
 
 
 
+
 class WritingStyle(models.Model):
     name = models.CharField(max_length=100)
+    description = models.TextField(null=True, blank=True)  # Description of the style
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)  # Track when the style was last updated
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     analyze = models.JSONField(null=True, blank=True)
-    word_limit = models.IntegerField(default=1000)  # New field
-    price = models.DecimalField(max_digits=6, decimal_places=2, default=5.00)
+    status = models.CharField(max_length=50, default='active')  # Status of the writing style
+
+class StylePurchase(models.Model):
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    purchased_at = models.DateTimeField(auto_now_add=True)  # Timestamp of purchase
+    transaction_id = models.CharField(max_length=200)  # ID from your payment gateway
+    quantity = models.PositiveIntegerField(default=1)  # Quantity of the style purchased
+    purchased_price = models.DecimalField(max_digits=10, decimal_places=2)  # Price at which the style was purchased
+    used_count = models.PositiveIntegerField(default=0)  # Track the number of times the style was used
 

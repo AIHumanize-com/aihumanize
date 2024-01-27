@@ -1,10 +1,8 @@
 from openai import OpenAI
 import json
-from purposes_data import prompts
-from test_data import input_text, text_rewrite
-client = OpenAI(api_key="")
+client = OpenAI(api_key="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")
 
-example = writing_style_analysis = {
+example = {
     "language_use": {
         "formality": None,
         "technicality": None,
@@ -62,7 +60,7 @@ example = writing_style_analysis = {
 }
 
 
-def anaylze_style(text):
+def anaylze_style(input_text):
     response = client.chat.completions.create(
     model="gpt-4-1106-preview",
     messages=[
@@ -215,7 +213,7 @@ def rewrite(style_analysis, text_to_rewrite):
     
         {
         "role": "user",
-        "content": text_rewrite
+        "content": text_to_rewrite
         },
     
     ],
@@ -232,18 +230,3 @@ def rewrite(style_analysis, text_to_rewrite):
 
 
 
-original_text = """Flowers do more than just brighten your room, they can have an uplifting and brightening effect on your mood too. But more than just a hit of happy, research has shown that the impact can last for days, so way more powerful than that bar of chocolate and significantly less calories!
-
-Flowers can chase away anxieties, worries and the blues, making people feel less depressed, troubled or agitated.  They can induce a more positive outlook on life, boosting energy and happiness."""
-
-give_text = """Indeed, artificial intelligence is shaping the future of humanity across nearly every industry. It is already the main driver of emerging technologies like big data, robotics and IoT — not to mention generative AI, with tools like ChatGPT and AI art generators garnering mainstream attention — and it will continue to act as a technological innovator for the foreseeable future. """
-analyses = anaylze_style(original_text)
-rewriten = rewrite(analyses, give_text)
-
-print("-----------------------------original-------------------------")
-print(original_text)
-print("-----------------------------analyses--------------------------")
-print(analyses)
-
-print("-----------------------------rewriten--------------------------")
-print(rewriten)
