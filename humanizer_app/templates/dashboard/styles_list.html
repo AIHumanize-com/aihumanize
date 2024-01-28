@@ -2,13 +2,14 @@
 
 {% load my_filters %}
 {% block meta_tags %}
-<title>Documents - AI Humanize</title>
+<title>Writing Styles - AI Humanize</title>
 <meta name="description"
-    content="View your history of humanized texts on AI Humanize. Access and manage your previously processed documents efficiently." />
-<meta property="og:title" content="Documents - AI Humanize" />
+    content="View and manage your personalized writing styles on AI Humanize. Access your collection of unique styles tailored to your writing needs." />
+<meta property="og:title" content="Writing Styles - AI Humanize" />
 <meta property="og:description"
-    content="Explore your history of AI-humanized texts at AI Humanize. Revisit and manage your documents with ease." />
+    content="Discover and manage your custom writing styles at AI Humanize. Explore your tailored styles and enhance your writing experience." />
 <meta property="og:type" content="website" />
+
 <meta property="og:url" content="https://aihumanize.com/" />
 {% endblock %}
 {% block content %}
@@ -73,12 +74,23 @@
             <div class="nk-block-head nk-page-head">
                 <div class="nk-block-head-between flex-wrap gap g-2">
                     <div class="nk-block-head-content">
-                        <h2 class="display-6">Styles</h2>
-                        <p>List of all Styles you have generated.</p>
+                        <h2 class="display-6">Writing Styles</h2>
+                        <p>
+                            <span class="badge bg-success">Available: {{ total_available }}</span>
+                            <span class="badge bg-warning">Used: {{ total_used }}</span>
+                        </p>
+
                     </div>
                     <div class="nk-block-head-content">
                         <ul class="nk-block-tools">
+                            {% if not is_subscribed  %}
+                            <li><a class="btn btn-primary" data-bs-toggle="modal" href="#subscribeToUseStylesModal"><em class="icon ni ni-plus"></em><span>Create New Style</span></a></li>
+                            {% elif not can_create %}
+                            <li><a class="btn btn-primary" data-bs-toggle="modal" href="#purchaseStylesModal"><em
+                                        class="icon ni ni-plus"></em><span>Create New Style</span></a></li>
+                            {% else %}
                             <li><a class="btn btn-primary" href="{% url 'add_style' %}"><em class="icon ni ni-plus"></em><span>Create New Style</span></a></li>
+                            {%endif%}
                         </ul>
                     </div>
                 </div>
@@ -172,7 +184,101 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="purchaseStylesModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-4">
+                <div class="media media-rg media-middle media-circle text-primary bg-primary bg-opacity-20 mb-3">
+                    <em class="icon ni ni-spark-fill"></em>
+                </div>
+                <h2 class="h1">Purchase More Styles</h2>
+                <p>You have used all your available writing styles. To continue enjoying our unique style
+                    personalization, you can purchase additional styles.</p>
 
+                <div class="alert alert-info mt-2">
+                    <strong>What You'll Get:</strong>
+                    <ul class="list-dot gap gy-2 mt-2">
+                    <li>Unlock new style options tailored to your writing needs.</li>
+                        <li>Increased training word limit to 2,000 words per style.</li>
+                    </ul>
+                </div>
+
+                <p class="text-center fw-bold mt-3 mb-4">Each additional style costs $5.</p>
+
+                <!-- Button to trigger Stripe checkout -->
+                <p class="text-muted small">
+                    <em>Note: Purchases are final and non-refundable. Please review your selection carefully.</em>
+                </p>
+                <div class="text-center">
+                    <button id="checkout-button" class="btn btn-primary">Purchase Styles</button>
+                </div>
+            </div><!-- .modal-body -->
+        </div><!-- .modal-content -->
+    </div><!-- .modal-dialog -->
+</div>
+
+
+<div class="modal fade" id="subscribeToUseStylesModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-4">
+                <div class="media media-rg media-middle media-circle text-primary bg-primary bg-opacity-20 mb-3">
+                    <em class="icon ni ni-spark-fill"></em>
+                </div>
+                <h2 class="h1">Unlock Writing Styles</h2>
+                <p>To access and use writing styles, please subscribe to one of our  plans. Subscribing gives you
+                    access to a range of styles and increased word limits.</p>
+
+                <p class="text-muted small">
+                    <em>As a subscriber, you'll receive one style for free and can purchase additional styles
+                        anytime.</em>
+                </p>
+
+                <div class="text-center mt-3">
+                    <a href="{% url 'pricing' %}" class="btn btn-primary">View Subscription Plans</a>
+                </div>
+            </div><!-- .modal-body -->
+        </div><!-- .modal-content -->
+    </div><!-- .modal-dialog -->
+</div>
+
+
+<script src="https://js.stripe.com/v3/"></script>
+
+
+
+<script>
+    var stripe = Stripe('pk_test_51OCnPQFG5G6BKxaQ0JDtM7dWfppLE77Z1jUwI80isYFpKLTwrBkxtLR32xrUl4rbcYlny0ifv1sCLTMtzMPPTN6P00wrp1eSoy'); // Replace with your Stripe public key
+
+    var checkoutButton = document.getElementById('checkout-button');
+    checkoutButton.addEventListener('click', function () {
+            fetch('http://127.0.0.1:8000/payments/create-checkout-session-style/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}' // Include CSRF token for Django
+                }
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (session) {
+                    if (session.id) {
+                        return stripe.redirectToCheckout({ sessionId: session.id });
+                    } else {
+                        console.error('Session ID not found');
+                    }
+                })
+                .then(function (result) {
+                    if (result && result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error:', error);
+                });
+        });
+</script>
 
 
 

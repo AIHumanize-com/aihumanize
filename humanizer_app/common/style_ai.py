@@ -1,6 +1,8 @@
 from openai import OpenAI
 import json
-client = OpenAI(api_key="")
+import os
+openai_api_key = os.environ.get("OPEN_AI_KEY")
+client = OpenAI(api_key=openai_api_key)
 
 example = {
     "language_use": {

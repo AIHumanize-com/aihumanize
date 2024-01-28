@@ -11,9 +11,10 @@ from common.detect_ai import detect_and_classify, detect_with_perx
 from .forms import ContactForm
 from django.contrib import messages
 from django.utils import timezone
+from dashboard.models import WritingStyle
 
 def index(request):
-    context = {'paid': False}  # Default context
+    context = {'paid': False, "have_style": False}  # Default context
 
     if request.user.is_authenticated:
         # Get the latest paid subscription for the user (excluding 'FREE' plan type)
@@ -26,6 +27,12 @@ def index(request):
             # Check if the end_date is greater than today
             if latest_subscription.end_date > timezone.now():
                 context['paid'] = True
+
+        # If writing style exist for user
+        writing_style = WritingStyle.objects.filter(user=request.user).first()
+        if writing_style:
+            context['have_style'] = True
+        
 
     return render(request, 'front/index.html', context)
 

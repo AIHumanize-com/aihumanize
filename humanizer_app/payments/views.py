@@ -17,6 +17,8 @@ from django.db.models import F
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth.decorators import login_required
 from common.telegram_sender import send_telegram_message
+from django.views.decorators.http import require_POST
+from dashboard.models import StylePurchase
 def calculate_price(plan_type: str, word_count: int):
     # Validate plan_type
     valid_plan_types = ["monthly", "yearly", "enterprise"]
@@ -106,66 +108,104 @@ def cancel_stripe_subscription(subscription_id):
         print(f"Stripe API error: {e}")
         # Depending on your requirement, you might want to log this error or take additional actions
 
-def handle_checkout_session(session):
+
+def handle_style_purchase(session):
     customer_email = session.get('customer_email')
-    subscription_id = session.get('subscription')
-    stripe_customer_id = session.get('customer')
-    send_telegram_message(str(session))
+    transaction_id = session.get('id')  # Assuming this is the Stripe session ID
+    # Assuming the price is sent in the metadata or can be a fixed value
+    price = session.get('metadata', {}).get('price', 500)  # Default price in cents
+   
+   
     try:
         user = UserModel.objects.get(email=customer_email)
 
+        # Create a new StylePurchase record
+        StylePurchase.objects.create(
+            user=user,
+            transaction_id=transaction_id,
+            purchased_price= price,  # Converting cents to dollars
+            purchased_at=timezone.now(),  # Record the purchase time
+            quantity=1,  # Change this as per your logic if needed
+            used_count=0  # Initialize used count to 0
+        )
+
     except UserModel.DoesNotExist:
         # Handle user not found
+        print("User not found")
         return HttpResponse(status=400)
 
-    # Retrieve the subscription from Stripe
-    stripe_subscription = stripe.Subscription.retrieve(subscription_id)
-
-    # Calculate subscription duration based on Stripe's interval
-    word_count = int(session.get('metadata', {}).get('word_count', 0))
-    plan_type = session.get('metadata', {}).get('plan_type')
-    interval = stripe_subscription.plan.interval if stripe_subscription and stripe_subscription.plan else None
-
-    start_date = timezone.now()
-    end_date = calculate_end_date(start_date, interval)
-
-    # Check for existing active subscription and carry over unused words
-    existing_subscription = Subscription.objects.filter(user=user, is_active=True).first()
-    total_words_count = word_count
-    if existing_subscription:
-        # Renewal: carry over unused words
-        if existing_subscription.plan_type != "free":
-            cancel_stripe_subscription(existing_subscription.stripe_subscription_id)
-        existing_subscription.is_active = False
-        existing_subscription.actual_end_date = timezone.now()
-        existing_subscription.save()
-        total_words_count = word_count + get_unused_words(existing_subscription)
-
-    # Update or create the subscription record in your database
-    subscription = Subscription.objects.create(
-        user=user,
-        plan_type=plan_type,
-        price_in_cents=stripe_subscription.plan.amount,
-        stripe_subscription_id=subscription_id,
-        is_active=True,
-        start_date=start_date,
-        end_date=end_date,
-        word_count=word_count
-        
-    )
-
-    # Update word count tracker
-    WordCountTracker.objects.update_or_create(
-        subscription=subscription,
-        defaults={
-            'words_purchased': total_words_count,
-            # Reset words_used if needed, or handle it according to your logic
-        }
-    )
-    user.stripe_customer_id = stripe_customer_id
-    user.save()
+    
     return HttpResponse(status=200)
-    # Additional actions...
+
+def handle_checkout_session(session):
+    mode = session.get('mode')
+    print(mode)
+    if mode == 'subscription':
+        customer_email = session.get('customer_email')
+        subscription_id = session.get('subscription')
+        stripe_customer_id = session.get('customer')
+        send_telegram_message(str(session))
+        try:
+            user = UserModel.objects.get(email=customer_email)
+
+        except UserModel.DoesNotExist:
+            # Handle user not found
+            return HttpResponse(status=400)
+
+        # Retrieve the subscription from Stripe
+        stripe_subscription = stripe.Subscription.retrieve(subscription_id)
+
+        # Calculate subscription duration based on Stripe's interval
+        word_count = int(session.get('metadata', {}).get('word_count', 0))
+        plan_type = session.get('metadata', {}).get('plan_type')
+        interval = stripe_subscription.plan.interval if stripe_subscription and stripe_subscription.plan else None
+
+        start_date = timezone.now()
+        end_date = calculate_end_date(start_date, interval)
+
+        # Check for existing active subscription and carry over unused words
+        existing_subscription = Subscription.objects.filter(user=user, is_active=True).first()
+        total_words_count = word_count
+        if existing_subscription:
+            # Renewal: carry over unused words
+            if existing_subscription.plan_type != "free":
+                cancel_stripe_subscription(existing_subscription.stripe_subscription_id)
+            existing_subscription.is_active = False
+            existing_subscription.actual_end_date = timezone.now()
+            existing_subscription.save()
+            total_words_count = word_count + get_unused_words(existing_subscription)
+
+        # Update or create the subscription record in your database
+        subscription = Subscription.objects.create(
+            user=user,
+            plan_type=plan_type,
+            price_in_cents=stripe_subscription.plan.amount,
+            stripe_subscription_id=subscription_id,
+            is_active=True,
+            start_date=start_date,
+            end_date=end_date,
+            word_count=word_count
+            
+        )
+
+        # Update word count tracker
+        WordCountTracker.objects.update_or_create(
+            subscription=subscription,
+            defaults={
+                'words_purchased': total_words_count,
+                # Reset words_used if needed, or handle it according to your logic
+            }
+        )
+        user.stripe_customer_id = stripe_customer_id
+        user.save()
+        return HttpResponse(status=200)
+    elif mode == 'payment':
+        print("payment")
+        if 'style_purchase' in session.get('metadata', {}):
+            handle_style_purchase(session)
+
+
+
 
 def calculate_end_date(start_date, interval):
     if interval == 'month':
@@ -236,6 +276,7 @@ def stripe_webhook(request):
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
+    
 
     try:
         event = stripe.Webhook.construct_event(
@@ -283,3 +324,33 @@ def cancel_stripe_subscription_view(request, subscription_id):
 
     
   
+
+
+
+@login_required
+@require_POST
+@csrf_exempt
+def create_checkout_session(request):
+    try:
+        # Create a new checkout session
+        checkout_session = stripe.checkout.Session.create(
+            customer_email=request.user.email,
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'product': 'prod_PSWkfV7JNV8YTd',  # Your product ID
+                    'unit_amount': 500,  # Price in cents ($5.00)
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            metadata={
+                'style_purchase': True,
+            },
+            success_url=request.build_absolute_uri('/dashboard/style/list/'),  # Redirect URL after successful payment
+            cancel_url=request.build_absolute_uri('/dashboard/style/list/'),  # Redirect URL after cancelled payment
+        )
+        return JsonResponse({'id': checkout_session.id})
+    except Exception as e:
+        return JsonResponse({'error': str(e)})
