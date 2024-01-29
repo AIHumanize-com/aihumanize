@@ -11,7 +11,8 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.core.mail import get_connection
-
+from dashboard.models import WritingStyle
+from common.style_ai import anaylze_style
 @shared_task
 def create_documents_record(input_text, output_text, user_id, purpose, level, readibility, model):
     """
@@ -121,3 +122,14 @@ def send_email_batch(campaign_id, start_index=0):
     else:
         campaign.completed = True
         campaign.save()
+
+
+
+@shared_task
+def analyse_text_task(text, name, description, user_id, writing_style_id):
+    style = WritingStyle.objects.get(id=writing_style_id)
+    analyze = anaylze_style(text)  
+    style.status = 'completed'
+    style.analyze = analyze
+    style.save()
+    

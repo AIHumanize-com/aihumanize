@@ -83,3 +83,4 @@ class StylePurchase(models.Model):
     purchased_price = models.DecimalField(max_digits=10, decimal_places=2)  # Price at which the style was purchased
     used_count = models.PositiveIntegerField(default=0)  # Track the number of times the style was used
 
+

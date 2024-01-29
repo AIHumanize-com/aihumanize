@@ -16,7 +16,7 @@ import json
 from common.style_ai import anaylze_style
 from .forms import WritingStyleForm
 from django.contrib import messages
-
+from dashboard.tasks import analyse_text_task
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # Create your views here.
@@ -263,9 +263,9 @@ def style_view(request):
             description = form.cleaned_data['description']
             text = form.cleaned_data['text']
             user = request.user
-            analyze = anaylze_style(text)  
-
-            WritingStyle.objects.create(name=name, description=description, user=user, analyze=analyze)
+            created_style = WritingStyle.objects.create(name=name, description=description, user=user, status='processing')
+            analyse_text_task.delay(text, name, description, user.id, created_style.id)
+            messages.info(request, 'Your text is being analyzed. This may take up to 10 minutes. Please refresh the page to check the status.')
             return redirect('styles_list')  # Redirect after POST
         else:
             # Form is not valid, render the page with form errors
@@ -273,21 +273,28 @@ def style_view(request):
     else:
         form = WritingStyleForm()
 
-    total_available = 1
+        total_available = 1
 
-    user_purchases = StylePurchase.objects.filter(user=request.user)
-    user_styles = WritingStyle.objects.filter(user=request.user).order_by('-created_at')
-    can_create = total_available > user_styles.count()
-    # plan type should not be free
-    is_subscribed = True
-    subscribtion = Subscription.objects.filter(user=request.user, is_active=True).last()
-    if subscribtion.plan_type == Subscription.FREE:
-        is_subscribed = False
+        user_purchases = StylePurchase.objects.filter(user=request.user)
+        for purchase in user_purchases:
+            total_available += purchase.quantity - purchase.used_count
+        
 
-    if is_subscribed and can_create:
-        return render(request, 'dashboard/style.html', {'form': form})
-    else:
-        return redirect('styles_list')
+        user_styles = WritingStyle.objects.filter(user=request.user).order_by('-created_at')
+        
+        can_create = total_available > user_styles.count()
+        # plan type should not be free
+        is_subscribed = True
+        subscribtion = Subscription.objects.filter(user=request.user, is_active=True).last()
+        if subscribtion.plan_type == Subscription.FREE:
+            is_subscribed = False
+
+        print(is_subscribed)
+        print(can_create)
+        if is_subscribed and can_create:
+            return render(request, 'dashboard/style.html', {'form': form})
+        else:
+            return redirect('styles_list')
 
     
 

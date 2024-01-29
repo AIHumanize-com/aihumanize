@@ -69,12 +69,22 @@
 
 </style>
 <div class="container-xl">
+    {% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     <div class="nk-content-inner">
         <div class="nk-content-body">
             <div class="nk-block-head nk-page-head">
                 <div class="nk-block-head-between flex-wrap gap g-2">
                     <div class="nk-block-head-content">
-                        <h2 class="display-6">Writing Styles</h2>
+                        <h2 class="display-6">Writing Styles - Beta</h2>
                         <p>
                             <span class="badge bg-success">Available: {{ total_available }}</span>
                             <span class="badge bg-warning">Used: {{ total_used }}</span>
@@ -102,7 +112,7 @@
                        
                         
                         
-                       
+                    
                         
                         
                     </ul>
@@ -112,7 +122,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                              
+                                <th>Status</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                             </tr>
@@ -121,16 +131,29 @@
                            
                             {% for style in styles %}
                             <tr>
-                                <td class="tb-col">
-                                    <a   class="document-link" href="{% url 'style_detail' style.id %}"
-                                       >
-                                        <div class="caption-text line-clamp-2">{{ style.name }}</div>
+                            <td class="tb-col">
+                                <div class="caption-text line-clamp-2">
+                                    {% if style.status == 'processing' %}
+                                    <!-- Display just the name without a link -->
+                                    {{ style.name }}
+                                    {% else %}
+                                    <!-- Display the name as a link to the detail page -->
+                                    <a class="document-link" href="{% url 'style_detail' style.id %}">
+                                        {{ style.name }}
                                     </a>
-                                </td>
+                                    {% endif %}
+                                </div>
+                            </td>
                               
-                                <!-- <td class="tb-col">
-                                    <div class="caption-text line-clamp-2">{{ document.level }}</div>
-                                </td> -->
+                            <td class="tb-col">
+                                <div class="caption-text line-clamp-2">
+                                    {% if style.status == 'processing' %}
+                                    <span class="badge bg-warning text-dark">Processing</span>
+                                    {% elif style.status == 'completed' %}
+                                    <span class="badge bg-success">Completed</span>
+                                    {% endif %}
+                                </div>
+                            </td>
                               
                                 <!-- <td class="tb-col">
                                     <div class="caption-text line-clamp-2">{{ document.readibility }}</div>
@@ -250,8 +273,12 @@
 <script>
     var stripe = Stripe('pk_test_51OCnPQFG5G6BKxaQ0JDtM7dWfppLE77Z1jUwI80isYFpKLTwrBkxtLR32xrUl4rbcYlny0ifv1sCLTMtzMPPTN6P00wrp1eSoy'); // Replace with your Stripe public key
 
-    var checkoutButton = document.getElementById('checkout-button');
-    checkoutButton.addEventListener('click', function () {
+        var checkoutButton = document.getElementById('checkout-button');
+        checkoutButton.addEventListener('click', function () {
+            // Disable the button and change the text with spinner
+            checkoutButton.disabled = true;
+            checkoutButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Redirecting...';
+
             fetch('http://127.0.0.1:8000/payments/create-checkout-session-style/', {
                 method: 'POST',
                 headers: {
@@ -266,18 +293,28 @@
                     if (session.id) {
                         return stripe.redirectToCheckout({ sessionId: session.id });
                     } else {
+                        // Re-enable the button and reset the text if session ID is not found
+                        checkoutButton.disabled = false;
+                        checkoutButton.innerHTML = 'Purchase Styles';
                         console.error('Session ID not found');
                     }
                 })
                 .then(function (result) {
                     if (result && result.error) {
+                        // Re-enable the button and reset the text in case of error
+                        checkoutButton.disabled = false;
+                        checkoutButton.innerHTML = 'Purchase Styles';
                         alert(result.error.message);
                     }
                 })
                 .catch(function (error) {
                     console.error('Error:', error);
+                    // Re-enable the button and reset the text in case of error
+                    checkoutButton.disabled = false;
+                    checkoutButton.innerHTML = 'Purchase Styles';
                 });
         });
+
 </script>
 
 

@@ -64,6 +64,14 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
+                                
+                                    <strong>Characters Cound: <span class="text-secondary" id="chars_count">0</span></strong>
+                                   
+                            </div>
+                            <div id="char_limit_error" class="text-danger" style="display: none;">
+                                Currently, we also support up to 20,000 characters. We are working on increasing this limit.
+                            </div>
+                            <div class="col-md-12">
                                 <div class="file ">
                                     <label for="input-file">
                                         <i class="p-1"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -97,6 +105,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script>
+
+
+
+
+
+
     document.getElementById('input-file').addEventListener('change', function (event) {
             const file = event.target.files[0];
             if (!file) {
@@ -152,5 +166,23 @@
                 inputTextArea.value = 'Unsupported file type.';
             }
         });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let inputText = document.getElementById('id_text');
+        var charCountSpan = document.getElementById('chars_count');
+        var charLimitError = document.getElementById('char_limit_error');
+
+        inputText.addEventListener('input', function () {
+            var charCount = inputText.value.length;
+            charCountSpan.textContent = charCount;
+
+            if (charCount > 20000) {
+                charLimitError.style.display = 'block';
+            } else {
+                charLimitError.style.display = 'none';
+            }
+        });
+    });
 </script>
 {% endblock %}

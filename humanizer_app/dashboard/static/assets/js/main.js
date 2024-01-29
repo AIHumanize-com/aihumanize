@@ -395,6 +395,8 @@ function handleHumanizeText(event){
 	var textareaContent = document.getElementById('input-text').value;
 	var wordCount = textareaContent.split(/\s+/).filter(function (n) { return n != '' }).length;
 	let resultDivDetect = document.getElementById("result-row-detect");
+	let styleSelect = document.getElementById('style_id');
+	let styleId = styleSelect && styleSelect.value ? styleSelect.value : null;
 	resultDivDetect.style.display = "none";
 	if (wordCount < 30) {
 		let error_p = document.getElementById("min_word_error")
@@ -423,7 +425,7 @@ function handleHumanizeText(event){
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ text: textareaContent, model: selectedModel, purpose: purpose.value, level: level }),
+		body: JSON.stringify({ text: textareaContent, model: selectedModel, purpose: purpose.value, level: level, style_id: styleId }),
 	})
 		.then(response => response.json())
 		.then(data => {
@@ -810,6 +812,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	var purpose = document.getElementById("purposeButton")
 	var levelButton = document.getElementById("levelButton")
 	var stylesButton = document.getElementById("stylesButton")
+	let humanizeMainButton = document.getElementById("hummani-main-btn")
     ninjaBox.addEventListener('click', function () {
         // Remove 'active' class from ghost box and add to ninja box
         ghostBox.classList.remove('active');
@@ -820,6 +823,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		purpose.style.display = "block"
 		levelButton.style.display = "block"
 		stylesButton.style.display = "none"
+		humanizeMainButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>
+                    Humanize`
 		// readabilityButton.style.display = "none"
 		// levelButton.style.display = "none"
     });
@@ -839,6 +844,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			purpose.style.display = "none"
 			levelButton.style.display = "none"
 			stylesButton.style.display = "block"
+			humanizeMainButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>
+                    Rewrite`
 			
 		}
 		
@@ -855,6 +862,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			purpose.style.display = "block"
 		levelButton.style.display = "block"
 		stylesButton.style.display = "none"
+		humanizeMainButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>
+                    Humanize`
 			// readabilityButton.style.display = "block"
 			// levelButton.style.display = "block"
         }
