@@ -29,9 +29,10 @@ def index(request):
                 context['paid'] = True
 
         # If writing style exist for user
-        writing_style = WritingStyle.objects.filter(user=request.user).first()
-        if writing_style:
+        writing_style = WritingStyle.objects.filter(user=request.user)
+        if writing_style.exists():
             context['have_style'] = True
+            context['styles'] = writing_style
         
 
     return render(request, 'front/index.html', context)

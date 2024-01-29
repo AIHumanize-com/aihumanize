@@ -165,7 +165,7 @@
                     <p>Maestro {% if not user.is_authenticated %}{% endif %}</p>
                   </div>
                   
-                  <div class="ghost-box   {% if not have_style %}disabled{% endif %}" data-bs-toggle="popover" data-bs-placement="top"
+                  <div class="ghost-box   {% if not have_style %}disabled{% endif %}" id="writingStyleModel" data-bs-toggle="popover" data-bs-placement="top"
                     data-bs-content="Rewrite with a your writing style - our platform adapts to your unique writing style by analyzing your previous texts. It's designed to echo your voice, ensuring that each edit reflects your individual style and tone, all while transforming your writings to elevate their impact.">
                     <!-- svg here -->
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -248,7 +248,15 @@
                   </button>
                 </div>
                 
+                <div class="button-2" style="display: none;" id="stylesButton">
+                  <select class="select-box" aria-invalid="false" id="style_id">
+                    {% for style in styles %}
+                    <option value="{{style.id}}">{{style.name}}</option>
+                    {% endfor %}
                 
+                  </select>
+                  <p>Style</p>
+                </div>
                 <div class="button-2"  id="levelButton">
                   <select class="select-box" aria-invalid="false"  id="level">
                     <option value="basic_vocabulary">Basic</option>
@@ -268,7 +276,7 @@
                   </select>
                   <p>Readability</p>
                 </div> -->
-                <div class="button-2">
+                <div class="button-2" id="purposeButton">
                   <select class="select-box" aria-invalid="false" id="purpose">
                     <option value="general">General Writing</option>
                     <option value="essay">Essay</option>
@@ -283,6 +291,9 @@
                   <p>Purpose</p>
                 </div>
               </div>
+
+             
+            
 
               <div>
                 <h3>
@@ -1111,6 +1122,26 @@
         </div><!-- .modal-content -->
     </div><!-- .modal-dialog -->
 </div>
+
+<div class="modal fade" id="noStylesModal" tabindex="-1" aria-labelledby="noStylesModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="noStylesModalLabel">No Writing Styles Found</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>You currently have no writing styles created. To use the rewriting feature, please create a personalized
+          writing style.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="{% url 'styles_list' %}" class="btn btn-primary">View Writing Styles</a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- Word Limit Modal -->
  
 

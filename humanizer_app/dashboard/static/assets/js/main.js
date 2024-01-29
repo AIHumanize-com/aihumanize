@@ -806,16 +806,43 @@ document.addEventListener('DOMContentLoaded', function () {
     var ninjaBox = document.querySelector('.ninja-box');
     var ghostBox = document.querySelector('.ghost-box');
 	var masteroInfo = document.getElementById("masteroInfo")
-	// var readabilityButton = document.getElementById("readabilityButton")
-	// var levelButton = document.getElementById("levelButton")
+	var writingStyleModel = document.getElementById("writingStyleModel")
+	var purpose = document.getElementById("purposeButton")
+	var levelButton = document.getElementById("levelButton")
+	var stylesButton = document.getElementById("stylesButton")
     ninjaBox.addEventListener('click', function () {
         // Remove 'active' class from ghost box and add to ninja box
         ghostBox.classList.remove('active');
+		writingStyleModel.classList.remove('active');
+
         ninjaBox.classList.add('active');
 		masteroInfo.style.display = "none"
+		purpose.style.display = "block"
+		levelButton.style.display = "block"
+		stylesButton.style.display = "none"
 		// readabilityButton.style.display = "none"
 		// levelButton.style.display = "none"
     });
+
+	writingStyleModel.addEventListener('click', function () {
+		ghostBox.classList.remove('active');
+		ninjaBox.classList.remove('active');
+		writingStyleModel.classList.add('active');
+		masteroInfo.style.display = "none"
+		
+		if (!writingStyleModel.classList.contains('active')) {
+			var noStylesModal = new bootstrap.Modal(document.getElementById('noStylesModal'));
+			noStylesModal.show();
+			ninjaBox.classList.add('active');
+
+		}else{
+			purpose.style.display = "none"
+			levelButton.style.display = "none"
+			stylesButton.style.display = "block"
+			
+		}
+		
+	})
 
     ghostBox.addEventListener('click', function () {
         // Check if the ghost box is disabled
@@ -823,7 +850,11 @@ document.addEventListener('DOMContentLoaded', function () {
             // If not disabled, toggle the 'active' class
             ninjaBox.classList.remove('active');
             ghostBox.classList.add('active');
+			writingStyleModel.classList.remove('active');
 			masteroInfo.style.display = "block"
+			purpose.style.display = "block"
+		levelButton.style.display = "block"
+		stylesButton.style.display = "none"
 			// readabilityButton.style.display = "block"
 			// levelButton.style.display = "block"
         }
@@ -839,6 +870,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+
 
 
 function renderGauge(renderTo, value, label, description, colors) {

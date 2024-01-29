@@ -263,7 +263,7 @@ def style_view(request):
             description = form.cleaned_data['description']
             text = form.cleaned_data['text']
             user = request.user
-            analyze = anaylze_style(text)  # Ensure this function is defined
+            analyze = anaylze_style(text)  
 
             WritingStyle.objects.create(name=name, description=description, user=user, analyze=analyze)
             return redirect('styles_list')  # Redirect after POST
