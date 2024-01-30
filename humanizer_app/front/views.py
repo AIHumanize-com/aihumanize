@@ -30,7 +30,7 @@ def index(request):
                 context['paid'] = True
 
         # If writing style exist for user
-        writing_style = WritingStyle.objects.filter(user=request.user)
+        writing_style = WritingStyle.objects.filter(user=request.user, status="completed")
         if writing_style.exists():
             context['have_style'] = True
             context['styles'] = writing_style
@@ -84,7 +84,7 @@ def humanizer(request):
                 return JsonResponse({"error": "word_limit_reached"}, status=400)
 
         if style_id:
-            style = WritingStyle.objects.get(id=style_id, user=request.user, status="completed")
+            style = WritingStyle.objects.get(id=style_id, user=request.user)
             result = rewrite(style.analyze, text)
            
             create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=style.name, level=None, readibility=None, model=model)
