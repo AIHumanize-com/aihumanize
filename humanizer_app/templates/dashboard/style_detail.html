@@ -1,0 +1,229 @@
+{% extends 'dashboard/main.html' %}
+{% load static %}
+{% load my_filters %} <!-- Ensure your custom template tags are loaded -->
+
+{% block content %}
+<div class="container-xl mt-3">
+    {% if messages %}
+    <div class="nk-block">
+        <div class="alert alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    <!-- Section for Editing Name and Description -->
+    <div class="nk-block">
+        <div class="card shadow-none">
+            <div class="card-body">
+                <h4>Edit Basic Information</h4>
+                <form action="{% url 'update_basic_info' writing_style.id %}" method="post">
+                    {% csrf_token %}
+                    <!-- Name Field -->
+                    <div class="form-group mt-2">
+                        <label for="id_name">Name</label>
+                        <input type="text" id="id_name" name="name" class="form-control"
+                            value="{{ writing_style.name }}">
+                    </div>
+                    <!-- Description Field -->
+                    <div class="form-group mt-2">
+                        <label for="id_description">Description</label>
+                        <textarea id="id_description" name="description"
+                            class="form-control">{{ writing_style.description }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Update Basic Info</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section for Editing Analyze Data -->
+    <div class="nk-block mt-4">
+    
+        <div class="card shadow-none">
+            <div class="card-body">
+                <h4>Some Insights from your Writing Style</h4>
+                <form action="" method="post">
+                    {% csrf_token %}
+        
+                    <!-- Language Use Section -->
+                    <div class="form-group mt-2">
+                        <label for="id_language_use_formality">Language Use Formality</label>
+                        <input type="text" id="id_language_use_formality" disabled disabled name="language_use_formality" class="form-control"
+                            value="{{ writing_style.analyze.language_use.formality }}">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="id_language_use_technicality">Language Use Technicality</label>
+                        <input type="text" id="id_language_use_technicality" disabled name="language_use_technicality"
+                            class="form-control" value="{{ writing_style.analyze.language_use.technicality }}">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="id_language_use_colloquialisms">Language Use Colloquialisms</label>
+                        <input type="text" id="id_language_use_colloquialisms" disabled name="language_use_colloquialisms"
+                            class="form-control" value="{{ writing_style.analyze.language_use.colloquialisms }}">
+                    </div>
+        
+                    <!-- Sentence Structure Section -->
+                    <div class="form-group mt-2">
+                        <label for="id_sentence_structure_length">Sentence Structure Length</label>
+                        <input type="text" id="id_sentence_structure_length" disabled name="sentence_structure_length"
+                            class="form-control" value="{{ writing_style.analyze.sentence_structure.length }}">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="id_sentence_structure_complexity">Sentence Structure Complexity</label>
+                        <input type="text" id="id_sentence_structure_complexity" disabled name="sentence_structure_complexity"
+                            class="form-control" value="{{ writing_style.analyze.sentence_structure.complexity }}">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="id_sentence_structure_variety">Sentence Structure Variety</label>
+                        <input type="text" id="id_sentence_structure_variety" disabled name="sentence_structure_variety"
+                            class="form-control" value="{{ writing_style.analyze.sentence_structure.variety }}">
+                    </div>
+        
+                <!-- Vocabulary Level Section -->
+                <div class="form-group mt-2">
+                    <label for="id_vocabulary_level_basic_advanced_specialized">Vocabulary Level (Basic/Advanced/Specialized)</label>
+                    <input type="text" id="id_vocabulary_level_basic_advanced_specialized"
+                        disabled name="vocabulary_level_basic_advanced_specialized" class="form-control"
+                        value="{{ writing_style.analyze.vocabulary_level.basic_advanced_specialized }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="id_vocabulary_level_abstract_concrete">Vocabulary Level (Abstract/Concrete)</label>
+                    <input type="text" id="id_vocabulary_level_abstract_concrete" disabled name="vocabulary_level_abstract_concrete"
+                        class="form-control" value="{{ writing_style.analyze.vocabulary_level.abstract_concrete }}">
+                </div>
+                
+                <!-- Tone and Voice Section -->
+                <div class="form-group mt-2">
+                    <label for="id_tone_and_voice_emotional_tone">Tone and Voice (Emotional Tone)</label>
+                    <input type="text" id="id_tone_and_voice_emotional_tone" disabled name="tone_and_voice_emotional_tone" class="form-control"
+                        value="{{ writing_style.analyze.tone_and_voice.emotional_tone }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="id_tone_and_voice_author_personality">Tone and Voice (Author Personality)</label>
+                    <input type="text" id="id_tone_and_voice_author_personality" disabled name="tone_and_voice_author_personality"
+                        class="form-control" value="{{ writing_style.analyze.tone_and_voice.author_personality }}">
+                </div>
+                
+                <!-- Rhythm and Flow Section -->
+                <div class="form-group mt-2">
+                    <label for="id_rhythm_and_flow_pacing">Rhythm and Flow (Pacing)</label>
+                    <input type="text" id="id_rhythm_and_flow_pacing" disabled name="rhythm_and_flow_pacing" class="form-control"
+                        value="{{ writing_style.analyze.rhythm_and_flow.pacing }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="id_rhythm_and_flow_stylistic_elements">Rhythm and Flow (Stylistic Elements)</label>
+                    <input type="text" id="id_rhythm_and_flow_stylistic_elements" disabled name="rhythm_and_flow_stylistic_elements"
+                        class="form-control" value="{{ writing_style.analyze.rhythm_and_flow.stylistic_elements }}">
+                </div>
+                <!-- Literary Devices Section -->
+                <div class="form-group mt-2">
+                    <label for="id_literary_devices_metaphors_similes">Literary Devices (Metaphors/Similes)</label>
+                    <input type="text" id="id_literary_devices_metaphors_similes" disabled name="literary_devices_metaphors_similes"
+                        class="form-control" value="{{ writing_style.analyze.literary_devices.metaphors_similes }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="id_literary_devices_symbolism">Literary Devices (Symbolism)</label>
+                    <input type="text" id="id_literary_devices_symbolism" disabled name="literary_devices_symbolism" class="form-control"
+                        value="{{ writing_style.analyze.literary_devices.symbolism }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="id_literary_devices_irony">Literary Devices (Irony)</label>
+                    <input type="text" id="id_literary_devices_irony" disabled name="literary_devices_irony" class="form-control"
+                        value="{{ writing_style.analyze.literary_devices.irony }}">
+                </div>
+                
+                <!-- Rhetorical Strategies Section -->
+                <div class="form-group mt-2">
+                    <label for="id_rhetorical_strategies_persuasion_techniques">Rhetorical Strategies (Persuasion Techniques)</label>
+                    <input type="text" id="id_rhetorical_strategies_persuasion_techniques"
+                        disabled name="rhetorical_strategies_persuasion_techniques" class="form-control"
+                        value="{{ writing_style.analyze.rhetorical_strategies.persuasion_techniques }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="id_rhetorical_strategies_argument_structure">Rhetorical Strategies (Argument Structure)</label>
+                    <input type="text" id="id_rhetorical_strategies_argument_structure" disabled name="rhetorical_strategies_argument_structure"
+                        class="form-control" value="{{ writing_style.analyze.rhetorical_strategies.argument_structure }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="id_formatting_and_presentation_paragraph_structure">Formatting and Presentation (Paragraph
+                        Structure)</label>
+                    <input type="text" id="id_formatting_and_presentation_paragraph_structure"
+                        disabled name="formatting_and_presentation_paragraph_structure" class="form-control"
+                        value="{{ writing_style.analyze.formatting_and_presentation.paragraph_structure }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="id_formatting_and_presentation_use_of_headings">Formatting and Presentation (Use of Headings)</label>
+                    <input type="text" id="id_formatting_and_presentation_use_of_headings"
+                        disabled name="formatting_and_presentation_use_of_headings" class="form-control"
+                        value="{{ writing_style.analyze.formatting_and_presentation.use_of_headings }}">
+                </div>
+                
+                <!-- Audience Engagement Section -->
+                <div class="form-group mt-2">
+                    <label for="id_audience_engagement_direct_address">Audience Engagement (Direct Address)</label>
+                    <input type="text" id="id_audience_engagement_direct_address" disabled name="audience_engagement_direct_address"
+                        class="form-control" value="{{ writing_style.analyze.audience_engagement.direct_address }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="id_audience_engagement_questions">Audience Engagement (Questions)</label>
+                    <input type="text" id="id_audience_engagement_questions" disabled name="audience_engagement_questions" class="form-control"
+                        value="{{ writing_style.analyze.audience_engagement.questions }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="id_audience_engagement_call_to_action">Audience Engagement (Call to Action)</label>
+                    <input type="text" id="id_audience_engagement_call_to_action" disabled name="audience_engagement_call_to_action"
+                        class="form-control" value="{{ writing_style.analyze.audience_engagement.call_to_action }}">
+                </div>
+                
+                <!-- Consistency and Coherence Section -->
+                <div class="form-group mt-2">
+                    <label for="id_consistency_and_coherence_flow_of_ideas">Consistency and Coherence (Flow of Ideas)</label>
+                    <input type="text" id="id_consistency_and_coherence_flow_of_ideas" disabled name="consistency_and_coherence_flow_of_ideas"
+                        class="form-control" value="{{ writing_style.analyze.consistency_and_coherence.flow_of_ideas }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="id_consistency_and_coherence_consistent_tense_style">Consistency and Coherence (Consistent
+                        Tense/Style)</label>
+                    <input type="text" id="id_consistency_and_coherence_consistent_tense_style"
+                        disabled name="consistency_and_coherence_consistent_tense_style" class="form-control"
+                        value="{{ writing_style.analyze.consistency_and_coherence.consistent_tense_style }}">
+                </div>
+                
+                <!-- Content Theme Section -->
+                <div class="form-group mt-2">
+                    <label for="id_content_theme_information_density">Content Theme (Information Density)</label>
+                    <input type="text" id="id_content_theme_information_density" disabled name="content_theme_information_density"
+                        class="form-control" value="{{ writing_style.analyze.content_theme.information_density }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="id_content_theme_factual_vs_anecdotal">Content Theme (Factual vs. Anecdotal)</label>
+                    <input type="text" id="id_content_theme_factual_vs_anecdotal" disabled name="content_theme_factual_vs_anecdotal"
+                        class="form-control" value="{{ writing_style.analyze.content_theme.factual_vs_anecdotal }}">
+                </div>
+                
+                <!-- Content Purpose Section -->
+                <div class="form-group mt-2">
+                    <label for="id_content_purpose_informative_vs_entertaining">Content Purpose (Informative vs. Entertaining)</label>
+                    <input type="text" id="id_content_purpose_informative_vs_entertaining"
+                        disabled name="content_purpose_informative_vs_entertaining" class="form-control"
+                        value="{{ writing_style.analyze.content_purpose.informative_vs_entertaining }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="id_content_purpose_educational_value">Content Purpose (Educational Value)</label>
+                    <input type="text" id="id_content_purpose_educational_value" disabled name="content_purpose_educational_value"
+                        class="form-control" value="{{ writing_style.analyze.content_purpose.educational_value }}">
+                </div>
+        
+                    <!-- <button type="submit" class="btn btn-primary mt-3">Update Analyze Data</button> -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

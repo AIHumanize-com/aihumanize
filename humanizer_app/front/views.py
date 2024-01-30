@@ -11,9 +11,11 @@ from common.detect_ai import detect_and_classify, detect_with_perx
 from .forms import ContactForm
 from django.contrib import messages
 from django.utils import timezone
+from dashboard.models import WritingStyle
+from common.style_ai import rewrite
 
 def index(request):
-    context = {'paid': False}  # Default context
+    context = {'paid': False, "have_style": False}  # Default context
 
     if request.user.is_authenticated:
         # Get the latest paid subscription for the user (excluding 'FREE' plan type)
@@ -26,6 +28,13 @@ def index(request):
             # Check if the end_date is greater than today
             if latest_subscription.end_date > timezone.now():
                 context['paid'] = True
+
+        # If writing style exist for user
+        writing_style = WritingStyle.objects.filter(user=request.user)
+        if writing_style.exists():
+            context['have_style'] = True
+            context['styles'] = writing_style
+        
 
     return render(request, 'front/index.html', context)
 
@@ -42,6 +51,8 @@ def humanizer(request):
         purpose = body["purpose"]
         model = body["model"]
         level = body["level"]
+        style_id = body['style_id']
+
         # readability = None
         # strength = None
         if model == "Maestro":
@@ -72,9 +83,16 @@ def humanizer(request):
             if subscrioption.end_date < timezone.now():
                 return JsonResponse({"error": "word_limit_reached"}, status=400)
 
-        result = rewrite_text(text, purpose=purpose, readability="university", strength=level, model_name=model)
+        if style_id:
+            style = WritingStyle.objects.get(id=style_id, user=request.user, status="completed")
+            result = rewrite(style.analyze, text)
+           
+            create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=style.name, level=None, readibility=None, model=model)
+        else:
+            result = rewrite_text(text, purpose=purpose, readability="university", strength=level, model_name=model)
         
-        create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=None, readibility=None, model=model)
+            create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=None, readibility=None, model=model)
+           
         word_count_tracker.words_used += word_count
         word_count_tracker.save()
         return JsonResponse({"text": result})

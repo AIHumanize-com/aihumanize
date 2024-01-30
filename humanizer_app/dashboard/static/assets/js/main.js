@@ -395,6 +395,8 @@ function handleHumanizeText(event){
 	var textareaContent = document.getElementById('input-text').value;
 	var wordCount = textareaContent.split(/\s+/).filter(function (n) { return n != '' }).length;
 	let resultDivDetect = document.getElementById("result-row-detect");
+	let styleSelect = document.getElementById('style_id');
+	let styleId = styleSelect && styleSelect.value ? styleSelect.value : null;
 	resultDivDetect.style.display = "none";
 	if (wordCount < 30) {
 		let error_p = document.getElementById("min_word_error")
@@ -413,7 +415,7 @@ function handleHumanizeText(event){
 	clickedButton = event.currentTarget;
 	clickedButton.disabled = true;
 	clickedButton.innerHTML = '<span class="spinner-border spinner-border-sm text-white" role="status" aria-hidden="true"></span> Loading...';
-	
+	var writingStyleModel = document.getElementById("writingStyleModel")
 	let level = document.getElementById("level").value
 	// let readability = document.getElementById("readability").value
 
@@ -423,7 +425,7 @@ function handleHumanizeText(event){
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ text: textareaContent, model: selectedModel, purpose: purpose.value, level: level }),
+		body: JSON.stringify({ text: textareaContent, model: selectedModel, purpose: purpose.value, level: level, style_id: styleId }),
 	})
 		.then(response => response.json())
 		.then(data => {
@@ -433,6 +435,10 @@ function handleHumanizeText(event){
 					let errorMessageP = document.getElementById('error-message');
 					errorMessageP.textContent = "Now we can proccess up to 1000 words. Please enter fewer words";
 					clickedButton.disabled = false;
+					if(writingStyleModel.classList.contains("active")){
+						clickedButton.innerHTML = 'Rewrite';
+						return
+					}
 					clickedButton.innerHTML = 'Humanize';
 					return
 				}
@@ -441,6 +447,10 @@ function handleHumanizeText(event){
 				wordLimitModal.show();
 				// Other necessary actions
 				clickedButton.disabled = false;
+				if(writingStyleModel.classList.contains("active")){
+						clickedButton.innerHTML = 'Rewrite';
+						return
+					}
 				clickedButton.innerHTML = 'Humanize';
 				return;
 				}
@@ -458,10 +468,24 @@ function handleHumanizeText(event){
 
 			// Re-enable the button and remove spinner
 			clickedButton.disabled = false;
+			
 			if (clickedButton.id == "humanize-btn"){
-				clickedButton.innerHTML = '<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>  Humanize Again';
+				if(writingStyleModel.classList.contains("active")){
+						clickedButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>
+                    Rewrite`;
+						
+				}  else{
+					clickedButton.innerHTML = '<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>  Humanize Again';
+				}
 			} else {
-				clickedButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span> Humanize`;
+				if(writingStyleModel.classList.contains("active")){
+						clickedButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>
+                    Rewrite`;
+						
+				}  else{
+					clickedButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span> Humanize`;
+				}
+				
 			}
 			
 		})
@@ -806,16 +830,53 @@ document.addEventListener('DOMContentLoaded', function () {
     var ninjaBox = document.querySelector('.ninja-box');
     var ghostBox = document.querySelector('.ghost-box');
 	var masteroInfo = document.getElementById("masteroInfo")
-	// var readabilityButton = document.getElementById("readabilityButton")
-	// var levelButton = document.getElementById("levelButton")
+	var writingStyleModel = document.getElementById("writingStyleModel")
+	var purpose = document.getElementById("purposeButton")
+	var levelButton = document.getElementById("levelButton")
+	var stylesButton = document.getElementById("stylesButton")
+	let humanizeMainButton = document.getElementById("hummani-main-btn")
     ninjaBox.addEventListener('click', function () {
         // Remove 'active' class from ghost box and add to ninja box
         ghostBox.classList.remove('active');
+		writingStyleModel.classList.remove('active');
+
         ninjaBox.classList.add('active');
 		masteroInfo.style.display = "none"
+		purpose.style.display = "block"
+		levelButton.style.display = "block"
+		stylesButton.style.display = "none"
+		humanizeMainButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>
+                    Humanize`
 		// readabilityButton.style.display = "none"
 		// levelButton.style.display = "none"
     });
+
+	writingStyleModel.addEventListener('click', function () {
+		// if not disabled.
+		if (writingStyleModel.classList.contains('disabled')) {
+			var noStylesModal = new bootstrap.Modal(document.getElementById('noStylesModal'));
+			noStylesModal.show();
+		} else{
+		ghostBox.classList.remove('active');
+		ninjaBox.classList.remove('active');
+		writingStyleModel.classList.add('active');
+		masteroInfo.style.display = "none"
+		
+		if (!writingStyleModel.classList.contains('active')) {
+			var noStylesModal = new bootstrap.Modal(document.getElementById('noStylesModal'));
+			noStylesModal.show();
+			ninjaBox.classList.add('active');
+
+		}else{
+			purpose.style.display = "none"
+			levelButton.style.display = "none"
+			stylesButton.style.display = "block"
+			humanizeMainButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>
+                    Rewrite`
+			
+		}
+		
+	}})
 
     ghostBox.addEventListener('click', function () {
         // Check if the ghost box is disabled
@@ -823,7 +884,13 @@ document.addEventListener('DOMContentLoaded', function () {
             // If not disabled, toggle the 'active' class
             ninjaBox.classList.remove('active');
             ghostBox.classList.add('active');
+			writingStyleModel.classList.remove('active');
 			masteroInfo.style.display = "block"
+			purpose.style.display = "block"
+		levelButton.style.display = "block"
+		stylesButton.style.display = "none"
+		humanizeMainButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>
+                    Humanize`
 			// readabilityButton.style.display = "block"
 			// levelButton.style.display = "block"
         }
@@ -839,6 +906,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+
 
 
 function renderGauge(renderTo, value, label, description, colors) {

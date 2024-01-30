@@ -21,51 +21,168 @@
 
                 <div class="card shadown-none">
                     <div class="card-body">
-                        <form action="{% url 'edit_profile' %}" class="form" method="post"> {% csrf_token %}
-                            <div class="row g-3 gx-gs">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="form-control-wrap">
-                                            <label for="style_name">Style Name</label>
-                                            <input type="text" id="style_name" class="form-control ">
-                                        </div>
+                    <form action="{% url 'add_style' %}" class="form" method="post">
+                        {% csrf_token %}
+                        <div class="row g-3 gx-gs">
+                            <!-- Name Field -->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="form-control-wrap">
+                                        <label for="id_name">{{ form.name.label }}</label>
+                                        <input type="text" id="id_name" name="{{ form.name.html_name }}" class="form-control"
+                                            value="{{ form.name.value|default_if_none:'' }}">
+                                        {% if form.name.errors %}
+                                        <div class="text-danger">{{ form.name.errors }}</div>
+                                        {% endif %}
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                   
-                                        <div class="form-control-wrap">
-                                            <textarea name="" class="form-control " placeholder="Paste text here or use the 'Upload File' button to analyze a document" id="input_text" cols="30" rows="10"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="file ">
-                                        <label for="input-file">
-                                            <i class="p-1"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-                                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path
-                                                        d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4s1.79-4 4-4h.71C7.37 7.69 9.48 6 12 6c3.04 0 5.5 2.46 5.5 5.5v.5H19c1.66 0 3 1.34 3 3s-1.34 3-3 3z">
-                                                    </path>
-                                                </svg></i>Upload File
-                                        </label>
-                                        <input id="input-file" class="btn btn-lg" type="file">
-                                    </div>
-                                </div>
-                               
-
-                                <div class="col-md-12">
-                                    <button class="btn btn-primary">Start Training</button>
-                                    </div>
-                                </div>
-                                
-
                             </div>
-                        </form>
+                            <!-- Description Field -->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="form-control-wrap">
+                                        <label for="id_description">{{ form.description.label }}</label>
+                                        <textarea id="id_description" name="{{ form.description.html_name }}" 
+                                            class="form-control">{{ form.description.value|default_if_none:'' }}</textarea>
+                                        {% if form.description.errors %}
+                                        <div class="text-danger">{{ form.description.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Text Field -->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="form-control-wrap">
+                                        <label for="id_text">{{ form.text.label }}</label>
+                                        <textarea id="id_text" name="{{ form.text.html_name }}" class="form-control" rows="10"
+                                            placeholder="Paste text here or use the 'Upload File' button to analyze a document">{{ form.text.value|default_if_none:'' }}</textarea>
+                                        {% if form.text.errors %}
+                                        <div class="text-danger">{{ form.text.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                
+                                    <strong>Characters Cound: <span class="text-secondary" id="chars_count">0</span></strong>
+                                   
+                            </div>
+                            <div id="char_limit_error" class="text-danger" style="display: none;">
+                                Currently, we also support up to 20,000 characters. We are working on increasing this limit.
+                            </div>
+                            <div class="col-md-12">
+                                <div class="file ">
+                                    <label for="input-file">
+                                        <i class="p-1"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                                <path
+                                                    d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4s1.79-4 4-4h.71C7.37 7.69 9.48 6 12 6c3.04 0 5.5 2.46 5.5 5.5v.5H19c1.66 0 3 1.34 3 3s-1.34 3-3 3z">
+                                                </path>
+                                            </svg></i>Upload File
+                                    </label>
+                                    <input id="input-file" class="btn btn-lg" type="file">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn btn-primary">Start Training</button>
+                            </div>
+                            </div>
+                            <!-- Other Fields -->
+                            <!-- ... -->
+                        </div>
+                    </form>
+
                     </div><!-- .card-body -->
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block custom_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script>
+
+
+
+
+
+
+    document.getElementById('input-file').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (!file) {
+                return;
+            }
+
+            let inputTextArea = document.getElementById('input-text');
+            
+            if (file.type === 'application/pdf') {
+                // Handle PDF file
+                const fileReader = new FileReader();
+                fileReader.onload = function () {
+                    const typedarray = new Uint8Array(this.result);
+
+                    pdfjsLib.getDocument(typedarray).promise.then(pdf => {
+                        let text = '';
+                        for (let i = 1; i <= pdf.numPages; i++) {
+                            pdf.getPage(i).then(page => {
+                                page.getTextContent().then(content => {
+                                    content.items.forEach(item => {
+                                        text += item.str + ' ';
+                                    });
+
+                                    if (i === pdf.numPages) {
+                                        // Set the textarea value and hide the paste button div
+
+                                       
+                                        inputTextArea.value = text;
+                                    }
+                                });
+                            });
+                        }
+                    });
+                };
+                fileReader.readAsArrayBuffer(file);
+            } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+                // Handle Word file (.docx)
+                const fileReader = new FileReader();
+                fileReader.onload = function (event) {
+                    const arrayBuffer = event.target.result;
+
+                    mammoth.extractRawText({ arrayBuffer: arrayBuffer })
+                        .then(result => {
+                    
+                            inputTextArea.value = result.value;
+                        })
+                        .catch(err => {
+                            console.error('Error reading .docx file:', err);
+                        });
+                };
+                fileReader.readAsArrayBuffer(file);
+            } else {
+                inputTextArea.value = 'Unsupported file type.';
+            }
+        });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let inputText = document.getElementById('id_text');
+        var charCountSpan = document.getElementById('chars_count');
+        var charLimitError = document.getElementById('char_limit_error');
+
+        inputText.addEventListener('input', function () {
+            var charCount = inputText.value.length;
+            charCountSpan.textContent = charCount;
+
+            if (charCount > 20000) {
+                charLimitError.style.display = 'block';
+            } else {
+                charLimitError.style.display = 'none';
+            }
+        });
+    });
+</script>
 {% endblock %}

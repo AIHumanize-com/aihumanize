@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from payments.models import Subscription, WordCountTracker
-from .models import Documents
+from .models import Documents, WritingStyle, StylePurchase
 from django.core.paginator import Paginator
 from django.db.models import Avg
 from django.core.exceptions import PermissionDenied
@@ -13,6 +13,10 @@ import datetime
 from django.contrib.auth import logout
 from common.content_writer import generate_content, extend_text
 import json
+from common.style_ai import anaylze_style
+from .forms import WritingStyleForm
+from django.contrib import messages
+from dashboard.tasks import analyse_text_task
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # Create your views here.
@@ -251,5 +255,169 @@ def extend_text_view(request):
     
 
 
-def stye_view(request):
-    return render(request, 'dashboard/style.html')
+def style_view(request):
+    if request.method == "POST":
+        form = WritingStyleForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            text = form.cleaned_data['text']
+            user = request.user
+            created_style = WritingStyle.objects.create(name=name, description=description, user=user, status='processing')
+            analyse_text_task.delay(text, name, description, user.id, created_style.id)
+            messages.info(request, 'Your text is being analyzed. This may take up to 10 minutes. Please refresh the page to check the status.')
+            return redirect('styles_list')  # Redirect after POST
+        else:
+            # Form is not valid, render the page with form errors
+            return render(request, 'dashboard/style.html', {'form': form})
+    else:
+        form = WritingStyleForm()
+
+        total_available = 1
+
+        user_purchases = StylePurchase.objects.filter(user=request.user)
+        for purchase in user_purchases:
+            total_available += purchase.quantity - purchase.used_count
+        
+
+        user_styles = WritingStyle.objects.filter(user=request.user).order_by('-created_at')
+        
+        can_create = total_available > user_styles.count()
+        # plan type should not be free
+        is_subscribed = True
+        subscribtion = Subscription.objects.filter(user=request.user, is_active=True).last()
+        if subscribtion.plan_type == Subscription.FREE:
+            is_subscribed = False
+
+        print(is_subscribed)
+        print(can_create)
+        if is_subscribed and can_create:
+            return render(request, 'dashboard/style.html', {'form': form})
+        else:
+            return redirect('styles_list')
+
+    
+
+
+
+@login_required
+def styles_list(request):
+    user_styles = WritingStyle.objects.filter(user=request.user).order_by('-created_at')
+
+    # Aggregate total available and used styles
+    total_available = 1
+
+    user_purchases = StylePurchase.objects.filter(user=request.user)
+    for purchase in user_purchases:
+        total_available += purchase.quantity - purchase.used_count
+    
+    
+
+    # Pagination
+    paginator = Paginator(user_styles, 15)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    can_create = total_available > user_styles.count()
+    # plan type should not be free
+    is_subscribed = True
+    subscribtion = Subscription.objects.filter(user=request.user, is_active=True).last()
+    if subscribtion.plan_type == Subscription.FREE:
+        is_subscribed = False
+    context = {
+        'styles': page_obj,
+        'total_available': total_available,
+        'total_used': user_styles.count(),
+        "can_create": can_create,
+        "is_subscribed": is_subscribed
+    }
+    return render(request, "dashboard/styles_list.html", context=context)
+
+
+@login_required
+def style_detail(request, style_id):
+    try:
+        style = WritingStyle.objects.get(id=style_id, user=request.user)
+        context = {
+            'writing_style': style
+        }
+        return render(request, "dashboard/style_detail.html", context=context)
+    except WritingStyle.DoesNotExist:
+        return  redirect('styles_list')
+
+def update_basic_info(request, style_id):
+    try:
+        writing_style = WritingStyle.objects.get(id=style_id, user=request.user)
+
+        if request.method == "POST":
+            writing_style.name = request.POST.get('name')
+            writing_style.description = request.POST.get('description')
+            writing_style.save()
+
+            messages.success(request, "Basic information updated successfully.")
+            return redirect('style_detail', style_id=style_id)
+
+        # Redirect to detail page with form
+        return redirect('style_detail', style_id=style_id)
+    except WritingStyle.DoesNotExist:
+        return  redirect('styles_list')
+
+
+
+def update_analyze_data(request, style_id):
+    try:
+        writing_style = WritingStyle.objects.get(id=style_id, user=request.user)
+
+        if request.method == "POST":
+            new_analyze_data = writing_style.analyze
+
+            # Updating each field in the analyze data
+            new_analyze_data['language_use']['formality'] = request.POST.get('language_use_formality', '')
+            new_analyze_data['language_use']['technicality'] = request.POST.get('language_use_technicality', '')
+            new_analyze_data['language_use']['colloquialisms'] = request.POST.get('language_use_colloquialisms', '')
+
+            new_analyze_data['sentence_structure']['length'] = request.POST.get('sentence_structure_length', '')
+            new_analyze_data['sentence_structure']['complexity'] = request.POST.get('sentence_structure_complexity', '')
+            new_analyze_data['sentence_structure']['variety'] = request.POST.get('sentence_structure_variety', '')
+
+            new_analyze_data['vocabulary_level']['basic_advanced_specialized'] = request.POST.get('vocabulary_level_basic_advanced_specialized', '')
+            new_analyze_data['vocabulary_level']['abstract_concrete'] = request.POST.get('vocabulary_level_abstract_concrete', '')
+
+            new_analyze_data['tone_and_voice']['emotional_tone'] = request.POST.get('tone_and_voice_emotional_tone', '')
+            new_analyze_data['tone_and_voice']['author_personality'] = request.POST.get('tone_and_voice_author_personality', '')
+
+            new_analyze_data['rhythm_and_flow']['pacing'] = request.POST.get('rhythm_and_flow_pacing', '')
+            new_analyze_data['rhythm_and_flow']['stylistic_elements'] = request.POST.get('rhythm_and_flow_stylistic_elements', '')
+
+            new_analyze_data['literary_devices']['metaphors_similes'] = request.POST.get('literary_devices_metaphors_similes', '')
+            new_analyze_data['literary_devices']['symbolism'] = request.POST.get('literary_devices_symbolism', '')
+            new_analyze_data['literary_devices']['irony'] = request.POST.get('literary_devices_irony', '')
+
+            new_analyze_data['rhetorical_strategies']['persuasion_techniques'] = request.POST.get('rhetorical_strategies_persuasion_techniques', '')
+            new_analyze_data['rhetorical_strategies']['argument_structure'] = request.POST.get('rhetorical_strategies_argument_structure', '')
+
+            new_analyze_data['formatting_and_presentation']['paragraph_structure'] = request.POST.get('formatting_and_presentation_paragraph_structure', '')
+            new_analyze_data['formatting_and_presentation']['use_of_headings'] = request.POST.get('formatting_and_presentation_use_of_headings', '')
+
+            new_analyze_data['audience_engagement']['direct_address'] = request.POST.get('audience_engagement_direct_address', '')
+            new_analyze_data['audience_engagement']['questions'] = request.POST.get('audience_engagement_questions', '')
+            new_analyze_data['audience_engagement']['call_to_action'] = request.POST.get('audience_engagement_call_to_action', '')
+
+            new_analyze_data['consistency_and_coherence']['flow_of_ideas'] = request.POST.get('consistency_and_coherence_flow_of_ideas', '')
+            new_analyze_data['consistency_and_coherence']['consistent_tense_style'] = request.POST.get('consistency_and_coherence_consistent_tense_style', '')
+
+            new_analyze_data['content_theme']['information_density'] = request.POST.get('content_theme_information_density', '')
+            new_analyze_data['content_theme']['factual_vs_anecdotal'] = request.POST.get('content_theme_factual_vs_anecdotal', '')
+
+            new_analyze_data['content_purpose']['informative_vs_entertaining'] = request.POST.get('content_purpose_informative_vs_entertaining', '')
+            new_analyze_data['content_purpose']['educational_value'] = request.POST.get('content_purpose_educational_value', '')
+            
+            writing_style.analyze = new_analyze_data
+            writing_style.save()
+
+            messages.success(request, "Analyze data updated successfully.")
+            return redirect('style_detail', style_id=style_id)
+    except WritingStyle.DoesNotExist:
+        return redirect('styles_list')
+
+    return redirect('style_detail', style_id=style_id)
+
