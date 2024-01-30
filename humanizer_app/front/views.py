@@ -84,17 +84,15 @@ def humanizer(request):
                 return JsonResponse({"error": "word_limit_reached"}, status=400)
 
         if style_id:
-            style = WritingStyle.objects.get(id=style_id, user=request.user)
+            style = WritingStyle.objects.get(id=style_id, user=request.user, status="completed")
             result = rewrite(style.analyze, text)
-            print("@" * 30)
-            print("With style")
+           
             create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=style.name, level=None, readibility=None, model=model)
         else:
             result = rewrite_text(text, purpose=purpose, readability="university", strength=level, model_name=model)
         
             create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=None, readibility=None, model=model)
-            print("@" * 30)
-            print("With Model")
+           
         word_count_tracker.words_used += word_count
         word_count_tracker.save()
         return JsonResponse({"text": result})

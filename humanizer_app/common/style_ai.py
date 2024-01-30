@@ -202,7 +202,7 @@ def rewrite(style_analysis, text_to_rewrite):
     formatted_instructions = ". ".join(prompt_instructions)
 
     # Final prompt
-    prompt = f"Rewrite the given text according to specific writing guidelines: {formatted_instructions}."
+    prompt = f"Rewrite the given text according to specific writing guidelines: {formatted_instructions}. Important: keep words count same as original text."
    
     response = client.chat.completions.create(
     model="gpt-4-1106-preview",
