@@ -285,12 +285,11 @@ def style_view(request):
         can_create = total_available > user_styles.count()
         # plan type should not be free
         is_subscribed = True
-        subscribtion = Subscription.objects.filter(user=request.user, is_active=True).last()
+        subscribtion = Subscription.objects.filter(user=request.user).last()
         if subscribtion.plan_type == Subscription.FREE:
             is_subscribed = False
 
-        print(is_subscribed)
-        print(can_create)
+      
         if is_subscribed and can_create:
             return render(request, 'dashboard/style.html', {'form': form})
         else:
@@ -320,8 +319,11 @@ def styles_list(request):
     can_create = total_available > user_styles.count()
     # plan type should not be free
     is_subscribed = True
-    subscribtion = Subscription.objects.filter(user=request.user, is_active=True).last()
-    if subscribtion.plan_type == Subscription.FREE:
+    try:
+        subscribtion = Subscription.objects.filter(user=request.user).last()
+        if subscribtion.plan_type == Subscription.FREE:
+            is_subscribed = False
+    except:
         is_subscribed = False
     context = {
         'styles': page_obj,
