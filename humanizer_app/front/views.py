@@ -51,7 +51,10 @@ def humanizer(request):
         purpose = body["purpose"]
         model = body["model"]
         level = body["level"]
-        style_id = body['style_id']
+        try:
+            style_id = body['style_id']
+        except:
+            style_id = None
 
         # readability = None
         # strength = None
