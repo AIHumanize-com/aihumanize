@@ -83,7 +83,7 @@ def sync_with_sendpulse():
                 "name": first_name,
                 "lastname": last_name,
                 "email": user.email,
-                "last_active_by_document": ,
+                "last_active_by_document": document_time,
                 "subscription_price": float(subscription.price_in_cents) / 100.0,  # Ensuring division results in a float for correct pricing
             }
             # print(contact_data)
