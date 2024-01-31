@@ -415,8 +415,12 @@ CKEDITOR_5_CONFIGS = {
 from celery.schedules import crontab
 
 CELERY_BEAT_SCHEDULE = {
-    'sync_with_crm_daily': {
-        'task': 'common.tasks.sync_with_crm',
+    # 'sync_with_crm_daily': {
+    #     'task': 'common.tasks.sync_with_crm',
+    #     'schedule': crontab(hour=1, minute=0),
+    # },
+    'sync_with_sendpulse_daily': {
+        'task': 'common.tasks.sync_with_sendpulse',
         'schedule': crontab(hour=1, minute=0),
     },
 }
