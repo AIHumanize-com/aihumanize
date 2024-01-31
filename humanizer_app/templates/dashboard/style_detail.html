@@ -1,7 +1,18 @@
 {% extends 'dashboard/main.html' %}
 {% load static %}
 {% load my_filters %} <!-- Ensure your custom template tags are loaded -->
+{% block meta_tags %}
 
+<title>{{ writing_style.name }} - Style Details - AI Humanize</title>
+<meta name="description"
+    content="Explore the details of {{ writing_style.name}}, a personalized writing style on AI Humanize. Delve into the nuances and characteristics that make this style unique." />
+<meta property="og:title" content="{{ writing_style.name}} - Style Details - AI Humanize" />
+<meta property="og:description"
+    content="Get an in-depth look at {{ writing_style.name}}, a custom writing style on AI Humanize, and discover how it can enhance your writing projects." />
+<meta property="og:type" content="website" />
+
+
+{% endblock %}
 {% block content %}
 <div class="container-xl mt-3">
     {% if messages %}

@@ -385,7 +385,7 @@ document.querySelector('.text-area-btn-2').addEventListener('click', function (e
 
 
 
-var purpose = document.getElementById('purpose');
+// var purpose = document.getElementById('purpose');
 // var readability = document.getElementById('readability');
 // var level = document.getElementById('level');
 
@@ -416,7 +416,7 @@ function handleHumanizeText(event){
 	clickedButton.disabled = true;
 	clickedButton.innerHTML = '<span class="spinner-border spinner-border-sm text-white" role="status" aria-hidden="true"></span> Loading...';
 	var writingStyleModel = document.getElementById("writingStyleModel")
-	let level = document.getElementById("level").value
+	// let level = document.getElementById("level").value
 	// let readability = document.getElementById("readability").value
 
 	
@@ -425,7 +425,7 @@ function handleHumanizeText(event){
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ text: textareaContent, model: selectedModel, purpose: purpose.value, level: level, style_id: styleId }),
+		body: JSON.stringify({ text: textareaContent, model: selectedModel,  style_id: styleId }),
 	})
 		.then(response => response.json())
 		.then(data => {
@@ -831,8 +831,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var ghostBox = document.querySelector('.ghost-box');
 	var masteroInfo = document.getElementById("masteroInfo")
 	var writingStyleModel = document.getElementById("writingStyleModel")
-	var purpose = document.getElementById("purposeButton")
-	var levelButton = document.getElementById("levelButton")
+	// var purpose = document.getElementById("purposeButton")
+	// var levelButton = document.getElementById("levelButton")
 	var stylesButton = document.getElementById("stylesButton")
 	let humanizeMainButton = document.getElementById("hummani-main-btn")
     ninjaBox.addEventListener('click', function () {
@@ -842,8 +842,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         ninjaBox.classList.add('active');
 		masteroInfo.style.display = "none"
-		purpose.style.display = "block"
-		levelButton.style.display = "block"
+		// purpose.style.display = "block"
+		// levelButton.style.display = "block"
 		stylesButton.style.display = "none"
 		humanizeMainButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>
                     Humanize`
@@ -868,7 +868,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			ninjaBox.classList.add('active');
 
 		}else{
-			purpose.style.display = "none"
+			// purpose.style.display = "none"
 			levelButton.style.display = "none"
 			stylesButton.style.display = "block"
 			humanizeMainButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>
@@ -886,7 +886,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ghostBox.classList.add('active');
 			writingStyleModel.classList.remove('active');
 			masteroInfo.style.display = "block"
-			purpose.style.display = "block"
+			// purpose.style.display = "block"
 		levelButton.style.display = "block"
 		stylesButton.style.display = "none"
 		humanizeMainButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>

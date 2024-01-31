@@ -48,9 +48,9 @@ def humanizer(request):
         body = json.loads(body_unicode)
     
         text = body["text"]
-        purpose = body["purpose"]
+        # purpose = body["purpose"]
         model = body["model"]
-        level = body["level"]
+        # level = body["level"]
         try:
             style_id = body['style_id']
         except:
@@ -92,9 +92,9 @@ def humanizer(request):
            
             create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=style.name, level=None, readibility=None, model=model)
         else:
-            result = rewrite_text(text, purpose=purpose, readability="university", strength=level, model_name=model)
+            result = rewrite_text(text, purpose="general", readability="university", strength="basic_vocabulary", model_name=model)
         
-            create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=purpose, level=None, readibility=None, model=model)
+            create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose="general", level=None, readibility=None, model=model)
            
         word_count_tracker.words_used += word_count
         word_count_tracker.save()
