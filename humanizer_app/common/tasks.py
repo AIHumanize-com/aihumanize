@@ -58,7 +58,10 @@ def sync_with_sendpulse():
             # Get subscription and word tracker data
             subscription = Subscription.objects.filter(user=user).order_by('-start_date').first()
             word_tracker = WordCountTracker.objects.get(subscription=subscription)
-            document = Documents.objects.filter(user=user).order_by('-created_at').first()
+            try:
+                document = Documents.objects.filter(user=user).order_by('-created_at').first()
+            except:
+                document = None
             # Check for social account
             try:
                 social_account = SocialAccount.objects.get(user=user)
