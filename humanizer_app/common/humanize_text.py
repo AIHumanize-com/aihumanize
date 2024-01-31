@@ -37,6 +37,7 @@ def rewrite_text(original_text, purpose, readability, strength, model_name):
         model = "gpt-3.5-turbo-1106"
         openai_api_key = os.environ.get("OPEN_AI_KEY_AIHUMANIZE")
         system_prompt = prompts[purpose]  + " " + vocabulary_level_prompt
+        
     elif model_name == "Maestro":
         model = "gpt-4-1106-preview"
         system_prompt = prompts[purpose] + " " + vocabulary_level_prompt

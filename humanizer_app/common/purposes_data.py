@@ -74,10 +74,7 @@ prompts = {
         "Include around 5% SAT words."
     ),
     "general": (
-        "Rewrite the following text to increase its complexity and unpredictability. "
-        "Focus on varying sentence length and structure (burstiness) and using a mix of simple and complex vocabulary. "
-        "The sentences should be concise, with a low number of syllables. "
-        "Include a balanced mix of common language and occasional advanced vocabulary (around 5% SAT words)."
+        "Rewrite the given text, follow these rules: use short words and low amount of syllables , change words with simpler words, use varied sentence lengths. use 100 most common words in the English language when possible. Keep words count same."
     )
 }
 
