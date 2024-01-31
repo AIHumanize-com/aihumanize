@@ -60,8 +60,9 @@ def sync_with_sendpulse():
             word_tracker = WordCountTracker.objects.get(subscription=subscription)
             try:
                 document = Documents.objects.filter(user=user).order_by('-created_at').first()
+                document_time = document.created_at.strftime("%m-%d-%y")
             except:
-                document = None
+                document_time = None
             # Check for social account
             try:
                 social_account = SocialAccount.objects.get(user=user)
@@ -82,7 +83,7 @@ def sync_with_sendpulse():
                 "name": first_name,
                 "lastname": last_name,
                 "email": user.email,
-                "last_active_by_document": document.created_at.strftime("%m-%d-%y"),
+                "last_active_by_document": ,
                 "subscription_price": float(subscription.price_in_cents) / 100.0,  # Ensuring division results in a float for correct pricing
             }
             # print(contact_data)
