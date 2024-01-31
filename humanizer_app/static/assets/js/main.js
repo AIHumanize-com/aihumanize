@@ -396,7 +396,12 @@ function handleHumanizeText(event){
 	var wordCount = textareaContent.split(/\s+/).filter(function (n) { return n != '' }).length;
 	let resultDivDetect = document.getElementById("result-row-detect");
 	let styleSelect = document.getElementById('style_id');
+
+
 	let styleId = styleSelect && styleSelect.value ? styleSelect.value : null;
+
+
+	
 	resultDivDetect.style.display = "none";
 	if (wordCount < 30) {
 		let error_p = document.getElementById("min_word_error")
@@ -418,7 +423,9 @@ function handleHumanizeText(event){
 	var writingStyleModel = document.getElementById("writingStyleModel")
 	// let level = document.getElementById("level").value
 	// let readability = document.getElementById("readability").value
-
+	if (!writingStyleModel.classList.contains("active")){
+		styleId = null
+	}
 	
 	fetch('humanizer/', {
 		method: 'POST',
