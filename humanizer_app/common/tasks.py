@@ -70,7 +70,11 @@ def sync_with_sendpulse():
                 last_name = social_account.extra_data.get('family_name', 'No lastname')
             except SocialAccount.DoesNotExist:
                 # Fallback to fullname or default values
-                first_name, last_name = (user.fullname.split() + ['No firstname', 'No lastname'])[:2]
+                try:
+                    first_name, last_name = (user.fullname.split() + ['No firstname', 'No lastname'])[:2]
+                except:
+                    first_name, last_name = (None, None)
+                
 
             contact_data = {
                 "is_subscrioption_active": subscription.is_active,
