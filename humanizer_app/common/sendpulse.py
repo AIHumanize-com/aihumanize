@@ -47,3 +47,28 @@ def search_user(token, email):
 # print(search_test)
 # update_test = update_user(get_token(), email=email, **contact_data)
 # print(update_test)
+
+
+
+
+def send_contact(bearer_token, name, email, subject, message):
+    url = "https://api.sendpulse.com/crm/v1/deals/"
+    headers = {
+        "Authorization": f"Bearer {bearer_token}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "pipelineId": 90777,
+        "stepId": 312239,
+        "responsibleId": 8571902,
+        "name": subject,
+        "attributes": [
+            {"attributeId": 508904, "value": message},  # corrected typo 'mesage' to 'message'
+            {"attributeId": 509570, "value": subject},
+            {"attributeId": 509569, "value": email},
+            {"attributeId": 509568, "value": name}
+        ]
+    }
+    
+    response = requests.post(url, json=data, headers=headers)
+    return response.json()
