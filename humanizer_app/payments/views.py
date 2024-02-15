@@ -348,6 +348,7 @@ def create_checkout_session(request):
             metadata={
                 'style_purchase': True,
             },
+            allow_promotion_codes=True,
             success_url=request.build_absolute_uri('/dashboard/style/list/'),  # Redirect URL after successful payment
             cancel_url=request.build_absolute_uri('/dashboard/style/list/'),  # Redirect URL after cancelled payment
         )
