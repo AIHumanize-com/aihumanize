@@ -1303,3 +1303,186 @@ function handleAICheck(event){
 
 document.getElementById("ai-btn").addEventListener("click", handleAICheck);
 document.getElementById("checkAiInresult").addEventListener("click", handleAICheck);
+
+function showLoadingIndicatorAtSelection() {
+    const selection = window.getSelection();
+    if (!selection.rangeCount) return;
+
+    const range = selection.getRangeAt(0);
+    const rect = range.getBoundingClientRect();
+    const loadingIndicator = document.getElementById('loadingIndicator');
+
+    // Position the loading indicator near the selected text
+    loadingIndicator.style.top = `${window.scrollY + rect.bottom}px`;
+    loadingIndicator.style.left = `${window.scrollX + rect.left}px`;
+    loadingIndicator.classList.remove('d-none'); // Make it visible
+}
+
+function hideLoadingIndicator() {
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    loadingIndicator.classList.add('d-none'); // Hide it
+}
+
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelector('.reult-p').addEventListener('mouseup', function(event) {
+        const selectedText = window.getSelection().toString();
+        const wordCount = selectedText.split(/\s+/).filter(n => n !== '').length;
+
+        if (wordCount >= 1) {
+		
+            // If the selected text is at least 2 words, fetch alternatives
+            fetchAlternatives(selectedText);
+        }
+    });
+});
+
+
+function replaceSelectedText(originalText, newText, range) {
+    // Directly use the provided range instead of querying the selection
+	
+    // if (range && range.toString() === originalText) {
+        const newNode = document.createTextNode(newText);
+        range.deleteContents();
+        range.insertNode(newNode);
+
+        // Clear the selection if necessary
+        window.getSelection().removeAllRanges();
+    // } else {
+    //     console.error('The selected text does not match the original text.');
+    // }
+}
+
+
+function displayAlternatives(alternatives, originalText, range) {
+    // Remove existing dropdown if present
+    const existingDropdown = document.getElementById('alternatives-dropdown');
+    if (existingDropdown) {
+        existingDropdown.remove();
+    }
+
+    // Create the dropdown container
+    const dropdown = document.createElement('div');
+    dropdown.setAttribute('id', 'alternatives-dropdown');
+    dropdown.style.position = 'absolute';
+    dropdown.style.zIndex = '1000'; // Ensure it appears above other content
+    dropdown.style.backgroundColor = '#fff';
+    dropdown.style.border = '1px solid #ddd';
+    dropdown.style.borderRadius = '5px';
+    dropdown.style.padding = '5px';
+    dropdown.style.boxShadow = '0 2px 5px rgba(0,0,0,.2)';
+
+    // Append alternatives as items in the dropdown
+    alternatives.forEach((altText) => {
+        const item = document.createElement('div');
+        item.textContent = altText;
+        item.style.padding = '5px 10px';
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', () => {
+            replaceSelectedText(originalText, altText, range);
+            dropdown.remove(); // Remove dropdown after selection
+        });
+
+        // Optional: Add hover effect
+        item.addEventListener('mouseenter', () => {
+            item.style.backgroundColor = '#f0f0f0';
+        });
+        item.addEventListener('mouseleave', () => {
+            item.style.backgroundColor = '#fff';
+        });
+
+        dropdown.appendChild(item);
+    });
+
+    document.body.appendChild(dropdown);
+
+    // Position the dropdown near the selected text
+    positionDropdownAtSelection(dropdown);
+}
+
+function positionDropdownAtSelection(dropdown) {
+    const selection = window.getSelection();
+    if (!selection.rangeCount) return;
+
+    const range = selection.getRangeAt(0);
+    const rect = range.getBoundingClientRect();
+
+    // Position dropdown below the selected text
+    // Adjust these values as needed for better positioning
+    const topOffset = 5; // Spacing from the selected text
+    dropdown.style.left = `${rect.left + window.scrollX}px`;
+    dropdown.style.top = `${rect.bottom + window.scrollY + topOffset}px`;
+}
+
+
+function fetchAlternatives(selectedText) {
+	if (document.getElementById('featureToggle').checked) {
+    const apiUrl = `https://par.aihumanize.com/selection/?part=${encodeURIComponent(selectedText)}`;
+	showLoadingIndicatorAtSelection();
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            // Step 4: Display Alternatives
+			console.log(data)
+			const selection = window.getSelection();
+			if (!selection.rangeCount) return;
+			const range = selection.getRangeAt(0);
+
+    // Assume fetchAlternatives successfully fetches alternatives
+		hideLoadingIndicator();
+            displayAlternatives(data.alternatives, selectedText, range);
+        })
+		
+        .catch(error => {
+            console.error('Error:', error);
+            // Hide spinner in case of error
+            hideLoadingIndicator();
+        });
+}}
+
+
+
+function displayDropdown(rect, alternatives, originalText) {
+    // Create the dropdown if it doesn't exist, or find it if it already does
+    let dropdown = document.getElementById('alternatives-dropdown');
+    if (!dropdown) {
+        dropdown = document.createElement('div');
+        dropdown.setAttribute('id', 'alternatives-dropdown');
+        // Apply styles to position and show the dropdown
+        document.body.appendChild(dropdown);
+    }
+
+    // Position the dropdown based on the rect parameter
+    dropdown.style.position = 'absolute';
+    dropdown.style.left = `${rect.left + window.scrollX}px`;
+    dropdown.style.top = `${rect.bottom + window.scrollY}px`;
+
+    // Populate the dropdown with alternatives
+    dropdown.innerHTML = ''; // Clear existing content
+    alternatives.forEach(alt => {
+        const item = document.createElement('div');
+        item.textContent = alt;
+        item.addEventListener('click', function() {
+            replaceSelectedText(originalText, alt);
+            dropdown.remove(); // Remove dropdown after selection
+        });
+        dropdown.appendChild(item);
+    });
+
+    // Prevent clicks within the dropdown from closing it
+    dropdown.addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
+
+    // Show the dropdown
+    dropdown.style.display = 'block';
+}
+
+// Add a click event listener to the document to hide the dropdown
+document.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('alternatives-dropdown');
+    if (dropdown && !dropdown.contains(event.target)) {
+        dropdown.remove(); // Or dropdown.style.display = 'none'; to hide it instead of removing
+    }
+});
