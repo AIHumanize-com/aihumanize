@@ -9,6 +9,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://aihumanize.com" />
 <style>
+ 
 @media screen and (max-width: 768px) { /* Adjust the max-width as needed */
     .ghost-box:last-child { /* Assuming the "Your Writing Style" div is the last .ghost-box */
         display: none;
@@ -28,26 +29,29 @@
   /* Other styles as needed */
 }
 
-                          .cls-1,
-                          .cls-2 {
-                            fill: none;
-                            stroke: #6A4DFF;
-                            stroke-linecap: round;
-                            stroke-width: 2px;
-                          }
-                    
-                          .cls-1 {
-                            stroke-linejoin: round;
-                          }
-                    
-                          .cls-2 {
-                            stroke-miterlimit: 10;
-                          }
-                    
-                          .cls-3 {
-                            fill: #353535;
-                          }
-                      
+  .cls-1,
+  .cls-2 {
+    fill: none;
+    stroke: #6A4DFF;
+    stroke-linecap: round;
+    stroke-width: 2px;
+  }
+
+  .cls-1 {
+    stroke-linejoin: round;
+  }
+
+  .cls-2 {
+    stroke-miterlimit: 10;
+  }
+
+  .cls-3 {
+    fill: #353535;
+  }
+           
+  
+
+
 
 
 </style>
@@ -337,7 +341,7 @@
         </div>
       </div>
       {% include 'front/detect_result.html' %}
-      <div class="row" id="result-row" style="display:none ">
+      <div class="row" id="result-row" style="display: none;">
         <div class="box-outer d-flex justify-center">
           <div class="result-box">
             <div>
@@ -363,12 +367,46 @@
                     <p>Humanized text:</p>
                   </div>
                   <div class="result-main-right-icons">
-                    <img width="32" height="32" src="https://img.icons8.com/windows/32/000000/copy.png" alt="copy" />
+                    <div class="text-secondary" id="alternative_tip" style="display: none;">Select part of text from left to right to see alternatives</div>
+                  <div class="form-check form-switch " >
+                    <input class="form-check-input" type="checkbox" id="featureToggle" >
+                    <label class="form-check-label" for="featureToggle">
+                      Enable Alternatives
+                      <span class="ms-2" 
+                        data-bs-toggle="popover" title="Enable Alternatives"
+                        data-bs-content="This feature allows you to select text from left to right to fetch alternative phrases. Make sure to enable this feature here."><svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 496.304 496.303"
+                          xml:space="preserve">
+                          <g>
+                            <path d="M248.146,0C111.314,0,0,111.321,0,248.152c0,136.829,111.314,248.151,248.146,248.151
+                        		c136.835,0,248.158-111.322,248.158-248.151C496.304,111.321,384.98,0,248.146,0z M248.146,472.093
+                        		c-123.473,0-223.935-100.459-223.935-223.941c0-123.479,100.462-223.941,223.935-223.941
+                        		c123.488,0,223.947,100.462,223.947,223.941C472.093,371.634,371.634,472.093,248.146,472.093z M319.536,383.42v32.852
+                        		c0,1.383-1.123,2.494-2.482,2.494H196.45c-1.374,0-2.482-1.117-2.482-2.494V383.42c0-1.372,1.114-2.482,2.482-2.482h34.744V205.831
+                        		h-35.101c-1.375,0-2.468-1.111-2.468-2.474v-33.6c0-1.38,1.1-2.479,2.468-2.479h82.293c1.371,0,2.482,1.105,2.482,2.479v211.181
+                        		h36.186C318.413,380.938,319.536,382.048,319.536,383.42z M209.93,105.927c0-20.895,16.929-37.829,37.829-37.829
+                        		c20.886,0,37.826,16.935,37.826,37.829s-16.94,37.829-37.826,37.829C226.853,143.756,209.93,126.822,209.93,105.927z" />
+                          </g>
+                        </svg></span>
+                    </label>
+                  </div>
+
+
+                    <img class="ms-4" width="32" height="32" src="https://img.icons8.com/windows/32/000000/copy.png" alt="copy" />
                  
                   </div>
                 </div>
                 <div class="border-b"></div>
-                <p style="margin: 0; white-space: pre-line" class="reult-p" id="humanizedResult"></p>
+                <div contenteditable="true" style="margin: 0; white-space: pre-line" class="reult-p p-2" id="humanizedResult">
+                New car type, electric cars, is important for making transportation better. People are focusing on these cars to help
+                stop air problems and make the world better. This paper looks at electric cars, thinking about the good things and the
+                not so good things.
+                
+                Good things about Electric Cars:
+                
+                Help the Environment:
+                Electric cars make less bad gas than regular cars, which makes the air in cities better.
+                </div>
               </div>
             </div>
           </div>
@@ -1016,6 +1054,14 @@
       </div>
     </div>
   </section>
+  <!-- Placeholder for the loading indicator; initially hidden -->
+<div id="loadingIndicator" style="z-index: 2;" class="d-none position-absolute p-2 bg-primary border border-light rounded">
+  <div class="d-flex align-items-center">
+    <div class="spinner-border spinner-border-sm text-light me-2" role="status"></div>
+    <span class="text-white">Fetching alternatives...</span>
+  </div>
+</div>
+
   <!-- Bootstrap Modal -->
   <!-- Bootstrap Modal for Limit Reached -->
   <div class="modal fade" id="limitReachedModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
