@@ -13,9 +13,11 @@ from django.contrib import messages
 from django.utils import timezone
 from dashboard.models import WritingStyle
 from common.style_ai import rewrite
+from common.generate_token import generate_secure_token_with_expiry
 
 def index(request):
-    context = {'paid': False, "have_style": False}  # Default context
+   
+    context = {'paid': False, "have_style": False,}  # Default context
 
     if request.user.is_authenticated:
         # Get the latest paid subscription for the user (excluding 'FREE' plan type)
@@ -34,9 +36,10 @@ def index(request):
         if writing_style.exists():
             context['have_style'] = True
             context['styles'] = writing_style
-        
-
-    return render(request, 'front/index.html', context)
+    token  = generate_secure_token_with_expiry("authorization")
+    response = render(request, 'front/index.html', context)
+    response.set_cookie('auth_token', token, max_age=86400, secure=True, samesite='Lax')
+    return response
 
 def pricing(request):
     return render(request, 'front/pricing.html')

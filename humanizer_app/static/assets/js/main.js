@@ -1416,11 +1416,43 @@ function positionDropdownAtSelection(dropdown) {
 }
 
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+let featureToggle = document.getElementById('featureToggle');
+featureToggle.addEventListener('change', function() {
+	let alternative_tip = document.getElementById('alternative_tip');
+	if (featureToggle.checked) {
+		alternative_tip.style.display = "block";
+	}
+	else {
+		alternative_tip.style.display = "none";
+	}
+});
+
 function fetchAlternatives(selectedText) {
+	let  authToken = getCookie('auth_token');
 	if (document.getElementById('featureToggle').checked) {
     const apiUrl = `https://par.aihumanize.com/selection/?part=${encodeURIComponent(selectedText)}`;
 	showLoadingIndicatorAtSelection();
-    fetch(apiUrl)
+    fetch(apiUrl, {method: "GET",
+            headers: {
+                "Authorization": `Bearer ${authToken}`,
+            },
+            credentials: 'include',})
         .then(response => response.json())
         .then(data => {
             // Step 4: Display Alternatives
