@@ -18,7 +18,7 @@ class SubscriptionInline(admin.TabularInline):
     extra = 0
     fields = ['id','plan_type', 'word_count', 'price_in_cents', 'start_date', 'end_date', 'actual_end_date', 'used_words', 'remaining_words']
     readonly_fields = ['id','plan_type', 'word_count', 'price_in_cents', 'start_date', 'end_date', 'actual_end_date', 'used_words', 'remaining_words']
-    
+    autocomplete_fields = ['user']
     def used_words(self, instance):
         # Access the related WordCountTracker instance and return the used words
         if hasattr(instance, 'wordcounttracker'):
