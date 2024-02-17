@@ -876,7 +876,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		}else{
 			// purpose.style.display = "none"
-			levelButton.style.display = "none"
+			// levelButton.style.display = "none"
 			stylesButton.style.display = "block"
 			humanizeMainButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>
                     Rewrite`
@@ -894,7 +894,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			writingStyleModel.classList.remove('active');
 			masteroInfo.style.display = "block"
 			// purpose.style.display = "block"
-		levelButton.style.display = "block"
+		// levelButton.style.display = "block"
 		stylesButton.style.display = "none"
 		humanizeMainButton.innerHTML = `<span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span>
                     Humanize`
