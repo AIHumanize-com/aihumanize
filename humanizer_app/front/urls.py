@@ -11,5 +11,7 @@ urlpatterns = [
     path("privacy-policy/", views.privacy_view, name="privacy"),
     path("contact-us/", views.contact_view, name="contact"),
     path("ai-content-writer/", views.content_writer, name="content_writer"),
+    path("affiliate-program/", views.affiliate_program, name="affiliate_program"),
+    path("affiliate-program/terms-of-service/", views.terms_of_use_affiliate, name="terms_of_use_affiliate"),
    
 ]

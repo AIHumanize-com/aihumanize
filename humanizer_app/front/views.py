@@ -171,3 +171,10 @@ def view_404(request, exception):
 
 def content_writer(request):
     return render(request, 'front/content_writer.html')
+
+
+def terms_of_use_affiliate(request):
+    return render(request, 'front/terms_of_use_affiliate.html')
+
+def affiliate_program(request):
+    return render(request, 'front/affiliate_program.html')

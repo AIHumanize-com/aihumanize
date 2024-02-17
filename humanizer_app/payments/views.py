@@ -73,7 +73,7 @@ class CreateCheckoutSessionView(View):
         plan_type = data.get('plan_type')
         word_count = data.get('word_count')
         price, plan, word_count = calculate_price(plan_type, word_count)  # Implement this function based on your pricing logic
-        
+        tolt_id = data.get('tolt_io')
         try:
             checkout_session = stripe.checkout.Session.create(
                 customer_email=user.email,
@@ -91,7 +91,7 @@ class CreateCheckoutSessionView(View):
                         'quantity': 1,
                     },
                 ],
-                metadata={'word_count': word_count, "plan_type": plan_type},
+                metadata={'word_count': word_count, "plan_type": plan_type, "tolt_referral": tolt_id},
                 mode='subscription',
                 success_url='https://aihumanize.com/dashboard/',
                 cancel_url='https://aihumanize.com/dashboard/',
