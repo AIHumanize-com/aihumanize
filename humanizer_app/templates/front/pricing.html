@@ -6,6 +6,8 @@
 <meta property="og:description" content="Explore affordable pricing plans for AI Humanize's services. Choose the best plan for your needs." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://aihumanize.com/pricing/" />
+<script async src="https://cdn.tolt.io/tolt.js" data-tolt="28fec8a8-4a33-485e-81db-a071f523783f"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -304,6 +306,8 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
+    console.log(window)
+    console.log('tolt_referral', window.tolt_referral);
     document.addEventListener('DOMContentLoaded', function () {
         var stripe = Stripe('pk_live_51OCnPQFG5G6BKxaQX3AhVm3iEcPmrjNgs49WQ9FvYnSII5oIdNxc77FMB5RamU23S1PpgBfCfeVax4zJQ2o2XxlW00dkI9KDWA');
 
@@ -376,7 +380,8 @@
             },
             body: JSON.stringify({
                 plan_type: planType,
-                word_count: parseInt(wordCount, 10)
+                word_count: parseInt(wordCount, 10),
+                tolt_io: window.tolt_referral
             }),
         }).then(function (response) {
             if (response.ok) {
