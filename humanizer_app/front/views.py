@@ -14,7 +14,7 @@ from django.utils import timezone
 from dashboard.models import WritingStyle
 from common.style_ai import rewrite
 from common.generate_token import generate_secure_token_with_expiry
-
+from users.tasks import send_to_sendpulse_task
 def index(request):
    
     context = {'paid': False, "have_style": False,}  # Default context
@@ -83,6 +83,7 @@ def humanizer(request):
 
         word_count_tracker = WordCountTracker.objects.filter(subscription__user=request.user).last()
         if word_count  > word_count_tracker.words_remaining:
+            send_to_sendpulse_task.delay(request.user.id, upgrade_alert=1)
             return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
         # even if user has remanining words but subscrioption is expired, we need to check user is in paid plan
         if subscrioption.plan_type in [Subscription.MONTHLY, Subscription.YEARLY, Subscription.ENTERPRISE]:

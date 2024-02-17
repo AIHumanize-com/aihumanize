@@ -15,17 +15,7 @@ from dashboard.models import WritingStyle
 from common.style_ai import anaylze_style
 @shared_task
 def create_documents_record(input_text, output_text, user_id, purpose, level, readibility, model):
-    """
-    Create a record for Documents model with the given input_text, output_text, and user.
-
-    Args:
-        input_text (str): The input text.
-        output_text (str): The output text.
-        user_id (int): The ID of the user object.
-
-    Returns:
-        None
-    """
+    
     word_count = len(input_text.split())
     
     # with transaction.atomic():
