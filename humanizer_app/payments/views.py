@@ -73,7 +73,7 @@ class CreateCheckoutSessionView(View):
         plan_type = data.get('plan_type')
         word_count = data.get('word_count')
         price, plan, word_count = calculate_price(plan_type, word_count)  # Implement this function based on your pricing logic
-        tolt_id = data.get('tolt_io')
+        tolt_id = data.get('tolt_io', None)
         try:
             checkout_session = stripe.checkout.Session.create(
                 customer_email=user.email,
