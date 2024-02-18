@@ -36,6 +36,22 @@ def update_user(token, email, *args, **kwargs):
     return response.json()
 
 
+def change_sendpulse_variable(email, variable_name, variable_value, token):
+    url  = f"{BASE_URL}/addressbooks/545013/emails/variable"
+    data = {"email": email, "variables":[ {
+         "name":variable_name,
+         "value":variable_value
+        },  
+      ]}
+    headers = {"Authorization": f"Bearer {token}"}
+    response = requests.post(url, headers=headers, json=data)
+    return response.json()
+    
+
+
+# result = change_sendpulse_variable("megamedia.uz@gmail.com", "words_remaining", 12, get_token())
+# print(result)
+
 def search_user(token, email):
     url  = f"{BASE_URL}/addressbooks/545013/emails/{email}"
     headers = {"Authorization": f"Bearer {token}"}
