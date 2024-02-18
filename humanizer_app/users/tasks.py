@@ -1,5 +1,5 @@
 # tasks.py
-from common.sendpulse import update_user, get_token
+from common.sendpulse import update_user, get_token, change_sendpulse_variable
 from celery import shared_task
 from django.core.mail import EmailMessage
 from users.models import UserModel
@@ -68,3 +68,11 @@ def send_to_sendpulse_task(user_id, upgrade_alert=0):
 
     except Exception as e:
         print(f"Error syncing user {user.email}: {e}")
+
+
+
+@shared_task
+def change_variable_task(email, variable_name, variable_value, ):
+    token = get_token()
+    result = change_sendpulse_variable(email, variable_name, variable_value, token)
+    print(result)
