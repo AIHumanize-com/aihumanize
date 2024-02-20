@@ -18,6 +18,7 @@ def rewrite_text(original_text, purpose, readability, strength, model_name):
             "Unsupported text type. Please choose from 'essay', 'article', etc."
         )
     
+    
     vocabulary_level_prompt = ""
     if strength == "basic_vocabulary":
         vocabulary_level_prompt = "The text should use basic vocabulary."
@@ -36,11 +37,11 @@ def rewrite_text(original_text, purpose, readability, strength, model_name):
     if model_name == "Falcon":
         model = "gpt-3.5-turbo-1106"
         openai_api_key = os.environ.get("OPEN_AI_KEY_AIHUMANIZE")
-        system_prompt = prompts[purpose]  + " " + vocabulary_level_prompt
+        system_prompt = prompts[purpose] 
         
     elif model_name == "Maestro":
         model = "gpt-4-1106-preview"
-        system_prompt = prompts[purpose] + " " + vocabulary_level_prompt
+        system_prompt = prompts[purpose] 
 
     
     # Updated system prompt
