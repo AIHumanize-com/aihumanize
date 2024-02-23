@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta name="google-site-verification" content="kwFxbgn2KozYwJhm5W-_NTgtQdnSw8eZRTG1wMubyKM" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-636ZPTYLDR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-636ZPTYLDR');
+  </script>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="follow, index">
+  
+  
+
+<!-- Title -->
+<title>Transform Your Writing with the Ultimate Free Paraphrasing Tool</title>
+
+<!-- Meta Description -->
+<meta name="description"
+  content="Transform your writing with our AI-powered Paraphrasing Tool. Rephrase sentences and paragraphs effortlessly, ensuring your ideas are conveyed with precision and creativity. Discover the ultimate free solution to refine your words.">
+
+<!-- Open Graph Tags -->
+<meta property="og:title" content="Transform Your Writing with the Ultimate Free Paraphrasing Tool" />
+<meta property="og:description"
+  content="Elevate your content with our AI-driven Paraphrasing Tool. Perfect for academic, creative, and professional writing. Experience the power of AI to choose the right words for you." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://aihumanize.com/paraphrasing-tool/" />
+<meta property="og:image" content="{% static 'assets/images/paraphrasing-tool.png'  %}" />
+
+  
+  <!-- <link rel="icon" href="{% static 'assets/images/ai-humanize-icon.svg' %}" type="image/svg+xml" /> -->
+  <!-- <meta property="og:image" content="{% static 'assets/images/ai-humanize-icon.svg' %}" /> -->
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/aihumanize_icon_180x_180.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/aihumanize_icon_32_32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/aihumanize_icon_16_16.png' %}">
+  <meta property="og:image" content="{% static 'assets/images/aihumanize_icon_512_512.png' %}">
+  <meta property="twitter:image" content="{% static 'assets/images/aihumanize_icon_512_512.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'assets/images/aihumanize_icon_512_512.png' %}">
+  
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'assets/css/plugins.css' %}" />
+  <link rel="stylesheet" href="{%static 'assets/css/style.css' %}" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'assets/css/plugins.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/paraphraser.css' %}" />
+  <style>
+    .loader {
+      border: 4px solid #f3f3f3;
+      /* Light grey */
+      border-top: 4px solid #3498db;
+      /* Blue */
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper d-flex flex-column justify-between">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top bg-white">
+    
+      <div class="container">
+    
+        <!-- Logo -->
+        <a class="navbar-brand" href="{% url 'index' %}">
+          <img src="{% static  'assets/images/ai-humanize-logo.svg' %}" alt="" width="300" />
+        </a>
+    
+        <!-- Navbar toggler button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+          aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+          <div class="navbar-toggler-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+    
+        <!-- Navbar content -->
+    
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <div
+            class="navbar-content-inner ms-lg-auto d-flex flex-column flex-lg-row align-lg-center gap-4 gap-lg-10 p-2 p-lg-0">
+            <ul class="navbar-nav gap-lg-2 gap-xl-5">
+    
+    
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'index' %}">AI Detector and Humanizer</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'content_writer' %}">AI Writer</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'paraphraser' %}">Paraphrasing Tool</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'pricing' %}">Pricing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'contact' %}">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'affiliate_program' %}">Earn</a>
+              </li>
+              {% if not user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+              </li>
+              {% endif %}
+            </ul>
+            <div class="">
+              {% if user.is_authenticated %}
+              <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Dashboard</a>
+              {% else %}
+              <a href="{% url 'account_signup' %}" class="btn btn-outline-primary">Get started</a>
+              {% endif %}
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="flex-grow-1">
+      <!-- Hero -->
+      <section class="hero-section py-10 py-lg-15">
+        <div class="container">
+          <div class="tab-content" id="nav-tabContent">
+            <!-- English US -->
+            <div class="tab-pane fade show active" id="nav-english" role="tabpanel" aria-labelledby="nav-english-tab">
+              <div class="shadow border">
+                <div class="row p-4" style="padding-bottom: 0 !important">
+                  <div class="col-lg-9 col-10 d-flex">
+                    <h6 class="mb-0">Modes:</h6>
+                    <ul id="modes" class="d-flex flex-wrap align-center gap-3 mb-0">
+                      <li id="standard" class="active">Standard</li>
+                      <li id="fluency">Fluency</li>
+                      <li id="formal">Formal</li>
+                      <li id="academic">Academic</li>
+                      <li id="creative">Creative</li>
+                      <li id="seo-friendly">SEO-Friendly</li>
+                      <li id="simplification">Simplification</li>
+                  
+                    </ul>
+                    <div id="mobilemodes">
+                      <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                          onclick="toggleDropdown()">
+                          Standard
+                        </button>
+                        <div class="dropdown-menu" id="dropdownMenu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#" onclick="selectItem('Standard')">Standard</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem('Fluency')">Fluency</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem('Formal')">Formal</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem('Academic')">Academic</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem('Creative')">Creative</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem('SEO-Friendly')">SEO-Friendly</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem('Simplification')">Simplification</a>
+                       
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-7 col-md-5 d-flex gap-2 align-baseline justify-end"
+                    style="position: relative; margin-bottom: 8px">
+                      <input type="range" style="margin-right: 0" min="1" max="3" value="2" id="range2" hidden />
+                      <input type="range" style="margin-right: 0" min="1" max="100" value="50" id="range" hidden />
+                      <!-- <a href="" class="btn  btn-sm btn-outline-primary" style="--gen-btn-padding-y: 0.2rem">Humanizer</a> -->
+                 
+                  </div>
+                  <div class="show-menu col-2">
+                    <div class="dropdown">
+                      <button style="
+                            background: transparent;
+                            border: none;
+                            outline: none;
+                          " class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <svg style="height: 25px" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-10dohqv"
+                          focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="MoreVertOutlinedIcon">
+                          <path
+                            d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
+                          </path>
+                        </svg>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li class="d-flex align-center">
+                          <svg style="height: 20px" focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                            data-testid="SettingsOutlinedIcon">
+                            <path
+                              d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z">
+                            </path>
+                          </svg>
+                          <a class="dropdown-item" href="#"> Settings</a>
+                        </li>
+                        <li class="d-flex align-center">
+                          <svg style="height: 20px" focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                            data-testid="CommentOutlinedIcon">
+                            <path
+                              d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z">
+                            </path>
+                          </svg>
+                          <a class="dropdown-item" href="#">Feedback</a>
+                        </li>
+                        <li class="d-flex align-center">
+                          <svg style="height: 20px" focusable="false" aria-hidden="true" viewBox="0 0 21 18"
+                            fill="#000">
+                            <path
+                              d="M12 0C7.03 0 3 4.03 3 9H0L3.89 12.89L3.96 13.03L8 9H5C5 5.13 8.13 2 12 2C15.87 2 19 5.13 19 9C19 12.87 15.87 16 12 16C10.07 16 8.32 15.21 7.06 13.94L5.64 15.36C7.27 16.99 9.51 18 12 18C16.97 18 21 13.97 21 9C21 4.03 16.97 0 12 0ZM11 5V10L15.25 12.52L16.02 11.24L12.5 9.15V5H11Z">
+                            </path>
+                          </svg>
+                          <a class="dropdown-item" href="#"> History </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex border-top m-0 flex-direction">
+                  <div class="p-4" id="resizableDiv" style="
+                        padding-right: 0 !important;
+                        position: relative;
+                        max-width: 100%;
+                        width: 50%;
+                        min-width: 30%;
+                      ">
+                    <textarea style="padding: 0 30px 0 0"
+                      placeholder='To rewrite text, enter or paste it here and press "Paraphrase"' id="txtarea"
+                      rows="18"></textarea>
+                    <div class="delete" id="deleteText" style="display: none; cursor: pointer">
+                      <svg style="
+                            height: 25px;
+                            position: absolute;
+                            top: 20px;
+                            right: 10px;
+                          " focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="DeleteOutlineIcon">
+                        <path
+                          d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5-1-1h-5l-1 1H5v2h14V4z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div style="
+                          position: absolute;
+                          top: 50%;
+                          transform: translate(-50%, -50%);
+                          left: 50%;
+                          width: 100%;
+                        " id="buttons" class="d-flex justify-center gap-3 align-center">
+                      <button id="sampleTextBtn" class="btn btn-secondary d-flex flex-column align-center">
+                        <span style="
+                              height: 28px;
+                              font-size: 25px;
+                              margin-bottom: 3px;
+                            ">
+                          👋🏻
+                        </span>
+                        try sample text
+                      </button>
+                      <button id="pasteTextBtn" class="btn btn-secondary d-flex flex-column align-center">
+                        <svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-17j0t9x"
+                          focusable="false" aria-hidden="true" viewBox="0 0 24 29" width="24" height="30"
+                          style="font-size: 30px; fill: #6a4dff">
+                          <path width="24" height="29" viewBox="0 0 24 29" fill="inherit"
+                            xmlns="http://www.w3.org/2000/svg"
+                            d="M20.7418 3.25678H15.4522C14.9207 1.78883 13.5286 0.72583 11.8835 0.72583C10.2384 0.72583 8.84639 1.78883 8.31489 3.25678H3.02521C1.63319 3.25678 0.494263 4.3957 0.494263 5.78772V26.0353C0.494263 27.4273 1.63319 28.5662 3.02521 28.5662H20.7418C22.1339 28.5662 23.2728 27.4273 23.2728 26.0353V5.78772C23.2728 4.3957 22.1339 3.25678 20.7418 3.25678ZM11.8835 3.25678C12.5795 3.25678 13.149 3.82624 13.149 4.52225C13.149 5.21826 12.5795 5.78772 11.8835 5.78772C11.1875 5.78772 10.618 5.21826 10.618 4.52225C10.618 3.82624 11.1875 3.25678 11.8835 3.25678ZM20.7418 26.0353H3.02521V5.78772H5.55615V9.58414H18.2109V5.78772H20.7418V26.0353Z">
+                          </path>
+                        </svg>
+                        paste text
+                      </button>
+                    </div>
+                    <div class="d-flex justify-between align-center" style="padding-right: 18px !important">
+                      <p id="wordCount" style="display: none; margin-bottom: 0 !important"></p>
+                      <button id="uploadBtn" data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip" data-bs-title="Browse for a document or drag & drop one"
+                        class="btn d-flex justify-center align-center" style="
+                            background: transparent;
+                            outline: none;
+                            border: none;
+                            font-size: 15px;
+                            padding-left: 0;
+                          ">
+                        <svg class="w-5" style="fill: gray; margin-right: 10px" focusable="false" aria-hidden="true"
+                          viewBox="0 0 24 24" data-testid="CloudUploadOutlinedIcon">
+                          <path
+                            d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3zM8 13h2.55v3h2.9v-3H16l-4-4z">
+                          </path>
+                        </svg>
+                        Upload Doc
+                      </button>
+
+                      <input type="file" id="fileInput" />
+                      <button class="btn btn-primary" id="paraphrase" onclick="paraphraseText()">
+                        Paraphrase
+                      </button>
+                      <button class="d-none" id="loading" style="
+                            width: 140px;
+                            height: auto;
+                            background: #5a41d9;
+                            outline: none;
+                            border: 1px solid #5a41d9;
+                            border-radius: 8px;
+                            padding: 10px 0;
+                            display: flex;
+                            justify-content: center;
+                          ">
+                        <div class="spinner"></div>
+                      </button>
+                    </div>
+                  </div>
+                  <span role="presentation" class="Resizer vertical"></span>
+                  <div class="p-4 sec-col" id="resultParaphrase" style="
+                        padding-right: 0 !important;
+                        position: relative;
+                        max-width: 100%;
+                        width: 50%;
+                        min-width: 30%;
+                        max-height: 500px;
+                      ">
+                    <p id="paraphraseTextResult" style="
+                          min-height: 386px;
+                          max-height: 428px;
+                          overflow-y: auto;
+                        "></p>
+
+                    <div style="
+                          position: absolute;
+                          background: #fff;
+                          left: 10px;
+                          align-items: center;
+                          bottom: 10px;
+                        " id="rightZero" class="d-flex justify-between">
+                      <p style="margin-bottom: 0" id="countSentences"></p>
+                    </div>
+                    <div style="
+                          position: absolute;
+                          background: #fff;
+                          align-items: center;
+                          bottom: 10px;
+                          right: 20px;
+                        " id="iconss" class="d-none d-flex justify-between gap-2">
+
+                    <div id="downloadMessage" style="display:none;">
+                      Download complete!
+                    </div>
+                      <svg xmlns="http://www.w3.org/2000/svg" onclick="downloadDocx()" style="cursor: pointer" shape-rendering="geometricPrecision" width="30px" height="30px" text-rendering="geometricPrecision"
+                        image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 424 511.54">
+                        <path fill="#262626" fill-rule="nonzero"
+                          d="M86.37 413.44c-11.76 0-11.76-17.89 0-17.89H189.1c-.2 2.95-.31 5.93-.31 8.94s.11 5.99.31 8.95H86.37zM73.12 266.31v-82.59h37c14.89 0 25.11 3.17 30.66 9.51 5.55 6.34 8.32 16.94 8.32 31.78 0 14.85-2.77 25.44-8.32 31.78-5.55 6.34-15.77 9.52-30.66 9.52h-37zm37.4-61.45H99.55v40.3h10.97c3.61 0 6.23-.41 7.86-1.25 1.63-.84 2.45-2.75 2.45-5.75v-26.3c0-2.99-.82-4.91-2.45-5.74-1.63-.84-4.25-1.26-7.86-1.26zm46.84 20.22c0-15.07 2.82-26.06 8.46-32.97 5.64-6.92 15.81-10.37 30.52-10.37 14.71 0 24.89 3.45 30.53 10.37 5.64 6.91 8.45 17.9 8.45 32.97 0 7.49-.59 13.78-1.78 18.89-1.19 5.11-3.24 9.56-6.14 13.35-2.91 3.79-6.92 6.56-12.03 8.32-5.11 1.77-11.45 2.65-19.03 2.65-7.57 0-13.92-.88-19.03-2.65-5.1-1.76-9.11-4.53-12.02-8.32s-4.95-8.24-6.14-13.35c-1.19-5.11-1.79-11.4-1.79-18.89zm28.41-13.74v34.35h10.97c3.61 0 6.23-.42 7.86-1.25 1.63-.84 2.45-2.76 2.45-5.75v-34.36h-11.1c-3.53 0-6.1.42-7.73 1.26-1.63.83-2.45 2.75-2.45 5.75zm116.62 31.31l1.98 22.2c-5.55 2.29-12.51 3.44-20.88 3.44s-15.09-.88-20.15-2.65c-5.07-1.76-9.05-4.53-11.96-8.32s-4.93-8.24-6.08-13.35c-1.14-5.11-1.72-11.4-1.72-18.89s.58-13.81 1.72-18.96c1.15-5.16 3.17-9.63 6.08-13.42 5.64-7.31 15.99-10.96 31.05-10.96 3.35 0 7.29.33 11.83.99 4.54.66 7.9 1.47 10.11 2.44l-3.97 20.22c-5.72-1.23-10.97-1.85-15.72-1.85-4.76 0-8.06.44-9.91 1.32-1.85.88-2.78 2.64-2.78 5.29v34.62c3.44.7 6.92 1.05 10.44 1.05 7.49 0 14.14-1.05 19.96-3.17zM265.81 24.26v29.1c0 65.66 15.31 69.47 69.08 69.47h22.03l-91.11-98.57zm94.33 115.92h-21.48c-61.02 0-90.2-4.09-90.2-86.28V17.35H56.82c-21.7 0-39.47 17.78-39.47 39.47v264.79H219.2c-4.64 5.47-8.83 11.34-12.51 17.54H17.35v89.83c0 21.62 17.85 39.47 39.47 39.47h149.04c3.53 6.12 7.56 11.92 12.02 17.34H56.82C25.63 485.79 0 460.17 0 428.98V56.82C0 25.55 25.55 0 56.82 0h206.33a8.68 8.68 0 016.93 3.45l105.07 113.68c2.19 2.37 2.34 4.66 2.34 7.52v166.86c-5.55-2.98-11.35-5.56-17.35-7.71V140.18z" />
+                        <path fill="#6A4DFF"
+                          d="M316.95 297.45c59.12 0 107.05 47.93 107.05 107.05 0 59.11-47.93 107.04-107.05 107.04S209.9 463.61 209.9 404.5c0-59.12 47.93-107.05 107.05-107.05z" />
+                        <path fill="#fff" fill-rule="nonzero"
+                          d="M337.9 356.54l-3.77 47.75 17.35-6.07c11.47-4.4 23.27 3.72 14.38 13.82-10.82 12.45-27.26 29.55-39.22 40.94-7.43 7.42-11.73 7.49-19.18.06-13.24-13-26.24-27.44-39.18-40.87-9.25-10.06 2.3-18.55 14.28-13.95l17.16 6.01c-1.25-16.28-2.82-31.84-3.77-48.1 0-2.99 2.5-5.39 5.42-5.61 10.31 0 20.84-.24 31.12 0 2.92.22 5.42 2.62 5.42 5.61l-.01.41z" />
+                      </svg>
+
+
+                      <span id="copyTooltip"
+                        style="visibility: hidden; position: absolute; background-color: black; color: white; padding: 5px; border-radius: 6px; font-size: 12px;">
+                        Copied!
+                      </span>
+                      <svg onclick="copyToClipboard()" style="width: 25px; height: 25px; cursor: pointer"
+                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-10dohqv" focusable="false"
+                        aria-hidden="true" viewBox="0 0 24 24">
+                        <path fill="inherit"
+                          d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Dutch -->
+            <div class="tab-pane fade" id="nav-dutch" role="tabpanel" aria-labelledby="nav-dutch-tab">
+              <div class="shadow border" style="border-top: 0 !important">
+                <div class="row p-4" style="padding-bottom: 0 !important">
+                  <div class="col-lg-9 col-10 d-flex">
+                    <h6 class="mb-0">Modes:</h6>
+                    <ul id="modes" class="d-flex flex-wrap align-center gap-3 mb-0">
+                      <li class="active">Standard</li>
+                      <li>Fluency</li>
+                      <li>Formal</li>
+                      <li>Academic</li>
+                      <li>Simple</li>
+                      <li>Creative</li>
+                      <li>Expand</li>
+                      <li>Shorten</li>
+                      <li>Custom</li>
+                    </ul>
+                    <div id="mobilemodes">
+                      <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                          onclick="toggleDropdown1()">
+                          Standard
+                        </button>
+                        <div class="dropdown-menu" id="dropdownMenu1" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#" onclick="selectItem1('Standard')">Standard</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem1('Fluency')">Fluency</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem1('Formal')">Formal</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem1('Academic')">Academic</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem1('Simple')">Simple</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem1('Creative')">Creative</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem1('Expand')">Expand</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem1('Shorten')">Shorten</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem1('Custom')">Custom</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-7 col-md-5 d-flex gap-2 align-baseline justify-start hide-synonym"
+                    style="position: relative; margin-bottom: 8px">
+                    <h6 class="mb-0">Synonyms:</h6>
+                    <input type="range" style="margin-right: 0" min="1" max="3" value="2" id="range1" />
+
+                    <div id="diamond" class="css-1kxo6at" aria-labelledby="mui-44"></div>
+                    <div id="dimToolTip" style="
+                          position: absolute;
+                          top: 30px;
+                          right: 0px;
+                          background: #f1f1f1;
+                          text-align: center;
+                          padding: 10px;
+                          width: 250px;
+                          border-radius: 10px;
+                        " class="d-none">
+                      <p>
+                        Maximize word changes by unlocking the last setting
+                      </p>
+                      <button class="btn btn-primary" style="text-transform: uppercase">
+                        unlock with premium
+                      </button>
+                    </div>
+                    <div id="synonym1" class="d-none d-flex justify-between" style="
+                          position: absolute;
+                          top: 30px;
+                          right: 10px;
+                          background: #555;
+                          color: white;
+                          text-align: center;
+                          padding: 10px;
+                          width: 220px;
+                          font-size: 12px;
+                          border-radius: 10px;
+                          z-index: 111;
+                        ">
+                      <div class="col d-flex flex-column">
+                        <b>Fewer Changes</b>
+                        <small>More Accurate</small>
+                      </div>
+                      <div class="col d-flex flex-column" style="text-align: right">
+                        <b>More Changes</b>
+                        <small>Less Accurate</small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="show-menu col-2">
+                    <div class="dropdown">
+                      <button style="
+                            background: transparent;
+                            border: none;
+                            outline: none;
+                          " class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <svg style="height: 25px" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-10dohqv"
+                          focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="MoreVertOutlinedIcon">
+                          <path
+                            d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
+                          </path>
+                        </svg>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li class="d-flex align-center">
+                          <svg style="height: 20px" focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                            data-testid="SettingsOutlinedIcon">
+                            <path
+                              d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z">
+                            </path>
+                          </svg>
+                          <a class="dropdown-item" href="#"> Settings</a>
+                        </li>
+                        <li class="d-flex align-center">
+                          <svg style="height: 20px" focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                            data-testid="CommentOutlinedIcon">
+                            <path
+                              d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z">
+                            </path>
+                          </svg>
+                          <a class="dropdown-item" href="#">Feedback</a>
+                        </li>
+                        <li class="d-flex align-center">
+                          <svg style="height: 20px" focusable="false" aria-hidden="true" viewBox="0 0 21 18"
+                            fill="#000">
+                            <path
+                              d="M12 0C7.03 0 3 4.03 3 9H0L3.89 12.89L3.96 13.03L8 9H5C5 5.13 8.13 2 12 2C15.87 2 19 5.13 19 9C19 12.87 15.87 16 12 16C10.07 16 8.32 15.21 7.06 13.94L5.64 15.36C7.27 16.99 9.51 18 12 18C16.97 18 21 13.97 21 9C21 4.03 16.97 0 12 0ZM11 5V10L15.25 12.52L16.02 11.24L12.5 9.15V5H11Z">
+                            </path>
+                          </svg>
+                          <a class="dropdown-item" href="#"> History </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="row border-top m-0">
+                  <div class="col-md-6 p-4" id="resizableDiv1" style="
+                        position: relative;
+                        min-width: 250px;
+                        overflow: hidden;
+                      ">
+                    <textarea placeholder='To rewrite text, enter or paste it here and press "Paraphrase"' id="txtarea"
+                      class="txtarea1" rows="18"></textarea>
+                    <div class="delete" id="deleteText1" style="display: none; cursor: pointer">
+                      <svg style="
+                            height: 25px;
+                            position: absolute;
+                            top: 20px;
+                            right: 20px;
+                          " focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="DeleteOutlineIcon">
+                        <path
+                          d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5-1-1h-5l-1 1H5v2h14V4z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div style="
+                          position: absolute;
+                          top: 50%;
+                          transform: translate(-50%, -50%);
+                          left: 50%;
+                          width: 100%;
+                        " class="d-flex justify-center gap-3 align-center">
+                      <button class="btn btn-secondary d-flex flex-column align-center">
+                        <svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-17j0t9x"
+                          focusable="false" aria-hidden="true" viewBox="0 0 24 29" width="24" height="29"
+                          style="font-size: 30px; fill: #6a4dff">
+                          <path width="24" height="29" viewBox="0 0 24 29" fill="inherit"
+                            xmlns="http://www.w3.org/2000/svg"
+                            d="M20.7418 3.25678H15.4522C14.9207 1.78883 13.5286 0.72583 11.8835 0.72583C10.2384 0.72583 8.84639 1.78883 8.31489 3.25678H3.02521C1.63319 3.25678 0.494263 4.3957 0.494263 5.78772V26.0353C0.494263 27.4273 1.63319 28.5662 3.02521 28.5662H20.7418C22.1339 28.5662 23.2728 27.4273 23.2728 26.0353V5.78772C23.2728 4.3957 22.1339 3.25678 20.7418 3.25678ZM11.8835 3.25678C12.5795 3.25678 13.149 3.82624 13.149 4.52225C13.149 5.21826 12.5795 5.78772 11.8835 5.78772C11.1875 5.78772 10.618 5.21826 10.618 4.52225C10.618 3.82624 11.1875 3.25678 11.8835 3.25678ZM20.7418 26.0353H3.02521V5.78772H5.55615V9.58414H18.2109V5.78772H20.7418V26.0353Z">
+                          </path>
+                        </svg>
+                        paste text
+                      </button>
+                    </div>
+                    <div class="d-flex justify-between align-center">
+                      <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Browse for a document or drag & drop one"
+                        class="btn d-flex justify-center align-center" style="
+                            background: transparent;
+                            outline: none;
+                            border: none;
+                            font-size: 15px;
+                            padding-left: 0;
+                          ">
+                        <svg class="w-5" style="fill: gray; margin-right: 10px" focusable="false" aria-hidden="true"
+                          viewBox="0 0 24 24" data-testid="CloudUploadOutlinedIcon">
+                          <path
+                            d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3zM8 13h2.55v3h2.9v-3H16l-4-4z">
+                          </path>
+                        </svg>
+                        Upload Doc
+                      </button>
+                      <button class="btn btn-primary">Paraphrase</button>
+                    </div>
+                  </div>
+                  <span role="presentation" class="Resizer1 vertical"></span>
+                  <div class="col-md-5 p-4" style="min-width: 350px"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Turkish -->
+            <div class="tab-pane fade" id="nav-turkish" role="tabpanel" aria-labelledby="nav-turkish-tab">
+              <div class="shadow border" style="border-top: 0 !important">
+                <div class="row p-4" style="padding-bottom: 0 !important">
+                  <div class="col-lg-9 col-10 d-flex">
+                    <h6 class="mb-0">Modes:</h6>
+                    <ul id="modes" class="d-flex flex-wrap align-center gap-3 mb-0">
+                      <li class="active">Standard</li>
+                      <li>Fluency</li>
+                      <li>Formal</li>
+                      <li>Academic</li>
+                      <li>Simple</li>
+                      <li>Creative</li>
+                      <li>Expand</li>
+                      <li>Shorten</li>
+                      <li>Custom</li>
+                    </ul>
+                    <div id="mobilemodes">
+                      <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
+                          onclick="toggleDropdown2()">
+                          Standard
+                        </button>
+                        <div class="dropdown-menu" id="dropdownMenu2" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#" onclick="selectItem2('Standard')">Standard</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem2('Fluency')">Fluency</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem2('Formal')">Formal</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem2('Academic')">Academic</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem2('Simple')">Simple</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem2('Creative')">Creative</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem2('Expand')">Expand</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem2('Shorten')">Shorten</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem2('Custom')">Custom</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-7 col-md-5 d-flex gap-2 align-baseline justify-start hide-synonym"
+                    style="position: relative; margin-bottom: 8px">
+                    <h6 class="mb-0">Synonyms:</h6>
+                    <input type="range" style="margin-right: 0" min="1" max="3" value="2" id="range2" />
+
+                    <div id="diamond" class="css-1kxo6at" aria-labelledby="mui-44"></div>
+                    <div id="dimToolTip" style="
+                          position: absolute;
+                          top: 30px;
+                          right: 0px;
+                          background: #f1f1f1;
+                          text-align: center;
+                          padding: 10px;
+                          width: 250px;
+                          border-radius: 10px;
+                        " class="d-none">
+                      <p>
+                        Maximize word changes by unlocking the last setting
+                      </p>
+                      <button class="btn btn-primary" style="text-transform: uppercase">
+                        unlock with premium
+                      </button>
+                    </div>
+                    <div id="synonym2" class="d-none d-flex justify-between" style="
+                          position: absolute;
+                          top: 30px;
+                          right: 10px;
+                          background: #555;
+                          color: white;
+                          text-align: center;
+                          padding: 10px;
+                          width: 220px;
+                          font-size: 12px;
+                          border-radius: 10px;
+                          z-index: 111;
+                        ">
+                      <div class="col d-flex flex-column">
+                        <b>Fewer Changes</b>
+                        <small>More Accurate</small>
+                      </div>
+                      <div class="col d-flex flex-column" style="text-align: right">
+                        <b>More Changes</b>
+                        <small>Less Accurate</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="show-menu col-2">
+                    <div class="dropdown">
+                      <button style="
+                            background: transparent;
+                            border: none;
+                            outline: none;
+                          " class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <svg style="height: 25px" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-10dohqv"
+                          focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="MoreVertOutlinedIcon">
+                          <path
+                            d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
+                          </path>
+                        </svg>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li class="d-flex align-center">
+                          <svg style="height: 20px" focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                            data-testid="SettingsOutlinedIcon">
+                            <path
+                              d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z">
+                            </path>
+                          </svg>
+                          <a class="dropdown-item" href="#"> Settings</a>
+                        </li>
+                        <li class="d-flex align-center">
+                          <svg style="height: 20px" focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                            data-testid="CommentOutlinedIcon">
+                            <path
+                              d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z">
+                            </path>
+                          </svg>
+                          <a class="dropdown-item" href="#">Feedback</a>
+                        </li>
+                        <li class="d-flex align-center">
+                          <svg style="height: 20px" focusable="false" aria-hidden="true" viewBox="0 0 21 18"
+                            fill="#000">
+                            <path
+                              d="M12 0C7.03 0 3 4.03 3 9H0L3.89 12.89L3.96 13.03L8 9H5C5 5.13 8.13 2 12 2C15.87 2 19 5.13 19 9C19 12.87 15.87 16 12 16C10.07 16 8.32 15.21 7.06 13.94L5.64 15.36C7.27 16.99 9.51 18 12 18C16.97 18 21 13.97 21 9C21 4.03 16.97 0 12 0ZM11 5V10L15.25 12.52L16.02 11.24L12.5 9.15V5H11Z">
+                            </path>
+                          </svg>
+                          <a class="dropdown-item" href="#"> History </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="row border-top m-0">
+                  <div class="col-md-6 p-4" id="resizableDiv2" style="
+                        position: relative;
+                        min-width: 250px;
+                        overflow: hidden;
+                      ">
+                    <textarea placeholder='To rewrite text, enter or paste it here and press "Paraphrase"' id="txtarea"
+                      class="txtarea2" rows="18"></textarea>
+                    <div class="delete" id="deleteText2" style="display: none; cursor: pointer">
+                      <svg style="
+                            height: 25px;
+                            position: absolute;
+                            top: 20px;
+                            right: 20px;
+                          " focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="DeleteOutlineIcon">
+                        <path
+                          d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5-1-1h-5l-1 1H5v2h14V4z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div style="
+                          position: absolute;
+                          top: 50%;
+                          transform: translate(-50%, -50%);
+                          left: 50%;
+                          width: 100%;
+                        " class="d-flex justify-center gap-3 align-center">
+                      <button class="btn btn-secondary d-flex flex-column align-center">
+                        <svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-17j0t9x"
+                          focusable="false" aria-hidden="true" viewBox="0 0 24 29" width="24" height="29"
+                          style="font-size: 30px; fill: #6a4dff">
+                          <path width="24" height="29" viewBox="0 0 24 29" fill="inherit"
+                            xmlns="http://www.w3.org/2000/svg"
+                            d="M20.7418 3.25678H15.4522C14.9207 1.78883 13.5286 0.72583 11.8835 0.72583C10.2384 0.72583 8.84639 1.78883 8.31489 3.25678H3.02521C1.63319 3.25678 0.494263 4.3957 0.494263 5.78772V26.0353C0.494263 27.4273 1.63319 28.5662 3.02521 28.5662H20.7418C22.1339 28.5662 23.2728 27.4273 23.2728 26.0353V5.78772C23.2728 4.3957 22.1339 3.25678 20.7418 3.25678ZM11.8835 3.25678C12.5795 3.25678 13.149 3.82624 13.149 4.52225C13.149 5.21826 12.5795 5.78772 11.8835 5.78772C11.1875 5.78772 10.618 5.21826 10.618 4.52225C10.618 3.82624 11.1875 3.25678 11.8835 3.25678ZM20.7418 26.0353H3.02521V5.78772H5.55615V9.58414H18.2109V5.78772H20.7418V26.0353Z">
+                          </path>
+                        </svg>
+                        paste text
+                      </button>
+                    </div>
+                    <div class="d-flex justify-between align-center">
+                      <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Browse for a document or drag & drop one"
+                        class="btn d-flex justify-center align-center" style="
+                            background: transparent;
+                            outline: none;
+                            border: none;
+                            font-size: 15px;
+                            padding-left: 0;
+                          ">
+                        <svg class="w-5" style="fill: gray; margin-right: 10px" focusable="false" aria-hidden="true"
+                          viewBox="0 0 24 24" data-testid="CloudUploadOutlinedIcon">
+                          <path
+                            d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3zM8 13h2.55v3h2.9v-3H16l-4-4z">
+                          </path>
+                        </svg>
+                        Upload Doc
+                      </button>
+                      <button class="btn btn-primary">Paraphrase</button>
+                    </div>
+                  </div>
+                  <span role="presentation" class="Resizer2 vertical"></span>
+                  <div class="col-md-5 p-4" style="min-width: 350px"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Norwegian -->
+            <div class="tab-pane fade" id="nav-norwegian" role="tabpanel" aria-labelledby="nav-norwegian-tab">
+              <div class="shadow border" style="border-top: 0 !important">
+                <div class="row p-4" style="padding-bottom: 0 !important">
+                  <div class="col-lg-9 col-10 d-flex">
+                    <h6 class="mb-0">Modes:</h6>
+                    <ul id="modes" class="d-flex flex-wrap align-center gap-3 mb-0">
+                      <li class="active">Standard</li>
+                      <li>Fluency</li>
+                      <li>Formal</li>
+                      <li>Academic</li>
+                      <li>Simple</li>
+                      <li>Creative</li>
+                      <li>Expand</li>
+                      <li>Shorten</li>
+                      <li>Custom</li>
+                    </ul>
+                    <div id="mobilemodes">
+                      <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3"
+                          onclick="toggleDropdown3()">
+                          Standard
+                        </button>
+                        <div class="dropdown-menu" id="dropdownMenu3" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#" onclick="selectItem3('Standard')">Standard</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem3('Fluency')">Fluency</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem3('Formal')">Formal</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem3('Academic')">Academic</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem3('Simple')">Simple</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem3('Creative')">Creative</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem3('Expand')">Expand</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem3('Shorten')">Shorten</a>
+                          <a class="dropdown-item" href="#" onclick="selectItem3('Custom')">Custom</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-7 col-md-5 d-flex gap-2 align-baseline justify-start hide-synonym"
+                    style="position: relative; margin-bottom: 8px">
+                    <h6 class="mb-0">Synonyms:</h6>
+                    <input type="range" style="margin-right: 0" min="1" max="3" value="2" id="range3" />
+
+                    <div id="diamond" class="css-1kxo6at" aria-labelledby="mui-44"></div>
+                    <div id="dimToolTip" style="
+                          position: absolute;
+                          top: 30px;
+                          right: 0px;
+                          background: #f1f1f1;
+                          text-align: center;
+                          padding: 10px;
+                          width: 250px;
+                          border-radius: 10px;
+                        " class="d-none">
+                      <p>
+                        Maximize word changes by unlocking the last setting
+                      </p>
+                      <button class="btn btn-primary" style="text-transform: uppercase">
+                        unlock with premium
+                      </button>
+                    </div>
+                    <div id="synonym3" class="d-none d-flex justify-between" style="
+                          position: absolute;
+                          top: 30px;
+                          right: 10px;
+                          background: #555;
+                          color: white;
+                          text-align: center;
+                          padding: 10px;
+                          width: 220px;
+                          font-size: 12px;
+                          border-radius: 10px;
+                          z-index: 111;
+                        ">
+                      <div class="col d-flex flex-column">
+                        <b>Fewer Changes</b>
+                        <small>More Accurate</small>
+                      </div>
+                      <div class="col d-flex flex-column" style="text-align: right">
+                        <b>More Changes</b>
+                        <small>Less Accurate</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="show-menu col-2">
+                    <div class="dropdown">
+                      <button style="
+                            background: transparent;
+                            border: none;
+                            outline: none;
+                          " class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <svg style="height: 25px" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-10dohqv"
+                          focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="MoreVertOutlinedIcon">
+                          <path
+                            d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
+                          </path>
+                        </svg>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li class="d-flex align-center">
+                          <svg style="height: 20px" focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                            data-testid="SettingsOutlinedIcon">
+                            <path
+                              d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z">
+                            </path>
+                          </svg>
+                          <a class="dropdown-item" href="#"> Settings</a>
+                        </li>
+                        <li class="d-flex align-center">
+                          <svg style="height: 20px" focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                            data-testid="CommentOutlinedIcon">
+                            <path
+                              d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z">
+                            </path>
+                          </svg>
+                          <a class="dropdown-item" href="#">Feedback</a>
+                        </li>
+                        <li class="d-flex align-center">
+                          <svg style="height: 20px" focusable="false" aria-hidden="true" viewBox="0 0 21 18"
+                            fill="#000">
+                            <path
+                              d="M12 0C7.03 0 3 4.03 3 9H0L3.89 12.89L3.96 13.03L8 9H5C5 5.13 8.13 2 12 2C15.87 2 19 5.13 19 9C19 12.87 15.87 16 12 16C10.07 16 8.32 15.21 7.06 13.94L5.64 15.36C7.27 16.99 9.51 18 12 18C16.97 18 21 13.97 21 9C21 4.03 16.97 0 12 0ZM11 5V10L15.25 12.52L16.02 11.24L12.5 9.15V5H11Z">
+                            </path>
+                          </svg>
+                          <a class="dropdown-item" href="#"> History </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="row border-top m-0">
+                  <div class="col-md-6 p-4" id="resizableDiv3" style="
+                        position: relative;
+                        min-width: 250px;
+                        overflow: hidden;
+                      ">
+                    <textarea placeholder='To rewrite text, enter or paste it here and press "Paraphrase"' id="txtarea"
+                      class="txtarea3" rows="18"></textarea>
+                    <div class="delete" id="deleteText3" style="display: none; cursor: pointer">
+                      <svg style="
+                            height: 25px;
+                            position: absolute;
+                            top: 20px;
+                            right: 20px;
+                          " focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="DeleteOutlineIcon">
+                        <path
+                          d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5-1-1h-5l-1 1H5v2h14V4z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div style="
+                          position: absolute;
+                          top: 50%;
+                          transform: translate(-50%, -50%);
+                          left: 50%;
+                          width: 100%;
+                        " class="d-flex justify-center gap-3 align-center">
+                      <button class="btn btn-secondary d-flex flex-column align-center">
+                        <svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-17j0t9x"
+                          focusable="false" aria-hidden="true" viewBox="0 0 24 29" width="24" height="29"
+                          style="font-size: 30px; fill: #6a4dff">
+                          <path width="24" height="29" viewBox="0 0 24 29" fill="inherit"
+                            xmlns="http://www.w3.org/2000/svg"
+                            d="M20.7418 3.25678H15.4522C14.9207 1.78883 13.5286 0.72583 11.8835 0.72583C10.2384 0.72583 8.84639 1.78883 8.31489 3.25678H3.02521C1.63319 3.25678 0.494263 4.3957 0.494263 5.78772V26.0353C0.494263 27.4273 1.63319 28.5662 3.02521 28.5662H20.7418C22.1339 28.5662 23.2728 27.4273 23.2728 26.0353V5.78772C23.2728 4.3957 22.1339 3.25678 20.7418 3.25678ZM11.8835 3.25678C12.5795 3.25678 13.149 3.82624 13.149 4.52225C13.149 5.21826 12.5795 5.78772 11.8835 5.78772C11.1875 5.78772 10.618 5.21826 10.618 4.52225C10.618 3.82624 11.1875 3.25678 11.8835 3.25678ZM20.7418 26.0353H3.02521V5.78772H5.55615V9.58414H18.2109V5.78772H20.7418V26.0353Z">
+                          </path>
+                        </svg>
+                        paste text
+                      </button>
+                    </div>
+                    <div class="d-flex justify-between align-center">
+                      <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Browse for a document or drag & drop one"
+                        class="btn d-flex justify-center align-center" style="
+                            background: transparent;
+                            outline: none;
+                            border: none;
+                            font-size: 15px;
+                            padding-left: 0;
+                          ">
+                        <svg class="w-5" style="fill: gray; margin-right: 10px" focusable="false" aria-hidden="true"
+                          viewBox="0 0 24 24" data-testid="CloudUploadOutlinedIcon">
+                          <path
+                            d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3zM8 13h2.55v3h2.9v-3H16l-4-4z">
+                          </path>
+                        </svg>
+                        Upload Doc
+                      </button>
+                      <button class="btn btn-primary">Paraphrase</button>
+                    </div>
+                  </div>
+                  <span role="presentation" class="Resizer3 vertical"></span>
+                  <div class="col-md-5 p-4" style="min-width: 250px; overflow: hidden"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section class="features-section has-blurry-shape position-relative overflow-hidden py-10 py-lg-15">
+        <div class="blurry-shape">
+          <img src="{% static 'assets/images/shapes/blurry-shape-3.svg' %}" alt="" class="img-fluid" />
+        </div>
+        <div class="container">
+          <div class="text-center mb-18">
+            <h1 class="mb-0" data-aos="fade-up-sm" data-aos-delay="50">
+              Elevate Your Text with Our 
+              <br class="d-none d-lg-block" />
+            Best Free Paraphrasing Tool
+            </h1>
+          </div>
+
+          <div class="row row-cols-1 row-cols-lg-3 g-6 g-xl-14">
+            <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
+              <div class="d-flex flex-column flex-lg-row gap-6">
+                <div
+                  class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+                  <h4 class="mb-0">01</h4>
+                </div>
+                <div>
+                  <h4 class="mb-4">Completely Free to Use</h4>
+                  <p>
+                Explore, enhance, and express your ideas with our free paraphraser. No subscriptions, no fees—just unlimited
+                creativity.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
+              <div class="d-flex flex-column flex-lg-row gap-6">
+                <div
+                  class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+                  <h4 class="mb-0">02</h4>
+                </div>
+                <div>
+                  <h4 class="mb-4">Synonym Replacement</h4>
+                  <p>
+                  Manually select synonyms to refine your content, using our AI-driven rewording tool for precision and creativity in
+                  every paragraph.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col" data-aos="fade-up-sm" data-aos-delay="200">
+              <div class="d-flex flex-column flex-lg-row gap-6">
+                <div
+                  class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+                  <h4 class="mb-0">03</h4>
+                </div>
+                <div>
+                  <h4 class="mb-4">Multiple Paraphrasing Modes</h4>
+                  <p>
+                    From academic to creative needs, our paraphrase generator offers multiple modes to perfectly match your writing style
+                    and purpose.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+       
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section class="py-10 py-lg-15">
+        <div class="container">
+          <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border mb-18">
+            <div class="row g-6 g-lg-14 g-xl-20 align-center">
+              <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
+                <div>
+                  <p class="text-primary">Completely Free to Use</p>
+                  <h1 class="mb-8">
+                  The Only Paraphrasing Tool You Need: Completely Free to Use
+                  </h1>
+                  <p class="mb-6">
+                    Unlock unparalleled writing freedom with  free paraphrasing tool designed for endless creativity. Ideal for
+                    students, educators, and professionals, our AI paraphrasing tool offers premium features at no cost, ensuring your
+                    projects shine without the burden of fees. Transform your texts with our best paraphrasing tool, where high-quality
+                    rephrasing meets the convenience of a free rewriter tool.
+                  </p>
+                  <ul class="list-unstyled list-check mb-8">
+                    <li>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                        <g>
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="m3.75 9 3.75 3.75 7.5-7.5" />
+                        </g>
+                      </svg>
+                      <span>Enjoy full access to our paraphrasing capabilities without any fees or subscriptions.</span>
+                    </li>
+                    <li>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                        <g>
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="m3.75 9 3.75 3.75 7.5-7.5" />
+                        </g>
+                      </svg>
+                      <span>Rewrite, enhance, and experiment with your text as much as you need, absolutely free.</span>
+                    </li>
+                    <li>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                        <g>
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="m3.75 9 3.75 3.75 7.5-7.5" />
+                        </g>
+                      </svg>
+                      <span>We guarantee transparency—what you see is what you get, with no surprises along the way.</span>
+                    </li>
+                  </ul>
+                
+                </div>
+              </div>
+              <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+                <div class="feature-img">
+                  <img src="{% static 'assets/images/illustrations/feature-illustration-1-blue.svg' %}" alt="" class="img-fluid" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border mb-18">
+            <div class="row g-6 g-lg-14 g-xl-20 align-center flex-row-reverse">
+              <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
+                <div>
+                  <p class="text-primary">Synonym Replacement</p>
+                  <h1 class="mb-8">
+                    Refine Your Text with Smart Synonym Replacement
+                  </h1>
+                  <p class="mb-6">
+                  Elevate your writing to new heights with our sophisticated synonym replacement feature. Tailored for nuanced expression,
+                  this tool empowers you to choose the perfect words, enhancing clarity and impact. With our AI paraphrasing tool,
+                  discover a world where every word counts, making your content stand out. Ideal for crafting compelling narratives,
+                  academic papers, or professional documents, it's the rewording tool you've been seeking.
+                  </p>
+                
+                </div>
+              </div>
+              <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+                <div class="feature-img">
+                  <img src="assets/images/illustrations/feature-illustration-2-blue.svg" alt="" class="img-fluid" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border">
+            <div class="row g-6 g-lg-14 g-xl-20 align-center">
+              <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
+                <div>
+                  <p class="text-primary">Multiple Paraphrasing Modes</p>
+                  <h1 class="mb-8">
+                  Versatility Unlocked: <span class="text-primary"> Multiple Paraphrasing Modes</span> for Every Write
+             
+                  </h1>
+                  <p class="mb-6">
+                    Elevate your writing with our best free paraphrasing tool, designed to adapt to your unique needs with multiple
+                    paraphrasing modes. From academic excellence to creative exploration, our tool provides the perfect fit, whether you're
+                    drafting an academic paper, a blog post, or professional documentation. Experience the freedom of choice with our
+                    AI-powered paraphrase generator, making rephrase, rewrite, and rewording tasks simpler and more effective. Perfect for
+                    anyone seeking to maintain the essence of their original text while exploring different tones and styles.
+                  </p>
+                  <ul class="list-unstyled list-check mb-8">
+                    <li>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                        <g>
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="m3.75 9 3.75 3.75 7.5-7.5" />
+                        </g>
+                      </svg>
+                      <span>Whether it's academic, creative, or professional writing, select the mode that best suits your project's requirements.</span>
+                    </li>
+                    <li>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                        <g>
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="m3.75 9 3.75 3.75 7.5-7.5" />
+                        </g>
+                      </svg>
+                      <span>Tailor your text for maximum impact and reader engagement with specialized rewriting modes.</span>
+                    </li>
+                    <li>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                        <g>
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="m3.75 9 3.75 3.75 7.5-7.5" />
+                        </g>
+                      </svg>
+                      <span>Leverage our AI paraphrasing tool's capability to ensure your content is not only varied in style but also accurate and
+                      coherent.</span>
+                    </li>
+                  </ul>
+               
+                </div>
+              </div>
+              <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+                <div class="feature-img">
+                  <img src="assets/images/illustrations/feature-illustration-3-blue.svg" alt="" class="img-fluid" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Use cases -->
+      <section class="features-section has-blurry-shape position-relative overflow-hidden py-10 py-lg-15">
+        <div class="blurry-shape">
+          <img src="assets/images/shapes/blurry-shape-3.svg" alt="" class="img-fluid" />
+        </div>
+        <div class="container">
+          <div class="text-center mb-18">
+            <h1 class="mb-0" data-aos="fade-up-sm" data-aos-delay="50">
+              Elevate Your Text with Our
+              <br class="d-none d-lg-block" />
+              Best Free Paraphrasing Tool
+            </h1>
+          </div>
+      
+          <div class="row row-cols-1 row-cols-lg-3 g-6 g-xl-14">
+              <!-- Standard Mode -->
+              <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
+                <div class="d-flex flex-column flex-lg-row gap-6">
+                  <div
+                    class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+                    <h4 class="mb-0">01</h4>
+                  </div>
+                  <div>
+                    <h4 class="mb-4">Standard</h4>
+                    <p>Efficiently rephrase text to maintain original meaning with enhanced clarity and readability. Ideal for general
+                      content refinement.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Fluency Mode -->
+              <div class="col" data-aos="fade-up-sm" data-aos-delay="200">
+                <div class="d-flex flex-column flex-lg-row gap-6">
+                  <div
+                    class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+                    <h4 class="mb-0">02</h4>
+                  </div>
+                  <div>
+                    <h4 class="mb-4">Fluency</h4>
+                    <p>Smooth out and enhance the flow of your text, making it more readable and engaging without altering the
+                      original message.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Formal Mode -->
+              <div class="col" data-aos="fade-up-sm" data-aos-delay="300">
+                <div class="d-flex flex-column flex-lg-row gap-6">
+                  <div
+                    class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+                    <h4 class="mb-0">03</h4>
+                  </div>
+                  <div>
+                    <h4 class="mb-4">Formal</h4>
+                    <p>Elevate your text with a formal tone, suitable for professional, academic, or official documents, ensuring
+                      precision and formality.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Academic Mode -->
+              <div class="col" data-aos="fade-up-sm" data-aos-delay="400">
+                <div class="d-flex flex-column flex-lg-row gap-6">
+                  <div
+                    class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+                    <h4 class="mb-0">04</h4>
+                  </div>
+                  <div>
+                    <h4 class="mb-4">Academic</h4>
+                    <p>Tailor your content to meet academic standards with sophisticated language, structure, and citations for
+                      essays, research papers, and reports.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Creative Mode -->
+              <div class="col" data-aos="fade-up-sm" data-aos-delay="500">
+                <div class="d-flex flex-column flex-lg-row gap-6">
+                  <div
+                    class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+                    <h4 class="mb-0">05</h4>
+                  </div>
+                  <div>
+                    <h4 class="mb-4">Creative</h4>
+                    <p>Inject creativity into your text, using imaginative expressions and stylistic variations to captivate and
+                      inspire your audience.</p>
+                  </div>
+                </div>
+              </div>
+                <!-- SEO-Friendly Mode -->
+                <div class="col" data-aos="fade-up-sm" data-aos-delay="600">
+                  <div class="d-flex flex-column flex-lg-row gap-6">
+                    <div
+                      class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+                      <h4 class="mb-0">06</h4>
+                    </div>
+                    <div>
+                      <h4 class="mb-4">SEO-Friendly</h4>
+                      <p>Optimize your content for search engines with keyword-rich paraphrases that boost SEO without sacrificing
+                        readability or relevance.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Simplification Mode -->
+                <div class="col" data-aos="fade-up-sm" data-aos-delay="700">
+                  <div class="d-flex flex-column flex-lg-row gap-6">
+                    <div
+                      class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+                      <h4 class="mb-0">07</h4>
+                    </div>
+                    <div>
+                      <h4 class="mb-4">Simplification</h4>
+                      <p>Make complex text more accessible by simplifying language, ensuring your message is clear and understandable to
+                        all audiences.</p>
+                    </div>
+                  </div>
+                </div>
+
+          </div>
+      
+      
+        </div>
+      </section>
+
+      <!-- App users -->
+   
+
+      <!-- Reviews -->
+  
+
+      <!-- Pricing -->
+   
+
+      <!-- FAQ -->
+      <section class="py-10 py-lg-15">
+        <div class="container">
+          <div class="row justify-center mb-18">
+            <div class="col-lg-10">
+              <div class="text-center">
+                <h1 class="mb-0" data-aos="fade-up-sm" data-aos-delay="50">
+                  Questions About our <span class="text-primary"> Paraphrasing tool?</span> <br class="d-none d-md-block" />
+                  We have Answers!
+                </h1>
+              </div>
+            </div>
+          </div>
+
+          <div class="row justify-center">
+            <div class="col-lg-8" data-aos="fade-up-sm" data-aos-delay="100">
+              <div class="accordion accordion-flush d-flex flex-column gap-6" id="faqAccordion">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#faq-collapseOne" aria-expanded="false" aria-controls="faq-collapseOne">
+                      <span class="icon"></span>
+                    What makes your free paraphrasing tool the best option for students and professionals?
+                    </button>
+                  </h2>
+                  <div id="faq-collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                    Our tool uniquely combines AI-driven accuracy with user-friendly features, making it the top choice for anyone needing
+                    high-quality, plagiarism-free content without any cost.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#faq-collapseTwo" aria-expanded="false" aria-controls="faq-collapseTwo">
+                      <span class="icon"></span>
+                      How does the synonym replacement feature enhance my writing?
+                    </button>
+                  </h2>
+                  <div id="faq-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                    The synonym replacement allows for precise word choice, enriching your text with varied vocabulary and improving
+                    readability, making it ideal for both academic and creative writing.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#faq-collapseThree" aria-expanded="false" aria-controls="faq-collapseThree">
+                      <span class="icon"></span>
+                    Can I use your paraphrasing tool for academic writing?
+                    </button>
+                  </h2>
+                  <div id="faq-collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                    Absolutely! Our academic mode is specifically designed to meet the rigors of academic standards, ensuring your
+                    paraphrased text is suitable for essays, research papers, and publications.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#faq-collapseFour" aria-expanded="false" aria-controls="faq-collapseFour">
+                      <span class="icon"></span>
+                  Is the content generated by your paraphrasing tool SEO-friendly?
+                    </button>
+                  </h2>
+                  <div id="faq-collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                Yes, our SEO-friendly mode optimizes your content with relevant keywords, improving your website's search engine ranking
+                while maintaining natural readability.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#faq-collapseFive" aria-expanded="false" aria-controls="faq-collapseFive">
+                      <span class="icon"></span>
+                    What modes does your paraphrasing tool offer for creative writers?
+                    </button>
+                  </h2>
+                  <div id="faq-collapseFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                    Creative writers will find our creative mode particularly useful, as it offers the ability to inject imaginative
+                    expressions and stylistic variations, transforming any text into a captivating narrative.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+    
+    </main>
+    <div id="myModal" class="modal">
+      <div class="modal-content p-4">
+        <div class="d-flex justify-between align-center">
+          <h4>Delete Text</h4>
+          <span class="close">&times;</span>
+        </div>
+        <p>You’re about to delete the Original .</p>
+        <div class="d-flex justify-between align-center">
+          
+          <button class="btn btn-primary" id="confirmDelete">Continue</button>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer bg-color-blur pt-10 pt-lg-15">
+      <div class="container">
+        <div class="row g-10">
+          <div class="col-lg-9 col-xl-8 order-lg-2">
+            <div class="row g-6">
+              <div class="col-md-4 col-lg-4">
+                <div class="footer-widget text-center text-md-start">
+                  <h6 class=" mb-2">AIHumanize</h6>
+                  <ul class="link-list list-unstyled mb-0">
+                    <li>
+                      <a href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'pricing' %}">Pricing</a>
+                    </li>
+    
+                    <li>
+                      <a href="{% url 'account_login' %}">Sign in</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'account_signup' %}">Register</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'contact' %}">Contact</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'blogs' %}">Blog</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'affiliate_program' %}">Affiliate Program</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-4 col-lg-4">
+                <div class="footer-widget text-center text-md-start">
+                  <h6 class=" mb-2">Company</h6>
+                  <ul class="link-list list-unstyled mb-0">
+                    <li>
+                      <a href="{% url 'terms' %}">Terms & Conditions</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'privacy' %}">Privacy Policy</a>
+                    </li>
+    
+                  </ul>
+                </div>
+              </div>
+    
+              <div class="col-md-4 col-lg-4">
+                <div class="footer-widget text-center text-md-start">
+                  <h6 class=" mb-4">Social Media</h6>
+    
+                  <ul
+                    class="list-unstyled d-flex flex-wrap align-center justify-center justify-md-start gap-3 social-list mb-0 mt-5">
+    
+                    <li>
+                      <a href="https://www.facebook.com/profile.php?id=61555052156060" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z" />
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5" />
+                        </svg>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.linkedin.com/company/aihumanize" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="18px" height="18px">
+                          <path stroke="currentColor" stroke-linecap="round"
+                            d="M 9 4 C 6.2504839 4 4 6.2504839 4 9 L 4 41 C 4 43.749516 6.2504839 46 9 46 L 41 46 C 43.749516 46 46 43.749516 46 41 L 46 9 C 46 6.2504839 43.749516 4 41 4 L 9 4 z M 9 6 L 41 6 C 42.668484 6 44 7.3315161 44 9 L 44 41 C 44 42.668484 42.668484 44 41 44 L 9 44 C 7.3315161 44 6 42.668484 6 41 L 6 9 C 6 7.3315161 7.3315161 6 9 6 z M 14 11.011719 C 12.904779 11.011719 11.919219 11.339079 11.189453 11.953125 C 10.459687 12.567171 10.011719 13.484511 10.011719 14.466797 C 10.011719 16.333977 11.631285 17.789609 13.691406 17.933594 A 0.98809878 0.98809878 0 0 0 13.695312 17.935547 A 0.98809878 0.98809878 0 0 0 14 17.988281 C 16.27301 17.988281 17.988281 16.396083 17.988281 14.466797 A 0.98809878 0.98809878 0 0 0 17.986328 14.414062 C 17.884577 12.513831 16.190443 11.011719 14 11.011719 z M 14 12.988281 C 15.392231 12.988281 15.94197 13.610038 16.001953 14.492188 C 15.989803 15.348434 15.460091 16.011719 14 16.011719 C 12.614594 16.011719 11.988281 15.302225 11.988281 14.466797 C 11.988281 14.049083 12.140703 13.734298 12.460938 13.464844 C 12.78117 13.19539 13.295221 12.988281 14 12.988281 z M 11 19 A 1.0001 1.0001 0 0 0 10 20 L 10 39 A 1.0001 1.0001 0 0 0 11 40 L 17 40 A 1.0001 1.0001 0 0 0 18 39 L 18 33.134766 L 18 20 A 1.0001 1.0001 0 0 0 17 19 L 11 19 z M 20 19 A 1.0001 1.0001 0 0 0 19 20 L 19 39 A 1.0001 1.0001 0 0 0 20 40 L 26 40 A 1.0001 1.0001 0 0 0 27 39 L 27 29 C 27 28.170333 27.226394 27.345035 27.625 26.804688 C 28.023606 26.264339 28.526466 25.940057 29.482422 25.957031 C 30.468166 25.973981 30.989999 26.311669 31.384766 26.841797 C 31.779532 27.371924 32 28.166667 32 29 L 32 39 A 1.0001 1.0001 0 0 0 33 40 L 39 40 A 1.0001 1.0001 0 0 0 40 39 L 40 28.261719 C 40 25.300181 39.122788 22.95433 37.619141 21.367188 C 36.115493 19.780044 34.024172 19 31.8125 19 C 29.710483 19 28.110853 19.704889 27 20.423828 L 27 20 A 1.0001 1.0001 0 0 0 26 19 L 20 19 z M 12 21 L 16 21 L 16 33.134766 L 16 38 L 12 38 L 12 21 z M 21 21 L 25 21 L 25 22.560547 A 1.0001 1.0001 0 0 0 26.798828 23.162109 C 26.798828 23.162109 28.369194 21 31.8125 21 C 33.565828 21 35.069366 21.582581 36.167969 22.742188 C 37.266572 23.901794 38 25.688257 38 28.261719 L 38 38 L 34 38 L 34 29 C 34 27.833333 33.720468 26.627107 32.990234 25.646484 C 32.260001 24.665862 31.031834 23.983076 29.517578 23.957031 C 27.995534 23.930001 26.747519 24.626988 26.015625 25.619141 C 25.283731 26.611293 25 27.829667 25 29 L 25 38 L 21 38 L 21 21 z" />
+                        </svg>
+                      </a>
+                    </li>
+    
+                    <li>
+                      <a href="https://www.instagram.com/aihumanize/" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M9 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6v0Z" />
+                          <path stroke="currentColor" stroke-width="1.5"
+                            d="M2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12Z" />
+                        </svg>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 order-lg-1 me-auto">
+            <div class="footer-widget text-center text-lg-start">
+              <a href="">
+                <img src="{% static  'assets/images/ai-humanize-logo.svg' %}" alt="" class="img-fluid" width="135" />
+              </a>
+              <p class="fs-sm mb-0 mt-4">
+                #1 AI Humanizer & AI writer. Transform Your Content into High-Quality, Unique Writing.
+              </p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="text-center py-6 mt-8">
+          <p class="fs-sm mb-0">
+            Copyright <span class="text-primary">TEMURIYDEVS LTD</span>.
+            All right reserved.
+    
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- JS -->
+  <script src="{% static 'assets/js/plugins.js' %}"></script>
+  <script src="
+  https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.min.js
+  "></script>
+  <script src="{% static 'assets/js/paraphraser.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+  <script>
+
+  </script>
+</body>
+
+</html>
