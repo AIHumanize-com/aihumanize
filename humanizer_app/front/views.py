@@ -182,4 +182,8 @@ def affiliate_program(request):
     return render(request, 'front/affiliate_program.html')
 
 def paraphraser_view(request):
-    return render(request, 'front/paraphraser.html')
+    token  = generate_secure_token_with_expiry("authorization")
+    response = render(request, 'front/paraphraser.html')
+    response.set_cookie('auth_token', token, max_age=86400, secure=True, samesite='Lax')
+    return response
+  
