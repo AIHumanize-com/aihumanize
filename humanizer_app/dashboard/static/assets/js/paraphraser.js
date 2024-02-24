@@ -554,6 +554,8 @@ const deleteButton3 = document.getElementById('deleteText3');
 
 const buttons = document.getElementById('buttons');
 textarea.addEventListener('input', function () {
+	minWordCountError(true);
+	maxWordCountError(true);
 	if (this.value.trim() === '') {
 		buttons.classList.remove('hidden');
 	} else {
@@ -661,6 +663,8 @@ deleteButton3.addEventListener('click', () => {
 
 const trySampleText = document.getElementById('sampleTextBtn')
 trySampleText.addEventListener('click', function () {
+	minWordCountError(true);
+	maxWordCountError(true);
 	const sampleSentences = [
 		"Unlock unparalleled writing freedom with free paraphrasing tool designed for endless creativity. Ideal for students, educators, and professionals, our AI paraphrasing tool offers premium features at no cost, ensuring your projects shine without the burden of fees. Transform your texts with our best paraphrasing tool, where high-quality rephrasing meets the convenience of a free rewriter tool.",
 		"Elevate your writing to new heights with our sophisticated synonym replacement feature. Tailored for nuanced expression, this tool empowers you to choose the perfect words, enhancing clarity and impact. With our AI paraphrasing tool, discover a world where every word counts, making your content stand out. Ideal for crafting compelling narratives, academic papers, or professional documents, it's the rewording tool you've been seeking."
@@ -673,7 +677,8 @@ trySampleText.addEventListener('click', function () {
 });
 const pasteTxt = document.getElementById('pasteTextBtn')
 pasteTxt.addEventListener('click', function () {
-	
+	minWordCountError(true);
+	maxWordCountError(true);
 	deleteButton.style.display = 'block';
 	navigator.clipboard.readText()
 		.then(text => {
@@ -827,8 +832,39 @@ document.addEventListener('click', function () {
 	selectedMode = standardMode.textContent.toLowerCase();
 });
 
+function maxWordCountError(hide=false) {
+	let maxWordCountError = document.getElementById("maxWordCountError");
+	let minWordCountError = document.getElementById("minWordCountError");
+	maxWordCountError.style.display = "block";
+	minWordCountError.style.display = "none";
+	if (hide) {
+		maxWordCountError.style.display = "none";
+	}
+}
+
+function minWordCountError(hide=false) {
+	let minWordCountError = document.getElementById("minWordCountError");
+	let maxWordCountError = document.getElementById("maxWordCountError");
+	minWordCountError.style.display = "block";
+	maxWordCountError.style.display = "none";
+	if (hide) {
+		minWordCountError.style.display = "none";
+	}
+}
+
 async function paraphraseText() {
 	const txtarea = document.getElementById("txtarea").value;
+	
+	
+
+	if (txtarea.trim().split(/\s+/).length > 1000) {
+		maxWordCountError()
+		return;
+	}
+	if (txtarea.trim().split(/\s+/).length < 5) {
+		minWordCountError()
+		return;
+	}
 	// const range = parseInt(document.getElementById("range").value);
 	const paraphraseTextResultElement = document.getElementById("paraphraseTextResult");
 	const countSentencesElement = document.getElementById("countSentences");

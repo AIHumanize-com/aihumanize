@@ -122,9 +122,7 @@
               <li class="nav-item">
                 <a class="nav-link " href="{% url 'pricing' %}">Pricing</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link " href="{% url 'contact' %}">Contact</a>
-              </li>
+           
               <li class="nav-item">
                 <a class="nav-link " href="{% url 'affiliate_program' %}">Earn</a>
               </li>
@@ -151,6 +149,7 @@
       <!-- Hero -->
       <section class="hero-section py-10 py-lg-15">
         <div class="container">
+         
           <div class="tab-content" id="nav-tabContent">
             <!-- English US -->
             <div class="tab-pane fade show active" id="nav-english" role="tabpanel" aria-labelledby="nav-english-tab">
@@ -314,6 +313,8 @@
                       </button>
 
                       <input type="file" id="fileInput" />
+                      <span class="alert p-2 alert-danger" id="maxWordCountError" style="display: none;">Currently we support up to 1000 words</span>
+                      <span class="alert p-2 alert-danger" id="minWordCountError" style="display: none;">Please, enter at least 5 words</span>
                       <button class="btn btn-primary" id="paraphrase" onclick="paraphraseText()">
                         Paraphrase
                       </button>
@@ -1101,7 +1102,7 @@
               </div>
               <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
                 <div class="feature-img">
-                  <img src="{% static 'assets/images/illustrations/feature-illustration-1-blue.svg' %}" alt="" class="img-fluid" />
+                  <img src="{% static 'assets/images/free-paraphrasing-tool.png' %}" alt="" class="img-fluid" />
                 </div>
               </div>
             </div>
@@ -1125,7 +1126,7 @@
               </div>
               <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
                 <div class="feature-img">
-                  <img src="assets/images/illustrations/feature-illustration-2-blue.svg" alt="" class="img-fluid" />
+                  <img src="{% static 'assets/images/synonym-replacement.svg' %}" alt="" class="img-fluid" />
                 </div>
               </div>
             </div>
@@ -1181,7 +1182,7 @@
               </div>
               <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
                 <div class="feature-img">
-                  <img src="assets/images/illustrations/feature-illustration-3-blue.svg" alt="" class="img-fluid" />
+                  <img src="{% static 'assets/images/multiple-paraphrasing-modes.svg' %}" alt="" class="img-fluid" />
                 </div>
               </div>
             </div>
@@ -1192,7 +1193,7 @@
       <!-- Use cases -->
       <section class="features-section has-blurry-shape position-relative overflow-hidden py-10 py-lg-15">
         <div class="blurry-shape">
-          <img src="assets/images/shapes/blurry-shape-3.svg" alt="" class="img-fluid" />
+          <img src="{% static 'assets/images/shapes/blurry-shape-3.svg' %}" alt="" class="img-fluid" />
         </div>
         <div class="container">
           <div class="text-center mb-18">

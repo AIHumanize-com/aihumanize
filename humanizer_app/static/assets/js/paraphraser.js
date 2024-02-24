@@ -345,6 +345,8 @@ document.getElementsByTagName('input')[0].addEventListener("input", function () 
 
 }, false);
 
+
+
 const range = document.getElementById('range');
 const synonym = document.getElementById('synonym');
 
@@ -370,6 +372,8 @@ range1.addEventListener('mouseleave', () => {
 const range2 = document.getElementById('range2');
 const synonym2 = document.getElementById('synonym2');
 
+
+
 range2.addEventListener('mouseenter', () => {
 	synonym2.classList.remove('d-none');
 })
@@ -389,6 +393,22 @@ range3.addEventListener('mouseleave', () => {
 	synonym3.classList.add('d-none');
 })
 
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 const diamond = document.getElementById('diamond');
 const diamondToolTip = document.getElementById('dimToolTip');
 
@@ -534,6 +554,8 @@ const deleteButton3 = document.getElementById('deleteText3');
 
 const buttons = document.getElementById('buttons');
 textarea.addEventListener('input', function () {
+	minWordCountError(true);
+	maxWordCountError(true);
 	if (this.value.trim() === '') {
 		buttons.classList.remove('hidden');
 	} else {
@@ -549,11 +571,7 @@ uploadBtn.addEventListener('click', function () {
 });
 
 // You can also add an event listener to handle file selection if needed
-fileInput.addEventListener('change', function (event) {
-	const selectedFile = event.target.files[0];
-	// Do something with the selected file
-	console.log(selectedFile);
-});
+
 
 function toggleDeleteButtonVisibility() {
 	if (textarea.value.trim() === '') {
@@ -591,8 +609,10 @@ document.getElementById('confirmDelete').addEventListener('click', function () {
 });
 
 document.getElementById('txtarea').addEventListener('input', countWords);
+
 function countWords() {
-	var text = this.value.trim();
+
+	var text = document.getElementById('txtarea').value;
 	var words = text.split(/\s+/).filter(function (word) {
 		return word.length > 0;
 	}).length;
@@ -643,12 +663,11 @@ deleteButton3.addEventListener('click', () => {
 
 const trySampleText = document.getElementById('sampleTextBtn')
 trySampleText.addEventListener('click', function () {
+	minWordCountError(true);
+	maxWordCountError(true);
 	const sampleSentences = [
-		"The quick brown fox jumps over the lazy dog.",
-		"This paraphraser takes your sentences and makes changes.",
-		"It was a dark and stormy night.",
-		"To be, or not to be: that is the question.",
-		"All happy families are alike; each unhappy family is unhappy in its own way."
+		"Unlock unparalleled writing freedom with free paraphrasing tool designed for endless creativity. Ideal for students, educators, and professionals, our AI paraphrasing tool offers premium features at no cost, ensuring your projects shine without the burden of fees. Transform your texts with our best paraphrasing tool, where high-quality rephrasing meets the convenience of a free rewriter tool.",
+		"Elevate your writing to new heights with our sophisticated synonym replacement feature. Tailored for nuanced expression, this tool empowers you to choose the perfect words, enhancing clarity and impact. With our AI paraphrasing tool, discover a world where every word counts, making your content stand out. Ideal for crafting compelling narratives, academic papers, or professional documents, it's the rewording tool you've been seeking."
 	];
 	const randomIndex = Math.floor(Math.random() * sampleSentences.length);
 	document.getElementById('txtarea').value = sampleSentences[randomIndex];
@@ -658,14 +677,19 @@ trySampleText.addEventListener('click', function () {
 });
 const pasteTxt = document.getElementById('pasteTextBtn')
 pasteTxt.addEventListener('click', function () {
+	minWordCountError(true);
+	maxWordCountError(true);
 	deleteButton.style.display = 'block';
 	navigator.clipboard.readText()
 		.then(text => {
 			document.getElementById('txtarea').value = text;
+			countWords()
+			
 		})
 		.catch(err => {
 			console.error('Failed to read clipboard contents: ', err);
 		});
+	
 	buttons.classList.add('hidden');
 });
 
@@ -707,16 +731,30 @@ function toggleDropdown3() {
 }
 
 function copyToClipboard() {
-	const textElement = document.getElementById("paraphraseTextResult");
-	const range = document.createRange();
-	range.selectNode(textElement);
-	window.getSelection().removeAllRanges();
-	window.getSelection().addRange(range);
-	document.execCommand("copy");
-	window.getSelection().removeAllRanges();
+  const textElement = document.getElementById("paraphraseTextResult");
+  const range = document.createRange();
+  range.selectNode(textElement);
+  window.getSelection().removeAllRanges();
+  window.getSelection().addRange(range);
+  document.execCommand("copy");
+  window.getSelection().removeAllRanges();
 
+  // Show tooltip
+  const tooltip = document.getElementById("copyTooltip");
+  tooltip.style.visibility = "visible";
+  tooltip.style.opacity = "1";
+
+  // Change icon color temporarily
+  const icon = document.querySelector(".MuiSvgIcon-root");
+  icon.style.fill = "green"; // Or any color indicating success
+
+  // Hide tooltip and revert icon color after 2 seconds
+  setTimeout(() => {
+    tooltip.style.visibility = "hidden";
+    tooltip.style.opacity = "0";
+    icon.style.fill = "inherit"; // Revert to original color
+  }, 2000);
 }
-
 window.onclick = function (event) {
 	if (!event.target.matches('.dropdown-toggle')) {
 		var dropdowns = document.getElementsByClassName("dropdown-menu");
@@ -732,6 +770,7 @@ window.onclick = function (event) {
 
 async function rewriteText(txtarea, range, mode) {
 	const url = 'https://par.aihumanize.com/rewrite/'; // Update with your actual endpoint URL
+	let  authToken = getCookie('auth_token');
 	const requestData = {
 		original_text: txtarea,
 		synonym_percentage: range,
@@ -742,7 +781,8 @@ async function rewriteText(txtarea, range, mode) {
 		const response = await fetch(url, {
 			method: 'POST', // Specify the method
 			headers: {
-				'Content-Type': 'application/json' // Specify the content type
+				'Content-Type': 'application/json', // Specify the content type
+				"Authorization": `Bearer ${authToken}`,
 			},
 			body: JSON.stringify(requestData) // Convert the JavaScript object to a JSON string
 		});
@@ -792,9 +832,40 @@ document.addEventListener('click', function () {
 	selectedMode = standardMode.textContent.toLowerCase();
 });
 
+function maxWordCountError(hide=false) {
+	let maxWordCountError = document.getElementById("maxWordCountError");
+	let minWordCountError = document.getElementById("minWordCountError");
+	maxWordCountError.style.display = "block";
+	minWordCountError.style.display = "none";
+	if (hide) {
+		maxWordCountError.style.display = "none";
+	}
+}
+
+function minWordCountError(hide=false) {
+	let minWordCountError = document.getElementById("minWordCountError");
+	let maxWordCountError = document.getElementById("maxWordCountError");
+	minWordCountError.style.display = "block";
+	maxWordCountError.style.display = "none";
+	if (hide) {
+		minWordCountError.style.display = "none";
+	}
+}
+
 async function paraphraseText() {
 	const txtarea = document.getElementById("txtarea").value;
-	const range = parseInt(document.getElementById("range").value);
+	
+	
+
+	if (txtarea.trim().split(/\s+/).length > 1000) {
+		maxWordCountError()
+		return;
+	}
+	if (txtarea.trim().split(/\s+/).length < 5) {
+		minWordCountError()
+		return;
+	}
+	// const range = parseInt(document.getElementById("range").value);
 	const paraphraseTextResultElement = document.getElementById("paraphraseTextResult");
 	const countSentencesElement = document.getElementById("countSentences");
 	const loadingIcon = document.getElementById("loading");
@@ -803,10 +874,13 @@ async function paraphraseText() {
 	loadingIcon.classList.remove('d-none');
 	iconss.classList.add('d-none');
 	try {
-		const data = await rewriteText(txtarea, range, selectedMode);
+		const data = await rewriteText(txtarea, 1, selectedMode);
 		const paraphraseTextResult = data
 			.filter(item => item.status === "added" || item.status === "unchanged")
 			.map(item => {
+				if (item.text === "\n"){
+					return "<br>";
+				}
 				if (item.status === "added") {
 					return `<span onclick="updateSynonyms(event)"  style="color: rgb(227, 107, 0); cursor:pointer;">${item.text}</span>`;
 				} else {
@@ -816,15 +890,22 @@ async function paraphraseText() {
 
 		paraphraseTextResultElement.innerHTML = paraphraseTextResult.join(" ");
 
-		const words = txtarea.match(/\b\w+\b/g) || [];
-		const sentences = txtarea.split(/[.!?]+/).filter(sentence => sentence.trim() !== "");
+		const divElement = document.getElementById('resultParaphrase');
+
+		// Use textContent to get the text without HTML tags
+		const textContent = divElement.textContent || divElement.innerText;
+
+		// Match words and sentences
+		const words = textContent.match(/\b\w+\b/g) || [];
+		const sentences = textContent.split(/[.!?]+/).filter(sentence => sentence.trim() !== "");
 
 		countSentencesElement.innerHTML = `Words: ${words.length}, Sentences: ${sentences.length}`;
+		
 	} catch (error) {
 		console.error(error);
 	} finally {
 		paraBtn.classList.remove('d-none');
-		paraBtn.disabled = true;
+		paraBtn.disabled = false;
 		loadingIcon.classList.add('d-none');
 		iconss.classList.remove('d-none');
 	}
@@ -839,12 +920,13 @@ document.getElementById("range").addEventListener("input", function () {
 
 async function fetchSynonym(word, sentence) {
 	const url = 'https://par.aihumanize.com/synonyms/?word=' + encodeURIComponent(word) + '&sentence=' + encodeURIComponent(sentence);
-
+	let  authToken = getCookie('auth_token');
 	try {
 		const response = await fetch(url, {
 			method: 'GET',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				"Authorization": `Bearer ${authToken}`,
 			}
 		});
 
@@ -868,8 +950,12 @@ document.addEventListener('click', () => {
 
 async function updateSynonyms(event) {
     const clickedWord = event.target.textContent;
-    const parentElement = event.target.parentElement;
-    const sentence = parentElement.textContent;
+    let synonymWord = event.target.textContent;
+    const fullText = event.target.parentElement.textContent;
+    // Attempt to extract the sentence containing the clicked word.
+    // This regex splits the text into sentences.
+    const sentences = fullText.match(/[^.!?]+[.!?]*\s*/g);
+    const sentence = sentences.find(s => s.includes(synonymWord)) || fullText;
 
     // Create a button with a Bootstrap spinner
     const loadingButton = document.createElement('button');
@@ -930,7 +1016,11 @@ async function updateSynonyms(event) {
 
 async function updateSynonym(event) {
     const synonymWord = event.target.textContent;
-    const sentence = event.target.parentElement.textContent;
+    const fullText = event.target.parentElement.textContent;
+    // Attempt to extract the sentence containing the clicked word.
+    // This regex splits the text into sentences.
+    const sentences = fullText.match(/[^.!?]+[.!?]*\s*/g);
+    const sentence = sentences.find(s => s.includes(synonymWord)) || fullText;
 
     // Create a button with a Bootstrap spinner
     const loadingButton = document.createElement('button');
@@ -1005,4 +1095,100 @@ async function replaceWithSynonym(selectedSynonym) {
 	const originalWordSpan = document.querySelector('.dropdown > span');
 	originalWordSpan.textContent = selectedSynonym;
 	originalWordSpan.setAttribute('onclick', 'updateSynonym(event)')
+}
+
+
+document.getElementById('fileInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (!file) {
+        return;
+    }
+
+    let inputTextArea = document.getElementById('txtarea');
+	let pasteDiv = buttons;
+    if (file.type === 'application/pdf') {
+        // Handle PDF file
+        const fileReader = new FileReader();
+        fileReader.onload = function() {
+            const typedarray = new Uint8Array(this.result);
+			
+            pdfjsLib.getDocument(typedarray).promise.then(pdf => {
+                let text = '';
+			
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    pdf.getPage(i).then(page => {
+                        page.getTextContent().then(content => {
+                            content.items.forEach(item => {
+                                text += item.str + ' ';
+                            });
+
+                            if (i === pdf.numPages) {
+								// Set the textarea value and hide the paste button div
+							
+								pasteDiv.classList.add("hidden")
+                                inputTextArea.value = text;
+                            }
+                        });
+                    });
+                }
+            });
+        };
+        fileReader.readAsArrayBuffer(file);
+    } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+        // Handle Word file (.docx)
+        const fileReader = new FileReader();
+        fileReader.onload = function(event) {
+            const arrayBuffer = event.target.result;
+
+            mammoth.extractRawText({ arrayBuffer: arrayBuffer })
+                .then(result => {
+					pasteDiv.classList.add("hidden")
+                    inputTextArea.value = result.value;
+                })
+                .catch(err => {
+                    console.error('Error reading .docx file:', err);
+                });
+        };
+        fileReader.readAsArrayBuffer(file);
+    } else {
+        inputTextArea.value = 'Unsupported file type.';
+    }
+});
+
+function downloadDocx() {
+    var text = document.getElementById('resultParaphrase').innerText;
+    var paragraphs = text.split('\n').map(paraText => {
+        return new docx.Paragraph({
+            children: [
+                new docx.TextRun(paraText)
+            ],
+        });
+    });
+
+    var doc = new docx.Document({
+        sections: [{
+            properties: {},
+            children: paragraphs,
+        }],
+    });
+
+    docx.Packer.toBlob(doc).then(blob => {
+        const url = URL.createObjectURL(blob);
+        const downloadAnchor = document.createElement("a");
+        downloadAnchor.href = url;
+        downloadAnchor.download = "paraphrased_text_aihumanize.com.docx";
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        document.body.removeChild(downloadAnchor);
+        URL.revokeObjectURL(url);
+
+        // Show the download message
+        var downloadMessage = document.getElementById('downloadMessage');
+        downloadMessage.style.display = 'block'; // Show download completion message
+
+        // Optionally, hide the message after a few seconds
+        setTimeout(() => {
+            downloadMessage.style.display = 'none'; // Hide the message after showing it
+        }, 5000); // Adjust the time as needed
+    });
 }
