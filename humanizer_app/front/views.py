@@ -180,3 +180,6 @@ def terms_of_use_affiliate(request):
 
 def affiliate_program(request):
     return render(request, 'front/affiliate_program.html')
+
+def paraphraser_view(request):
+    return render(request, 'front/paraphraser.html')

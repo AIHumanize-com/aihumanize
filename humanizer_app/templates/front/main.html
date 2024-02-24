@@ -22,10 +22,10 @@
 
 
     <!-- Title -->
-
+    {% block meta_tags %}
+    {% endblock %}
     <!-- SEO meta tags -->
-   {% block meta_tags %}
-   {% endblock %}
+  
     <!-- <link rel="icon" href="{% static 'assets/images/ai-humanize-icon.svg' %}" type="image/svg+xml" /> -->
     <!-- <meta property="og:image" content="{% static 'assets/images/ai-humanize-icon.svg' %}" /> -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/aihumanize_icon_180x_180.png' %}">
@@ -39,6 +39,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/plugins.css' %}" />
     <link rel="stylesheet" href="{%static 'assets/css/style.css' %}" />
+    
 
 
 
@@ -89,11 +90,12 @@
                                 <a class="nav-link " href="{% url 'content_writer' %}">AI Writer</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="{% url 'pricing' %}">Pricing</a>
+                                <a class="nav-link " href="{% url 'paraphraser' %}">Paraphrasing Tool</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="{% url 'contact' %}">Contact</a>
+                                <a class="nav-link " href="{% url 'pricing' %}">Pricing</a>
                             </li>
+                          
                             <li class="nav-item">
                                 <a class="nav-link " href="{% url 'affiliate_program' %}">Earn</a>
                             </li>

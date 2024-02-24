@@ -13,5 +13,6 @@ urlpatterns = [
     path("ai-content-writer/", views.content_writer, name="content_writer"),
     path("affiliate-program/", views.affiliate_program, name="affiliate_program"),
     path("affiliate-program/terms-of-service/", views.terms_of_use_affiliate, name="terms_of_use_affiliate"),
+    path("paraphrasing-tool/", views.paraphraser_view, name="paraphraser"),
    
 ]
