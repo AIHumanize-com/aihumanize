@@ -131,7 +131,7 @@ def handle_style_purchase(session):
 
     except UserModel.DoesNotExist:
         # Handle user not found
-        print("User not found")
+   
         return HttpResponse(status=400)
 
     
@@ -139,7 +139,7 @@ def handle_style_purchase(session):
 
 def handle_checkout_session(session):
     mode = session.get('mode')
-    print(mode)
+    
     if mode == 'subscription':
         customer_email = session.get('customer_email')
         subscription_id = session.get('subscription')
@@ -200,7 +200,7 @@ def handle_checkout_session(session):
         user.save()
         return HttpResponse(status=200)
     elif mode == 'payment':
-        print("payment")
+      
         if 'style_purchase' in session.get('metadata', {}):
             handle_style_purchase(session)
 
@@ -243,6 +243,7 @@ def handle_successful_payment(invoice):
     
     subscription.start_date = timezone.now()
     subscription.end_date = timezone.now() + relativedelta(months=1)
+    subscription.is_active = True
     subscription.save()
 
     # You might also want to reset or update the word count tracker for the new billing period
