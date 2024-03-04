@@ -69,7 +69,7 @@ class SubscriptionAdmin(admin.ModelAdmin):
     inlines = [WordCountTrackerInline] 
     list_display = ('id', 'user', 'plan_type', 'start_date', 'end_date')
     list_display_links = ('id', 'plan_type', 'user')  # Making 'user' and 'plan_type' clickable
-
+    autocomplete_fields = ["user"]
     search_fields = ('user__email',)
     actions = [csvexport]
 
