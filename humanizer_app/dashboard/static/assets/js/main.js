@@ -415,7 +415,7 @@ function handleHumanizeText(event){
     } else if (document.querySelector('.ghost-box').classList.contains('active')) {
         selectedModel = 'Maestro';
     }
-	console.log(selectedModel)
+
 	// Disable the button and add spinner
 	clickedButton = event.currentTarget;
 	clickedButton.disabled = true;

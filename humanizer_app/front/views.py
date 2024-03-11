@@ -15,6 +15,7 @@ from dashboard.models import WritingStyle
 from common.style_ai import rewrite
 from common.generate_token import generate_secure_token_with_expiry
 from users.tasks import send_to_sendpulse_task, change_variable_task
+from common.cloude_writer import human_writer
 def index(request):
    
     context = {'paid': False, "have_style": False,}  # Default context
@@ -186,4 +187,31 @@ def paraphraser_view(request):
     response = render(request, 'front/paraphraser.html')
     response.set_cookie('auth_token', token, max_age=86400, secure=True, samesite='Lax')
     return response
+
+
+@csrf_exempt
+def human_content_writer_view(request):
+    if request.method == "POST":
+        
+        if request.user.is_authenticated:
+        # Get the latest paid subscription for the user (excluding 'FREE' plan type)
+            latest_subscription = Subscription.objects.filter(
+                user=request.user, 
+                plan_type__in=[Subscription.MONTHLY, Subscription.YEARLY, Subscription.ENTERPRISE]
+            ).order_by('-end_date').first()
+
+            if latest_subscription and latest_subscription.end_date:
+                # Check if the end_date is greater than today
+                if latest_subscription.end_date < timezone.now():
+                    print(latest_subscription)
+                    return JsonResponse({"error": "You are not allowed to use this feature."}, status=400)
+        else:
+            return JsonResponse({"error": "You are not allowed to use this feature."}, status=400)
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        prompt = body["prompt"]
+        result = human_writer(prompt)
+        return JsonResponse({"text": result})
+        
+    return render(request, 'front/human_writer.html')
   

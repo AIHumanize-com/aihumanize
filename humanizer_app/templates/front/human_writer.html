@@ -1,0 +1,925 @@
+{% extends 'front/main.html' %} {% load static %} 
+{% block meta_tags %}
+<title>Generate Undetectable Content - Bypass AI Detectors with Ease</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<meta name="description" content="Unlock the power of our human content generator that produces content undetectable by AI detectors, ensuring authenticity and SEO-friendliness." />
+<meta property="og:title" content="Generate Undetectable Content - Bypass AI Detectors with Ease" />
+<meta property="og:description" content="Unlock the power of our human content generator that produces content undetectable by AI detectors, ensuring authenticity and SEO-friendliness." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://aihumanize.com/human-content-writer" />
+<script async src="https://cdn.tolt.io/tolt.js" data-tolt="28fec8a8-4a33-485e-81db-a071f523783f"></script>
+<style>
+ 
+@media screen and (max-width: 768px) { /* Adjust the max-width as needed */
+    .ghost-box:last-child { /* Assuming the "Your Writing Style" div is the last .ghost-box */
+        display: none;
+       
+    }
+}
+@media screen and (min-width: 993px) and (max-width: 1200px) {
+    .ghost-box {
+        padding-inline: 30px !important;   /* your desired padding value here */;
+        /* You can add any other styles you want to apply within this width range */
+    }
+}
+  .ghost-box.disabled {
+  /* Your styles for disabled mode */
+  opacity: 0.5; /* Example style */
+   
+  /* Other styles as needed */
+}
+
+  .cls-1,
+  .cls-2 {
+    fill: none;
+    stroke: #6A4DFF;
+    stroke-linecap: round;
+    stroke-width: 2px;
+  }
+
+  .cls-1 {
+    stroke-linejoin: round;
+  }
+
+  .cls-2 {
+    stroke-miterlimit: 10;
+  }
+
+  .cls-3 {
+    fill: #353535;
+  }
+           
+  
+
+
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Your HTML code here -->
+<main class="flex-grow-1">
+  <!-- Hero -->
+  <!-- Hero -->
+  <section class="hero-section style-2 position-relative py-10 py-lg-15">
+    <div class="striped-shape">
+      <img src="{% static 'assets/images/shapes/stripe-lite.svg' %}" alt="" />
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="text-center">
+          <div class="position-relative z-1">
+            <p class="text-primary" data-aos="fade-up-sm">
+              Best Human Content Generator
+            </p>
+            <h1 class="text-dark mb-8" data-aos="fade-up-sm" data-aos-delay="150">
+              Generate Undetectable Content  <br />
+
+            
+            </h1>
+            <!-- <a href="login.html" class="btn btn-lg btn-gradient-1" data-aos="fade-up-sm" data-aos-delay="200">Start Writing - It's Free</a> -->
+          </div>
+        </div>
+        <div class="box-outer d-flex justify-center">
+          <div class="box">
+
+            <div class="inner-box">
+             
+              
+
+             
+            
+            </div>
+            <p class="p-simple">Ask To Generate Anything. Articles, Emails, And Much More. Get Undetectable Human Content Directly.</p>
+            <p class="alert alert-secondary" id="masteroInfo" style="display: none;">The Maestro model takes <span style="color:#D32BF4">up to 1 minute</span> for text rewriting, ensuring high-quality and intelligent enhancements.</p>
+            <div class="text-area-inner-buttons" style="position: relative">
+              <textarea rows="15" style="height: 280px; width: 100%" aria-invalid="false" id="prompt"
+                name="input_text" placeholder="Ask me anything. For example: &quot;Write an essay about the impact of ai for the future words count should be 250&quot;, "
+                class=""></textarea>
+              <div id="error-message" class="text-danger"></div>
+              <div class="textarea-buttons" id="textarea-buttons">
+                <!-- <div class="text-area-btn-1">
+                                    <img src="{% static 'assets/images/icons/icons8-hand-32.png' %}" alt="">
+                                    <p>Try Sample Text</p>
+                                </div> -->
+                
+              </div>
+            </div>
+            {% csrf_token %}
+
+            <p style="color: red; display: none" id="min_word_error">
+              Error: Prompt words count should be between 2 and 400.
+            </p>
+            <!-- file -->
+      
+            <!-- end file -->
+            <div style="" class="words-count">
+              <div class="buttons">
+                <div class="button-1">
+                  <button id="humman-writer-main-btn" class="btn btn-lg btn-gradient-1 aos-init aos-animate text-white">
+                    <span><img width="24" height="24" src="{% static 'assets/images/icon2.svg' %}" /></span>
+                    Generate
+                  </button>
+                </div>
+                
+                <div class="button-2" style="display: none;" id="stylesButton">
+                  <select class="select-box" aria-invalid="false" id="style_id">
+                    {% for style in styles %}
+                    <option value="{{style.id}}">{{style.name}}</option>
+                    {% endfor %}
+                
+                  </select>
+                  <p>Style</p>
+                </div>
+                <!-- <div class="button-2"  id="levelButton">
+                  <select class="select-box" aria-invalid="false"  id="level">
+                    <option value="basic_vocabulary">Basic</option>
+                    <option value="inter_vocabulary" selected>Intermediate</option>
+                    <option value="advanced_vocabulary">Advanced</option>
+                  </select>
+                  <p>Vocabulary Level</p>
+                </div> -->
+                
+                <!-- <div class="button-2" style="display: none;" id="readabilityButton">
+                  <select class="select-box" aria-invalid="false"  id="readability">
+                      <option value="high_school">High School</option>
+                      <option value="university" selected>University</option>
+                      <option value="doctorate">Doctorate</option>
+                      <option value="journalist">Journalist</option>
+                      <option value="marketing">Marketing</option>
+                  </select>
+                  <p>Readability</p>
+                </div> -->
+                <!-- <div class="button-2" id="purposeButton">
+                  <select class="select-box" aria-invalid="false" id="purpose">
+                    <option value="general">General Writing</option>
+                    <option value="essay">Essay</option>
+                    <option value="article">Article</option>
+                    <option value="marketing_material">Marketing Material</option>
+                    <option value="story">Story</option>
+                    <option value="cover_letter">Cover Letter</option>
+                    <option value="report">Report</option>
+                    <option value="business_material">Business Material</option>
+                    <option value="legal_material">Legal Material</option>
+                  </select>
+                  <p>Purpose</p>
+                </div> -->
+              </div>
+
+             
+            
+
+             
+            </div>
+          
+
+
+
+            <div>
+              
+              <div class="box-last-text text-center mb-2" style="display: none;" id="detector-answer">
+
+              
+              </div>
+              <div id="tableDiv" style="display: none;">
+                <table class="table table-bordered border-primary mx-auto" style="width: 50%;"> 
+                  <tr>
+                   <th>#</th>
+                   <th>Score</th>
+                  </tr>
+                  <tr>
+                   <td class="text-danger"><strong>AI</strong></td>
+                   <td class="text-danger"><strong id="aiAvarage"></strong></td>
+                  </tr>
+                  <tr>
+                   <td class="text-success"><strong>Human</strong></td>
+                   <td class="text-success"><strong id="humanAvarage"></strong></td>
+                  </tr>
+ 
+                 </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% include 'front/detect_result.html' %}
+      <div class="row" id="result-row" style="display: none;">
+        <div class="box-outer d-flex justify-center">
+          <div class="result-box">
+            <div>
+              <h2>Your New Content:</h2>
+            </div>
+            <div class="result-box-inner-box">
+              <div class="result-box-first-row">
+                <div class="result-box-leftpart">
+                 <button class="btn btn-outline-primary" id="checkAiInresult">Check For AI</button>
+                </div>
+                <div class="result-box-rightpart">
+                  <div class="button-result-box">
+                    <button id="humanize-btn"><span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span> Humanize More</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="super-box">
+                <div class="result-main-box">
+                  <div class="result-main-left-text">
+                    <p>Humanized text:</p>
+                  </div>
+                  <div class="result-main-right-icons">
+                    <div class="text-secondary" id="alternative_tip" style="display: none;">Select part of text to see alternatives</div>
+                  <div class="form-check form-switch " >
+                    <input class="form-check-input" type="checkbox" id="featureToggle" >
+                    <label class="form-check-label" for="featureToggle">
+                      Enable Alternatives
+                     
+                    </label>
+                  </div>
+
+
+                    <img class="ms-4" width="32" height="32" src="https://img.icons8.com/windows/32/000000/copy.png" alt="copy" />
+                    <img width="32" height="32" style="cursor: pointer;" class="sp_popup_25012822-ceda-4dce-a7d7-d97862d06efc" src="https://img.icons8.com/ios/50/000000/facebook-like--v1.png" alt="facebook-like--v1">
+                    <img width="32" height="32" style="cursor: pointer;" class="sp_popup_25012822-ceda-4dce-a7d7-d97862d06efc"
+                      src="https://img.icons8.com/external-outline-andi-nur-abdillah/64/000000/external-Dislike-survey-(outline)-outline-andi-nur-abdillah.png"
+                      alt="external-Dislike-survey-(outline)-outline-andi-nur-abdillah">
+                 
+                  </div>
+                </div>
+                <div class="border-b"></div>
+                <div contenteditable="true" style="margin: 0; white-space: pre-line" class="reult-p p-2" id="humanizedResult">
+                New car type, electric cars, is important for making transportation better. People are focusing on these cars to help
+                stop air problems and make the world better. This paper looks at electric cars, thinking about the good things and the
+                not so good things.
+                
+                Good things about Electric Cars:
+                
+                Help the Environment:
+                Electric cars make less bad gas than regular cars, which makes the air in cities better.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features-section has-blurry-shape position-relative overflow-hidden py-10 py-lg-15">
+    <div class="blurry-shape">
+      <img src="{% static 'assets/images/shapes/blurry-shape-3.svg' %}" alt="" class="img-fluid" />
+    </div>
+    <div class="container">
+      <div class="text-center mb-18">
+        <h1 class="mb-0" data-aos="fade-up-sm" data-aos-delay="50">
+          Discover the Power of Human-like 
+
+
+
+          <br class="d-none d-lg-block" />
+        Content Creation
+        </h1>
+      </div>
+
+      <div class="row row-cols-1 row-cols-lg-3 g-6 g-xl-14">
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="d-flex flex-column flex-lg-row gap-6">
+            <div
+              class="icon w-14 h-14 flex-shrink-0 d-flex align-center  justify-center rounded-3  border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+              <h4 class="mb-0">01</h4>
+            </div>
+            <div class="content">
+              <h4 class="mb-4">Bypass AI detectors.
+              </h4>
+              <p>
+                Stay ahead of AI detection. With our state-of-the-art technology, the content produced is indistinguishable from
+                human-written text, bypassing AI detectors and preserving the authenticity of your communication.
+
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
+          <div class="d-flex flex-column flex-lg-row gap-6">
+            <div
+              class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+            <h4 class="mb-0">02</h4>
+            </div>
+            <div class="content">
+              <h4 class="mb-4">Authentic Content Generation
+              </h4>
+              <p>
+              Create content that resonates with real human experiences. Our tool leverages advanced algorithms to generate content
+              that mirrors human writing styles, ensuring your message is both genuine and engaging.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="200">
+          <div class="d-flex flex-column flex-lg-row gap-6">
+            <div
+              class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3  border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+            <h4 class="mb-0">03</h4>
+            </div>
+            <div class="content">
+              <h4 class="mb-4">Prompt-Based Content Generation
+
+
+              </h4>
+              <p>
+                Get customized content on demand. Simply provide a prompt, and our tool will generate tailored content that meets your
+                specific needs, ensuring relevance and originality in every piece.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-10 py-lg-15">
+    <div class="container">
+      <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border mb-18">
+        <div class="row g-6 g-lg-14 g-xl-20 align-center">
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
+            <div class="content">
+              <p class="text-primary">Bypass AI detectors</p>
+              <h1 class="mb-8">
+                Bypass AI detectors with undetectable content
+
+              </h1>
+              <p class="mb-6">
+                Maintain the human touch in your content. Our Human content writer ensures your message remains undetectable by AI detectors, preserving
+                its authenticity.
+              </p>
+              <ul class="list-unstyled list-check mb-8">
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span><strong>Authenticity preserved:</strong> Ensure your communication remains impactful and real.</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span><strong>Advanced algorithms:</strong> Craft content that mirrors human writing.</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span><strong>Stay undetectable:</strong> Keep your content genuine and free from AI flags.</span>
+                </li>
+              </ul>
+             
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+            <div class="feature-img">
+              <img src="{% static 'assets/images/ai-detector-2.jpg' %}" alt=""
+                class="img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border mb-18">
+        <div class="row g-6 g-lg-14 g-xl-20 align-center flex-row-reverse">
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
+            <div class="content">
+              <p class="text-primary">Generate Undetectable Content </p>
+              <h1 class="mb-8">
+                Authentic Content Generation
+
+              </h1>
+              <p class="mb-6">
+                In today's digital age, the authenticity of your content is paramount. Our tool is designed to produce content that not
+                only engages your audience but also reflects genuine human experiences. By analyzing patterns in human writing, our
+                algorithm can create articles, blogs, and other forms of content that resonate with your readers, making your message
+                more relatable and impactful.
+              </p>
+             
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+            <div class="feature-img">
+              <img src="{% static 'assets/images/authentic-content.jpg' %}" alt=""
+                class="img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border">
+        <div class="row g-6 g-lg-14 g-xl-20 align-center">
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
+            <div class="content">
+              <p class="text-primary">Prompt Based Creation</p>
+              <h1 class="mb-8">
+                Custom Content on Demand with 
+
+                <span class="text-primary">Prompts</span>.
+              </h1>
+              <p class="mb-6">
+                Generate tailored content effortlessly. Input your requirements and let our tool craft content that perfectly aligns
+                with your needs.
+              </p>
+              <ul class="list-unstyled list-check mb-8">
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>
+                    User-driven creation: Guide the content with your prompts.</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>Tailored output: Get content that meets your specific needs.</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>Efficiency at its best: Quick and precise content generation.</span>
+                </li>
+              </ul>
+             
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+            <div class="feature-img">
+              <img src="{% static 'assets/images/prompt-based-2.jpg' %}" alt=""
+                class="img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+
+
+  <!-- App users -->
+  <section class="bg-primary py-20 py-lg-30">
+    <div class="container">
+      <div class="row justify-center mb-18">
+        <div class="col-lg-9">
+          <div class="text-center">
+            <h1 class="text-white mb-0" data-aos="fade-up-sm" data-aos-delay="50">
+              Who are the users of AIHumanize's human content generator?
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-10 g-xl-24 divider-x">
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="50">
+          <div class="h-full">
+            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="#9884FF" stroke-width="1.5"
+                  d="M8 13.333A5.333 5.333 0 0 1 13.333 8h37.334A5.333 5.333 0 0 1 56 13.333v37.334A5.333 5.333 0 0 1 50.667 56H13.333A5.333 5.333 0 0 1 8 50.667V13.333Z" />
+                <path stroke="#fff" stroke-width="2" d="M24 40h-5.333m16-8h-16m10.666-8H18.667" />
+              </svg>
+            </div>
+            <div class="content text-white">
+              <h4 class="mb-4">Content Creators and Writers</h4>
+              <p class="mb-0">
+                Individuals who generate digital content, such as articles, blogs, and marketing materials, and seek to
+                ensure their work is original and undetectable by AI detectors.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="h-full">
+            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="#fff" stroke-width="2"
+                  d="M24 37.334c0 4.418 7.163 8 16 8s16-3.582 16-8c0-4.42-7.163-8-16-8s-16 3.58-16 8Z" />
+                <path stroke="#fff" stroke-width="2" d="M24 37.334V48c0 4.416 7.163 8 16 8s16-3.584 16-8V37.334" />
+                <path stroke="#9884FF" stroke-width="1.5"
+                  d="M8 16c0 2.859 3.05 5.499 8 6.928 4.95 1.43 11.05 1.43 16 0 4.95-1.43 8-4.07 8-6.928 0-2.859-3.05-5.499-8-6.928-4.95-1.43-11.05-1.43-16 0-4.95 1.43-8 4.07-8 6.928Z" />
+                <path stroke="#9884FF" stroke-width="1.5" d="M8 16v26.667c0 2.368 2.059 3.866 5.333 5.333" />
+                <path stroke="#9884FF" stroke-width="1.5" d="M8 29.334c0 2.367 2.059 3.866 5.333 5.333" />
+              </svg>
+            </div>
+            <div class="content text-white">
+              <h4 class="mb-4">Business Professionals</h4>
+              <p class="mb-0">
+                Individuals in business who need to create reports, presentations, and other documents that are
+                professional, error-free, and original.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
+          <div class="h-full">
+            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="#9884FF" stroke-width="1.5"
+                  d="M32 8c19.2 0 24 4.8 24 24s-4.8 24-24 24S8 51.2 8 32 12.8 8 32 8Z" />
+                <path stroke="#fff" stroke-width="2"
+                  d="M21.333 36a6.666 6.666 0 1 0 13.333 0 6.666 6.666 0 0 0-13.333 0Z" />
+                <path stroke="#fff" stroke-width="2" d="M21.333 21.334h21.334v21.333" />
+              </svg>
+            </div>
+            <div class="content text-white">
+              <h4 class="mb-4">Marketing and PR Agencies</h4>
+              <p class="mb-0">
+                Agencies that produce large volumes of content and require tools to help them maintain originality and
+                undetectability while catering to diverse client needs.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+      <div class="row mt-2 row-cols-1 row-cols-md-2 row-cols-lg-3 g-10 g-xl-24 divider-x">
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="50">
+          <div class="h-full">
+            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
+              <?xml version="1.0" encoding="utf-8"?>
+
+              <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+              <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
+                <style type="text/css">
+                  .st0 {
+                    fill: none;
+                    stroke: #9884FF;
+                    stroke-width: 2;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-miterlimit: 10;
+                  }
+
+                  .st1 {
+                    fill: none;
+                    stroke: white;
+                    stroke-width: 2;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                  }
+
+                  .st2 {
+                    fill: none;
+                    stroke: white;
+                    stroke-width: 2;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-dasharray: 5.2066, 0;
+                  }
+                </style>
+                <path class="st0" d="M22.2,19.4l4.2,4.2c0.8,0.8,0.8,2.1,0,2.8l0,0c-0.8,0.8-2.1,0.8-2.8,0l-5.7-5.7" />
+                <circle class="st0" cx="13" cy="13" r="9" />
+                <line class="st0" x1="13" y1="8" x2="13" y2="17" />
+                <line class="st0" x1="9" y1="12" x2="9" y2="17" />
+                <line class="st0" x1="17" y1="10" x2="17" y2="17" />
+              </svg>
+            </div>
+            <div class="content text-white">
+              <h4 class="mb-4">SEO Specialists</h4>
+              <p class="mb-0">
+                Professionals who focus on search engine optimization and need to produce or modify content that is both
+                SEO-friendly and free from AI detection.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="h-full">
+            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                y="0px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
+
+                <g>
+                  <g>
+                    <path fill="#9884FF"
+                      d="M168.6,236c-0.4,0.1-0.8,0.1-1.3,0.1c-1,0-2-0.2-2.9-0.7l-16.8-8.9l-16.8,8.9c-0.9,0.5-1.9,0.7-2.9,0.7c-1.3,0-2.6-0.4-3.7-1.2c-1.9-1.3-2.9-3.7-2.5-6l3.2-18.7l-13.6-13.3c-1.7-1.6-2.3-4.1-1.6-6.4c0.7-2.3,2.7-3.9,5-4.2l18.8-2.8l8.4-17c1-2.1,3.2-3.5,5.6-3.5c2.4,0,4.6,1.3,5.6,3.5l4.8,9.7c-3.6-11.6-8.1-22.3-13.4-29.1c-7.8-13.2-20.9-18-31-19.7c-1.5-0.3-3.1,0.4-4,1.7l-10.3,14l-11.1-15.1l7.8,26.4c0.2,0.7,0.2,1.4,0.1,2.1L88,194.1c0,0.1-0.1,0.2-0.1,0.4v0.2l-0.1-0.2v-0.2l-8.7-37.6c-0.1-0.8-0.1-1.5,0.1-2.2l8.5-26.8l-11.8,16.2l-10.1-13.7c-1-1.4-2.7-2-4.4-1.6c-8.1,2-18.7,6.8-26.3,17.6c-0.2,0.3-0.5,0.7-0.7,1.1c-0.2,0.2-0.3,0.3-0.6,0.5c-0.5,0.8-1.1,1.7-1.6,2.7c0.1,0,0.2,0.1,0.2,0.1c-1.1,2.1-2.2,4.4-3.3,7c-0.1-0.1-0.2-0.1-0.4-0.1c-9.9,23.4-18.9,70.1-18.8,74.4h0.4c0.1,4.6,1.9,14.2,16.3,13.9h124.7C151.5,245.7,164.6,245.9,168.6,236z" />
+                    <path fill="#9884FF"
+                      d="M141.9,64.9c0,30.1-24.4,54.5-54.7,54.5c-30.1,0-54.5-24.4-54.5-54.5c0-30.2,24.4-54.6,54.5-54.6C117.5,10.3,141.9,34.7,141.9,64.9z" />
+                    <path fill="white"
+                      d="M145.3,173.1c0.4-0.8,1.2-1.3,2.1-1.3s1.7,0.5,2.1,1.3l7.8,15.7l17.3,2.5c0.9,0.1,1.6,0.7,1.9,1.6c0.3,0.8,0,1.8-0.6,2.4l-12.5,12.2l3,17.2c0.1,0.9-0.2,1.8-0.9,2.3c-0.7,0.5-1.7,0.6-2.5,0.2l-15.5-8.2l-15.5,8.2c-0.8,0.4-1.7,0.4-2.5-0.2c-0.7-0.6-1.1-1.4-0.9-2.3l2.9-17.2L119,195.3c-0.7-0.6-0.9-1.6-0.6-2.4c0.3-0.8,1-1.5,1.9-1.6l17.3-2.5L145.3,173.1z" />
+                    <path fill="white"
+                      d="M214.7,173.1c0.4-0.8,1.2-1.3,2.1-1.3c0.9,0,1.7,0.5,2.1,1.3l7.7,15.7l17.3,2.5c0.9,0.1,1.6,0.7,1.9,1.6c0.3,0.8,0,1.8-0.6,2.4l-12.5,12.2l3,17.2c0.1,0.9-0.2,1.8-0.9,2.3c-0.7,0.5-1.7,0.6-2.5,0.2l-15.5-8.2l-15.5,8.2c-0.8,0.4-1.8,0.3-2.5-0.2c-0.7-0.5-1.1-1.4-0.9-2.3l3-17.2l-12.5-12.2c-0.7-0.6-0.9-1.6-0.6-2.4c0.3-0.9,1-1.5,1.9-1.6l17.3-2.5L214.7,173.1z" />
+                    <path fill="white"
+                      d="M178.2,113.6c0.4-0.8,1.2-1.3,2.1-1.3c0.9,0,1.7,0.5,2.1,1.3l7.7,15.7l17.3,2.5c0.9,0.1,1.6,0.7,1.9,1.6c0.3,0.8,0,1.8-0.6,2.4l-12.5,12.2l3,17.2c0.1,0.9-0.2,1.8-0.9,2.3c-0.7,0.6-1.7,0.6-2.5,0.2l-15.5-8.1l-15.5,8.1c-0.8,0.4-1.8,0.4-2.5-0.2c-0.7-0.5-1.1-1.4-0.9-2.3l2.9-17.2l-12.5-12.2c-0.6-0.6-0.9-1.5-0.6-2.4c0.3-0.9,1-1.5,1.9-1.6l17.3-2.5L178.2,113.6z" />
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="content text-white">
+              <h4 class="mb-4">Academic Professionals and Students</h4>
+              <p class="mb-0">
+                Those in the academic field who want to ensure their work is plagiarism-free and not flagged by AI
+                detection tools used by educational institutions.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
+          <div class="h-full">
+            <div class="icon w-16 h-16 flex-shrink-0 d-flex align-center justify-center mb-6">
+
+              <svg fill="#9884FF" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 419.931 419.931" xml:space="preserve">
+                <g>
+                  <g>
+                    <g>
+                      <path
+                        d="M282.895,352.367c-2.176-1.324-4.072-3.099-5.579-5.25c-0.696-0.992-1.284-2.041-1.771-3.125H28.282V100.276h335.624
+     v159.138c7.165,0.647,13.177,5.353,15.701,11.797c2.235-1.225,4.726-1.982,7.344-2.213c1.771-0.154,3.53-0.044,5.236,0.293
+     V39.561c0-12.996-10.571-23.569-23.566-23.569H23.568C10.573,15.992,0,26.565,0,39.561v309.146
+     c0,12.996,10.573,23.568,23.568,23.568h257.179c-2.007-4.064-2.483-8.652-1.302-13.066
+     C280.126,356.67,281.304,354.354,282.895,352.367z M338.025,55.569c0-4.806,3.896-8.703,8.702-8.703h8.702
+     c4.807,0,8.702,3.896,8.702,8.703v9.863c0,4.806-3.896,8.702-8.702,8.702h-8.702c-4.807,0-8.702-3.896-8.702-8.702V55.569z
+      M297.56,55.569c0-4.806,3.896-8.703,8.702-8.703h8.703c4.807,0,8.702,3.896,8.702,8.703v9.863c0,4.806-3.896,8.702-8.702,8.702
+     h-8.703c-4.806,0-8.702-3.896-8.702-8.702V55.569z M257.094,55.569c0-4.806,3.897-8.703,8.702-8.703h8.702
+     c4.807,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.896,8.702-8.703,8.702h-8.702c-4.805,0-8.702-3.896-8.702-8.702V55.569z" />
+                      <path
+                        d="M419.875,335.77l-2.615-14.83c-0.353-1.997-2.256-3.331-4.255-2.979l-13.188,2.324c-1.583-3.715-3.605-7.195-6.005-10.38
+     l8.614-10.268c0.626-0.744,0.931-1.709,0.847-2.68c-0.086-0.971-0.554-1.867-1.3-2.494l-11.534-9.68
+     c-0.746-0.626-1.713-0.93-2.683-0.845c-0.971,0.085-1.867,0.552-2.493,1.298l-8.606,10.26c-3.533-1.8-7.312-3.188-11.271-4.104
+     v-13.392c0-2.028-1.645-3.674-3.673-3.674h-15.06c-2.027,0-3.673,1.646-3.673,3.674v13.392
+     c-3.961,0.915-7.736,2.304-11.271,4.104l-8.608-10.259c-1.304-1.554-3.62-1.756-5.175-0.453l-11.535,9.679
+     c-0.746,0.627-1.213,1.523-1.299,2.494c-0.084,0.971,0.22,1.937,0.846,2.683l8.615,10.266c-2.396,3.184-4.422,6.666-6.005,10.38
+     l-13.188-2.325c-1.994-0.351-3.901,0.982-4.255,2.979l-2.614,14.83c-0.169,0.959,0.05,1.945,0.607,2.744
+     c0.561,0.799,1.41,1.342,2.37,1.511l13.198,2.326c0.215,4.089,0.927,8.045,2.073,11.812l-11.6,6.695
+     c-0.844,0.485-1.459,1.289-1.712,2.229c-0.252,0.941-0.119,1.943,0.367,2.787l7.529,13.041c0.485,0.844,1.289,1.459,2.229,1.711
+     c0.313,0.084,0.632,0.125,0.951,0.125c0.639,0,1.272-0.166,1.836-0.492l11.609-6.703c2.73,2.925,5.812,5.517,9.18,7.709
+     l-4.584,12.593c-0.332,0.916-0.289,1.926,0.123,2.809s1.157,1.566,2.072,1.898l14.148,5.149c0.406,0.148,0.832,0.224,1.257,0.224
+     c0.53,0,1.063-0.115,1.554-0.345c0.883-0.411,1.564-1.157,1.897-2.073l4.583-12.593c1.965,0.238,3.965,0.361,5.994,0.361
+     s4.029-0.125,5.994-0.361l4.584,12.593c0.332,0.916,1.016,1.662,1.897,2.073c0.49,0.229,1.021,0.345,1.554,0.345
+     c0.424,0,0.85-0.074,1.256-0.224l14.15-5.149c0.913-0.332,1.659-1.017,2.07-1.898c0.412-0.883,0.456-1.893,0.123-2.809
+     l-4.584-12.591c3.365-2.192,6.447-4.786,9.18-7.709l11.609,6.703c0.563,0.324,1.197,0.492,1.836,0.492
+     c0.318,0,0.64-0.043,0.951-0.125c0.941-0.252,1.743-0.869,2.229-1.711l7.529-13.043c0.486-0.842,0.619-1.846,0.367-2.787
+     c-0.253-0.938-0.868-1.742-1.712-2.229l-11.598-6.693c1.146-3.768,1.856-7.724,2.071-11.812l13.198-2.327
+     c0.96-0.169,1.812-0.712,2.37-1.511C419.825,337.715,420.044,336.729,419.875,335.77z M354.184,359.336
+     c-11.155,0-20.2-9.045-20.2-20.201s9.046-20.2,20.2-20.2c11.156,0,20.201,9.044,20.201,20.2S365.34,359.336,354.184,359.336z" />
+                      <g>
+                        <path d="M164.695,235.373c0-4.752-2.785-9.117-7.096-11.119l-39.455-18.332l39.456-18.334c4.31-2.004,7.095-6.368,7.095-11.118
+       v-0.319c0-4.21-2.119-8.075-5.665-10.334c-1.962-1.253-4.247-1.916-6.606-1.916c-1.778,0-3.563,0.391-5.16,1.133l-63.078,29.333
+       c-4.309,2.004-7.092,6.368-7.092,11.117v0.877c0,4.743,2.782,9.104,7.093,11.118l63.084,29.336
+       c1.631,0.755,3.368,1.138,5.162,1.138c2.338,0,4.616-0.664,6.597-1.924c3.548-2.268,5.666-6.13,5.666-10.335L164.695,235.373
+       L164.695,235.373z" />
+                        <path d="M226.932,134.012c-2.301-3.15-6.002-5.03-9.901-5.03h-0.314c-5.354,0-10.048,3.425-11.679,8.516L163.478,266.27
+       c-1.183,3.718-0.517,7.813,1.781,10.962c2.301,3.148,6.002,5.029,9.901,5.029h0.315c5.352,0,10.043-3.426,11.672-8.516
+       l41.555-128.762C229.896,141.268,229.234,137.167,226.932,134.012z" />
+                        <path d="M308.001,194.366l-63.079-29.333c-1.592-0.74-3.374-1.131-5.152-1.131c-2.358,0-4.644,0.661-6.605,1.912
+       c-3.552,2.263-5.671,6.127-5.671,10.337v0.319c0,4.746,2.783,9.111,7.097,11.123l39.454,18.33l-39.455,18.331
+       c-4.311,2.002-7.096,6.367-7.096,11.119v0.321c0,4.205,2.119,8.066,5.669,10.336c1.974,1.258,4.254,1.923,6.595,1.923
+       c1.792,0,3.527-0.383,5.169-1.141l63.082-29.336c4.307-2.009,7.088-6.371,7.088-11.114v-0.877
+       C315.094,200.735,312.311,196.371,308.001,194.366z" />
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="content text-white">
+              <h4 class="mb-4">Web Developers and Designers</h4>
+              <p class="mb-0">
+                Professionals who integrate content into websites and digital platforms, ensuring it is both engaging
+                and undetectable as AI-generated.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+
+
+  <!-- Pricing -->
+
+
+  <!-- FAQ -->
+  <section class="py-10 py-lg-15">
+    <div class="container">
+      <div class="row justify-center mb-18">
+        <div class="col-lg-10">
+          <div class="text-center">
+            <h1 class="mb-0" data-aos="fade-up-sm" data-aos-delay="50">
+              Frequently Asked Questions 
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-center">
+        <div class="col-lg-8" data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="accordion accordion-flush d-flex flex-column gap-6" id="faqAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseOne" aria-expanded="false" aria-controls="faq-collapseOne">
+                  <span class="icon"></span>
+                  How does your tool bypass AI detectors?
+                </button>
+              </h2>
+              <div id="faq-collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                Our tool uses advanced algorithms to generate content that closely mimics human writing styles, making it
+                indistinguishable from human-written text and undetectable by AI detectors.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseTwo" aria-expanded="false" aria-controls="faq-collapseTwo">
+                  <span class="icon"></span>
+                  Can I customize the content generated by your tool?
+                </button>
+              </h2>
+              <div id="faq-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Yes, absolutely! Our tool is designed for prompt-based content generation. You can provide specific prompts or
+                  requirements, and our tool will tailor the content accordingly to meet your needs.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseThree" aria-expanded="false" aria-controls="faq-collapseThree">
+                  <span class="icon"></span>
+                  How quickly can your tool generate content?
+                </button>
+              </h2>
+              <div id="faq-collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Our tool is optimized for efficiency. The content generation speed depends on the complexity and length of the prompt,
+                  but in most cases, you can expect to receive your content within minutes.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseFour" aria-expanded="false" aria-controls="faq-collapseFour">
+                  <span class="icon"></span>
+                  Is the content produced by your tool SEO-friendly?
+                </button>
+              </h2>
+              <div id="faq-collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Yes, our tool is designed to generate content that is not only authentic and engaging but also optimized for search
+                  engines, helping you improve your online visibility.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseFive" aria-expanded="false" aria-controls="faq-collapseFive">
+                  <span class="icon"></span>
+                  How can I ensure the content remains original and unique?
+                </button>
+              </h2>
+              <div id="faq-collapseFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Our tool is equipped with algorithms that ensure the generated content is original and unique, reducing the risk of
+                  duplication and maintaining the integrity of your content.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+
+  <!-- Placeholder for the loading indicator; initially hidden -->
+<div id="loadingIndicator" style="z-index: 2;" class="d-none position-absolute p-2 bg-primary border border-light rounded">
+  <div class="d-flex align-items-center">
+    <div class="spinner-border spinner-border-sm text-light me-2" role="status"></div>
+    <span class="text-white">Fetching alternatives...</span>
+  </div>
+</div>
+
+  <!-- Bootstrap Modal -->
+  <!-- Bootstrap Modal for Limit Reached -->
+  <div class="modal fade" id="limitReachedModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Limit Reached</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>You have reached the limit for AI detection as a guest user.</p>
+          <p><strong>Sign up now</strong> to gain unlimited access to our AI detection features.</p>
+        </div>
+        <div class="modal-footer">
+          <a href="{% url 'account_signup' %}" class="btn btn-primary">Sign Up</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Word Limit Modal -->
+  <div class="modal fade" id="wordLimitModal" tabindex="-1">
+    {% load socialaccount %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+          
+          <div class="modal-body p-4">
+            <div class="media media-rg media-middle media-circle text-primary bg-primary bg-opacity-20 mb-3">
+              <em class="icon ni ni-lock-alt"></em>
+            </div>
+            <h2 class="text-primary">Unlock Exclusive Features!</h2>
+            <p>To access this feature, please subscribe to one of our plans. Join our community of subscribers and enjoy full
+              access to all premium content and features.</p>
+            <div class="vstack gap-4 mt-4">
+              <a href="{% url 'pricing' %}" class="btn btn-primary py-4">
+                <span>Subscribe Now</span>
+              </a>
+              <button type="button" class="btn account-btn py-4 mt-3" data-bs-dismiss="modal">
+                <span>Explore Other Features</span>
+              </button>
+            </div>
+          </div>
+
+
+            <!-- .modal-body -->
+        </div><!-- .modal-content -->
+    </div><!-- .modal-dialog -->
+</div>
+
+<div class="modal fade" id="noStylesModal" tabindex="-1" aria-labelledby="noStylesModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="noStylesModalLabel">No Writing Styles Found</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>You currently have no writing styles created. To use the rewriting feature, please create a personalized
+          writing style.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="{% url 'styles_list' %}" class="btn btn-primary">View Writing Styles</a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Word Limit Modal -->
+ 
+
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'assets/js/human_writer.js' %}"></script>
+{% endblock %}
