@@ -35,7 +35,7 @@ function handleGenerateText(event){
 		.then(response => response.json())
 		.then(data => {
 			if (data.error) {
-				console.log(data.error)
+			
 				if (data.error == 'word_limit_reached') {
 					let errorMessageP = document.getElementById('error-message');
 					errorMessageP.textContent = "Now we can proccess up to 1000 words. Please enter fewer words";

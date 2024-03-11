@@ -1,8 +1,11 @@
 import anthropic
+import os
+
+OPEN_AI_API_KEY = os.environ.get("CLOUDE_API_KEY")
 def human_writer(prompt):
     client = anthropic.Anthropic(
         # defaults to os.environ.get("ANTHROPIC_API_KEY")
-        api_key="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",
+        api_key=OPEN_AI_API_KEY,
     )
     message = client.messages.create(
         model="claude-3-sonnet-20240229",
