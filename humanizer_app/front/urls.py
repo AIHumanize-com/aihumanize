@@ -14,5 +14,6 @@ urlpatterns = [
     path("affiliate-program/", views.affiliate_program, name="affiliate_program"),
     path("affiliate-program/terms-of-service/", views.terms_of_use_affiliate, name="terms_of_use_affiliate"),
     path("paraphrasing-tool/", views.paraphraser_view, name="paraphraser"),
+    path("human-content-writer/", views.human_content_writer_view, name="human_content_writer"),
    
 ]
