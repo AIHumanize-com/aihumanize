@@ -61,6 +61,7 @@ class UserModel(AbstractBaseUser, PermissionsMixin):
     does_email_receive = models.BooleanField(default=True)
     USERNAME_FIELD = "email"
     objects = UserManager()
+    api_secret = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.email

@@ -84,12 +84,12 @@ def humanizer(request):
 
         word_count_tracker = WordCountTracker.objects.filter(subscription__user=request.user).last()
         if word_count  > word_count_tracker.words_remaining:
-            change_variable_task.delay(request.user.email, "upgrade_alert", 1)
+            # change_variable_task.delay(request.user.email, "upgrade_alert", 1)
             return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
         # even if user has remanining words but subscrioption is expired, we need to check user is in paid plan
         if subscrioption.plan_type in [Subscription.MONTHLY, Subscription.YEARLY, Subscription.ENTERPRISE]:
             if subscrioption.end_date < timezone.now():
-                change_variable_task.delay(request.user.email, "upgrade_alert", 1)
+                # change_variable_task.delay(request.user.email, "upgrade_alert", 1)
                 return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
 
         if style_id:
@@ -215,3 +215,44 @@ def human_content_writer_view(request):
         
     return render(request, 'front/human_writer.html')
   
+@csrf_exempt
+def humanizer_api(request):
+    from users.models import UserModel
+    if request.method == "POST":
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        user_secret = body["user_secret"]
+        model = body["model"]
+        if model not in ["Falcon", "Maestro"]:
+            return JsonResponse({"error": "Invalid model name"}, status=400)
+        try:
+            user = UserModel.objects.get(api_secret=user_secret)
+            text = body["text"]
+            word_count = len(text.split())
+
+            if word_count > 1500:
+                return JsonResponse({"error": "Max input text words count must be less than 1500"}, status=400)
+            subscrioption = Subscription.objects.filter(user=user).last()
+
+            word_count_tracker = WordCountTracker.objects.filter(subscription__user=user).last()
+
+            if word_count  > word_count_tracker.words_remaining:
+                # change_variable_task.delay(user.email, "upgrade_alert", 1)
+                return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
+            # even if user has remanining words but subscrioption is expired, we need to check user is in paid plan
+            if subscrioption.plan_type in [Subscription.MONTHLY, Subscription.YEARLY, Subscription.ENTERPRISE]:
+                if subscrioption.end_date < timezone.now():
+                    # change_variable_task.delay(user.email, "upgrade_alert", 1)
+                    return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
+            result = rewrite_text(text, purpose="general", readability="university", strength="basic_vocabulary", model_name=model)
+        
+            # create_documents_record.delay(input_text=text, output_text=result, user_id=user.id, purpose="general", level=None, readibility=None, model=model)
+           
+            word_count_tracker.words_used += word_count
+            word_count_tracker.save()
+            return JsonResponse({"text": result})
+        except UserModel.DoesNotExist:
+            return JsonResponse({"error": "Invalid user secret"}, status=400)
+    else:
+        return JsonResponse({"error": "Invalid request method"}, status=400)
+        
