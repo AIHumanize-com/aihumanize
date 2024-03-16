@@ -74,7 +74,7 @@ prompts = {
         "Include around 5% SAT words."
     ),
     "general": (
-        "Rewrite the given text, follow these rules: use short words and low amount of syllables , change words with simpler words, use varied sentence lengths. use 100 most common words in the English language when possible. Words count must be same or more with given text."
+        "Rewrite the given text, follow these rules: use short words and low amount of syllables , change words with simpler words, use varied sentence lengths. use  most common words in the English language when possible. Words count must be same or more with given text."
     )
 }
 

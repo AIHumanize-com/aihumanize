@@ -18,19 +18,19 @@ from users.tasks import send_to_sendpulse_task, change_variable_task
 from common.cloude_writer import human_writer
 def index(request):
    
-    context = {'paid': False, "have_style": False,}  # Default context
+    context = {'paid': True, "have_style": False,}  # Default context
 
     if request.user.is_authenticated:
         # Get the latest paid subscription for the user (excluding 'FREE' plan type)
-        latest_subscription = Subscription.objects.filter(
-            user=request.user, 
-            plan_type__in=[Subscription.MONTHLY, Subscription.YEARLY, Subscription.ENTERPRISE]
-        ).order_by('-end_date').first()
+        # latest_subscription = Subscription.objects.filter(
+        #     user=request.user, 
+        #     plan_type__in=[Subscription.MONTHLY, Subscription.YEARLY, Subscription.ENTERPRISE]
+        # ).order_by('-end_date').first()
 
-        if latest_subscription and latest_subscription.end_date:
-            # Check if the end_date is greater than today
-            if latest_subscription.end_date > timezone.now():
-                context['paid'] = True
+        # if latest_subscription and latest_subscription.end_date:
+        #     # Check if the end_date is greater than today
+        #     if latest_subscription.end_date > timezone.now():
+        #         context['paid'] = True
 
         # If writing style exist for user
         writing_style = WritingStyle.objects.filter(user=request.user, status="completed")
