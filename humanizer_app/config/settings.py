@@ -183,12 +183,20 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
 
 
-EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = "support@aihumanize.com"
+# EMAIL_HOST_PASSWORD = "#Ashabdulla17012018"
+# DEFAULT_FROM_EMAIL = EMAIL_HOST
+
+EMAIL_HOST = "smtp-pulse.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "support@aihumanize.com"
-EMAIL_HOST_PASSWORD = "#Ashabdulla17012018"
-DEFAULT_FROM_EMAIL = EMAIL_HOST
+EMAIL_HOST_PASSWORD = "WRS4ioe6nd2"
+DEFAULT_FROM_EMAIL = "support@aihumanize.com"
+
 
 
 
