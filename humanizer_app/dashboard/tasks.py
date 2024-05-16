@@ -13,6 +13,7 @@ from django.template.loader import render_to_string
 from django.core.mail import get_connection
 from dashboard.models import WritingStyle
 from common.style_ai import anaylze_style
+
 @shared_task
 def create_documents_record(input_text, output_text, user_id, purpose, level, readibility, model):
     
