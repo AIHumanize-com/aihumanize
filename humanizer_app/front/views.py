@@ -71,8 +71,8 @@ def humanizer(request):
 
         word_count = len(text.split())
 
-        if word_count > 1500:
-            return JsonResponse({"error": "word_limit_reached"}, status=400)
+        # if word_count > 1500:
+        #     return JsonResponse({"error": "word_limit_reached"}, status=400)
     
 
         if not request.user.is_authenticated:
