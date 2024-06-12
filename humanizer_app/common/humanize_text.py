@@ -34,9 +34,9 @@ def rewrite_text(original_text, purpose, readability, strength, model_name):
 
    
     if model_name == "Falcon":
-        model = "gpt-3.5-turbo-1106"
+        model = "gpt-4o"
         openai_api_key = os.environ.get("OPEN_AI_KEY_AIHUMANIZE")
-        system_prompt = prompts[purpose] 
+        system_prompt = """Rewrite the given text, follow these rules: use short words and low amount of syllables , change words with simpler words, use varied sentence lengths. use  most common  words in the English language when possible. Make sentence unpredictable. Importand: Words count must be same or more with given text. """
   
         
     elif model_name == "Maestro":

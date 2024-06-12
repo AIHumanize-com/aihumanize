@@ -25,3 +25,6 @@ push:
 
 createsuperuser:
 	docker compose  -f docker-compose.debug.yml run --rm django sh -c "python manage.py createsuperuser"
+
+shell:
+	docker compose  -f docker-compose.debug.yml run --rm django sh -c "python manage.py shell"
