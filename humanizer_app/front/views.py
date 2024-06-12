@@ -18,19 +18,19 @@ from users.tasks import send_to_sendpulse_task, change_variable_task
 from common.cloude_writer import human_writer
 def index(request):
    
-    context = {'paid': True, "have_style": False,}  # Default context
+    context = {'paid': False, "have_style": False,}  # Default context
 
     if request.user.is_authenticated:
         # Get the latest paid subscription for the user (excluding 'FREE' plan type)
-        # latest_subscription = Subscription.objects.filter(
-        #     user=request.user, 
-        #     plan_type__in=[Subscription.MONTHLY, Subscription.YEARLY, Subscription.ENTERPRISE]
-        # ).order_by('-end_date').first()
+        latest_subscription = Subscription.objects.filter(
+            user=request.user, 
+            plan_type__in=[Subscription.MONTHLY, Subscription.YEARLY, Subscription.ENTERPRISE]
+        ).order_by('-end_date').first()
 
-        # if latest_subscription and latest_subscription.end_date:
-        #     # Check if the end_date is greater than today
-        #     if latest_subscription.end_date > timezone.now():
-        #         context['paid'] = True
+        if latest_subscription and latest_subscription.end_date:
+            # Check if the end_date is greater than today
+            if latest_subscription.end_date > timezone.now():
+                context['paid'] = True
 
         # If writing style exist for user
         writing_style = WritingStyle.objects.filter(user=request.user, status="completed")
@@ -74,10 +74,15 @@ def humanizer(request):
         # if word_count > 1500:
         #     return JsonResponse({"error": "word_limit_reached"}, status=400)
     
+        
+
 
         if not request.user.is_authenticated:
             return JsonResponse({"error": "Word limit exceeded. Sign up for additional words or subscribe for unlimited access."}, status=400)
 
+        if model == "Falcon":
+            result = rewrite_text(text, purpose="general", readability="university", strength="basic_vocabulary", model_name=model)
+            return JsonResponse({"text": result})
         
         # get last subscrioption of user
         subscrioption = Subscription.objects.filter(user=request.user).last()
@@ -246,7 +251,7 @@ def humanizer_api(request):
                     return JsonResponse({"error": "Limit is over please reset subscrioptions"}, status=400)
             result = rewrite_text(text, purpose="general", readability="university", strength="basic_vocabulary", model_name=model)
         
-            # create_documents_record.delay(input_text=text, output_text=result, user_id=user.id, purpose="general", level=None, readibility=None, model=model)
+            create_documents_record.delay(input_text=text, output_text=result, user_id=user.id, purpose="general", level=None, readibility=None, model=model)
            
             word_count_tracker.words_used += word_count
             word_count_tracker.save()
@@ -256,3 +261,5 @@ def humanizer_api(request):
     else:
         return JsonResponse({"error": "Invalid request method"}, status=400)
         
+
+
