@@ -33,4 +33,4 @@ jobs:
           ssh target "cd /var/www/aihumanize && sudo docker compose down &&  git pull"
       - name: Run Build
         run: |
-          ssh target "cd /var/www/aihumanize && s"
+          ssh target "cd /var/www/aihumanize && sudo docker compose up --build -d"
