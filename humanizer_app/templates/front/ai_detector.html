@@ -1,0 +1,575 @@
+{% extends 'front/main.html' %} {% load static %} 
+{% block meta_tags %}
+<title>AI Detector | Free & Accurate AI Content Detection  </title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<meta name="description" content="Detect AI-generated content with our free AI detector tool. Enjoy over 99% accuracy and stay updated with the latest AI models. No cost, no limits." />
+<meta property="og:title" content="AI Detector | Free & Accurate AI Content Detection  " />
+<meta property="og:description" content="Detect AI-generated content with our free AI detector tool. Enjoy over 99% accuracy and stay updated with the latest AI models. No cost, no limits." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://aihumanize.com/ai-detector/" />
+<script async src="https://cdn.tolt.io/tolt.js" data-tolt="28fec8a8-4a33-485e-81db-a071f523783f"></script>
+<style>
+ 
+@media screen and (max-width: 768px) { /* Adjust the max-width as needed */
+    .ghost-box:last-child { /* Assuming the "Your Writing Style" div is the last .ghost-box */
+        display: none;
+       
+    }
+}
+@media screen and (min-width: 993px) and (max-width: 1200px) {
+    .ghost-box {
+        padding-inline: 30px !important;   /* your desired padding value here */;
+        /* You can add any other styles you want to apply within this width range */
+    }
+}
+  .ghost-box.disabled {
+  /* Your styles for disabled mode */
+  opacity: 0.5; /* Example style */
+   
+  /* Other styles as needed */
+}
+
+  .cls-1,
+  .cls-2 {
+    fill: none;
+    stroke: #6A4DFF;
+    stroke-linecap: round;
+    stroke-width: 2px;
+  }
+
+  .cls-1 {
+    stroke-linejoin: round;
+  }
+
+  .cls-2 {
+    stroke-miterlimit: 10;
+  }
+
+  .cls-3 {
+    fill: #353535;
+  }
+           
+  
+
+
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Your HTML code here -->
+<main class="flex-grow-1">
+  <!-- Hero -->
+  <!-- Hero -->
+  <section class="hero-section style-2 position-relative py-10 py-lg-15">
+    <div class="striped-shape">
+      <img src="{% static 'assets/images/shapes/stripe-lite.svg' %}" alt="" />
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="text-center">
+          <div class="position-relative z-1">
+            <p class="text-primary" data-aos="fade-up-sm">
+              AI Detector 
+            </p>
+            <h1 class="text-dark mb-8" data-aos="fade-up-sm" data-aos-delay="150">
+              Detect content from AI writing tools like <br />
+
+              <span class="fw-bold text-gradient-1 typed-animation"
+                data-strings='["Claude", "Jasper AI", "Gemini", " GPT-4"]'>ChatGPT</span>
+            </h1>
+          </div>
+        </div>
+        <div class="box-outer d-flex justify-center">
+          <div class="box">
+
+            <div class="text-area-inner-buttons" style="position: relative">
+              <textarea rows="15" style="height: 280px; width: 100%" aria-invalid="false" id="input-text"
+                name="input_text" placeholder="Enter text to check for AI and ChatGPT Plagiarism"
+                class=""></textarea>
+              <div id="error-message" class="text-danger"></div>
+              <div class="textarea-buttons" id="textarea-buttons">
+                <!-- <div class="text-area-btn-1">
+                                    <img src="{% static 'assets/images/icons/icons8-hand-32.png' %}" alt="">
+                                    <p>Try Sample Text</p>
+                                </div> -->
+                <div class="text-area-btn-2">
+                  <img src="{% static 'assets/images/icons/icons8-paste-50.png' %}" alt="" height="24px" width="22px" />
+                  <p>Paste Text</p>
+                </div>
+              </div>
+            </div>
+            {% csrf_token %}
+
+            <p style="color: red; display: none" id="min_word_error">
+              Error: Please enter at least 30 words.
+            </p>
+            <!-- file -->
+            <div class="file ">
+              <label for="input-file">
+                <i><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                    <path d="M0 0h24v24H0z" fill="none" />
+                    <path
+                      d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4s1.79-4 4-4h.71C7.37 7.69 9.48 6 12 6c3.04 0 5.5 2.46 5.5 5.5v.5H19c1.66 0 3 1.34 3 3s-1.34 3-3 3z" />
+                  </svg></i>Select a file
+              </label>
+              <input id="input-file" class="btn btn-lg" type="file" />
+            </div>
+            <!-- end file -->
+            <div style="" class="words-count">
+              <div class="buttons">
+                
+                
+  
+              </div>
+
+             
+            
+
+              <div>
+                <h3>
+                  Words Count:
+                  <span id="word-count" class="text-dark"> 0</span>
+                </h3>
+              </div>
+            </div>
+            <div class="buttons">
+              <div class="button-1" style="display: none;">
+                <button id="hummani-main-btn" class="btn btn-lg btn-gradient-1 aos-init aos-animate text-white">
+                  <span><img width="24" height="24" src="/static/assets/images/icon2.svg"></span>
+                  Advanced Detection
+                </button>
+              </div>
+            
+       
+              
+            </div>
+            <div class="mt-2 ai-button">
+              <button class="ai-btn" id="ai-btn">Check for Ai</button>
+
+            </div>
+
+
+            <div>
+              
+              <div class="box-last-text text-center mb-2" style="display: none;" id="detector-answer">
+              
+              </div>
+              <div id="tableDiv" style="display: none;">
+                <table class="table table-bordered border-primary mx-auto" style="width: 50%;"> 
+                  <tr>
+                   <th>#</th>
+                   <th>Score</th>
+                  </tr>
+                  <tr>
+                   <td class="text-danger"><strong>AI</strong></td>
+                   <td class="text-danger"><strong id="aiAvarage"></strong></td>
+                  </tr>
+                  <tr>
+                   <td class="text-success"><strong>Human</strong></td>
+                   <td class="text-success"><strong id="humanAvarage"></strong></td>
+                  </tr>
+ 
+                 </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% include 'front/detect_result.html' %}
+      <div class="row" id="result-row" style="display: none;">
+        <div class="box-outer d-flex justify-center">
+          <div class="result-box">
+            <div>
+              <h2>Your New Content:</h2>
+            </div>
+            <div class="result-box-inner-box">
+              <div class="result-box-first-row">
+                <div class="result-box-leftpart">
+                 <button class="btn btn-outline-primary" id="checkAiInresult">Check For AI</button>
+                </div>
+                <div class="result-box-rightpart">
+                  <div class="button-result-box">
+                    <button id="humanize-btn"><span><img width="24" height="24" src="https://aihumanize.com/static/assets/images/icon2.svg" /></span> Humanize Again</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: none;">
+              <div class="super-box">
+                <div class="result-main-box">
+                  <div class="result-main-left-text">
+                    <p></p>
+                  </div>
+                  <div class="result-main-right-icons">
+                    <div class="text-secondary" id="alternative_tip" style="display: none;">Select part of text to see alternatives</div>
+                  <div class="form-check form-switch " >
+                    <input class="form-check-input" type="checkbox" id="featureToggle" >
+                    <label class="form-check-label" for="featureToggle">
+                      Enable Alternatives
+                      <span class="ms-2" 
+                        data-bs-toggle="popover" title="Enable Alternatives"
+                        data-bs-content="This feature allows you to select text from left to right to fetch alternative phrases. Make sure to enable this feature here."><svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 496.304 496.303"
+                          xml:space="preserve">
+                          <g>
+                            <path d="M248.146,0C111.314,0,0,111.321,0,248.152c0,136.829,111.314,248.151,248.146,248.151
+                        		c136.835,0,248.158-111.322,248.158-248.151C496.304,111.321,384.98,0,248.146,0z M248.146,472.093
+                        		c-123.473,0-223.935-100.459-223.935-223.941c0-123.479,100.462-223.941,223.935-223.941
+                        		c123.488,0,223.947,100.462,223.947,223.941C472.093,371.634,371.634,472.093,248.146,472.093z M319.536,383.42v32.852
+                        		c0,1.383-1.123,2.494-2.482,2.494H196.45c-1.374,0-2.482-1.117-2.482-2.494V383.42c0-1.372,1.114-2.482,2.482-2.482h34.744V205.831
+                        		h-35.101c-1.375,0-2.468-1.111-2.468-2.474v-33.6c0-1.38,1.1-2.479,2.468-2.479h82.293c1.371,0,2.482,1.105,2.482,2.479v211.181
+                        		h36.186C318.413,380.938,319.536,382.048,319.536,383.42z M209.93,105.927c0-20.895,16.929-37.829,37.829-37.829
+                        		c20.886,0,37.826,16.935,37.826,37.829s-16.94,37.829-37.826,37.829C226.853,143.756,209.93,126.822,209.93,105.927z" />
+                          </g>
+                        </svg></span>
+                    </label>
+                  </div>
+
+
+                    <img class="ms-4" width="32" height="32" src="https://img.icons8.com/windows/32/000000/copy.png" alt="copy" />
+                    <img width="32" height="32" style="cursor: pointer;" class="sp_popup_25012822-ceda-4dce-a7d7-d97862d06efc" src="https://img.icons8.com/ios/50/000000/facebook-like--v1.png" alt="facebook-like--v1">
+                    <img width="32" height="32" style="cursor: pointer;" class="sp_popup_25012822-ceda-4dce-a7d7-d97862d06efc"
+                      src="https://img.icons8.com/external-outline-andi-nur-abdillah/64/000000/external-Dislike-survey-(outline)-outline-andi-nur-abdillah.png"
+                      alt="external-Dislike-survey-(outline)-outline-andi-nur-abdillah">
+                 
+                  </div>
+                </div>
+                <div class="border-b"></div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features-section has-blurry-shape position-relative overflow-hidden py-10 py-lg-15">
+    <div class="blurry-shape">
+      <img src="{% static 'assets/images/shapes/blurry-shape-3.svg' %}" alt="" class="img-fluid" />
+    </div>
+    <div class="container">
+      <div class="text-center mb-18">
+        <h1 class="mb-0" data-aos="fade-up-sm" data-aos-delay="50">
+          Why Choose Our AI Detector?
+
+
+          
+        </h1>
+      </div>
+
+      <div class="row row-cols-1 row-cols-lg-3 g-6 g-xl-14">
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="d-flex flex-column flex-lg-row gap-6">
+            <div
+              class="icon w-14 h-14 flex-shrink-0 d-flex align-center  justify-center rounded-3  border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+            <h4 class="mb-0">01</h4>
+            </div>
+            <div class="content">
+              <h4 class="mb-4">Free AI Detection for All Users
+              </h4>
+              <p>
+                Access our AI detector free of charge, anytime, anywhere.
+
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="150">
+          <div class="d-flex flex-column flex-lg-row gap-6">
+            <div
+              class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+            <h4 class="mb-0">02</h4>
+            </div>
+            <div class="content">
+              <h4 class="mb-4">AI Detection with 99+ Percent Accuracy
+              </h4>
+              <p>
+                Experience precise AI detection with over 99% accuracy guaranteed.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-aos="fade-up-sm" data-aos-delay="200">
+          <div class="d-flex flex-column flex-lg-row gap-6">
+            <div
+              class="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3  border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+            <h4 class="mb-0">03</h4>
+            </div>
+            <div class="content">
+              <h4 class="mb-4">Latest AI Model Detection Technology
+
+
+              </h4>
+              <p>
+            Detect the newest AI models with our up-to-date detection technology.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-10 py-lg-15">
+    <div class="container">
+      <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border mb-18">
+        <div class="row g-6 g-lg-14 g-xl-20 align-center">
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
+            <div class="content">
+              <p class="text-primary">Free AI detector</p>
+              <h1 class="mb-8">
+                Enjoy Our Free AI Checker Tool
+
+              </h1>
+              <p class="mb-6">
+                Benefit from our powerful AI checker at no cost. Accessible and reliable for everyone, every time.
+              </p>
+              <ul class="list-unstyled list-check mb-8">
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>ONo subscription or payment required</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>Unlimited access for all users</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>High-quality detection at zero cost.</span>
+                </li>
+              </ul>
+           
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+            <div class="feature-img">
+              <img src="{% static 'assets/images/free_detector_ai.svg' %}" alt="free ai detector"
+                class="img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border mb-18">
+        <div class="row g-6 g-lg-14 g-xl-20 align-center flex-row-reverse">
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
+            <div class="content">
+              <p class="text-primary">Accurate AI Detection</p>
+              <h1 class="mb-8">
+                Experience Precise AI Detection Accuracy
+              </h1>
+              <p class="mb-6">
+              Our AI checker delivers over 99% accuracy, ensuring reliable and trustworthy results for every use. Whether for
+              academic, professional, or personal purposes, trust our advanced AI detection technology to provide you with the
+              precision you need.
+              </p>
+             
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+            <div class="feature-img">
+              <img src="{% static 'assets/images/accurate.svg' %}" alt="accurate ai detection"
+                class="img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-lite-blue rounded-4 p-6 p-md-12 px-xl-20 py-xl-12 hover-border">
+        <div class="row g-6 g-lg-14 g-xl-20 align-center">
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="50">
+            <div class="content">
+              <p class="text-primary">Up-To-Date AI Detector</p>
+              <h1 class="mb-8">
+                Stay Current with Latest <span class="text-primary">AI Detection</span> Technology
+                
+              </h1>
+              <p class="mb-6">
+                Detect the newest AI models with our constantly updated AI detector. Always stay ahead.
+              </p>
+              <ul class="list-unstyled list-check mb-8">
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>
+                    Continuously updated with the latest AI advancements</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>Detects emerging AI models accurately</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class="icon">
+                    <g>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="m3.75 9 3.75 3.75 7.5-7.5" />
+                    </g>
+                  </svg>
+                  <span>Ensures relevance in an evolving AI landscape</span>
+                </li>
+              </ul>
+              <a href="{% url 'account_signup' %}" class="arrow-link arrow-link-primary text-primary gap-3">
+                <span>Get Started Free</span>
+                <svg class="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor"
+                    stroke-width="1.21" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+            <div class="feature-img">
+              <img src="{% static 'assets/images/updated_detection_models.svg' %}" alt="latest ai detection models"
+                class="img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FAQ -->
+  <section class="py-10 py-lg-15">
+    <div class="container">
+      <div class="row justify-center mb-18">
+        <div class="col-lg-10">
+          <div class="text-center">
+            <h1 class="mb-0" data-aos="fade-up-sm" data-aos-delay="50">
+              Questions About our AI detector? <br class="d-none d-md-block" />
+              We have Answers!
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-center">
+        <div class="col-lg-8" data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="accordion accordion-flush d-flex flex-column gap-6" id="faqAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseOne" aria-expanded="false" aria-controls="faq-collapseOne">
+                  <span class="icon"></span>
+                  What is an AI detector?
+                </button>
+              </h2>
+              <div id="faq-collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                An AI detector is a tool designed to detect content generated by artificial intelligence. It analyzes text to determine
+                if it was created by a human or an AI model.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseTwo" aria-expanded="false" aria-controls="faq-collapseTwo">
+                  <span class="icon"></span>
+                  Is your AI checker really free?
+                </button>
+              </h2>
+              <div id="faq-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Yes, our AI checker is completely free to use. We believe in providing accessible and reliable AI detection tools for
+                  everyone without any cost.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseThree" aria-expanded="false" aria-controls="faq-collapseThree">
+                  <span class="icon"></span>
+                  How accurate is your AI detection tool?
+
+                </button>
+              </h2>
+              <div id="faq-collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                Our AI detection tool boasts an accuracy rate of over 99%. We continuously update and improve our technology to ensure
+                the highest level of precision.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseFour" aria-expanded="false" aria-controls="faq-collapseFour">
+                  <span class="icon"></span>
+                How often is your AI checker updated?
+                </button>
+              </h2>
+              <div id="faq-collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+              Our AI checker is constantly updated to detect the latest AI models. We ensure that our tool remains up-to-date with the
+              newest advancements in AI technology.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq-collapseFive" aria-expanded="false" aria-controls="faq-collapseFive">
+                  <span class="icon"></span>
+                  Can I use the AI checker for commercial purposes?
+                </button>
+              </h2>
+              <div id="faq-collapseFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+              Absolutely! Our AI checker can be used for academic, professional, or personal purposes. There are no restrictions on
+              its use, making it a versatile tool for various needs.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+
+  <!-- Placeholder for the loading indicator; initially hidden -->
+
+ 
+
+</main>
+
+{% endblock %}
