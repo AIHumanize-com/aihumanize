@@ -240,9 +240,14 @@ def handle_successful_payment(invoice):
     # For instance, you might want to update the subscription's end date
     # based on the current billing cycle of the Stripe subscription
     stripe_subscription = stripe.Subscription.retrieve(subscription_id)
-    
+    if subscription.plan_type == "yearly":
+        end_date = 12
+    else:
+        end_date = 1
+
+
     subscription.start_date = timezone.now()
-    subscription.end_date = timezone.now() + relativedelta(months=1)
+    subscription.end_date = timezone.now() + relativedelta(months=end_date)
     subscription.is_active = True
     subscription.save()
 

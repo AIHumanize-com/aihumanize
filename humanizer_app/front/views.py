@@ -42,6 +42,11 @@ def index(request):
     response.set_cookie('auth_token', token, max_age=86400, secure=True, samesite='Lax')
     return response
 
+
+
+def ai_detector(request):
+    return render(request, 'front/ai_detector.html')
+
 def pricing(request):
     return render(request, 'front/pricing.html')
 
