@@ -187,7 +187,7 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "support@aihumanize.com"
-EMAIL_HOST_PASSWORD = "#Ashabdulla17012018"
+EMAIL_HOST_PASSWORD = "meho nmfg wezz bqzy"
 DEFAULT_FROM_EMAIL = EMAIL_HOST
 
 # EMAIL_HOST = "smtp-pulse.com"
