@@ -3,13 +3,13 @@ from .purposes_data import purposes, strength_levels, readability_levels, prompt
 import os
 # client = OpenAI()
 
-def humanize_text(AI_text):
+def humanize_text(AI_text, model_ft_name):
   openai_api_key = os.environ.get("OPEN_AI_KEY_AIHUMANIZE")
   client = openai.OpenAI(api_key=openai_api_key)
 
   """Humanizes the provided AI text using the fine-tuned model."""
   response = completion = client.chat.completions.create(
-  model="ft:gpt-3.5-turbo-0125:temuriydevs-ltd::9eqcMVov",
+  model=model_ft_name,
   messages=[
     {"role": "system", "content": """
     You are a text humanizer.
@@ -26,27 +26,12 @@ def humanize_text(AI_text):
 
 
 
-def rewrite_text(original_text, purpose, readability, strength, model_name):
+def rewrite_text(original_text, model_version, model_name):
     
     if model_name == "Falcon":
         openai_api_key = os.environ.get("OPEN_AI_KEY_AIHUMANIZE")
     else:
         openai_api_key = os.environ.get("OPEN_AI_KEY")
-
-    if purpose not in purposes:
-        raise ValueError(
-            "Unsupported text type. Please choose from 'essay', 'article', etc."
-        )
-    
-    
-    vocabulary_level_prompt = ""
-    if strength == "basic_vocabulary":
-        vocabulary_level_prompt = "The text should use basic vocabulary."
-    elif strength == "inter_vocabulary":
-        vocabulary_level_prompt = "The text should use intermediate vocabulary."
-    elif strength == "advanced_vocabulary":
-        vocabulary_level_prompt = "The text should use advanced vocabulary."
-
 
 
     client = openai.OpenAI(api_key=openai_api_key)
@@ -54,14 +39,17 @@ def rewrite_text(original_text, purpose, readability, strength, model_name):
 
    
     if model_name == "Falcon":
-        # model = "gpt-3.5-turbo-1106"
-        # openai_api_key = os.environ.get("OPEN_AI_KEY_AIHUMANIZE")
-        # system_prompt = prompts[purpose] 
-        return humanize_text(original_text)
+        model = "gpt-3.5-turbo-1106"
+        system_prompt = prompts["general"] 
+        print(model_version)
+        if model_version == "falcon_2":
+            return humanize_text(original_text, "ft:gpt-3.5-turbo-0125:temuriydevs-ltd::9eqcMVov")
         
     elif model_name == "Maestro":
         model = "gpt-4-1106-preview"
-        system_prompt = prompts[purpose] 
+        system_prompt = prompts["general"] 
+        if model_version == "maestro_2":
+            return humanize_text(original_text, "ft:gpt-3.5-turbo-0125:temuriydevs-ltd::9fOPQ1HZ")
 
     
     # Updated system prompt

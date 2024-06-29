@@ -60,6 +60,8 @@ def humanizer(request):
         # purpose = body["purpose"]
         model = body["model"]
         # level = body["level"]
+        model_version = body.get("model_version", None)
+      
         try:
             style_id = body['style_id']
         except:
@@ -86,7 +88,7 @@ def humanizer(request):
             return JsonResponse({"error": "Word limit exceeded. Sign up for additional words or subscribe for unlimited access."}, status=400)
 
         if model == "Falcon":
-            result = rewrite_text(text, purpose="general", readability="university", strength="basic_vocabulary", model_name=model)
+            result = rewrite_text(text, model_version=model_version, model_name=model)
             return JsonResponse({"text": result})
         
         # get last subscrioption of user
@@ -108,7 +110,7 @@ def humanizer(request):
            
             create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose=style.name, level=None, readibility=None, model=model)
         else:
-            result = rewrite_text(text, purpose="general", readability="university", strength="basic_vocabulary", model_name=model)
+            result = rewrite_text(text, model_version=model_version, model_name=model)
         
             create_documents_record.delay(input_text=text, output_text=result, user_id=request.user.id, purpose="general", level=None, readibility=None, model=model)
            

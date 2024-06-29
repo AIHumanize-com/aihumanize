@@ -19,6 +19,9 @@ from django.contrib.auth.decorators import login_required
 from common.telegram_sender import send_telegram_message
 from django.views.decorators.http import require_POST
 from dashboard.models import StylePurchase
+
+
+
 def calculate_price(plan_type: str, word_count: int):
     # Validate plan_type
     valid_plan_types = ["monthly", "yearly", "enterprise"]
@@ -41,15 +44,15 @@ def calculate_price(plan_type: str, word_count: int):
 
     # Price calculation
     if plan_type.lower() == "monthly":
-        price = word_count * 0.0004495
+        price = word_count * 0.0006
         plan = "month"
     elif plan_type.lower() == "yearly":
-        price = word_count * 0.0002495 * 12
+        price = word_count * 0.00035 * 12
         plan = "year"
         word_count *= 12
         
     elif plan_type.lower() == "enterprise":
-        price = word_count * 0.0002
+        price = word_count * 0.0003
         plan = "month"
 
     return round(price, 2), plan, word_count
@@ -93,8 +96,8 @@ class CreateCheckoutSessionView(View):
                 ],
                 metadata={'word_count': word_count, "plan_type": plan_type, "tolt_referral": tolt_id},
                 mode='subscription',
-                success_url='https://aihumanize.com/dashboard/',
-                cancel_url='https://aihumanize.com/dashboard/',
+                success_url='https://aihumanize.com/',
+                cancel_url='https://aihumanize.com/',
             )
             return JsonResponse({'id': checkout_session.id})
         except Exception as e:
