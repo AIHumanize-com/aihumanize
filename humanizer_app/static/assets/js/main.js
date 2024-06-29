@@ -396,7 +396,9 @@ function handleHumanizeText(event){
 	var wordCount = textareaContent.split(/\s+/).filter(function (n) { return n != '' }).length;
 	let resultDivDetect = document.getElementById("result-row-detect");
 	let styleSelect = document.getElementById('style_id');
-
+	
+	let maestroModelVersion = document.getElementById("maestroModelVersionValue").value
+	let falconModelVersion = document.getElementById("falconModelVersionValue").value
 
 	let styleId = styleSelect && styleSelect.value ? styleSelect.value : null;
 
@@ -411,9 +413,11 @@ function handleHumanizeText(event){
 	// Identify the selected model
     var selectedModel = '';
     if (document.querySelector('.ninja-box').classList.contains('active')) {
+		modelVersion = falconModelVersion
         selectedModel = 'Falcon';
     } else if (document.querySelector('.ghost-box').classList.contains('active')) {
         selectedModel = 'Maestro';
+		modelVersion = maestroModelVersion
     }
 
 	// Disable the button and add spinner
@@ -426,18 +430,18 @@ function handleHumanizeText(event){
 	if (!writingStyleModel.classList.contains("active")){
 		styleId = null
 	}
-	
+
 	fetch('humanizer/', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ text: textareaContent, model: selectedModel,  style_id: styleId }),
+		body: JSON.stringify({ text: textareaContent, model: selectedModel,  style_id: styleId, model_version: modelVersion }),
 	})
 		.then(response => response.json())
 		.then(data => {
 			if (data.error) {
-				console.log(data.error)
+				
 				if (data.error == 'word_limit_reached') {
 					let errorMessageP = document.getElementById('error-message');
 					errorMessageP.textContent = "Now we can proccess up to 1000 words. Please enter fewer words";
@@ -689,7 +693,7 @@ document.getElementById('input-file').addEventListener('change', function(event)
 
 function updatePrice() {
 	var words = parseInt(document.getElementById('customNumber').value, 10);
-	var costPerWord = 0.0004495;
+	var costPerWord = 0.0006;
 	var newPrice = (words * costPerWord).toFixed(2);
 	document.getElementById('monthlyPrice').innerText = `$${newPrice}`;
 	document.getElementById('listWordsCount').innerText = words.toLocaleString(); // Formats the number with commas
@@ -698,7 +702,7 @@ function updatePrice() {
 
 function updatePriceBusines() {
 	var words = parseInt(document.getElementById('customNumberBusiness').value, 10);
-	var costPerWord = 0.0002;
+	var costPerWord = 0.0003;
 	var newPrice = (words * costPerWord).toFixed(2);
 	document.getElementById('monthlyPriceBusiness').innerText = `$${newPrice}`;
 	document.getElementById('listWordsCountBusiness').innerText = words.toLocaleString(); // Formats the number with commas
@@ -708,11 +712,11 @@ function updatePriceBusines() {
 function updatePriceYearly() {
 	var words = parseInt(document.getElementById('customNumberYearly').value, 10);
 	
-	var costPerWord = 0.0002495;
+	var costPerWord = 0.00035;
 	var newPrice = (words * costPerWord).toFixed(2);
 	var yearly_price = (newPrice * 12).toFixed(2);
 	document.getElementById('YearlyPrice').innerText = `$${newPrice}`;
-	document.getElementById('listWordsCountYearly').innerText = words.toLocaleString(); // Formats the number with commas
+	document.getElementById('listWordsCountYearlyTotal').innerText = words.toLocaleString(); // Formats the number with commas
 	document.getElementById('annualChargePrice').innerText = `$${yearly_price}`; // Formats the number with commas
 	words *= 12;
 	document.getElementById('listWordsCountYearlyTotal').innerText = words.toLocaleString(); // Formats the number with commas
@@ -838,7 +842,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var ghostBox = document.querySelector('.ghost-box');
 	var masteroInfo = document.getElementById("masteroInfo")
 	var writingStyleModel = document.getElementById("writingStyleModel")
+	var mastroVersion = document.getElementById("maestroModelVersion")
 	// var purpose = document.getElementById("purposeButton")
+	var falconModelVersion = document.getElementById("falconModelVersion")
 	// var levelButton = document.getElementById("levelButton")
 	var stylesButton = document.getElementById("stylesButton")
 	let humanizeMainButton = document.getElementById("hummani-main-btn")
@@ -848,7 +854,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		writingStyleModel.classList.remove('active');
 
         ninjaBox.classList.add('active');
+		mastroVersion.style.display = "none"
 		masteroInfo.style.display = "none"
+		falconModelVersion.style.display = "block"
 		// purpose.style.display = "block"
 		// levelButton.style.display = "block"
 		stylesButton.style.display = "none"
@@ -868,6 +876,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		ninjaBox.classList.remove('active');
 		writingStyleModel.classList.add('active');
 		masteroInfo.style.display = "none"
+		mastroVersion.style.display = "none"
+		falconModelVersion.style.display = "block"
 		
 		if (!writingStyleModel.classList.contains('active')) {
 			var noStylesModal = new bootstrap.Modal(document.getElementById('noStylesModal'));
@@ -893,6 +903,9 @@ document.addEventListener('DOMContentLoaded', function () {
             ghostBox.classList.add('active');
 			writingStyleModel.classList.remove('active');
 			masteroInfo.style.display = "block"
+			mastroVersion.style.display = "block"
+			falconModelVersion.style.display = "none"
+			
 			// purpose.style.display = "block"
 		// levelButton.style.display = "block"
 		stylesButton.style.display = "none"
