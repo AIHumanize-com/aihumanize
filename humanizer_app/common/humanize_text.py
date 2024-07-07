@@ -1,7 +1,38 @@
 import openai
 from .purposes_data import purposes, strength_levels, readability_levels, prompts
 import os
+from openai import AzureOpenAI
+import requests
+import json
 # client = OpenAI()
+
+
+def azure_humanizer(text):
+    azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+    api_key=os.getenv("AZURE_OPENAI_API_KEY")
+    
+    client = AzureOpenAI(
+        azure_endpoint=azure_endpoint,
+        api_key=api_key,
+        api_version="2024-02-01",
+    )
+    completion = client.chat.completions.create(
+    model="gpt-35-turbo",
+    messages=[
+                {
+                    "role": "system",
+                    "content": prompts["general"]
+                },
+                {
+                    "role": "user",
+                    "content": text
+                }
+              
+            ]
+    )
+
+    return completion.choices[0].message.content
+
 
 def humanize_text(AI_text, model_ft_name):
   openai_api_key = os.environ.get("OPEN_AI_KEY_AIHUMANIZE")
@@ -41,9 +72,11 @@ def rewrite_text(original_text, model_version, model_name):
     if model_name == "Falcon":
         model = "gpt-3.5-turbo-1106"
         system_prompt = prompts["general"] 
-        print(model_version)
+
         if model_version == "falcon_2":
             return humanize_text(original_text, "ft:gpt-3.5-turbo-0125:temuriydevs-ltd::9eqcMVov")
+        else:
+            return azure_humanizer(original_text)
         
     elif model_name == "Maestro":
         model = "gpt-4-1106-preview"
@@ -75,3 +108,8 @@ def rewrite_text(original_text, model_version, model_name):
         print(f"An error occurred: {e}")
         return None
 
+
+
+
+# result = azure_humanizer("Hello my name is Abdulla.")
+# print(result)

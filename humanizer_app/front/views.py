@@ -87,9 +87,9 @@ def humanizer(request):
         if not request.user.is_authenticated:
             return JsonResponse({"error": "Word limit exceeded. Sign up for additional words or subscribe for unlimited access."}, status=400)
 
-        if model == "Falcon":
-            result = rewrite_text(text, model_version=model_version, model_name=model)
-            return JsonResponse({"text": result})
+        # if model == "Falcon":
+        #     result = rewrite_text(text, model_version=model_version, model_name=model)
+      
         
         # get last subscrioption of user
         subscrioption = Subscription.objects.filter(user=request.user).last()
