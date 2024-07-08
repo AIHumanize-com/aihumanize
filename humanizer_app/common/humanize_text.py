@@ -75,8 +75,8 @@ def rewrite_text(original_text, model_version, model_name):
 
         if model_version == "falcon_2":
             return humanize_text(original_text, "ft:gpt-3.5-turbo-0125:temuriydevs-ltd::9eqcMVov")
-        else:
-            return azure_humanizer(original_text)
+        # else:
+        #     return azure_humanizer(original_text)
         
     elif model_name == "Maestro":
         model = "gpt-4-1106-preview"

@@ -172,6 +172,7 @@ def contact_view(request):
             form.save()
             messages.success(request, 'Your message has been sent successfully!')
             return redirect('contact')
+        return render(request, 'front/contact.html')
 
     else:
         
