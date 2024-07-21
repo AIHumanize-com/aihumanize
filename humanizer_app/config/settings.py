@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django.contrib.humanize',
+    "django.contrib.humanize",
     "django.contrib.sites",
     # installed apps
     "allauth",
@@ -45,15 +46,14 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "django_ckeditor_5",
-    'csvexport',
-    # local apps    
+    "csvexport",
+    # local apps
     "users",
     "common",
     "front",
     "dashboard",
     "payments",
     "blog",
-
 ]
 
 MIDDLEWARE = [
@@ -62,9 +62,8 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    
     "django.contrib.messages.middleware.MessageMiddleware",
-    'allauth.account.middleware.AccountMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -73,7 +72,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        'DIRS': [BASE_DIR / 'templates'], 
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -81,10 +80,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                
-            
-          
-         
             ],
         },
     },
@@ -170,13 +165,16 @@ MEDIA_ROOT = os.getenv("DJANGO_MEDIA_ROOT", "/var/www/media")
 MEDIA_URL = os.getenv("DJANGO_MEDIA_URL", "/media/")
 
 
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory' 
-AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend", "allauth.account.auth_backends.AuthenticationBackend",)
+ACCOUNT_USER_MODEL_EMAIL_FIELD = "email"
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
 
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
@@ -187,7 +185,7 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "support@aihumanize.com"
-EMAIL_HOST_PASSWORD = "meho nmfg wezz bqzy"
+EMAIL_HOST_PASSWORD = "xavo ktbl qvcm kqxr"
 DEFAULT_FROM_EMAIL = EMAIL_HOST
 
 # EMAIL_HOST = "smtp-pulse.com"
@@ -196,9 +194,6 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST
 # EMAIL_HOST_USER = "support@aihumanize.com"
 # EMAIL_HOST_PASSWORD = "WRS4ioe6nd2"
 # DEFAULT_FROM_EMAIL = "support@aihumanize.com"
-
-
-
 
 
 CELERY_BROKER_URL = "redis://redis:6379/0"
@@ -212,7 +207,7 @@ CSRF_TRUSTED_ORIGINS = ["https://aihumanize.com"]
 
 # settings.py
 
-ACCOUNT_ADAPTER = 'users.custom_email_adapter.CeleryEmailAdapter'
+ACCOUNT_ADAPTER = "users.custom_email_adapter.CeleryEmailAdapter"
 
 # settings.py
 import sentry_sdk
@@ -222,36 +217,30 @@ sentry_sdk.init(
     dsn="https://234f932c9af243cb9bfbe5c5bb3c0c70@errors.aihumanize.com/1",
     integrations=[DjangoIntegration()],
     auto_session_tracking=False,
-    traces_sample_rate=0
+    traces_sample_rate=0,
 )
 
 # Prod keys
-STRIPE_PUBLIC_KEY = 'pk_live_51OCnPQFG5G6BKxaQX3AhVm3iEcPmrjNgs49WQ9FvYnSII5oIdNxc77FMB5RamU23S1PpgBfCfeVax4zJQ2o2XxlW00dkI9KDWA'
+STRIPE_PUBLIC_KEY = "pk_live_51OCnPQFG5G6BKxaQX3AhVm3iEcPmrjNgs49WQ9FvYnSII5oIdNxc77FMB5RamU23S1PpgBfCfeVax4zJQ2o2XxlW00dkI9KDWA"
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
 STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET")
 
 
-
-
-
-
-
 # TODO change this to 3
 SITE_ID = 3
-SOCIALACCOUNT_LOGIN_ON_GET=True
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+SOCIALACCOUNT_LOGIN_ON_GET = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 
 # key is added
 
-SOCIALACCOUNT_PROVIDERS = {"google": {"SCOPE": ["profile", "email"], "AUTH_PARAMS": {"access_type": "online"}}}
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {"SCOPE": ["profile", "email"], "AUTH_PARAMS": {"access_type": "online"}}
+}
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 # ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
-
-
-
 
 
 customColorPalette = [
