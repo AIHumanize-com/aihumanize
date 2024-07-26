@@ -368,7 +368,7 @@ def create_checkout_session(request):
                 {
                     "price_data": {
                         "currency": "usd",
-                        "product": "prod_PSWVGM9hOiNApY",  # Your product ID
+                        "product": "prod_QXnce3eebwccUI",  # Your product ID
                         "unit_amount": 500,  # Price in cents ($5.00)
                     },
                     "quantity": 1,
